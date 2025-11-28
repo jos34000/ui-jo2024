@@ -1,0 +1,66 @@
+# Dépendances
+node_modules
+
+# Fichiers de build
+dist
+build
+.output
+
+# Fichiers d'environnement sensibles
+.env.local
+.env.*.local
+.env.production
+
+# Git
+.git
+.gitignore
+.gitattributes
+
+# IDE et éditeurs
+.vscode
+.idea
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Tests
+coverage
+.nyc_output
+**/*.test.js
+**/*.spec.js
+__tests__
+__mocks__
+
+# Documentation
+README.md
+CHANGELOG.md
+LICENSE
+docs/
+
+# CI/CD
+.github
+.gitlab-ci.yml
+.travis.yml
+Jenkinsfile
+
+# Docker
+docker-compose*.yml
+.dockerignore
+
+# Fichiers temporaires
+*.tmp
+*.temp
+.cache
+.temp
+.tmp
+
+# Logs
+logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+

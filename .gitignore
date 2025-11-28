@@ -1,0 +1,28 @@
+# Dependencies
+node_modules/
+package-lock.json
+pnpm-lock.yaml
+
+# Build
+dist/
+build/
+.parcel-cache/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+
+# Environment
+.env
+.env.local
+.env.prod
+.env.dev
+.env.docker
+.env.test
+
+# Logs
+*.log
+logs/
