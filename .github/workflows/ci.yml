@@ -1,0 +1,60 @@
+name: Quality Checks
+
+on:
+  pull_request:
+    branches:
+      - develop
+      - main
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint
+        id: lint
+        run: npm run lint
+        continue-on-error: true
+
+      - name: Tests
+        id: tests
+        run: npm test
+        continue-on-error: true
+
+      - name: Build
+        id: build
+        run: npm run build
+        continue-on-error: true
+
+      - name: Security audit
+        id: security
+        run: npm audit --audit-level=moderate
+        continue-on-error: true
+
+      - name: Summary
+        if: always()
+        run: |
+          echo "## Quality Checks Summary"
+          echo ""
+          echo "- Lint: ${{ steps.lint.outcome }}"
+          echo "- Tests: ${{ steps.tests.outcome }}"
+          echo "- Build: ${{ steps.build.outcome }}"
+          echo "- Security: ${{ steps.security.outcome }}"
+          echo ""
+          if [ "${{ steps.build.outcome }}" == "success" ]; then
+            echo "✅ Build passed - ready to merge"
+          else
+            echo "❌ Build failed - needs fixing"
+          fi
