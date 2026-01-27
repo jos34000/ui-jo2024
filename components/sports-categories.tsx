@@ -1,0 +1,56 @@
+"use client"
+
+import { Button } from "@/components/ui/button"
+import { ArrowRight } from "lucide-react"
+
+const sports = [
+    { name: "Athlétisme", icon: "🏃", events: 48, color: "bg-olympic-blue/10 hover:bg-olympic-blue/20 border-olympic-blue/30" },
+    { name: "Natation", icon: "🏊", events: 35, color: "bg-olympic-yellow/10 hover:bg-olympic-yellow/20 border-olympic-yellow/30" },
+    { name: "Gymnastique", icon: "🤸", events: 18, color: "bg-olympic-red/10 hover:bg-olympic-red/20 border-olympic-red/30" },
+    { name: "Basketball", icon: "🏀", events: 4, color: "bg-olympic-green/10 hover:bg-olympic-green/20 border-olympic-green/30" },
+    { name: "Football", icon: "⚽", events: 4, color: "bg-olympic-blue/10 hover:bg-olympic-blue/20 border-olympic-blue/30" },
+    { name: "Tennis", icon: "🎾", events: 5, color: "bg-olympic-yellow/10 hover:bg-olympic-yellow/20 border-olympic-yellow/30" },
+    { name: "Cyclisme", icon: "🚴", events: 22, color: "bg-olympic-red/10 hover:bg-olympic-red/20 border-olympic-red/30" },
+    { name: "Escrime", icon: "🤺", events: 12, color: "bg-olympic-green/10 hover:bg-olympic-green/20 border-olympic-green/30" },
+    { name: "Judo", icon: "🥋", events: 15, color: "bg-olympic-blue/10 hover:bg-olympic-blue/20 border-olympic-blue/30" },
+    { name: "Aviron", icon: "🚣", events: 14, color: "bg-olympic-yellow/10 hover:bg-olympic-yellow/20 border-olympic-yellow/30" },
+    { name: "Voile", icon: "⛵", events: 10, color: "bg-olympic-red/10 hover:bg-olympic-red/20 border-olympic-red/30" },
+    { name: "Équitation", icon: "🏇", events: 6, color: "bg-olympic-green/10 hover:bg-olympic-green/20 border-olympic-green/30" },
+]
+
+export function SportsCategories() {
+    return (
+        <section id="sports" className="py-20 bg-background">
+            <div className="mx-auto max-w-7xl px-6 lg:px-8">
+                <div className="text-center mb-12">
+                    <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
+                        Explorer par sport
+                    </h2>
+                    <p className="mt-2 text-muted-foreground max-w-2xl mx-auto">
+                        32 sports, 329 événements. Trouvez les billets pour vos sports préférés.
+                    </p>
+                </div>
+
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+                    {sports.map((sport) => (
+                        <button
+                            key={sport.name}
+                            className={`group flex flex-col items-center justify-center p-6 rounded-xl border transition-all duration-200 ${sport.color}`}
+                        >
+                            <span className="text-4xl mb-3 group-hover:scale-110 transition-transform">{sport.icon}</span>
+                            <span className="font-medium text-foreground text-sm">{sport.name}</span>
+                            <span className="text-xs text-muted-foreground mt-1">{sport.events} épreuves</span>
+                        </button>
+                    ))}
+                </div>
+
+                <div className="text-center mt-10">
+                    <Button variant="outline" size="lg">
+                        Voir tous les sports
+                        <ArrowRight className="ml-2 h-4 w-4" />
+                    </Button>
+                </div>
+            </div>
+        </section>
+    )
+}
