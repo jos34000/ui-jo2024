@@ -1,9 +1,9 @@
-import { Header } from "@/lib/components/header"
-import { HeroSection } from "@/lib/components/hero-section"
-import { FeaturedEvents } from "@/lib/components/featured-events"
-import { SportsCategories } from "@/lib/components/sports-categories"
-import { TicketTypes } from "@/lib/components/ticket-types"
-import { Footer } from "@/lib/components/footer"
+import { Header } from "@/components/header"
+import { HeroSection } from "@/components/hero-section"
+import { FeaturedEvents } from "@/components/featured-events"
+import { SportsCategories } from "@/components/sports-categories"
+import { TicketTypes } from "@/components/ticket-types"
+import { Footer } from "@/components/footer"
 
 export default function HomePage() {
     return (
