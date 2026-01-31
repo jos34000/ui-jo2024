@@ -86,7 +86,7 @@ export function FeaturedEvents() {
             <div className="mx-auto max-w-7xl px-6 lg:px-8">
                 <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-12">
                     <div>
-                        <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
+                        <h2 className="text-3xl font-bold tracking-tight sm:text-4xl font-mono">
                             Événements populaires
                         </h2>
                         <p className="mt-2 text-muted-foreground">
@@ -101,7 +101,7 @@ export function FeaturedEvents() {
 
                 <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
                     {events.map((event) => (
-                        <Card key={event.id} className="group overflow-hidden hover:shadow-lg transition-shadow border-border/50">
+                        <Card key={event.id} className="group overflow-hidden hover:shadow-lg hover:border-primary/30 transition-all border-border/50">
                             <CardHeader className="pb-3">
                                 <div className="flex items-start justify-between">
                                     <div className="text-4xl">{event.image}</div>
