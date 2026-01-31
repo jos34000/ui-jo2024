@@ -1,9 +1,10 @@
 name: Quality Checks
 
 on:
-  push:
+  pull_request:
     branches:
       - develop
+      - master
 
 jobs:
   quality:

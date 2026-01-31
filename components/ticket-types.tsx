@@ -57,7 +57,7 @@ export function TicketTypes() {
         <section className="py-20 bg-muted/30">
             <div className="mx-auto max-w-7xl px-6 lg:px-8">
                 <div className="text-center mb-12">
-                    <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
+                    <h2 className="text-3xl font-bold tracking-tight sm:text-4xl font-mono">
                         Types de billets
                     </h2>
                     <p className="mt-2 text-muted-foreground max-w-2xl mx-auto">
