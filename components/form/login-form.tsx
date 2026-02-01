@@ -7,9 +7,11 @@ import { loginAction } from "@/lib/actions/loginAction"
 import { toast } from "sonner"
 import { loginSchema } from "@/lib/schemas/FormValidation"
 import { User } from "lucide-react"
+import { useAuthStore } from "@/lib/stores/authStore"
 
 export const LoginForm = () => {
   const router = useRouter()
+  const { setAuth } = useAuthStore()
 
   const loginForm = useAppForm({
     defaultValues: {
@@ -23,8 +25,7 @@ export const LoginForm = () => {
         toast.success(result.message || "Connexion réussie")
 
         if (result.data?.accessToken && result.data?.refreshToken) {
-          localStorage.setItem("accessToken", result.data.accessToken)
-          localStorage.setItem("refreshToken", result.data.refreshToken)
+          setAuth(result.data.accessToken, result.data.refreshToken)
         }
 
         router.push("/")
