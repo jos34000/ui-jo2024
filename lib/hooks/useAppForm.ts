@@ -1,11 +1,11 @@
-import { ButtonField } from "@/components/form/button-field";
-import { InputField } from "@/components/form/input-field";
-import { SelectField } from "@/components/form/select-field";
-import { TextareaField } from "@/components/form/textarea-field";
-import { PasswordField } from "@/components/form/password-field";
+import { ButtonField } from "@/components/form/fields/button-field";
+import { InputField } from "@/components/form/fields/input-field";
+import { SelectField } from "@/components/form/fields/select-field";
+import { TextareaField } from "@/components/form/fields/textarea-field";
+import { PasswordField } from "@/components/form/fields/password-field";
 import { createFormHook, createFormHookContexts } from "@tanstack/react-form";
-import { RemembermeField } from "@/components/form/rememberme-field";
-import { AcceptTermsField } from "@/components/acceptTerms-field";
+import { RemembermeField } from "@/components/form/fields/rememberme-field";
+import { AcceptTermsField } from "@/components/form/fields/acceptTerms-field";
 
 export const { fieldContext, formContext, useFieldContext, useFormContext } =
   createFormHookContexts();
