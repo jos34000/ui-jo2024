@@ -1,9 +1,11 @@
+"use server";
+
 import { z } from "zod";
 import { loginSchema } from "@/lib/schemas/FormValidation";
 
 export const loginAction = async (
   formData: z.infer<typeof loginSchema>,
-): Promise<ApiResponse<{ token: string; user: string }>> => {
+): Promise<ApiResponse<{ accessToken: string; refreshToken: string }>> => {
   try {
     const validatedData = loginSchema.parse(formData);
 

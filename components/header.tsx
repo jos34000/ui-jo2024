@@ -1,20 +1,21 @@
-"use client";
+"use client"
 
-import { useState } from "react";
-import Link from "next/link";
-import { Menu, ShoppingCart, User, X } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { ThemeToggle } from "@/components/theme-toggle";
+import { useState } from "react"
+import Link from "next/link"
+import { Menu, ShoppingCart, User, X } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { ThemeToggle } from "@/components/theme-toggle"
+import { OlympicRings } from "@/lib/svg/OlympicRings"
 
 const navigation = [
   { name: "Événements", href: "#events" },
   { name: "Sports", href: "#sports" },
   { name: "Calendrier", href: "#calendar" },
   { name: "FAQ", href: "#faq" },
-];
+]
 
 export function Header() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -41,7 +42,7 @@ export function Header() {
         </div>
 
         <div className="hidden lg:flex lg:gap-x-8">
-          {navigation.map((item) => (
+          {navigation.map(item => (
             <Link
               key={item.name}
               href={item.href}
@@ -92,7 +93,7 @@ export function Header() {
             <div className="mt-6 flow-root">
               <div className="-my-6 divide-y divide-border">
                 <div className="space-y-2 py-6">
-                  {navigation.map((item) => (
+                  {navigation.map(item => (
                     <Link
                       key={item.name}
                       href={item.href}
@@ -119,63 +120,5 @@ export function Header() {
         </div>
       )}
     </header>
-  );
-}
-
-function OlympicRings({ className }: Readonly<{ className?: string }>) {
-  return (
-    <svg
-      viewBox="0 0 100 40"
-      className={className}
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      {/* Blue ring */}
-      <circle
-        cx="15"
-        cy="15"
-        r="12"
-        stroke="#0081C8"
-        strokeWidth="3"
-        fill="none"
-      />
-      {/* Black ring */}
-      <circle
-        cx="35"
-        cy="15"
-        r="12"
-        stroke="currentColor"
-        strokeWidth="3"
-        fill="none"
-        className="text-foreground"
-      />
-      {/* Red ring */}
-      <circle
-        cx="55"
-        cy="15"
-        r="12"
-        stroke="#EE334E"
-        strokeWidth="3"
-        fill="none"
-      />
-      {/* Yellow ring */}
-      <circle
-        cx="25"
-        cy="25"
-        r="12"
-        stroke="#FCB131"
-        strokeWidth="3"
-        fill="none"
-      />
-      {/* Green ring */}
-      <circle
-        cx="45"
-        cy="25"
-        r="12"
-        stroke="#00A651"
-        strokeWidth="3"
-        fill="none"
-      />
-    </svg>
-  );
+  )
 }

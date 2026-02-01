@@ -8,7 +8,6 @@ export const registerAction = async (
 ): Promise<ApiResponse<{ token: string; user: string }>> => {
   try {
     const validatedData = registerSchema.parse(formData);
-
     const response = await fetch(`${process.env.API_BASE_URL}/auth/register`, {
       method: "POST",
       headers: {

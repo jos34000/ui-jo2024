@@ -1,16 +1,16 @@
-import React from "react";
-import type { Metadata } from "next";
-import { JetBrains_Mono, Nunito } from "next/font/google";
-import { Analytics } from "@vercel/analytics/next";
-import { ThemeProvider } from "@/components/theme-provider";
-import "./globals.css";
-import { Toaster } from "@/components/ui/sonner";
+import React from "react"
+import type { Metadata } from "next"
+import { JetBrains_Mono, Nunito } from "next/font/google"
+import { Analytics } from "@vercel/analytics/next"
+import { ThemeProvider } from "@/components/theme-provider"
+import "./globals.css"
+import { Toaster } from "@/components/ui/sonner"
 
 const _jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
   variable: "--font-mono",
-});
-const _nunito = Nunito({ subsets: ["latin"], variable: "--font-sans" });
+})
+const _nunito = Nunito({ subsets: ["latin"], variable: "--font-sans" })
 
 export const metadata: Metadata = {
   title: "Paris 2024 - Billetterie Officielle | Jeux Olympiques",
@@ -33,12 +33,12 @@ export const metadata: Metadata = {
     ],
     apple: "/apple-icon.png",
   },
-};
+}
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: React.ReactNode
 }>) {
   return (
     <html lang="fr" suppressHydrationWarning>
@@ -52,10 +52,14 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           {children}
-          <Toaster />
+          <Toaster
+            position="bottom-right"
+            richColors={true}
+            closeButton={true}
+          />
         </ThemeProvider>
         <Analytics />
       </body>
     </html>
-  );
+  )
 }
