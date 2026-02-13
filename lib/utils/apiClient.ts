@@ -1,47 +1,51 @@
-import { useAuthStore } from "@/lib/stores/authStore"
+const API_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:8000"
 
-const API_URL = process.env.API_BASE_URL
+let isRefreshing = false
+let refreshPromise: Promise<boolean> | null = null
 
-export const apiFetch = async (url: string, options: RequestInit = {}) => {
-  const { accessToken, refreshToken, setAuth, clearAuth } =
-    useAuthStore.getState()
-
-  const headers: Record<string, string> = {
-    "Content-Type": "application/json",
-    ...(options.headers as Record<string, string>),
+async function refreshTokens(): Promise<boolean> {
+  if (isRefreshing && refreshPromise) {
+    return refreshPromise
   }
 
-  if (accessToken) {
-    headers["Authorization"] = `Bearer ${accessToken}`
-  }
-
-  let response = await fetch(`${API_URL}${url}`, {
-    ...options,
-    headers,
+  isRefreshing = true
+  refreshPromise = fetch(`${API_URL}/auth/refresh`, {
+    method: "POST",
+    credentials: "include",
   })
-
-  if (
-    (response.status === 401 && refreshToken) ||
-    (response.status === 403 && refreshToken)
-  ) {
-    const refreshResponse = await fetch(`${API_URL}/auth/refresh`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ refreshToken }),
+    .then(res => res.ok)
+    .finally(() => {
+      isRefreshing = false
+      refreshPromise = null
     })
 
-    if (refreshResponse.ok) {
-      const data = await refreshResponse.json()
-      setAuth(data.accessToken, data.refreshToken)
+  return refreshPromise
+}
 
-      headers["Authorization"] = `Bearer ${data.accessToken}`
-      response = await fetch(`${API_URL}${url}`, {
+export async function apiClient(endpoint: string, options?: RequestInit) {
+  let response = await fetch(`${API_URL}${endpoint}`, {
+    ...options,
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+      ...options?.headers,
+    },
+  })
+
+  if (response.status === 401 && !endpoint.includes("/auth/")) {
+    const refreshed = await refreshTokens()
+
+    if (refreshed) {
+      response = await fetch(`${API_URL}${endpoint}`, {
         ...options,
-        headers,
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+          ...options?.headers,
+        },
       })
     } else {
-      clearAuth()
-      globalThis.location.href = "/auth/login"
+      globalThis.location.href = "/auth"
     }
   }
 

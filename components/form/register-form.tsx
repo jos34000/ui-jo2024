@@ -3,13 +3,16 @@
 import { User } from "lucide-react"
 import { useAppForm } from "@/lib/hooks/useAppForm"
 import { RegisterFormValues } from "@/lib/types/Form"
-import { registerAction } from "@/lib/actions/registerAction"
 import { toast } from "sonner"
 import { registerSchema } from "@/lib/schemas/FormValidation"
 import { useRouter } from "next/navigation"
+import { useAuthStore } from "@/lib/stores/authStore"
+import { apiClient } from "@/lib/utils/apiClient"
 
 export const RegisterForm = () => {
   const router = useRouter()
+  const { setUser } = useAuthStore()
+
   const registerForm = useAppForm({
     defaultValues: {
       firstName: "",
@@ -20,23 +23,31 @@ export const RegisterForm = () => {
       acceptTerms: false,
     } as RegisterFormValues,
     onSubmit: async ({ value }) => {
-      const result = await registerAction(value)
-      if (result.success) {
-        toast.success(result.message || "Inscription réussie")
+      try {
+        const response = await apiClient("/auth/register", {
+          method: "POST",
+          body: JSON.stringify({
+            email: value.email,
+            password: value.password,
+            firstName: value.firstName,
+            lastName: value.lastName,
+          }),
+        })
 
-        if (result.data?.token) {
-          localStorage.setItem("token", result.data.token)
+        if (!response.ok) {
+          const error = await response.json().catch(() => ({}))
+          toast.error(error.message || "Erreur lors de l'inscription")
+          return
         }
 
+        const data = await response.json()
+        setUser(data.user)
+
+        toast.success("Inscription réussie")
         router.push("/")
-      } else {
-        toast.error(result.message || "Erreur lors de l'inscription")
-
-        if (result.errors) {
-          Object.entries(result.errors).forEach(([field, message]) => {
-            toast.error(`${field}: ${message}`)
-          })
-        }
+      } catch (error) {
+        console.error("Register error:", error)
+        toast.error("Une erreur est survenue")
       }
     },
     validators: {

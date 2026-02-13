@@ -3,15 +3,15 @@
 import { useRouter } from "next/navigation"
 import { useAppForm } from "@/lib/hooks/useAppForm"
 import { LoginFormValues } from "@/lib/types/Form"
-import { loginAction } from "@/lib/actions/loginAction"
 import { toast } from "sonner"
 import { loginSchema } from "@/lib/schemas/FormValidation"
 import { User } from "lucide-react"
 import { useAuthStore } from "@/lib/stores/authStore"
+import { apiClient } from "@/lib/utils/apiClient"
 
 export const LoginForm = () => {
   const router = useRouter()
-  const { setAuth } = useAuthStore()
+  const { setUser } = useAuthStore()
 
   const loginForm = useAppForm({
     defaultValues: {
@@ -20,23 +20,29 @@ export const LoginForm = () => {
       rememberMe: false,
     } as LoginFormValues,
     onSubmit: async ({ value }) => {
-      const result = await loginAction(value)
-      if (result.success) {
-        toast.success(result.message || "Connexion réussie")
+      try {
+        const response = await apiClient("/auth/login", {
+          method: "POST",
+          body: JSON.stringify({
+            email: value.email,
+            password: value.password,
+          }),
+        })
 
-        if (result.data?.accessToken && result.data?.refreshToken) {
-          setAuth(result.data.accessToken, result.data.refreshToken)
+        if (!response.ok) {
+          const error = await response.json().catch(() => ({}))
+          toast.error(error.message || "Email ou mot de passe incorrect")
+          return
         }
 
+        const data = await response.json()
+        setUser(data.user)
+
+        toast.success("Connexion réussie")
         router.push("/")
-      } else {
-        toast.error(result.message || "Erreur lors de la connexion")
-
-        if (result.errors) {
-          Object.entries(result.errors).forEach(([field, message]) => {
-            toast.error(`${field}: ${message}`)
-          })
-        }
+      } catch (error) {
+        console.error("Login error:", error)
+        toast.error("Une erreur est survenue")
       }
     },
     validators: {
