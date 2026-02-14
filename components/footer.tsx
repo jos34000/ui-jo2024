@@ -1,4 +1,5 @@
-import Link from "next/link";
+import Link from "next/link"
+import { OlympicRings } from "@/lib/svg/OlympicRings"
 
 const footerNavigation = {
   billetterie: [
@@ -24,7 +25,7 @@ const footerNavigation = {
     { name: "Politique de confidentialité", href: "#" },
     { name: "Cookies", href: "#" },
   ],
-};
+}
 
 export function Footer() {
   return (
@@ -53,7 +54,7 @@ export function Footer() {
               <div>
                 <h3 className="text-sm font-semibold">Billetterie</h3>
                 <ul className="mt-4 space-y-3">
-                  {footerNavigation.billetterie.map((item) => (
+                  {footerNavigation.billetterie.map(item => (
                     <li key={item.name}>
                       <Link
                         href={item.href}
@@ -68,7 +69,7 @@ export function Footer() {
               <div className="mt-10 md:mt-0">
                 <h3 className="text-sm font-semibold">Sports populaires</h3>
                 <ul className="mt-4 space-y-3">
-                  {footerNavigation.sports.map((item) => (
+                  {footerNavigation.sports.map(item => (
                     <li key={item.name}>
                       <Link
                         href={item.href}
@@ -85,7 +86,7 @@ export function Footer() {
               <div>
                 <h3 className="text-sm font-semibold">Informations</h3>
                 <ul className="mt-4 space-y-3">
-                  {footerNavigation.infos.map((item) => (
+                  {footerNavigation.infos.map(item => (
                     <li key={item.name}>
                       <Link
                         href={item.href}
@@ -100,7 +101,7 @@ export function Footer() {
               <div className="mt-10 md:mt-0">
                 <h3 className="text-sm font-semibold">Légal</h3>
                 <ul className="mt-4 space-y-3">
-                  {footerNavigation.legal.map((item) => (
+                  {footerNavigation.legal.map(item => (
                     <li key={item.name}>
                       <Link
                         href={item.href}
@@ -117,64 +118,11 @@ export function Footer() {
         </div>
         <div className="mt-12 border-t border-border pt-8">
           <p className="text-xs text-muted-foreground text-center">
-            &copy; 2024 Comité d'Organisation des Jeux Olympiques et
+            &copy; 2024 Comité d&apos;Organisation des Jeux Olympiques et
             Paralympiques de Paris 2024. Tous droits réservés.
           </p>
         </div>
       </div>
     </footer>
-  );
-}
-
-function OlympicRings({ className }: Readonly<{ className?: string }>) {
-  return (
-    <svg
-      viewBox="0 0 100 40"
-      className={className}
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <circle
-        cx="15"
-        cy="15"
-        r="12"
-        stroke="#0081C8"
-        strokeWidth="3"
-        fill="none"
-      />
-      <circle
-        cx="35"
-        cy="15"
-        r="12"
-        stroke="currentColor"
-        strokeWidth="3"
-        fill="none"
-        className="text-foreground"
-      />
-      <circle
-        cx="55"
-        cy="15"
-        r="12"
-        stroke="#EE334E"
-        strokeWidth="3"
-        fill="none"
-      />
-      <circle
-        cx="25"
-        cy="25"
-        r="12"
-        stroke="#FCB131"
-        strokeWidth="3"
-        fill="none"
-      />
-      <circle
-        cx="45"
-        cy="25"
-        r="12"
-        stroke="#00A651"
-        strokeWidth="3"
-        fill="none"
-      />
-    </svg>
-  );
+  )
 }

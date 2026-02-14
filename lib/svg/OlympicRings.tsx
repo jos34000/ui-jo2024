@@ -1,0 +1,52 @@
+export function OlympicRings({ className }: Readonly<{ className?: string }>) {
+  return (
+    <svg
+      viewBox="0 0 100 40"
+      className={className}
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <circle
+        cx="15"
+        cy="15"
+        r="12"
+        stroke="#0081C8"
+        strokeWidth="3"
+        fill="none"
+      />
+      <circle
+        cx="35"
+        cy="15"
+        r="12"
+        stroke="currentColor"
+        strokeWidth="3"
+        fill="none"
+        className="text-foreground"
+      />
+      <circle
+        cx="55"
+        cy="15"
+        r="12"
+        stroke="#EE334E"
+        strokeWidth="3"
+        fill="none"
+      />
+      <circle
+        cx="25"
+        cy="25"
+        r="12"
+        stroke="#FCB131"
+        strokeWidth="3"
+        fill="none"
+      />
+      <circle
+        cx="45"
+        cy="25"
+        r="12"
+        stroke="#00A651"
+        strokeWidth="3"
+        fill="none"
+      />
+    </svg>
+  );
+}
