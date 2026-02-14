@@ -2,12 +2,14 @@
 
 import { useRouter } from "next/navigation"
 import { useAppForm } from "@/lib/hooks/useAppForm"
-import { LoginFormValues } from "@/lib/types/Form"
 import { toast } from "sonner"
-import { loginSchema } from "@/lib/schemas/FormValidation"
+import { loginSchema } from "@/lib/schemas/form.schema"
 import { User } from "lucide-react"
-import { useAuthStore } from "@/lib/stores/authStore"
+import { useAuthStore } from "@/lib/stores/auth.store"
 import { apiClient } from "@/lib/utils/apiClient"
+import { z } from "zod"
+
+type LoginFormValues = z.infer<typeof loginSchema>
 
 export const LoginForm = () => {
   const router = useRouter()

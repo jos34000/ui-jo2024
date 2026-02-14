@@ -8,11 +8,16 @@ import {
   InputGroupInput,
 } from "@/components/ui/input-group"
 
-export function InputField({
+interface InputFieldProps extends ComponentProps<typeof Input> {
+  label: string
+  icon?: ReactNode
+}
+
+export const InputField = ({
   label,
   icon,
   ...inputProps
-}: { label: string; icon?: ReactNode } & ComponentProps<typeof Input>) {
+}: Readonly<InputFieldProps>) => {
   const field = useFieldContext<string>()
   const error = field.state.meta.errors[0]?.message
   return (

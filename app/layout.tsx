@@ -2,7 +2,7 @@ import React from "react"
 import type { Metadata } from "next"
 import { JetBrains_Mono, Nunito } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
-import { ThemeProvider } from "@/components/theme-provider"
+import { ThemeProvider } from "@/components/ThemeProvider"
 import "./globals.css"
 import { Toaster } from "@/components/ui/sonner"
 
@@ -35,11 +35,11 @@ export const metadata: Metadata = {
   },
 }
 
-export default function RootLayout({
-  children,
-}: Readonly<{
+interface LayoutProps {
   children: React.ReactNode
-}>) {
+}
+
+export default function RootLayout({ children }: Readonly<LayoutProps>) {
   return (
     <html lang="fr" suppressHydrationWarning>
       <body

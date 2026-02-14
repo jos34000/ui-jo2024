@@ -3,7 +3,7 @@ import { useFieldContext } from "@/lib/hooks/useAppForm"
 import { ComponentProps } from "react"
 import { Field, FieldLabel } from "@/components/ui/field"
 
-export function RemembermeField(props: ComponentProps<typeof Checkbox>) {
+export const RememberMeField = (props: ComponentProps<typeof Checkbox>) => {
   const field = useFieldContext<boolean>()
   return (
     <Field orientation={"horizontal"}>

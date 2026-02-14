@@ -16,14 +16,17 @@ import {
 import { Eye, EyeOff, Lock } from "lucide-react"
 import Link from "next/link"
 
-export function PasswordField({
+interface PasswordFieldProps extends ComponentProps<typeof Input> {
+  label: string
+  showForgetPassword: boolean
+}
+
+export const PasswordField = ({
   label,
   showForgetPassword,
   placeholder,
   ...inputProps
-}: { label: string; showForgetPassword: boolean } & ComponentProps<
-  typeof Input
->) {
+}: Readonly<PasswordFieldProps>) => {
   const field = useFieldContext<string>()
   const error = field.state.meta.errors[0]?.message
   const [showPassword, setShowPassword] = useState(false)

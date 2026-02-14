@@ -1,11 +1,15 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { AuthFormProps } from "@/lib/types/Form"
-import { LoginForm } from "@/components/form/login-form"
-import { RegisterForm } from "@/components/form/register-form"
+import { LoginForm } from "@/components/form/LoginForm"
+import { RegisterForm } from "@/components/form/RegisterForm"
 
-export function AuthForm({ mode, onToggleMode }: Readonly<AuthFormProps>) {
+interface AuthFormProps {
+  mode: "login" | "register"
+  onToggleMode: () => void
+}
+
+export const AuthForm = ({ mode, onToggleMode }: Readonly<AuthFormProps>) => {
   const isLogin = mode === "login"
 
   return (

@@ -2,12 +2,14 @@
 
 import { User } from "lucide-react"
 import { useAppForm } from "@/lib/hooks/useAppForm"
-import { RegisterFormValues } from "@/lib/types/Form"
 import { toast } from "sonner"
-import { registerSchema } from "@/lib/schemas/FormValidation"
+import { registerSchema } from "@/lib/schemas/form.schema"
 import { useRouter } from "next/navigation"
-import { useAuthStore } from "@/lib/stores/authStore"
+import { useAuthStore } from "@/lib/stores/auth.store"
 import { apiClient } from "@/lib/utils/apiClient"
+import { z } from "zod"
+
+type RegisterFormValues = z.infer<typeof registerSchema>
 
 export const RegisterForm = () => {
   const router = useRouter()

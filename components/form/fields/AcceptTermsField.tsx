@@ -4,7 +4,7 @@ import { ComponentProps } from "react"
 import { Field, FieldLabel } from "@/components/ui/field"
 import Link from "next/link"
 
-export function AcceptTermsField(props: ComponentProps<typeof Checkbox>) {
+export const AcceptTermsField = (props: ComponentProps<typeof Checkbox>) => {
   const field = useFieldContext<boolean>()
   const error = field.state.meta.errors[0]?.message
   return (
