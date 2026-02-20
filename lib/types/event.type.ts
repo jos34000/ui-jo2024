@@ -12,7 +12,6 @@ export interface EventResponseDTO {
 }
 
 export interface OlympicEvent {
-  id: number
   title: string
   sport: string
   date: string

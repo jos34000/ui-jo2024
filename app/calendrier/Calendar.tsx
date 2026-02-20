@@ -134,7 +134,7 @@ export const Calendar = ({ initialEvents }: CalendarProps) => {
             {filteredEvents.length > 0 ? (
               <div className="space-y-3">
                 {filteredEvents.map(event => (
-                  <EventCard key={event.id} event={event} />
+                  <EventCard key={event.title} event={event} />
                 ))}
               </div>
             ) : (
