@@ -1,0 +1,18 @@
+export const sportsNames: Record<string, string> = {
+  athlétisme: "Athlétisme",
+  natation: "Natation",
+  gymnastique: "Gymnastique",
+  football: "Football",
+  basketball: "Basketball",
+  tennis: "Tennis",
+  volleyball: "Volleyball",
+  cyclisme: "Cyclisme",
+  escrime: "Escrime",
+  judo: "Judo",
+  boxe: "Boxe",
+  aviron: "Aviron",
+  voile: "Voile",
+  tir: "Tir",
+  équitation: "Équitation",
+  cérémonie: "Cérémonie",
+}

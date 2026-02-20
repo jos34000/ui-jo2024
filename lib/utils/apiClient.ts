@@ -32,7 +32,10 @@ export async function apiClient(endpoint: string, options?: RequestInit) {
     },
   })
 
-  if (response.status === 401 && !endpoint.includes("/auth/")) {
+  if (
+    (response.status === 401 || response.status === 403) &&
+    !endpoint.includes("/auth/")
+  ) {
     const refreshed = await refreshTokens()
 
     if (refreshed) {

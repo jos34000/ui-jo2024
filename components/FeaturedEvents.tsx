@@ -13,7 +13,6 @@ const events = [
     date: "26 Juillet 2024",
     time: "19:30",
     location: "Seine",
-    price: "À partir de 2700€",
     status: "limited",
     image: "🏛️",
   },
@@ -24,7 +23,6 @@ const events = [
     date: "4 Août 2024",
     time: "21:50",
     location: "Stade de France",
-    price: "À partir de 195€",
     status: "available",
     image: "🏃",
   },
@@ -35,7 +33,6 @@ const events = [
     date: "10 Août 2024",
     time: "21:30",
     location: "Bercy Arena",
-    price: "À partir de 320€",
     status: "available",
     image: "🏀",
   },
@@ -46,7 +43,6 @@ const events = [
     date: "28 Juillet 2024",
     time: "20:30",
     location: "Paris La Défense Arena",
-    price: "À partir de 180€",
     status: "available",
     image: "🏊",
   },
@@ -57,7 +53,6 @@ const events = [
     date: "9 Août 2024",
     time: "18:00",
     location: "Parc des Princes",
-    price: "À partir de 145€",
     status: "soldout",
     image: "⚽",
   },
@@ -68,7 +63,6 @@ const events = [
     date: "11 Août 2024",
     time: "21:00",
     location: "Stade de France",
-    price: "À partir de 1500€",
     status: "limited",
     image: "🎆",
   },
@@ -92,7 +86,7 @@ const statusConfig = {
   },
 }
 
-export const FeaturedEvents = () => {
+export function FeaturedEvents() {
   return (
     <section id="events" className="py-20 bg-muted/30">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
@@ -155,10 +149,7 @@ export const FeaturedEvents = () => {
                   <span>{event.location}</span>
                 </div>
               </CardContent>
-              <CardFooter className="flex items-center justify-between border-t border-border/50 pt-4">
-                <span className="font-semibold text-foreground">
-                  {event.price}
-                </span>
+              <CardFooter className="flex justify-end border-t border-border/50 pt-4">
                 <Button
                   size="sm"
                   disabled={event.status === "soldout"}
