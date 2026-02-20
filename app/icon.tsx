@@ -13,7 +13,6 @@ export default function Icon() {
   return new ImageResponse(
     <div
       style={{
-        background: "#0B1120",
         width: "100%",
         height: "100%",
         display: "flex",
@@ -24,15 +23,19 @@ export default function Icon() {
     >
       <div
         style={{
+          position: "relative",
+          width: "30px",
+          height: "14px",
           display: "flex",
-          gap: "6px",
-          alignItems: "center",
         }}
       >
         <div
           style={{
-            width: "7px",
-            height: "7px",
+            position: "absolute",
+            left: "0px",
+            top: "0px",
+            width: "6px",
+            height: "6px",
             borderRadius: "50%",
             border: "1.5px solid #0081C8",
             display: "flex",
@@ -40,8 +43,35 @@ export default function Icon() {
         />
         <div
           style={{
-            width: "7px",
-            height: "7px",
+            position: "absolute",
+            left: "9px",
+            top: "0px",
+            width: "6px",
+            height: "6px",
+            borderRadius: "50%",
+            border: "1.5px solid #000000",
+            display: "flex",
+          }}
+        />
+        <div
+          style={{
+            position: "absolute",
+            left: "18px",
+            top: "0px",
+            width: "6px",
+            height: "6px",
+            borderRadius: "50%",
+            border: "1.5px solid #EE334E",
+            display: "flex",
+          }}
+        />
+        <div
+          style={{
+            position: "absolute",
+            left: "4.5px",
+            top: "5px",
+            width: "6px",
+            height: "6px",
             borderRadius: "50%",
             border: "1.5px solid #FCB131",
             display: "flex",
@@ -49,28 +79,13 @@ export default function Icon() {
         />
         <div
           style={{
-            width: "7px",
-            height: "7px",
-            borderRadius: "50%",
-            border: "1.5px solid #FFFFFF",
-            display: "flex",
-          }}
-        />
-        <div
-          style={{
-            width: "7px",
-            height: "7px",
+            position: "absolute",
+            left: "13.5px",
+            top: "5px",
+            width: "6px",
+            height: "6px",
             borderRadius: "50%",
             border: "1.5px solid #00A651",
-            display: "flex",
-          }}
-        />
-        <div
-          style={{
-            width: "7px",
-            height: "7px",
-            borderRadius: "50%",
-            border: "1.5px solid #EE334E",
             display: "flex",
           }}
         />
