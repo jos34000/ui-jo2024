@@ -28,7 +28,7 @@ export const HeroSection = () => {
 
                 <h1 className="text-4xl font-bold tracking-tight sm:text-6xl lg:text-7xl text-balance font-mono">
                   Bonjour,{" "}
-                  <span className="text-primary">{user.firstName}</span>
+                  <span className="text-primary">{user.firstName.trim()}</span>
                 </h1>
 
                 <p className="text-lg text-muted-foreground max-w-lg leading-relaxed">

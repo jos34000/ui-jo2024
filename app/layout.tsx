@@ -16,23 +16,6 @@ export const metadata: Metadata = {
   title: "Paris 2024 - Billetterie Officielle | Jeux Olympiques",
   description:
     "Achetez vos billets officiels pour les Jeux Olympiques de Paris 2024. Vivez des moments inoubliables aux JO.",
-  icons: {
-    icon: [
-      {
-        url: "/icon-light-32x32.png",
-        media: "(prefers-color-scheme: light)",
-      },
-      {
-        url: "/icon-dark-32x32.png",
-        media: "(prefers-color-scheme: dark)",
-      },
-      {
-        url: "/icon.svg",
-        type: "image/svg+xml",
-      },
-    ],
-    apple: "/apple-icon.png",
-  },
 }
 
 interface LayoutProps {

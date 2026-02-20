@@ -36,7 +36,7 @@ import {
 const navigation = [
   { name: "Événements", href: "#events" },
   { name: "Sports", href: "#sports" },
-  { name: "Calendrier", href: "#calendar" },
+  { name: "Calendrier", href: "/calendrier" },
   { name: "FAQ", href: "#faq" },
 ]
 

@@ -1,61 +1,67 @@
 "use client"
 
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
+import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Check, Crown, Sparkles, Star } from "lucide-react"
+import { Badge } from "@/components/ui/badge"
+import { Check, Heart, User, Users } from "lucide-react"
 
-export const ticketTypes = [
+interface TicketOffer {
+  name: string
+  subtitle: string
+  icon: React.ElementType
+  count: number
+  description: string
+  features: string[]
+  popular: boolean
+  color: string
+}
+
+const offers: TicketOffer[] = [
   {
-    name: "Standard",
-    icon: Star,
-    price: "À partir de 24€",
-    description: "L'essentiel pour vivre l'expérience olympique",
+    name: "Solo",
+    subtitle: "1 billet",
+    icon: User,
+    count: 1,
+    description: "Parfait pour vivre votre passion en toute liberte.",
     features: [
-      "Accès à la session sélectionnée",
-      "Place assise garantie",
+      "Acces a tous les evenements",
+      "1 place assise garantie",
       "E-billet sur mobile",
-      "Accès aux zones communes",
+      "Acces aux zones communes",
     ],
-    buttonVariant: "outline" as const,
     popular: false,
+    color: "text-[#0081C8]",
   },
   {
-    name: "Premium",
-    icon: Sparkles,
-    price: "À partir de 195€",
-    description: "Une vue imprenable sur l'action",
+    name: "Duo",
+    subtitle: "2 billets",
+    icon: Users,
+    count: 2,
+    description: "Partagez des moments uniques a deux, cote a cote.",
     features: [
-      "Tout ce qui est inclus en Standard",
-      "Meilleures places de la catégorie",
-      "Accès prioritaire au site",
-      "Programme souvenir inclus",
-      "Espace restauration dédié",
+      "Acces a tous les evenements",
+      "2 places cote a cote garanties",
+      "E-billets sur mobile",
+      "Acces aux zones communes",
     ],
-    buttonVariant: "default" as const,
     popular: true,
+    color: "text-primary",
   },
   {
-    name: "Hospitalité",
-    icon: Crown,
-    price: "À partir de 950€",
-    description: "L'expérience ultime des Jeux",
+    name: "Famille",
+    subtitle: "4 billets",
+    icon: Heart,
+    count: 4,
+    description: "Vivez les Jeux en famille avec des places regroupees.",
     features: [
-      "Tout ce qui est inclus en Premium",
-      "Suite privée ou loge VIP",
-      "Service de conciergerie",
-      "Restauration gastronomique",
-      "Meet & greet exclusifs",
-      "Cadeaux Paris 2024",
+      "Acces a tous les evenements",
+      "4 places regroupees garanties",
+      "E-billets sur mobile",
+      "Acces aux zones communes",
+      "Sac souvenir Paris 2024 offert",
     ],
-    buttonVariant: "outline" as const,
     popular: false,
+    color: "text-[#00A651]",
   },
 ]
 
@@ -65,42 +71,57 @@ export const TicketTypes = () => {
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold tracking-tight sm:text-4xl font-mono">
-            Types de billets
+            Nos offres
           </h2>
           <p className="mt-2 text-muted-foreground max-w-2xl mx-auto">
-            Choisissez l&apos;expérience qui vous correspond pour vivre les Jeux
-            Olympiques 2024
+            {
+              "Choisissez la formule adaptee a votre experience. Chaque billet donne acces a l'ensemble des evenements."
+            }
           </p>
         </div>
 
-        <div className="grid gap-8 lg:grid-cols-3">
-          {ticketTypes.map(ticket => (
+        <div className="grid gap-8 lg:grid-cols-3 items-start">
+          {offers.map(offer => (
             <Card
-              key={ticket.name}
-              className={`relative flex flex-col ${ticket.popular ? "border-primary shadow-lg scale-105" : "border-border/50"}`}
+              key={offer.name}
+              className={`relative flex flex-col transition-all duration-200 hover:shadow-lg hover:border-primary/30 ${
+                offer.popular
+                  ? "border-primary shadow-md lg:scale-105"
+                  : "border-border/50"
+              }`}
             >
-              {ticket.popular && (
-                <div className="absolute -top-4 left-1/2 -translate-x-1/2">
-                  <span className="bg-primary text-primary-foreground text-xs font-semibold px-3 py-1 rounded-full">
-                    Le plus populaire
-                  </span>
+              {offer.popular && (
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2">
+                  <Badge className="bg-primary text-primary-foreground shadow-sm">
+                    Le plus choisi
+                  </Badge>
                 </div>
               )}
-              <CardHeader className="text-center pb-4">
-                <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-primary/10">
-                  <ticket.icon className="h-7 w-7 text-primary" />
+              <CardHeader className="pb-4">
+                <div className="flex items-center gap-3 mb-3">
+                  <div
+                    className={`flex h-11 w-11 items-center justify-center rounded-lg bg-muted ${offer.color}`}
+                  >
+                    <offer.icon className="h-5 w-5" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-bold font-mono">
+                      {offer.name}
+                    </h3>
+                    <p className="text-xs text-muted-foreground">
+                      {offer.subtitle}
+                    </p>
+                  </div>
                 </div>
-                <CardTitle className="text-xl">{ticket.name}</CardTitle>
-                <CardDescription>{ticket.description}</CardDescription>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  {offer.description}
+                </p>
               </CardHeader>
               <CardContent className="flex-1">
-                <div className="mb-6 text-center">
-                  <span className="text-3xl font-bold">{ticket.price}</span>
-                </div>
                 <ul className="space-y-3">
-                  {ticket.features.map(feature => (
+                  {offer.features.map(feature => (
                     <li key={feature} className="flex items-start gap-3">
-                      <Check className="h-5 w-5 text-primary shrink-0 mt-0.5" />
+                      <Check className="h-4 w-4 text-primary shrink-0 mt-0.5" />
                       <span className="text-sm text-muted-foreground">
                         {feature}
                       </span>
@@ -109,10 +130,11 @@ export const TicketTypes = () => {
                 </ul>
               </CardContent>
               <CardFooter>
-                <Button variant={ticket.buttonVariant} className="w-full">
-                  {ticket.name === "Hospitalité"
-                    ? "Nous contacter"
-                    : "Sélectionner"}
+                <Button
+                  className="w-full"
+                  variant={offer.popular ? "default" : "outline"}
+                >
+                  {offer.popular ? "Choisir Duo" : `Choisir ${offer.name}`}
                 </Button>
               </CardFooter>
             </Card>
