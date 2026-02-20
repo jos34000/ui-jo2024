@@ -10,18 +10,25 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 
-export function SelectField({
+interface SelectOption {
+  label: string
+  value: string
+}
+interface SelectFieldProps extends ComponentProps<typeof Select> {
+  label: string
+  options: SelectOption[]
+  placeholder: string
+}
+
+export const SelectField = ({
   label,
   options,
   placeholder,
   ...selectProps
-}: {
-  label: string
-  options: SelectOptions[]
-  placeholder: string
-} & ComponentProps<typeof Select>) {
+}: Readonly<SelectFieldProps>) => {
   const field = useFieldContext<string>()
   const error = field.state.meta.errors[0]?.message
+
   return (
     <div className="space-y-2">
       <Label htmlFor={field.name}>{label}</Label>
@@ -33,13 +40,13 @@ export function SelectField({
         <SelectTrigger
           className={cn(
             "bg-background text-foreground rounded-lg transition-all duration-300",
-            error ? "border-red-500" : "border-secondary"
+            error ? "border-red-500" : "border-secondary",
           )}
         >
           <SelectValue placeholder={placeholder} />
         </SelectTrigger>
         <SelectContent className="bg-background border-secondary text-foreground">
-          {options.map((item) => (
+          {options.map(item => (
             <SelectItem key={item.value} value={item.value}>
               {item.label}
             </SelectItem>
