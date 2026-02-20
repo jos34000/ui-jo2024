@@ -29,7 +29,6 @@ export const mapEventFromDTO = (dto: EventResponseDTO): OlympicEvent => {
   }
 
   return {
-    id: dto.id,
     title: dto.name,
     sport: extractSport(dto.name),
     date: date,
