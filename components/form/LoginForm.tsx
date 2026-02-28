@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation"
 import { useAppForm } from "@/lib/hooks/useAppForm"
 import { toast } from "sonner"
-import { loginSchema } from "@/lib/schemas/form.schema"
+import { loginSchema } from "@/lib/schemas/login.schema"
 import { User } from "lucide-react"
 import { useAuthStore } from "@/lib/stores/auth.store"
 import { apiClient } from "@/lib/utils/apiClient"
@@ -54,10 +54,10 @@ export const LoginForm = () => {
 
   return (
     <form
-      onSubmit={async e => {
+      onSubmit={e => {
         e.preventDefault()
         e.stopPropagation()
-        await loginForm.handleSubmit()
+        loginForm.handleSubmit()
       }}
       className="space-y-5"
     >
@@ -77,6 +77,7 @@ export const LoginForm = () => {
             label="Mot de passe"
             placeholder="Entrez votre mot de passe ..."
             showForgetPassword={true}
+            resetPasswordMode="request"
           ></field.PasswordField>
         )}
       </loginForm.AppField>

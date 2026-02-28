@@ -1,12 +1,4 @@
-import { z } from "zod";
-
-export const loginSchema = z.object({
-  email: z.email("Adresse email invalide"),
-  password: z
-    .string()
-    .min(8, "Le mot de passe doit contenir au moins 8 caractères"),
-  rememberMe: z.boolean().optional(),
-});
+import { z } from "zod"
 
 export const registerSchema = z
   .object({
@@ -29,7 +21,7 @@ export const registerSchema = z
       message: "Vous devez accepter les conditions d'utilisation",
     }),
   })
-  .refine((data) => data.password === data.confirmPassword, {
+  .refine(data => data.password === data.confirmPassword, {
     message: "Les mots de passe ne correspondent pas",
     path: ["confirmPassword"],
-  });
+  })
