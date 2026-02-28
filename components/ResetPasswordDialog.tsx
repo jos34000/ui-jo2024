@@ -11,9 +11,12 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
-import { resetPasswordSchema } from "@/lib/schemas/resetPassword.schema"
+import { emailForReset } from "@/lib/schemas/resetPassword.schema"
 import { changePasswordSchema } from "@/lib/schemas/changePassword.schema"
 import { useAppForm } from "@/lib/hooks/useAppForm"
+import { apiClient } from "@/lib/utils/apiClient"
+import { toast } from "sonner"
+import { useRouter } from "next/navigation"
 
 interface ResetPasswordDialogProps {
   mode: "request" | "change" | undefined
@@ -28,17 +31,30 @@ export const ResetPasswordDialog = ({
 }: ResetPasswordDialogProps) => {
   const [open, setOpen] = useState(false)
   const [success, setSuccess] = useState(false)
+  const router = useRouter()
 
   const requestForm = useAppForm({
     defaultValues: {
       email: userEmail || "",
     },
     onSubmit: async ({ value }) => {
-      console.log(value)
-      setSuccess(true)
+      try {
+        const response = await apiClient("/users/forget-password", {
+          method: "POST",
+          body: JSON.stringify({
+            email: value.email,
+          }),
+        })
+
+        toast.success("Si un comtpe est lié a cet email, un lien a été envoyé.")
+        setSuccess(true)
+      } catch (error) {
+        console.error("Reset error:", error)
+        toast.error("Une erreur est survenue")
+      }
     },
     validators: {
-      onSubmit: resetPasswordSchema,
+      onSubmit: emailForReset,
     },
   })
 
@@ -49,7 +65,27 @@ export const ResetPasswordDialog = ({
       confirmPassword: "",
     },
     onSubmit: async ({ value }) => {
-      console.log(value)
+      try {
+        const response = await apiClient("/users/password", {
+          method: "PUT",
+          body: JSON.stringify({
+            oldPassword: value.currentPassword,
+            newPassword: value.newPassword,
+          }),
+        })
+
+        if (!response.ok) {
+          const error = await response.json().catch(() => ({}))
+          toast.error(error.message || "Une erreur est survenue.")
+          return
+        }
+
+        toast.success("Modification réussie")
+        setSuccess(true)
+      } catch (error) {
+        console.error("Update error:", error)
+        toast.error("Une erreur est survenue")
+      }
     },
     validators: {
       onSubmit: changePasswordSchema,
