@@ -1,4 +1,4 @@
-export interface UserReponse {
+export interface User {
   id: number
   email: string
   firstName: string
@@ -8,14 +8,22 @@ export interface UserReponse {
 }
 
 export interface AuthState {
-  user: UserReponse | null
+  user: User | null
   isAuthenticated: boolean
-  setUser: (user: UserReponse | null) => void
+  setUser: (user: User | null) => void
   logout: () => void
+  updateUser: (user: Partial<User>) => void
 }
 
 export interface StoredUser {
   firstName: string
   lastName: string
   email: string
+}
+
+export interface UpdateUser {
+  firstName: string
+  lastName: string
+  email: string
+  password: string
 }

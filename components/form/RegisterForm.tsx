@@ -3,7 +3,7 @@
 import { User } from "lucide-react"
 import { useAppForm } from "@/lib/hooks/useAppForm"
 import { toast } from "sonner"
-import { registerSchema } from "@/lib/schemas/form.schema"
+import { registerSchema } from "@/lib/schemas/register.schema"
 import { useRouter } from "next/navigation"
 import { useAuthStore } from "@/lib/stores/auth.store"
 import { apiClient } from "@/lib/utils/apiClient"
