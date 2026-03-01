@@ -29,11 +29,10 @@ export const ProfileForm = ({
       firstName: user.firstName,
       lastName: user.lastName,
       email: user.email,
-      password: undefined,
     } as ProfileFormValues,
     onSubmit: async ({ value }) => {
-      const response = await apiClient("/user", {
-        method: "PATCH",
+      const response = await apiClient("/users", {
+        method: "PUT",
         body: JSON.stringify(value),
       })
       const data = await response.json()
@@ -82,15 +81,6 @@ export const ProfileForm = ({
           <form.AppField name="email">
             {field => (
               <field.TextField label="Email" placeholder="votre@email.com" />
-            )}
-          </form.AppField>
-          <form.AppField name="password">
-            {field => (
-              <field.PasswordField
-                label="Mot de passe"
-                placeholder="*********"
-                showForgetPassword={false}
-              />
             )}
           </form.AppField>
         </div>
