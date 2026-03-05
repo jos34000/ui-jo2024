@@ -2,12 +2,12 @@
 
 import { User } from "lucide-react"
 import { useAppForm } from "@/lib/hooks/useAppForm"
-import { toast } from "sonner"
 import { registerSchema } from "@/lib/schemas/register.schema"
 import { useRouter } from "next/navigation"
 import { useAuthStore } from "@/lib/stores/auth.store"
-import { apiClient } from "@/lib/utils/apiClient"
 import { z } from "zod"
+import { apiClient } from "@/lib/utils/apiClient"
+import { toast } from "sonner"
 
 type RegisterFormValues = z.infer<typeof registerSchema>
 
@@ -22,6 +22,7 @@ export const RegisterForm = () => {
       email: "",
       password: "",
       confirmPassword: "",
+      enableTwoFactor: false,
       acceptTerms: false,
     } as RegisterFormValues,
     onSubmit: async ({ value }) => {
@@ -33,6 +34,7 @@ export const RegisterForm = () => {
             password: value.password,
             firstName: value.firstName,
             lastName: value.lastName,
+            enableTwoFactor: value.enableTwoFactor,
           }),
         })
 
@@ -110,6 +112,9 @@ export const RegisterForm = () => {
             showForgetPassword={false}
           />
         )}
+      </registerForm.AppField>
+      <registerForm.AppField name="enableTwoFactor">
+        {field => <field.TwoFactorField />}
       </registerForm.AppField>
 
       <registerForm.AppField name="acceptTerms">

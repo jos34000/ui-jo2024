@@ -31,7 +31,7 @@ export const PasswordField = ({
 
   return (
     <Field>
-      <div className="flex items-center justify-between mb-2">
+      <div className="flex items-center justify-between">
         <FieldLabel htmlFor={field.name}>{label}</FieldLabel>
         {showForgetPassword && resetPasswordMode && (
           <ResetPasswordDialog

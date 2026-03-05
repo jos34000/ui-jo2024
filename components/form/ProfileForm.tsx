@@ -29,6 +29,7 @@ export const ProfileForm = ({
       firstName: user.firstName,
       lastName: user.lastName,
       email: user.email,
+      twoFactor: user.mfaEnabled,
     } as ProfileFormValues,
     onSubmit: async ({ value }) => {
       const response = await apiClient("/users", {
@@ -85,6 +86,17 @@ export const ProfileForm = ({
           </form.AppField>
         </div>
       </div>
+      <div>
+        <h3 className="text-sm font-medium text-muted-foreground mb-3 uppercase tracking-wider font-mono">
+          Securité
+        </h3>
+        <div className="space-y-4">
+          <form.AppField name="twoFactor">
+            {field => <field.TwoFactorField />}
+          </form.AppField>
+        </div>
+      </div>
+
       <div className="flex flex-col gap-3 pt-2 border-t border-border">
         <form.AppForm>
           <form.SubmitButton className="w-full">Modifier</form.SubmitButton>

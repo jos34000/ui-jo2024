@@ -6,6 +6,8 @@ import { PasswordField } from "@/components/form/fields/PasswordField"
 import { createFormHook, createFormHookContexts } from "@tanstack/react-form"
 import { RememberMeField } from "@/components/form/fields/RememberMeField"
 import { AcceptTermsField } from "@/components/form/fields/AcceptTermsField"
+import { TwoFactorField } from "@/components/form/fields/TwoFactorField"
+import { OTPField } from "@/components/form/fields/OTPField"
 
 export const { fieldContext, formContext, useFieldContext, useFormContext } =
   createFormHookContexts()
@@ -18,6 +20,8 @@ export const { useAppForm, withForm } = createFormHook({
     PasswordField: PasswordField,
     RememberMeField: RememberMeField,
     AcceptTermsField: AcceptTermsField,
+    TwoFactorField: TwoFactorField,
+    OTPField: OTPField,
   },
   formComponents: {
     SubmitButton: ButtonField,

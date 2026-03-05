@@ -1,6 +1,7 @@
 import { getAuthStore } from "@/lib/stores/auth.store"
 
 const API_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:8000"
+const PUBLIC_ENDPOINTS = ["/auth/", "/2fa/send", "/2fa/verify"]
 
 let isRefreshing = false
 let refreshPromise: Promise<boolean> | null = null
@@ -36,7 +37,7 @@ export async function apiClient(endpoint: string, options?: RequestInit) {
 
   if (
     (response.status === 401 || response.status === 403) &&
-    !endpoint.includes("/auth/")
+    !PUBLIC_ENDPOINTS.some(e => endpoint.includes(e))
   ) {
     const refreshed = await refreshTokens()
 

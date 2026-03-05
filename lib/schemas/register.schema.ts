@@ -17,6 +17,7 @@ export const registerSchema = z
       .regex(/[A-Z]/, "Le mot de passe doit contenir au moins une majuscule")
       .regex(/\d/, "Le mot de passe doit contenir au moins un chiffre"),
     confirmPassword: z.string(),
+    enableTwoFactor: z.boolean(),
     acceptTerms: z.boolean().refine((val: boolean) => val, {
       message: "Vous devez accepter les conditions d'utilisation",
     }),

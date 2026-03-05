@@ -4,15 +4,21 @@ import { useRouter } from "next/navigation"
 import { useAppForm } from "@/lib/hooks/useAppForm"
 import { toast } from "sonner"
 import { loginSchema } from "@/lib/schemas/login.schema"
-import { User } from "lucide-react"
 import { useAuthStore } from "@/lib/stores/auth.store"
 import { apiClient } from "@/lib/utils/apiClient"
 import { z } from "zod"
+import { useState } from "react"
+import { OTPDialog } from "@/components/OTPDialog"
+import { User } from "@/lib/types/user.types"
+import { User as UserIcon } from "lucide-react"
 
 type LoginFormValues = z.infer<typeof loginSchema>
 
 export const LoginForm = () => {
   const router = useRouter()
+  const [showOtpDialog, setShowOtpDialog] = useState(false)
+  const [pendingUser, setPendingUser] = useState<User | null>(null)
+  const [pendingEmail, setPendingEmail] = useState("")
   const { setUser } = useAuthStore()
 
   const loginForm = useAppForm({
@@ -38,10 +44,16 @@ export const LoginForm = () => {
         }
 
         const data = await response.json()
-        setUser(data.user)
 
-        toast.success("Connexion réussie")
-        router.push("/")
+        if (response.status === 202) {
+          setPendingUser(data)
+          setPendingEmail(data.email)
+          setShowOtpDialog(true)
+        } else {
+          setUser(data.user)
+          toast.success("Connexion réussie")
+          router.push("/")
+        }
       } catch (error) {
         console.error("Login error:", error)
         toast.error("Une erreur est survenue")
@@ -53,44 +65,54 @@ export const LoginForm = () => {
   })
 
   return (
-    <form
-      onSubmit={e => {
-        e.preventDefault()
-        e.stopPropagation()
-        loginForm.handleSubmit()
-      }}
-      className="space-y-5"
-    >
-      <loginForm.AppField name="email">
-        {field => (
-          <field.TextField
-            label="E-mail"
-            placeholder="Entrez votre mail"
-            icon={<User />}
-          />
-        )}
-      </loginForm.AppField>
+    <>
+      {pendingUser && (
+        <OTPDialog
+          open={showOtpDialog}
+          onOpenChange={setShowOtpDialog}
+          pendingEmail={pendingEmail}
+          pendingUser={pendingUser}
+        />
+      )}
+      <form
+        onSubmit={e => {
+          e.preventDefault()
+          e.stopPropagation()
+          loginForm.handleSubmit()
+        }}
+        className="space-y-5"
+      >
+        <loginForm.AppField name="email">
+          {field => (
+            <field.TextField
+              label="E-mail"
+              placeholder="Entrez votre mail"
+              icon={<UserIcon />}
+            />
+          )}
+        </loginForm.AppField>
 
-      <loginForm.AppField name="password">
-        {field => (
-          <field.PasswordField
-            label="Mot de passe"
-            placeholder="Entrez votre mot de passe ..."
-            showForgetPassword={true}
-            resetPasswordMode="request"
-          ></field.PasswordField>
-        )}
-      </loginForm.AppField>
+        <loginForm.AppField name="password">
+          {field => (
+            <field.PasswordField
+              label="Mot de passe"
+              placeholder="Entrez votre mot de passe ..."
+              showForgetPassword={true}
+              resetPasswordMode="request"
+            ></field.PasswordField>
+          )}
+        </loginForm.AppField>
 
-      <loginForm.AppField name="rememberMe">
-        {field => <field.RememberMeField></field.RememberMeField>}
-      </loginForm.AppField>
+        <loginForm.AppField name="rememberMe">
+          {field => <field.RememberMeField></field.RememberMeField>}
+        </loginForm.AppField>
 
-      <loginForm.AppForm>
-        <loginForm.SubmitButton className="w-full">
-          Se connecter
-        </loginForm.SubmitButton>
-      </loginForm.AppForm>
-    </form>
+        <loginForm.AppForm>
+          <loginForm.SubmitButton className="w-full">
+            Se connecter
+          </loginForm.SubmitButton>
+        </loginForm.AppForm>
+      </form>
+    </>
   )
 }
