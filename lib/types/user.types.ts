@@ -19,6 +19,7 @@ export interface StoredUser {
   firstName: string
   lastName: string
   email: string
+  mfaEnabled: boolean
 }
 
 export interface UpdateUser {
