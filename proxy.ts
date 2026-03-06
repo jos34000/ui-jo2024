@@ -4,7 +4,7 @@ import { NextResponse } from "next/server"
 export function proxy(request: NextRequest) {
   const accessToken = request.cookies.get("access_token")?.value
 
-  const publicPaths = ["/", "/auth", "/login", "/register"]
+  const publicPaths = ["/", "/auth", "/login", "/register", "/events"]
   const isPublicPath = publicPaths.some(path =>
     request.nextUrl.pathname.startsWith(path),
   )

@@ -2,6 +2,8 @@ export interface EventResponseDTO {
   id: number
   name: string
   description: string
+  sport: string
+  category: string
   location: string
   eventDate: string
   capacity: number
@@ -12,6 +14,7 @@ export interface EventResponseDTO {
 }
 
 export interface OlympicEvent {
+  id: number
   title: string
   sport: string
   date: string
@@ -19,4 +22,18 @@ export interface OlympicEvent {
   location: string
   status: "available" | "limited" | "soldout"
   category: string
+}
+
+export interface FullEvent extends OlympicEvent {
+  description: string
+  capacity: number
+  availableSlots: number
+}
+
+export type EventStatus = "available" | "limited" | "soldout"
+
+export interface EventStatusProps {
+  label: string
+  className: string
+  dotColor: string
 }
