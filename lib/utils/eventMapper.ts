@@ -1,23 +1,14 @@
-import { EventResponseDTO, OlympicEvent } from "@/lib/types/event.type"
-import { sportsNames } from "@/lib/constants/sports-names"
+import {
+  EventResponseDTO,
+  FullEvent,
+  OlympicEvent,
+} from "@/lib/types/event.type"
 
 export const mapEventFromDTO = (dto: EventResponseDTO): OlympicEvent => {
   const eventDateTime = new Date(dto.eventDate)
   const date = eventDateTime.toISOString().split("T")[0]
   const time = eventDateTime.toTimeString().slice(0, 5)
 
-  const extractSport = (name: string): string => {
-    const lowerName = name.toLowerCase()
-
-    for (const [key, value] of Object.entries(sportsNames)) {
-      if (lowerName.includes(key)) {
-        return value
-      }
-    }
-
-    const parts = name.split("-")
-    return parts[0].trim() || "Événement"
-  }
   const calculateStatus = (
     availableSlots: number,
     capacity: number,
@@ -29,12 +20,24 @@ export const mapEventFromDTO = (dto: EventResponseDTO): OlympicEvent => {
   }
 
   return {
+    id: dto.id,
     title: dto.name,
-    sport: extractSport(dto.name),
+    sport: dto.sport,
     date: date,
     time: time,
     location: dto.location,
     status: calculateStatus(dto.availableSlots, dto.capacity),
-    category: extractSport(dto.name),
+    category: dto.category,
+  }
+}
+
+export const toFullEvent = (dto: EventResponseDTO): FullEvent => {
+  const olympicEvent = mapEventFromDTO(dto)
+
+  return {
+    ...olympicEvent,
+    description: dto.description,
+    capacity: dto.capacity,
+    availableSlots: dto.availableSlots,
   }
 }

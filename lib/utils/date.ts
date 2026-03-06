@@ -26,6 +26,24 @@ export const formatDateFull = (dateStr: string) => {
   })
 }
 
+export const formatDateLong = (dateStr: string) => {
+  const d = new Date(dateStr + "T00:00:00")
+  return d.toLocaleDateString("fr-FR", {
+    weekday: "long",
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  })
+}
+
+export const formatDateShort = (dateStr: string) => {
+  const d = new Date(dateStr + "T00:00:00")
+  return d.toLocaleDateString("fr-FR", {
+    day: "numeric",
+    month: "short",
+  })
+}
+
 export const getMonth = (dateStr: string) => {
   return new Date(dateStr + "T00:00:00").getMonth()
 }
