@@ -4,14 +4,14 @@ import { FeaturedEvents } from "@/components/FeaturedEvents"
 import { SportCategories } from "@/components/SportCategories"
 import { TicketTypes } from "@/components/TicketTypes"
 import { Footer } from "@/components/Footer"
-import { mapEventFromDTO } from "@/lib/utils/eventMapper"
-import { EventResponseDTO } from "@/lib/types/event.type"
+import { EventDTO } from "@/lib/types/event.type"
+import { toOlympicEvent } from "@/lib/utils/eventMapper"
 
 export default async function HomePage() {
   const apiUrl = process.env.NEXT_PUBLIC_API_BASE_URL
   const events = await fetch(`${apiUrl}/events/all`).then(r => r.json())
-  const mappedEvents = events.map((event: EventResponseDTO) => {
-    return mapEventFromDTO(event)
+  const mappedEvents = events.map((event: EventDTO) => {
+    return toOlympicEvent(event)
   })
   const featuredEvents = mappedEvents.slice(0, 6)
 

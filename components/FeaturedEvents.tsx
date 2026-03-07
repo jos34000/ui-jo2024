@@ -63,7 +63,7 @@ export function FeaturedEvents({ events }: Readonly<FeaturedEventsProps>) {
                       {event.sport}
                     </p>
                     <h3 className="text-lg font-semibold leading-tight group-hover:text-primary transition-colors">
-                      {event.title}
+                      {event.name}
                     </h3>
                   </div>
                 </CardHeader>

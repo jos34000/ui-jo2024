@@ -1,10 +1,6 @@
-import {
-  EventResponseDTO,
-  FullEvent,
-  OlympicEvent,
-} from "@/lib/types/event.type"
+import { EventDTO, EventStatus, OlympicEvent } from "@/lib/types/event.type"
 
-export const mapEventFromDTO = (dto: EventResponseDTO): OlympicEvent => {
+export const toOlympicEvent = (dto: EventDTO): OlympicEvent => {
   const eventDateTime = new Date(dto.eventDate)
   const date = eventDateTime.toISOString().split("T")[0]
   const time = eventDateTime.toTimeString().slice(0, 5)
@@ -12,7 +8,7 @@ export const mapEventFromDTO = (dto: EventResponseDTO): OlympicEvent => {
   const calculateStatus = (
     availableSlots: number,
     capacity: number,
-  ): "available" | "limited" | "soldout" => {
+  ): EventStatus => {
     if (availableSlots === 0) return "soldout"
     const percentAvailable = (availableSlots / capacity) * 100
     if (percentAvailable < 20) return "limited"
@@ -21,23 +17,17 @@ export const mapEventFromDTO = (dto: EventResponseDTO): OlympicEvent => {
 
   return {
     id: dto.id,
-    title: dto.name,
-    sport: dto.sport,
+    name: dto.name,
+    description: dto.description,
+    category: dto.category,
+    phase: dto.phase,
+    location: dto.location,
     date: date,
     time: time,
-    location: dto.location,
-    status: calculateStatus(dto.availableSlots, dto.capacity),
-    category: dto.category,
-  }
-}
-
-export const toFullEvent = (dto: EventResponseDTO): FullEvent => {
-  const olympicEvent = mapEventFromDTO(dto)
-
-  return {
-    ...olympicEvent,
-    description: dto.description,
     capacity: dto.capacity,
     availableSlots: dto.availableSlots,
+    isActive: dto.isActive,
+    status: calculateStatus(dto.availableSlots, dto.capacity),
+    sport: dto.sport,
   }
 }

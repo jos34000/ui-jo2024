@@ -18,7 +18,7 @@ import {
 } from "lucide-react"
 import { formatDateLong, formatDateShort } from "@/lib/utils/date"
 import {
-  EventResponseDTO,
+  EventDTO,
   EventStatus,
   EventStatusProps,
   FullEvent,
@@ -66,8 +66,8 @@ const getAllEventsBySport = async (
 
   const data = await res.json()
   return data
-    .filter((e: EventResponseDTO) => e.id !== thisId)
-    .map((e: EventResponseDTO) => toFullEvent(e))
+    .filter((e: EventDTO) => e.id !== thisId)
+    .map((e: EventDTO) => toFullEvent(e))
 }
 
 const EventPage = async ({ params }: { params: Promise<{ slug: string }> }) => {

@@ -1,39 +1,50 @@
-export interface EventResponseDTO {
-  id: number
+import { SportCategory } from "@/lib/types/category.type"
+import { EventPhase } from "@/lib/types/phases.type"
+
+export interface EventSeed {
   name: string
   description: string
-  sport: string
-  category: string
+  category: SportCategory
+  phase: EventPhase
   location: string
+  city: string
   eventDate: string
   capacity: number
   availableSlots: number
   isActive: boolean
-  createdAt: string
-  updatedAt: string
-}
-
-export interface OlympicEvent {
-  id: number
-  title: string
   sport: string
-  date: string
-  time: string
-  location: string
-  status: "available" | "limited" | "soldout"
-  category: string
 }
 
-export interface FullEvent extends OlympicEvent {
+export interface EventDTO {
+  id: number
+  name: string
   description: string
+  category: SportCategory
+  phase: EventPhase
+  location: string
+  city: string
+  eventDate: string
   capacity: number
   availableSlots: number
+  isActive: boolean
+  sport: string
 }
 
 export type EventStatus = "available" | "limited" | "soldout"
 
-export interface EventStatusProps {
-  label: string
-  className: string
-  dotColor: string
+export interface OlympicEvent {
+  id: number
+  name: string
+  description: string
+  category: SportCategory
+  phase: EventPhase
+  location: string
+  city: string
+  date: string
+  time: string
+  capacity: number
+  availableSlots: number
+  isActive: boolean
+  status: EventStatus
+  sport: string
 }
