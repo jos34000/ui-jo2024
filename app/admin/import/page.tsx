@@ -2,14 +2,16 @@
 
 import { apiClient } from "@/lib/utils/apiClient"
 import { useState } from "react"
-import { eventsCatalog } from "@/lib/constants/events-catalog"
+import { eventsSeed } from "@/lib/constants/events-catalog"
 import { offerTypes } from "@/lib/constants/offer-types"
 import { Button } from "@/components/ui/button"
+import { sportsSeed } from "@/lib/constants/sports-catalog"
 
 export default function ImportEventsPage() {
   const [isLoading, setIsLoading] = useState(false)
   const [eventResult, setEventResult] = useState<any>(null)
   const [offerResult, setOfferResult] = useState<any>(null)
+  const [sportResult, setSportResult] = useState<any>(null)
   const [error, setError] = useState<string | null>(null)
 
   const handleImportEvents = async () => {
@@ -20,7 +22,7 @@ export default function ImportEventsPage() {
     try {
       const response = await apiClient("/events/bulk", {
         method: "POST",
-        body: JSON.stringify(eventsCatalog),
+        body: JSON.stringify(eventsSeed),
       })
 
       if (!response.ok) {
@@ -61,6 +63,31 @@ export default function ImportEventsPage() {
     }
   }
 
+  const handleImportSports = async () => {
+    setIsLoading(true)
+    setError(null)
+    setOfferResult(null)
+
+    try {
+      const response = await apiClient("/sport/bulk", {
+        method: "POST",
+        body: JSON.stringify(sportsSeed),
+      })
+
+      if (!response.ok) {
+        setError("Erreur")
+        console.log(response)
+      }
+
+      const data = await response.json()
+      setSportResult(data)
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Une erreur est survenue")
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
   return (
     <div className="min-h-screen bg-gray-50 p-8">
       <div className="mx-auto max-w-6xl">
@@ -72,8 +99,7 @@ export default function ImportEventsPage() {
           <div className="mb-6 rounded-md bg-blue-50 p-4">
             <p className="text-sm text-blue-800">
               {"Cette page permet d'importer en masse les "}
-              {eventsCatalog.length} événements des Jeux Olympiques de Paris
-              2024.
+              {eventsSeed.length} événements des Jeux Olympiques de Paris 2024.
             </p>
             <p className="mt-2 text-sm text-blue-700">
               {
@@ -95,7 +121,14 @@ export default function ImportEventsPage() {
               disabled={isLoading}
               className="rounded-md bg-blue-600 px-6 py-3 font-semibold text-white transition-colors hover:bg-blue-700 disabled:cursor-not-allowed disabled:bg-gray-400"
             >
-              {isLoading ? "Import en cours..." : "Importer les offer types"}
+              {isLoading ? "Import en cours..." : "Importer les offres"}
+            </Button>
+            <Button
+              onClick={handleImportSports}
+              disabled={isLoading}
+              className="rounded-md bg-blue-600 px-6 py-3 font-semibold text-white transition-colors hover:bg-blue-700 disabled:cursor-not-allowed disabled:bg-gray-400"
+            >
+              {isLoading ? "Import en cours..." : "Importer les sports"}
             </Button>
           </div>
 
@@ -121,7 +154,7 @@ export default function ImportEventsPage() {
                 <div className="rounded-lg bg-blue-50 p-4">
                   <p className="text-sm text-gray-600">Total</p>
                   <p className="text-2xl font-bold text-blue-700">
-                    {eventsCatalog.length}
+                    {eventsSeed.length}
                   </p>
                 </div>
               </div>
@@ -168,6 +201,40 @@ export default function ImportEventsPage() {
               </pre>
             </div>
           )}
+          {sportResult && (
+            <div className="mt-8">
+              <h2 className="mb-4 text-xl font-semibold text-green-700">
+                ✅ Import réussi
+              </h2>
+              <div className="mb-4 grid grid-cols-3 gap-4">
+                <div className="rounded-lg bg-green-50 p-4">
+                  <p className="text-sm text-gray-600">Créés</p>
+                  <p className="text-2xl font-bold text-green-700">
+                    {sportResult.created}
+                  </p>
+                </div>
+                <div className="rounded-lg bg-yellow-50 p-4">
+                  <p className="text-sm text-gray-600">Ignorés</p>
+                  <p className="text-2xl font-bold text-yellow-700">
+                    {sportResult.skipped}
+                  </p>
+                </div>
+                <div className="rounded-lg bg-blue-50 p-4">
+                  <p className="text-sm text-gray-600">Total</p>
+                  <p className="text-2xl font-bold text-blue-700">
+                    {sportsSeed.length}
+                  </p>
+                </div>
+              </div>
+
+              <h3 className="mb-2 text-lg font-semibold text-gray-700">
+                Réponse complète :
+              </h3>
+              <pre className="overflow-auto rounded-lg bg-gray-800 p-4 text-sm text-green-400">
+                {JSON.stringify(sportResult, null, 2)}
+              </pre>
+            </div>
+          )}
 
           {/* Erreur */}
           {error && (
@@ -181,15 +248,14 @@ export default function ImportEventsPage() {
             </div>
           )}
 
-          {/* Aperçu des données */}
           <div className="mt-8">
             <details className="cursor-pointer">
               <summary className="text-lg font-semibold text-gray-700">
-                📋 Aperçu des données à importer ({eventsCatalog.length}{" "}
+                📋 Aperçu des données à importer ({eventsSeed.length}{" "}
                 événements)
               </summary>
               <pre className="mt-4 overflow-auto rounded-lg bg-gray-100 p-4 text-xs text-gray-700">
-                {JSON.stringify(eventsCatalog, null, 2)}
+                {JSON.stringify(eventsSeed, null, 2)}
               </pre>
             </details>
           </div>
@@ -201,6 +267,16 @@ export default function ImportEventsPage() {
               </summary>
               <pre className="mt-4 overflow-auto rounded-lg bg-gray-100 p-4 text-xs text-gray-700">
                 {JSON.stringify(offerTypes, null, 2)}
+              </pre>
+            </details>
+          </div>
+          <div className="mt-8">
+            <details className="cursor-pointer">
+              <summary className="text-lg font-semibold text-gray-700">
+                📋 Aperçu des données à importer ({sportsSeed.length} sports)
+              </summary>
+              <pre className="mt-4 overflow-auto rounded-lg bg-gray-100 p-4 text-xs text-gray-700">
+                {JSON.stringify(sportsSeed, null, 2)}
               </pre>
             </details>
           </div>

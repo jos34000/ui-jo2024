@@ -1,11 +1,16 @@
-"use client"
-
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { ArrowRight } from "lucide-react"
-import { sports } from "@/lib/constants/sports-catalog"
+import { SportResponseDTO } from "@/lib/types/sport.type"
 
-export const SportCategories = () => {
+const getAllSport = async (): Promise<SportResponseDTO[] | null> => {
+  const res = await fetch(`${process.env.API_BASE_URL}/sport`)
+  if (!res.ok) return null
+  return await res.json()
+}
+
+export const SportCategories = async () => {
+  const sports = await getAllSport()
   return (
     <section id="sports" className="py-20 bg-background">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
@@ -14,26 +19,23 @@ export const SportCategories = () => {
             Explorer par sport
           </h2>
           <p className="mt-2 text-muted-foreground max-w-2xl mx-auto">
-            32 sports, 329 evenements. Trouvez les billets pour vos sports
-            preferes.
+            {sports?.length} sports, 329 evenements. Trouvez les billets pour
+            vos sports preferes.
           </p>
         </div>
 
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
-          {sports.map(sport => (
+          {sports?.map(sport => (
             <Link
-              key={sport.slug}
-              href={`/sports/${sport.slug}`}
+              key={sport.id}
+              href={`/sports/${sport.id}`}
               className="group flex flex-col items-center justify-center p-6 rounded-xl border border-border bg-card hover:border-primary/50 hover:bg-primary/5 transition-all duration-200"
             >
-              <span className="text-4xl mb-3 group-hover:scale-110 transition-transform">
-                {sport.icon}
-              </span>
               <span className="font-medium text-foreground text-sm">
                 {sport.name}
               </span>
               <span className="text-xs text-muted-foreground mt-1">
-                {sport.events} epreuves
+                {sport.eventCount} epreuves
               </span>
             </Link>
           ))}

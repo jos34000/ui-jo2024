@@ -4,6 +4,7 @@ import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Check, Heart, User, Users } from "lucide-react"
+import React from "react"
 
 interface TicketOffer {
   name: string
