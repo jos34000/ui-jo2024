@@ -77,7 +77,7 @@ export const DayTimeline = ({
                       : "bg-card border-border hover:border-primary/40 hover:bg-accent text-foreground"
                   }
                 `}
-                aria-label={`Voir les evenements du ${formatDateFull(day)}`}
+                aria-label={`Voir les évènement du ${formatDateFull(day)}`}
               >
                 <span className="text-[10px] font-medium uppercase opacity-90">
                   {formatDay(day)}

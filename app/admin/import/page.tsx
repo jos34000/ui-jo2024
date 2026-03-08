@@ -3,9 +3,10 @@
 import { apiClient } from "@/lib/utils/apiClient"
 import { useState } from "react"
 import { eventsSeed } from "@/lib/constants/events-catalog"
-import { offerTypes } from "@/lib/constants/offer-types"
+import { offersCatalog } from "@/lib/constants/offers-catalog"
 import { Button } from "@/components/ui/button"
 import { sportsSeed } from "@/lib/constants/sports-catalog"
+import Link from "next/link"
 
 export default function ImportEventsPage() {
   const [isLoading, setIsLoading] = useState(false)
@@ -44,9 +45,9 @@ export default function ImportEventsPage() {
     setOfferResult(null)
 
     try {
-      const response = await apiClient("/offer-types/bulk", {
+      const response = await apiClient("/offer/bulk", {
         method: "POST",
-        body: JSON.stringify(offerTypes),
+        body: JSON.stringify(offersCatalog),
       })
 
       if (!response.ok) {
@@ -91,6 +92,9 @@ export default function ImportEventsPage() {
   return (
     <div className="min-h-screen bg-gray-50 p-8">
       <div className="mx-auto max-w-6xl">
+        <Button>
+          <Link href="/">Home</Link>
+        </Button>
         <div className="rounded-lg bg-white p-8 shadow-md">
           <h1 className="mb-6 text-3xl font-bold text-gray-900">
             Import des données des JO Paris 2024
@@ -188,7 +192,7 @@ export default function ImportEventsPage() {
                 <div className="rounded-lg bg-blue-50 p-4">
                   <p className="text-sm text-gray-600">Total</p>
                   <p className="text-2xl font-bold text-blue-700">
-                    {offerTypes.length}
+                    {offersCatalog.length}
                   </p>
                 </div>
               </div>
@@ -262,11 +266,11 @@ export default function ImportEventsPage() {
           <div className="mt-8">
             <details className="cursor-pointer">
               <summary className="text-lg font-semibold text-gray-700">
-                📋 Aperçu des données à importer ({offerTypes.length} offer
+                📋 Aperçu des données à importer ({offersCatalog.length} offer
                 types)
               </summary>
               <pre className="mt-4 overflow-auto rounded-lg bg-gray-100 p-4 text-xs text-gray-700">
-                {JSON.stringify(offerTypes, null, 2)}
+                {JSON.stringify(offersCatalog, null, 2)}
               </pre>
             </details>
           </div>

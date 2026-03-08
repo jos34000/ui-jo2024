@@ -17,6 +17,11 @@ const statusConfig = {
 
 export const EventCard = ({ event }: EventCardProps) => {
   const status = statusConfig[event.status]
+  const getStatusClassName = (status: string) => {
+    if (status === "available") return "border-[#00A651]/30 text-[#00A651]"
+    if (status === "limited") return "border-[#FCB131]/30 text-[#FCB131]"
+    return "border-[#EE334E]/30 text-[#EE334E]"
+  }
 
   return (
     <Link href={`/events/${event.id}`} passHref>
@@ -39,18 +44,12 @@ export const EventCard = ({ event }: EventCardProps) => {
                     {event.sport}
                   </p>
                   <h3 className="text-sm sm:text-base font-semibold leading-tight group-hover:text-primary transition-colors">
-                    {event.title}
+                    {event.name}
                   </h3>
                 </div>
                 <Badge
                   variant="outline"
-                  className={`shrink-0 text-[10px] whitespace-nowrap ${
-                    event.status === "available"
-                      ? "border-[#00A651]/30 text-[#00A651]"
-                      : event.status === "limited"
-                        ? "border-[#FCB131]/30 text-[#FCB131]"
-                        : "border-[#EE334E]/30 text-[#EE334E]"
-                  }`}
+                  className={`shrink-0 text-[10px] whitespace-nowrap ${getStatusClassName(event.status)}`}
                 >
                   {status.label}
                 </Badge>

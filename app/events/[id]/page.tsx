@@ -17,14 +17,10 @@ import {
   Users,
 } from "lucide-react"
 import { formatDateLong, formatDateShort } from "@/lib/utils/date"
-import {
-  EventDTO,
-  EventStatus,
-  EventStatusProps,
-  FullEvent,
-} from "@/lib/types/event.type"
+import { EventDTO, EventStatus, OlympicEvent } from "@/lib/types/event.type"
 import { ReservationDialog } from "@/components/ReservationDialog"
-import { toFullEvent } from "@/lib/utils/eventMapper"
+import { EventStatusProps } from "@/lib/types/props.type"
+import { toOlympicEvent } from "@/lib/utils/eventMapper"
 
 const statusConfig: Record<EventStatus, EventStatusProps> = {
   available: {
@@ -44,20 +40,20 @@ const statusConfig: Record<EventStatus, EventStatusProps> = {
   },
 }
 
-const getThisEvent = async (slug: string): Promise<FullEvent | null> => {
-  const url = `${process.env.API_BASE_URL}/events/${slug}`
+const getThisEvent = async (id: number): Promise<OlympicEvent | null> => {
+  const url = `${process.env.API_BASE_URL}/events/${id}`
   const res = await fetch(url, { cache: "no-store" })
 
   if (!res.ok) return null
 
   const data = await res.json()
-  return toFullEvent(data)
+  return toOlympicEvent(data)
 }
 
 const getAllEventsBySport = async (
   sport: string,
   thisId: number,
-): Promise<FullEvent[] | null> => {
+): Promise<OlympicEvent[] | null> => {
   const res = await fetch(`${process.env.API_BASE_URL}/events/sport/${sport}`, {
     cache: "no-store",
   })
@@ -67,16 +63,15 @@ const getAllEventsBySport = async (
   const data = await res.json()
   return data
     .filter((e: EventDTO) => e.id !== thisId)
-    .map((e: EventDTO) => toFullEvent(e))
+    .map((e: EventDTO) => toOlympicEvent(e))
 }
 
-const EventPage = async ({ params }: { params: Promise<{ slug: string }> }) => {
-  const event = await getThisEvent((await params).slug)
+const EventPage = async ({ params }: { params: Promise<{ id: number }> }) => {
+  const event = await getThisEvent((await params).id)
 
   if (!event) notFound()
 
   const otherEvents = await getAllEventsBySport(event.sport, event.id)
-  console.log(otherEvents)
 
   const status = statusConfig[event.status as EventStatus]
   const occupancyRate =
@@ -103,7 +98,7 @@ const EventPage = async ({ params }: { params: Promise<{ slug: string }> }) => {
               </Link>
               <span>/</span>
               <span className="text-foreground font-medium truncate">
-                {event.title}
+                {event.name}
               </span>
             </nav>
           </div>
@@ -119,9 +114,12 @@ const EventPage = async ({ params }: { params: Promise<{ slug: string }> }) => {
                 </div>
 
                 <div className="flex items-start gap-4 mb-4">
+                  <div className="flex h-14 w-14 sm:h-16 sm:w-16 items-center justify-center rounded-xl bg-primary/5 border border-primary/20 shrink-0">
+                    <span className="text-3xl sm:text-4xl">{event.icon}</span>
+                  </div>
                   <div>
                     <h1 className="text-2xl sm:text-3xl font-bold tracking-tight font-mono">
-                      {event.title}
+                      {event.name}
                     </h1>
                     <p className="text-muted-foreground mt-1">
                       {event.category}
@@ -226,7 +224,7 @@ const EventPage = async ({ params }: { params: Promise<{ slug: string }> }) => {
 
                     {isSoldOut && (
                       <p className="text-xs text-center text-muted-foreground">
-                        Cet evenement est complet. Consultez les autres epreuves
+                        Cet évènement est complet. Consultez les autres epreuves
                         de {event.sport}.
                       </p>
                     )}
@@ -306,26 +304,27 @@ const EventPage = async ({ params }: { params: Promise<{ slug: string }> }) => {
           <section className="border-t border-border bg-background">
             <div className="mx-auto max-w-5xl px-4 sm:px-6 py-8 sm:py-10">
               <h2 className="text-xl font-bold font-mono mb-6">
-                {event.sport !== "Aucun"
-                  ? `Autres épreuves de ${event.sport}`
-                  : "Autres cérémonies"}
+                {event.sport === "Cérémonie"
+                  ? "Autres cérémonies"
+                  : `Autres épreuves de ${event.sport}`}
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                {otherEvents.map(e => (
-                  <Link key={e.id} href={`/events/${e.id}`}>
+                {otherEvents.map(event => (
+                  <Link key={event.id} href={`/events/${event.id}`}>
                     <Card className="group hover:border-primary/30 transition-all h-full">
                       <CardContent className="p-4">
                         <div className="flex items-start gap-3">
+                          <span className="text-2xl">{event.icon}</span>
                           <div className="min-w-0">
                             <p className="text-xs text-muted-foreground mb-0.5">
-                              {formatDateShort(e.date)} - {e.time}
+                              {formatDateShort(event.date)} - {event.time}
                             </p>
                             <h3 className="text-sm font-semibold leading-tight group-hover:text-primary transition-colors">
-                              {e.title}
+                              {event.name}
                             </h3>
                             <p className="text-xs text-muted-foreground mt-1 flex items-center gap-1">
                               <MapPin className="h-3 w-3" />
-                              {e.location}
+                              {event.location}
                             </p>
                           </div>
                         </div>

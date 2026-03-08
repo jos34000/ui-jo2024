@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { Card, CardContent, CardHeader } from "@/components/ui/card"
+import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { ArrowRight, Calendar, Clock, MapPin } from "lucide-react"
@@ -25,10 +25,10 @@ export function FeaturedEvents({ events }: Readonly<FeaturedEventsProps>) {
         <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-12">
           <div>
             <h2 className="text-3xl font-bold tracking-tight sm:text-4xl font-mono">
-              Evenements populaires
+              Évènements populaires
             </h2>
             <p className="mt-2 text-muted-foreground">
-              Les évenements les plus attendus des Jeux Olympiques 2024
+              Les évènements les plus attendus des Jeux Olympiques 2024
             </p>
           </div>
           <Button variant="outline" className="w-fit bg-transparent" asChild>
@@ -45,18 +45,10 @@ export function FeaturedEvents({ events }: Readonly<FeaturedEventsProps>) {
               <Card className="group overflow-hidden hover:shadow-lg hover:border-primary/30 transition-all border-border/50 h-full">
                 <CardHeader className="pb-3">
                   <div className="flex items-start justify-between">
+                    <div className="text-4xl">{event.icon}</div>
                     <Badge className={statusConfig[event.status].className}>
                       {statusConfig[event.status].label}
                     </Badge>
-                    <Button
-                      size="sm"
-                      disabled={event.status === "soldout"}
-                      variant={
-                        event.status === "soldout" ? "outline" : "default"
-                      }
-                    >
-                      {event.status === "soldout" ? "Complet" : "Reserver"}
-                    </Button>
                   </div>
                   <div className="space-y-1 pt-2">
                     <p className="text-sm font-medium text-primary">
@@ -81,6 +73,15 @@ export function FeaturedEvents({ events }: Readonly<FeaturedEventsProps>) {
                     <span>{event.location}</span>
                   </div>
                 </CardContent>
+                <CardFooter className="flex justify-end border-t border-border/50 pt-4">
+                  <Button
+                    size="sm"
+                    disabled={event.status === "soldout"}
+                    variant={event.status === "soldout" ? "outline" : "default"}
+                  >
+                    {event.status === "soldout" ? "Complet" : "Reserver"}
+                  </Button>
+                </CardFooter>
               </Card>
             </Link>
           ))}

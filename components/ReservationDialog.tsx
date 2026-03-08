@@ -69,7 +69,7 @@ export const ReservationDialog = ({
                 Reservation confirmee
               </DialogTitle>
               <DialogDescription className="text-center">
-                Votre reservation pour {event.title} a ete enregistree. Vous
+                Votre reservation pour {event.name} a ete enregistree. Vous
                 recevrez un email de confirmation.
               </DialogDescription>
             </DialogHeader>
@@ -85,7 +85,7 @@ export const ReservationDialog = ({
               <DialogTitle className="font-mono">
                 Reserver des billets
               </DialogTitle>
-              <DialogDescription>{event.title}</DialogDescription>
+              <DialogDescription>{event.name}</DialogDescription>
             </DialogHeader>
 
             <div className="space-y-4 py-4">
@@ -119,7 +119,7 @@ export const ReservationDialog = ({
                 <div className="flex items-start gap-2">
                   <Info className="h-4 w-4 text-primary mt-0.5 shrink-0" />
                   <p className="text-xs text-muted-foreground">
-                    Votre billet donne acces a tous les evenements des Jeux
+                    Votre billet donne accès a tous les évènement des Jeux
                     Olympiques. Les places sont attribuees selon la
                     disponibilite.
                   </p>

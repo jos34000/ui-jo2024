@@ -1,18 +1,18 @@
 interface SportFilterProps {
   selected: string | null
   onSelect: (sport: string | null) => void
-  sports: string[]
+  categories: string[]
 }
 
 export const SportFilter = ({
   selected,
   onSelect,
-  sports,
+  categories,
 }: SportFilterProps) => {
   return (
     <div className="flex flex-wrap gap-1.5">
       <button
-        key="all-sports"
+        key="all-categories"
         onClick={() => onSelect(null)}
         className={`px-3 py-1.5 rounded-full text-xs font-medium transition-colors ${
           selected
@@ -20,19 +20,19 @@ export const SportFilter = ({
             : "bg-primary text-primary-foreground"
         }`}
       >
-        Tous les sports
+        Toutes catégories
       </button>
-      {sports.map((sport, index) => (
+      {categories.map((cat, index) => (
         <button
-          key={`sport-${index}-${sport}`}
-          onClick={() => onSelect(selected === sport ? null : sport)}
+          key={`sport-${index}-${cat}`}
+          onClick={() => onSelect(selected === cat ? null : cat)}
           className={`px-3 py-1.5 rounded-full text-xs font-medium transition-colors ${
-            selected === sport
+            selected === cat
               ? "bg-primary text-primary-foreground"
               : "bg-card border border-border text-muted-foreground hover:border-primary/40 hover:text-foreground"
           }`}
         >
-          {sport}
+          {cat}
         </button>
       ))}
     </div>

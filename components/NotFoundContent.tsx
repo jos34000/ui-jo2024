@@ -61,14 +61,14 @@ const presets: Record<
     ],
   },
   event: {
-    title: "Evenement introuvable",
-    description: "Cet evenement n'existe pas ou n'est plus disponible.",
+    title: "Évènement introuvable",
+    description: "Cet évènement n'existe pas ou n'est plus disponible.",
     icon: <Ticket className="h-8 w-8" />,
     backLink: { href: "/calendrier", label: "Voir le calendrier" },
     suggestions: [
       {
         href: "/calendrier",
-        label: "Evenements",
+        label: "Évènement",
         icon: <Calendar className="h-4 w-4" />,
       },
       {

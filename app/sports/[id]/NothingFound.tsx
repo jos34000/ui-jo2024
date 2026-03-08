@@ -9,11 +9,11 @@ export const NothingFound = ({ hasSportFilter }: NothingFoundProps) => (
     <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-muted mb-4">
       <CalendarDays className="h-7 w-7 text-muted-foreground" />
     </div>
-    <h3 className="text-lg font-semibold font-mono">Aucun evenement</h3>
+    <h3 className="text-lg font-semibold font-mono">Aucun évènement</h3>
     <p className="text-sm text-muted-foreground mt-1 max-w-xs">
       {hasSportFilter
-        ? "Aucun evenement pour ce sports a cette date. Essayez un autre filtre ou changez de jour."
-        : "Pas d'evenement programme pour cette journee."}
+        ? "Aucun évènement pour ce sports a cette date. Essayez un autre filtre ou changez de jour."
+        : "Pas d'évènement programme pour cette journee."}
     </p>
   </div>
 )

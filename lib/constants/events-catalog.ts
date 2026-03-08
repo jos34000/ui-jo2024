@@ -5,6 +5,7 @@ export const eventsSeed: EventSeed[] = [
     name: "Cérémonie d'ouverture — JO Paris 2024",
     description:
       "Pour la première fois dans l'histoire olympique, la cérémonie d'ouverture quitte le stade et s'installe sur la Seine. 10 500 athlètes de 206 délégations défileront sur des bateaux sur 6 km, de l'île Saint-Louis jusqu'au Trocadéro, devant 320 000 spectateurs massés sur les berges.",
+    icon: "🎉",
     category: "Cérémonie",
     phase: "FINALE",
     location: "Les berges de la Seine",
@@ -13,12 +14,13 @@ export const eventsSeed: EventSeed[] = [
     capacity: 320000,
     availableSlots: 98000,
     isActive: true,
-    sport: "Sprint",
+    sport: "Aucun",
   },
   {
     name: "Cérémonie de clôture — JO Paris 2024",
     description:
       "La flamme olympique s'éteint au Stade de France après 16 jours de compétition. La cérémonie célèbre les performances des athlètes et passe officiellement le flambeau à Los Angeles pour les JO 2028.",
+    icon: "🔥",
     category: "Cérémonie",
     phase: "FINALE",
     location: "Stade de France",
@@ -27,13 +29,14 @@ export const eventsSeed: EventSeed[] = [
     capacity: 80000,
     availableSlots: 4200,
     isActive: true,
-    sport: "Sprint",
+    sport: "Aucun",
   },
 
   {
     name: "100m Homme — Séries",
     description:
       "Premier tour du 100m masculin. Les 80 athlètes engagés sont répartis en séries éliminatoires pour se qualifier pour les demi-finales.",
+    icon: "🏃",
     category: "Athlétisme",
     phase: "SERIES",
     location: "Stade de France",
@@ -48,6 +51,7 @@ export const eventsSeed: EventSeed[] = [
     name: "100m Homme — Demi-finales",
     description:
       "Les huit finalistes du 100m masculin se qualifient lors de ces trois demi-finales. L'occasion de voir les favoris gérer leur effort avant la grande finale.",
+    icon: "🏃",
     category: "Athlétisme",
     phase: "DEMI_FINALE",
     location: "Stade de France",
@@ -62,6 +66,7 @@ export const eventsSeed: EventSeed[] = [
     name: "100m Homme — Finale",
     description:
       "La course la plus scrutée des JO. En à peine 10 secondes, le successeur de Marcell Jacobs sera couronné homme le plus rapide du monde. Le Stade de France accueille 80 000 spectateurs pour ce moment d'anthologie.",
+    icon: "🥇",
     category: "Athlétisme",
     phase: "FINALE",
     location: "Stade de France",
@@ -76,6 +81,7 @@ export const eventsSeed: EventSeed[] = [
     name: "100m Femme — Séries",
     description:
       "Premier tour du 100m féminin. Les sprinteuses mondiales s'élancent pour les qualifications dans une ambiance déjà électrique au Stade de France.",
+    icon: "🏃",
     category: "Athlétisme",
     phase: "SERIES",
     location: "Stade de France",
@@ -90,6 +96,7 @@ export const eventsSeed: EventSeed[] = [
     name: "100m Femme — Demi-finales",
     description:
       "Les huit finalistes du 100m féminin se qualifient. Sha'Carri Richardson et Shericka Jackson font figure de grandes favorites dans ces demi-finales très attendues.",
+    icon: "🏃",
     category: "Athlétisme",
     phase: "DEMI_FINALE",
     location: "Stade de France",
@@ -104,6 +111,7 @@ export const eventsSeed: EventSeed[] = [
     name: "100m Femme — Finale",
     description:
       "Finale du 100 mètres féminin. Sha'Carri Richardson, Shericka Jackson et les meilleures sprinteuses mondiales s'affrontent pour le titre olympique sous les projecteurs du Stade de France.",
+    icon: "🥇",
     category: "Athlétisme",
     phase: "FINALE",
     location: "Stade de France",
@@ -118,6 +126,7 @@ export const eventsSeed: EventSeed[] = [
     name: "Marathon Homme — Arrivée",
     description:
       "Le marathon olympique masculin arrive devant l'Hôtel de Ville. Le parcours traverse les plus beaux monuments de Paris : Notre-Dame, le Louvre, les Champs-Élysées, avant de longer la Seine.",
+    icon: "🏅",
     category: "Athlétisme",
     phase: "FINALE",
     location: "Hôtel de Ville",
@@ -132,6 +141,7 @@ export const eventsSeed: EventSeed[] = [
     name: "Marathon Femme — Arrivée",
     description:
       "Le marathon olympique féminin sur le parcours emblématique de Paris. Sifan Hassan, tenante du titre de Tokyo, fait figure de favorite dans une course qui promet d'être ouverte.",
+    icon: "🏅",
     category: "Athlétisme",
     phase: "FINALE",
     location: "Hôtel de Ville",
@@ -147,6 +157,7 @@ export const eventsSeed: EventSeed[] = [
     name: "Natation — Finales (Session du soir 1)",
     description:
       "Première session de finales : 400m nage libre homme, 400m 4 nages femme et 4x100m relais mixte. Atmosphère électrique garantie dans la Paris La Défense Arena.",
+    icon: "🏊",
     category: "Sport aquatique",
     phase: "FINALE",
     location: "Paris La Défense Arena",
@@ -161,6 +172,7 @@ export const eventsSeed: EventSeed[] = [
     name: "Natation — Finales (Session du soir 2)",
     description:
       "Session incluant le 100m nage libre masculin, souvent le plus disputé après le 100m au stade. Plusieurs records du monde sont attendus dans cette salle à l'acoustique remarquable.",
+    icon: "🏊",
     category: "Sport aquatique",
     phase: "FINALE",
     location: "Paris La Défense Arena",
@@ -175,6 +187,7 @@ export const eventsSeed: EventSeed[] = [
     name: "Natation — Finales (Session du soir 3)",
     description:
       "Grande soirée de finales avec les relais 4x100m nage libre. Les finales de relais sont toujours parmi les moments les plus intenses des Jeux.",
+    icon: "🏊",
     category: "Sport aquatique",
     phase: "FINALE",
     location: "Paris La Défense Arena",
@@ -189,6 +202,7 @@ export const eventsSeed: EventSeed[] = [
     name: "Natation en eau libre 10km Homme",
     description:
       "Course de 10 km dans la Seine, entre le pont d'Iéna et le pont de l'Alma. Les nageurs affrontent courants et conditions naturelles dans l'un des cadres les plus iconiques des JO.",
+    icon: "🌊",
     category: "Sport aquatique",
     phase: "FINALE",
     location: "Pont d'Iéna",
@@ -203,6 +217,7 @@ export const eventsSeed: EventSeed[] = [
     name: "Natation en eau libre 10km Femme",
     description:
       "Même parcours dans la Seine pour les femmes. L'épreuve d'eau libre est l'une des rares disciplines qui se déroule en plein cœur de Paris, visible depuis les berges.",
+    icon: "🌊",
     category: "Sport aquatique",
     phase: "FINALE",
     location: "Pont d'Iéna",
@@ -218,6 +233,7 @@ export const eventsSeed: EventSeed[] = [
     name: "Plongeon — Synchronisé 10m Mixte",
     description:
       "Plongeon synchronisé depuis la plateforme de 10 mètres en format mixte. Les binômes hommes-femmes réalisent des plongeons identiques jugés sur synchronisation et exécution.",
+    icon: "🤿",
     category: "Sport aquatique",
     phase: "FINALE",
     location: "Paris La Défense Arena",
@@ -232,6 +248,7 @@ export const eventsSeed: EventSeed[] = [
     name: "Plongeon — Individuel 10m Homme",
     description:
       "Finale de plongeon depuis la plateforme de 10 mètres. Six plongeons obligatoires et optionnels notés sur la difficulté, l'approche et l'entrée dans l'eau.",
+    icon: "🤿",
     category: "Sport aquatique",
     phase: "FINALE",
     location: "Paris La Défense Arena",
@@ -247,6 +264,7 @@ export const eventsSeed: EventSeed[] = [
     name: "Triathlon Individuel Homme",
     description:
       "Natation dans la Seine (1,5 km), cyclisme dans Paris (40 km) et course à pied (10 km). Départ depuis le pont Alexandre III avec vue sur les Invalides.",
+    icon: "🤸",
     category: "Sport aquatique",
     phase: "FINALE",
     location: "Pont Alexandre III",
@@ -261,6 +279,7 @@ export const eventsSeed: EventSeed[] = [
     name: "Triathlon Individuel Femme",
     description:
       "Même parcours exceptionnel pour les femmes. La Seine, les Champs-Élysées, et l'arrivée face au Grand Palais : le cadre le plus spectaculaire de l'histoire du triathlon olympique.",
+    icon: "🤸",
     category: "Sport aquatique",
     phase: "FINALE",
     location: "Pont Alexandre III",
@@ -275,6 +294,7 @@ export const eventsSeed: EventSeed[] = [
     name: "Triathlon — Relais Mixte",
     description:
       "Format par équipes de quatre (2 hommes, 2 femmes) se relayant sur des distances réduites. Épreuve spectaculaire et tactique, introduite aux JO de Tokyo.",
+    icon: "🔄",
     category: "Sport aquatique",
     phase: "RELAIS_MIXTE",
     location: "Pont Alexandre III",
@@ -290,6 +310,7 @@ export const eventsSeed: EventSeed[] = [
     name: "Aviron — Finales A (Matinée)",
     description:
       "Premières finales A d'aviron avec les épreuves de deux de couple. Le stade nautique de Vaires-sur-Marne offre un cadre naturel exceptionnel à 30 km de Paris.",
+    icon: "🚣",
     category: "Sport nautique",
     phase: "FINALE",
     location: "Stade nautique",
@@ -304,6 +325,7 @@ export const eventsSeed: EventSeed[] = [
     name: "Aviron — Finales A (Après-midi)",
     description:
       "Session incluant les finales du huit barré hommes et femmes, l'épreuve la plus emblématique de l'aviron olympique avec neuf rameurs et un barreur.",
+    icon: "🚣",
     category: "Sport nautique",
     phase: "FINALE",
     location: "Stade nautique",
@@ -319,6 +341,7 @@ export const eventsSeed: EventSeed[] = [
     name: "Canoë Slalom — Kayak Homme (K1) Finale",
     description:
       "Finale de slalom en kayak monoplace masculin. Les compétiteurs négocient 18 à 25 portes suspendues en moins de 90 secondes sur le canal artificiel de Vaires-sur-Marne.",
+    icon: "🌀",
     category: "Sport nautique",
     phase: "FINALE",
     location: "Stade nautique",
@@ -333,6 +356,7 @@ export const eventsSeed: EventSeed[] = [
     name: "Canoë Slalom — Canoë Femme (C1) Finale",
     description:
       "Finale de slalom en canoë monoplace féminin. Discipline introduite à Tokyo 2020, le C1 femmes attire de plus en plus les regards avec des performances de haut niveau.",
+    icon: "🌀",
     category: "Sport nautique",
     phase: "FINALE",
     location: "Stade nautique",
@@ -347,6 +371,7 @@ export const eventsSeed: EventSeed[] = [
     name: "Canoë Sprint — Finales (Session complète)",
     description:
       "Session de finales de canoë-kayak sprint. Au programme : K1 200m, K4 500m hommes et femmes, C2 1000m hommes.",
+    icon: "🛶",
     category: "Sport nautique",
     phase: "FINALE",
     location: "Stade nautique",
@@ -362,6 +387,7 @@ export const eventsSeed: EventSeed[] = [
     name: "Voile — Medal Race (Toutes classes)",
     description:
       "Les courses finales de voile dans la rade de Marseille. Les Medal Races concentrent les meilleurs skippers mondiaux dans des duels tactiques intenses sur les eaux méditerranéennes.",
+    icon: "⛵",
     category: "Sport nautique",
     phase: "FINALE",
     location: "Marina Olympique",
@@ -377,6 +403,7 @@ export const eventsSeed: EventSeed[] = [
     name: "Surf Homme — Demi-finales et Finale",
     description:
       "Les demi-finales et la finale du surf masculin à Teahupo'o en Polynésie française. Les vagues mythiques, considérées parmi les plus dangereuses du monde, offrent un cadre unique dans l'histoire olympique.",
+    icon: "🏄",
     category: "Sport aquatique",
     phase: "FINALE",
     location: "Teahupo'o",
@@ -391,6 +418,7 @@ export const eventsSeed: EventSeed[] = [
     name: "Surf Femme — Demi-finales et Finale",
     description:
       "L'ultime confrontation du surf féminin sur les vagues légendaires de Teahupo'o. Carissa Moore, quadruple championne du monde, défend son titre olympique acquis à Tokyo.",
+    icon: "🏄",
     category: "Sport aquatique",
     phase: "FINALE",
     location: "Teahupo'o",
@@ -406,6 +434,7 @@ export const eventsSeed: EventSeed[] = [
     name: "Gymnastique Artistique — Concours Général Individuel Homme",
     description:
       "Les meilleurs gymnastes de la planète s'affrontent sur les six agrès : sol, cheval d'arçons, anneaux, saut, barres parallèles et barre fixe. Le titre le plus complet de la discipline.",
+    icon: "🤸",
     category: "Gymnastique",
     phase: "FINALE",
     location: "Bercy Arena",
@@ -420,6 +449,7 @@ export const eventsSeed: EventSeed[] = [
     name: "Gymnastique Artistique — Concours Général Individuel Femme",
     description:
       "La compétition reine de la gymnastique féminine sur quatre agrès. Simone Biles, revenue après Tokyo, est l'attraction centrale de ces Jeux.",
+    icon: "🤸",
     category: "Gymnastique",
     phase: "FINALE",
     location: "Bercy Arena",
@@ -434,6 +464,7 @@ export const eventsSeed: EventSeed[] = [
     name: "Gymnastique Artistique — Épreuve par Équipes Femme",
     description:
       "Les équipes nationales s'affrontent sur quatre agrès. La France, portée par son public, cherche à créer la surprise face aux États-Unis et à la Chine.",
+    icon: "🤸",
     category: "Gymnastique",
     phase: "EPREUVE_PAR_EQUIPES",
     location: "Bercy Arena",
@@ -448,6 +479,7 @@ export const eventsSeed: EventSeed[] = [
     name: "Gymnastique Artistique — Finale Agrès Sol Femme",
     description:
       "Finale au sol féminin. Les gymnastes enchaînent sauts acrobatiques et éléments chorégraphiés sur 70 secondes de musique dans l'épreuve la plus spectaculaire de la discipline.",
+    icon: "🤸",
     category: "Gymnastique",
     phase: "FINALE",
     location: "Bercy Arena",
@@ -462,6 +494,7 @@ export const eventsSeed: EventSeed[] = [
     name: "Gymnastique Rythmique — Individuel Tout Engins",
     description:
       "Finale de la compétition tout engins. Cerceau, ballon, massues et ruban : les gymnastes réalisent quatre routines dans la discipline la plus poétique des JO.",
+    icon: "🎀",
     category: "Gymnastique",
     phase: "FINALE",
     location: "Bercy Arena",
@@ -476,6 +509,7 @@ export const eventsSeed: EventSeed[] = [
     name: "Trampoline — Finale Homme",
     description:
       "Finale de trampoline masculin. Les athlètes réalisent dix rebonds enchaînés, atteignant jusqu'à 8 mètres de hauteur, jugés sur temps de vol, difficulté et exécution.",
+    icon: "⬆️",
     category: "Gymnastique",
     phase: "FINALE",
     location: "Bercy Arena",
@@ -491,6 +525,7 @@ export const eventsSeed: EventSeed[] = [
     name: "Basketball Homme — Quarts de finale",
     description:
       "Quarts de finale du tournoi olympique masculin. Deux matches en une soirée pour déterminer les demi-finalistes dans des confrontations directement éliminatoires.",
+    icon: "🏀",
     category: "Sport collectif",
     phase: "QUART_DE_FINALE",
     location: "Bercy Arena",
@@ -505,6 +540,7 @@ export const eventsSeed: EventSeed[] = [
     name: "Basketball Homme — Demi-finales",
     description:
       "Les quatre meilleures équipes s'affrontent pour une place en finale. Les États-Unis, favoris, affrontent leurs challengers européens dans ces matchs à élimination directe.",
+    icon: "🏀",
     category: "Sport collectif",
     phase: "DEMI_FINALE",
     location: "Bercy Arena",
@@ -519,6 +555,7 @@ export const eventsSeed: EventSeed[] = [
     name: "Basketball Homme — Finale",
     description:
       "Match de finale du tournoi olympique masculin. Les États-Unis, avec leur équipe NBA All-Stars, font figure de grands favoris face à des nations européennes de plus en plus compétitives.",
+    icon: "🏀",
     category: "Sport collectif",
     phase: "FINALE",
     location: "Bercy Arena",
@@ -533,6 +570,7 @@ export const eventsSeed: EventSeed[] = [
     name: "Basketball Femme — Finale",
     description:
       "Finale du tournoi de basketball féminin. L'équipe des États-Unis, dominatrice historique de la discipline, affronte son plus sérieux challenger pour le titre olympique.",
+    icon: "🏀",
     category: "Sport collectif",
     phase: "FINALE",
     location: "Bercy Arena",
@@ -547,6 +585,7 @@ export const eventsSeed: EventSeed[] = [
     name: "Basketball 3x3 Homme — Finale",
     description:
       "Finale du tournoi de basketball 3x3 masculin à la Concorde. Format ultra-dynamique avec 10 minutes de jeu intense sur demi-terrain, devant une foule debout.",
+    icon: "🏀",
     category: "Sport collectif",
     phase: "FINALE",
     location: "Place de la Concorde",
@@ -561,6 +600,7 @@ export const eventsSeed: EventSeed[] = [
     name: "Basketball 3x3 Femme — Finale",
     description:
       "Finale féminine du basketball 3x3. La France, qui a décroché l'or à Tokyo 2020, espère rééditer cet exploit à domicile.",
+    icon: "🏀",
     category: "Sport collectif",
     phase: "FINALE",
     location: "Place de la Concorde",
@@ -576,6 +616,7 @@ export const eventsSeed: EventSeed[] = [
     name: "Rugby à 7 Homme — Finales (Bronze et Or)",
     description:
       "Les matchs pour les médailles du tournoi masculin au Stade de France. La Fidji, double championne olympique, est attendue au sommet, mais la France rêve d'or à domicile.",
+    icon: "🏉",
     category: "Sport collectif",
     phase: "FINALE",
     location: "Stade de France",
@@ -590,6 +631,7 @@ export const eventsSeed: EventSeed[] = [
     name: "Rugby à 7 Femme — Finales (Bronze et Or)",
     description:
       "Les matchs pour les médailles du tournoi féminin. La Nouvelle-Zélande, tenante du titre, affronte les meilleures nations dans ces finales spectaculaires.",
+    icon: "🏉",
     category: "Sport collectif",
     phase: "FINALE",
     location: "Stade de France",
@@ -605,6 +647,7 @@ export const eventsSeed: EventSeed[] = [
     name: "Volleyball Homme — Finale",
     description:
       "Finale olympique de volleyball masculin. Action explosive, services ravageurs et smashes à plus de 100 km/h pour décrocher l'or olympique à Montpellier.",
+    icon: "🏐",
     category: "Sport collectif",
     phase: "FINALE",
     location: "Sud de France Arena",
@@ -619,6 +662,7 @@ export const eventsSeed: EventSeed[] = [
     name: "Volleyball Femme — Finale",
     description:
       "Finale olympique de volleyball féminin. Le Brésil, l'Italie et les États-Unis se disputent traditionnellement les podiums dans une discipline en constante progression.",
+    icon: "🏐",
     category: "Sport collectif",
     phase: "FINALE",
     location: "Sud de France Arena",
@@ -634,6 +678,7 @@ export const eventsSeed: EventSeed[] = [
     name: "Beach Volley Homme — Demi-finales",
     description:
       "Demi-finales de beach volleyball masculin sous la Tour Eiffel. Les quatre meilleures paires s'affrontent pour une place en finale dans ce cadre incomparable.",
+    icon: "🏖️",
     category: "Sport collectif",
     phase: "DEMI_FINALE",
     location: "Stade Tour Eiffel",
@@ -648,6 +693,7 @@ export const eventsSeed: EventSeed[] = [
     name: "Beach Volley Homme — Finale",
     description:
       "Finale de beach volleyball masculin au Stade Tour Eiffel. Jouée sur sable au pied du monument le plus célèbre du monde, avec la Dame de fer illuminée en toile de fond.",
+    icon: "🏖️",
     category: "Sport collectif",
     phase: "FINALE",
     location: "Stade Tour Eiffel",
@@ -662,6 +708,7 @@ export const eventsSeed: EventSeed[] = [
     name: "Beach Volley Femme — Finale",
     description:
       "La finale féminine de beach volleyball sous la Tour Eiffel. Ambiance festive et cadre unique pour couronner les meilleures équipes dans la discipline la plus photographiée des JO.",
+    icon: "🏖️",
     category: "Sport collectif",
     phase: "FINALE",
     location: "Stade Tour Eiffel",
@@ -677,6 +724,7 @@ export const eventsSeed: EventSeed[] = [
     name: "Tennis — Demi-finales Simple Homme",
     description:
       "Les quatre derniers en lice se disputent les deux places en finale sur le Central Philippe-Chatrier dans une atmosphère olympique unique à Roland-Garros.",
+    icon: "🎾",
     category: "Sport de raquette",
     phase: "DEMI_FINALE",
     location: "Roland-Garros",
@@ -691,6 +739,7 @@ export const eventsSeed: EventSeed[] = [
     name: "Tennis — Finale Simple Homme",
     description:
       "Finale du tournoi olympique masculin sur la terre battue de Roland-Garros. Novak Djokovic, en quête de l'unique titre manquant à sa carrière, affronte la nouvelle génération.",
+    icon: "🎾",
     category: "Sport de raquette",
     phase: "FINALE",
     location: "Roland-Garros",
@@ -705,6 +754,7 @@ export const eventsSeed: EventSeed[] = [
     name: "Tennis — Finale Simple Femme",
     description:
       "La finale féminine sur la terre battue de Roland-Garros. Les meilleures joueuses du circuit WTA s'affrontent pour la médaille d'or dans un tournoi qui réserve toujours des surprises.",
+    icon: "🎾",
     category: "Sport de raquette",
     phase: "FINALE",
     location: "Roland-Garros",
@@ -719,6 +769,7 @@ export const eventsSeed: EventSeed[] = [
     name: "Tennis — Finale Double Mixte",
     description:
       "Finale du double mixte, discipline très appréciée du public olympique. Les paires hommes-femmes s'affrontent dans un format dynamique où la complicité entre partenaires est décisive.",
+    icon: "🎾",
     category: "Sport de raquette",
     phase: "FINALE",
     location: "Roland-Garros",
@@ -734,6 +785,7 @@ export const eventsSeed: EventSeed[] = [
     name: "Badminton — Finale Simple Homme",
     description:
       "La finale de badminton en simple masculin. La Chine, la Corée du Sud et le Danemark dominent cette discipline à haute intensité physique.",
+    icon: "🏸",
     category: "Sport de raquette",
     phase: "FINALE",
     location: "Paris La Défense Arena",
@@ -748,6 +800,7 @@ export const eventsSeed: EventSeed[] = [
     name: "Badminton — Finale Double Mixte",
     description:
       "Finale du double mixte. Les échanges à plus de 400 km/h et les redressements spectaculaires font de cette épreuve un moment de choix des JO.",
+    icon: "🏸",
     category: "Sport de raquette",
     phase: "FINALE",
     location: "Paris La Défense Arena",
@@ -763,6 +816,7 @@ export const eventsSeed: EventSeed[] = [
     name: "Tennis de table — Finale Simple Homme",
     description:
       "Finale du tennis de table masculin. La Chine, qui domine la discipline depuis des décennies, est attendue en finale face à un adversaire européen ou coréen.",
+    icon: "🏓",
     category: "Sport de raquette",
     phase: "FINALE",
     location: "South Paris Arena",
@@ -777,6 +831,7 @@ export const eventsSeed: EventSeed[] = [
     name: "Tennis de table — Finale par Équipes Mixte",
     description:
       "Finale par équipes mixtes. Hommes et femmes alternent dans les matchs dans ce format dynamique, nouvelle épreuve au programme olympique de Paris 2024.",
+    icon: "🏓",
     category: "Sport de raquette",
     phase: "EPREUVE_PAR_EQUIPES",
     location: "South Paris Arena",
@@ -792,6 +847,7 @@ export const eventsSeed: EventSeed[] = [
     name: "Football Homme — Demi-finale",
     description:
       "Demi-finale du tournoi olympique masculin. La France, devant ses supporters au Parc des Princes, joue sa place en finale dans l'un des matchs les plus attendus des JO.",
+    icon: "⚽",
     category: "Sport collectif",
     phase: "DEMI_FINALE",
     location: "Parc des Princes",
@@ -806,6 +862,7 @@ export const eventsSeed: EventSeed[] = [
     name: "Football Homme — Finale",
     description:
       "Match de finale du tournoi olympique masculin. La France, pays hôte, nourrit l'espoir de décrocher l'or dans son propre stade devant 48 000 spectateurs en liesse.",
+    icon: "⚽",
     category: "Sport collectif",
     phase: "FINALE",
     location: "Parc des Princes",
@@ -820,6 +877,7 @@ export const eventsSeed: EventSeed[] = [
     name: "Football Femme — Finale",
     description:
       "Finale du tournoi olympique féminin. Les États-Unis, le Canada ou l'Allemagne sont les favoris de ce tournoi jamais aussi ouvert.",
+    icon: "⚽",
     category: "Sport collectif",
     phase: "FINALE",
     location: "Parc des Princes",
@@ -835,6 +893,7 @@ export const eventsSeed: EventSeed[] = [
     name: "Handball Homme — Demi-finale",
     description:
       "Demi-finale du tournoi olympique masculin. La France cherche à retrouver le sommet olympique dans ce match à haute intensité à la Sud de France Arena.",
+    icon: "🤾",
     category: "Sport collectif",
     phase: "DEMI_FINALE",
     location: "Sud de France Arena",
@@ -849,6 +908,7 @@ export const eventsSeed: EventSeed[] = [
     name: "Handball Homme — Finale",
     description:
       "Finale du tournoi olympique masculin. La France, triple championne du monde, cherche à retrouver le sommet olympique devant 14 000 spectateurs déchaînés.",
+    icon: "🤾",
     category: "Sport collectif",
     phase: "FINALE",
     location: "Sud de France Arena",
@@ -863,6 +923,7 @@ export const eventsSeed: EventSeed[] = [
     name: "Handball Femme — Finale",
     description:
       "Finale du tournoi olympique féminin. La Norvège, la France et le Danemark se disputent traditionnellement le podium dans cette discipline à dominante européenne.",
+    icon: "🤾",
     category: "Sport collectif",
     phase: "FINALE",
     location: "Sud de France Arena",
@@ -878,6 +939,7 @@ export const eventsSeed: EventSeed[] = [
     name: "Hockey sur gazon Homme — Finale",
     description:
       "Finale du tournoi olympique masculin au stade Yves-du-Manoir. Les Pays-Bas, l'Australie et la Belgique dominent la discipline : une confrontation de haut niveau en perspective.",
+    icon: "🏑",
     category: "Sport collectif",
     phase: "FINALE",
     location: "Stade Yves-du-Manoir",
@@ -892,6 +954,7 @@ export const eventsSeed: EventSeed[] = [
     name: "Hockey sur gazon Femme — Finale",
     description:
       "Finale féminine. Pays-Bas, Australie et Argentine sont les nations les plus titrées dans une discipline qui gagne en popularité à chaque olympiade.",
+    icon: "🏑",
     category: "Sport collectif",
     phase: "FINALE",
     location: "Stade Yves-du-Manoir",
@@ -907,6 +970,7 @@ export const eventsSeed: EventSeed[] = [
     name: "Water-polo Homme — Finale",
     description:
       "La finale olympique de water-polo masculin. Combat physique et tactique dans l'eau, porté par l'ambiance unique de la Paris La Défense Arena.",
+    icon: "🤽",
     category: "Sport aquatique",
     phase: "FINALE",
     location: "Paris La Défense Arena",
@@ -922,6 +986,7 @@ export const eventsSeed: EventSeed[] = [
     name: "Judo — Journée de Finales (Catégories légères)",
     description:
       "Finales des catégories -60 kg et -66 kg hommes, -48 kg et -52 kg femmes. L'excellence du judo mondial à l'Arena Champ-de-Mars, au pied de la Tour Eiffel.",
+    icon: "🥋",
     category: "Sport de combat",
     phase: "FINALE",
     location: "Champ-de-Mars Arena",
@@ -936,6 +1001,7 @@ export const eventsSeed: EventSeed[] = [
     name: "Judo — Journée de Finales (Catégories lourdes)",
     description:
       "Finales des catégories supérieures avec Teddy Riner attendu dans la catégorie +100 kg. Le Français, double champion olympique, est l'un des sportifs les plus suivis des JO à domicile.",
+    icon: "🥋",
     category: "Sport de combat",
     phase: "FINALE",
     location: "Champ-de-Mars Arena",
@@ -950,6 +1016,7 @@ export const eventsSeed: EventSeed[] = [
     name: "Judo — Épreuve par Équipes Mixte",
     description:
       "Format mixte avec trois hommes et trois femmes par équipe. La France, tenant du titre olympique depuis Tokyo 2020, défend sa couronne à domicile.",
+    icon: "🥋",
     category: "Sport de combat",
     phase: "EPREUVE_PAR_EQUIPES",
     location: "Champ-de-Mars Arena",
@@ -965,6 +1032,7 @@ export const eventsSeed: EventSeed[] = [
     name: "Taekwondo — Finales Catégories Légères",
     description:
       "Finales des catégories légères (-58kg homme, -49kg femme) au Grand Palais. Coups de pieds retournés et techniques aériennes dans le cadre architectural le plus noble des JO.",
+    icon: "🦵",
     category: "Sport de combat",
     phase: "FINALE",
     location: "Grand Palais",
@@ -979,6 +1047,7 @@ export const eventsSeed: EventSeed[] = [
     name: "Taekwondo — Finales Catégories Lourdes",
     description:
       "Finales des catégories lourdes (+80kg homme, +73kg femme). Les combats dans les grandes catégories offrent des échanges de grande puissance, souvent décidés en quelques secondes.",
+    icon: "🦵",
     category: "Sport de combat",
     phase: "FINALE",
     location: "Grand Palais",
@@ -994,6 +1063,7 @@ export const eventsSeed: EventSeed[] = [
     name: "Lutte — Finales Gréco-romaine Homme",
     description:
       "Finales de lutte gréco-romaine masculine. La discipline, qui interdit les prises en dessous de la ceinture, met en valeur la technique de corps-à-corps pure.",
+    icon: "🤼",
     category: "Sport de combat",
     phase: "FINALE",
     location: "Champ-de-Mars Arena",
@@ -1008,6 +1078,7 @@ export const eventsSeed: EventSeed[] = [
     name: "Lutte — Finales Libre Femme",
     description:
       "Finales de lutte libre féminine. Les États-Unis et le Japon dominent cette discipline où la France cherche à se distinguer à domicile.",
+    icon: "🤼",
     category: "Sport de combat",
     phase: "FINALE",
     location: "Champ-de-Mars Arena",
@@ -1023,6 +1094,7 @@ export const eventsSeed: EventSeed[] = [
     name: "Boxe — Demi-finales (Session du soir)",
     description:
       "Demi-finales de boxe avec plusieurs catégories de poids. Chaque combattant vainqueur garantit au minimum une médaille de bronze.",
+    icon: "🥊",
     category: "Sport de combat",
     phase: "DEMI_FINALE",
     location: "Roland-Garros",
@@ -1037,6 +1109,7 @@ export const eventsSeed: EventSeed[] = [
     name: "Boxe — Finales (Session du soir)",
     description:
       "Session de finales de boxe avec plusieurs catégories de poids. Le ring installé à Roland-Garros accueille l'élite mondiale pour des combats mémorables.",
+    icon: "🥊",
     category: "Sport de combat",
     phase: "FINALE",
     location: "Roland-Garros",
@@ -1052,6 +1125,7 @@ export const eventsSeed: EventSeed[] = [
     name: "Escrime — Finales Individuelles (Épée Homme)",
     description:
       "Finales d'escrime à l'épée masculine dans le cadre somptueux du Grand Palais restauré. L'élégance et la précision de ce sport d'opposition dans un écrin architectural exceptionnel.",
+    icon: "🤺",
     category: "Sport de combat",
     phase: "FINALE",
     location: "Grand Palais",
@@ -1066,6 +1140,7 @@ export const eventsSeed: EventSeed[] = [
     name: "Escrime — Finales Individuelles (Fleuret Femme)",
     description:
       "Finale de fleuret féminin au Grand Palais. La France, grande nation d'escrime, compte sur ses fleurétistes pour briller à domicile dans cette épreuve de précision et de vitesse.",
+    icon: "🤺",
     category: "Sport de combat",
     phase: "FINALE",
     location: "Grand Palais",
@@ -1080,6 +1155,7 @@ export const eventsSeed: EventSeed[] = [
     name: "Escrime — Épreuve par Équipes (Sabre Homme)",
     description:
       "Finale par équipes au sabre masculin. La Corée du Sud, la Hongrie et les États-Unis sont les nations les plus redoutées dans cette arme la plus explosive de l'escrime.",
+    icon: "🤺",
     category: "Sport de combat",
     phase: "EPREUVE_PAR_EQUIPES",
     location: "Grand Palais",
@@ -1095,6 +1171,7 @@ export const eventsSeed: EventSeed[] = [
     name: "Tir à l'arc — Finale Individuelle Homme",
     description:
       "La finale de tir à l'arc masculin à l'Esplanade des Invalides. Les archers tirent à 70 mètres sur des cibles de 122 cm, dans un cadre architectural de prestige.",
+    icon: "🏹",
     category: "Sport de précision",
     phase: "FINALE",
     location: "Esplanade des Invalides",
@@ -1109,6 +1186,7 @@ export const eventsSeed: EventSeed[] = [
     name: "Tir à l'arc — Finale Équipes Mixtes",
     description:
       "La finale par équipes mixtes de tir à l'arc. Un homme et une femme alternent les tirs dans des matchs en format set system décidés parfois à la flèche de barrage.",
+    icon: "🏹",
     category: "Sport de précision",
     phase: "FINALE",
     location: "Esplanade des Invalides",
@@ -1124,6 +1202,7 @@ export const eventsSeed: EventSeed[] = [
     name: "Tir Sportif — Finale Carabine 10m Homme",
     description:
       "Finale de tir à la carabine à 10 mètres au Centre national de tir sportif. Discipline de précision extrême nécessitant un contrôle parfait du souffle et de la posture.",
+    icon: "🎯",
     category: "Sport de précision",
     phase: "FINALE",
     location: "Centre national de tir sportif",
@@ -1138,6 +1217,7 @@ export const eventsSeed: EventSeed[] = [
     name: "Tir Sportif — Finale Pistolet 25m Femme",
     description:
       "Finale de tir au pistolet à 25 mètres féminin. Les huit meilleures tireuses s'affrontent avec un format dynamique alternant tir de précision et tir rapide.",
+    icon: "🎯",
     category: "Sport de précision",
     phase: "FINALE",
     location: "Centre national de tir sportif",
@@ -1153,6 +1233,7 @@ export const eventsSeed: EventSeed[] = [
     name: "Cyclisme sur Route — Course en Ligne Homme",
     description:
       "La course en ligne masculine (270 km) depuis le Trocadéro. Les coureurs traversent l'Île-de-France et les routes de la Vallée de Chevreuse avant l'arrivée sur les Champs-Élysées.",
+    icon: "🚴",
     category: "Cyclisme",
     phase: "FINALE",
     location: "Les Champs-Élysées",
@@ -1167,6 +1248,7 @@ export const eventsSeed: EventSeed[] = [
     name: "Cyclisme sur Route — Contre-la-montre Homme",
     description:
       "Le contre-la-montre masculin autour du Château de Versailles (35 km). Les coureurs partent à intervalles réguliers pour une confrontation pure contre la montre.",
+    icon: "⏱️",
     category: "Cyclisme",
     phase: "CONTRE_LA_MONTRE",
     location: "Château de Versailles",
@@ -1181,6 +1263,7 @@ export const eventsSeed: EventSeed[] = [
     name: "Cyclisme sur Piste — Finale Keirin Homme",
     description:
       "Finale du keirin masculin. Les sprinters suivent un entraîneur à moto avant de se lancer dans un sprint final explosif sur les 600 derniers mètres du vélodrome.",
+    icon: "🚵",
     category: "Cyclisme",
     phase: "FINALE",
     location: "Vélodrome national",
@@ -1195,6 +1278,7 @@ export const eventsSeed: EventSeed[] = [
     name: "Cyclisme sur Piste — Finale Omnium Femme",
     description:
       "Finale de l'omnium féminin sur piste, combiné de quatre épreuves en une seule journée. La Française Clara Copponi et les meilleures pistards mondiales s'affrontent pour l'or olympique.",
+    icon: "🚵",
     category: "Cyclisme",
     phase: "FINALE",
     location: "Vélodrome national",
@@ -1209,6 +1293,7 @@ export const eventsSeed: EventSeed[] = [
     name: "VTT Cross-Country Homme",
     description:
       "La course de VTT cross-country masculin sur le circuit de la Colline d'Elancourt. Les pilotes enchaînent les tours sur un parcours technique mêlant montées raides et descentes engagées.",
+    icon: "🌲",
     category: "Cyclisme",
     phase: "FINALE",
     location: "Colline d'Elancourt",
@@ -1223,6 +1308,7 @@ export const eventsSeed: EventSeed[] = [
     name: "BMX Racing — Finales Homme et Femme",
     description:
       "Finales de BMX Racing au Vélodrome national. Sur une piste de 400 mètres avec bosses et virages relevés, les pilotes s'élancent depuis une rampe de 8 mètres de haut.",
+    icon: "🏎️",
     category: "Cyclisme",
     phase: "FINALE",
     location: "Vélodrome national",
@@ -1238,6 +1324,7 @@ export const eventsSeed: EventSeed[] = [
     name: "BMX Freestyle — Finale Homme",
     description:
       "Finale de BMX Freestyle Park masculin à la Place de la Concorde. Les riders réalisent leurs figures les plus spectaculaires sur le module géant, avec l'obélisque et les Champs-Élysées en arrière-plan.",
+    icon: "🛹",
     category: "Sport urbain",
     phase: "FINALE",
     location: "Place de la Concorde",
@@ -1252,6 +1339,7 @@ export const eventsSeed: EventSeed[] = [
     name: "BMX Freestyle — Finale Femme",
     description:
       "Finale féminine de BMX Freestyle Park. La discipline, introduite à Tokyo 2020, continue de repousser ses limites avec des figures de plus en plus audacieuses.",
+    icon: "🛹",
     category: "Sport urbain",
     phase: "FINALE",
     location: "Place de la Concorde",
@@ -1266,6 +1354,7 @@ export const eventsSeed: EventSeed[] = [
     name: "Skateboard — Park Homme",
     description:
       "Finale de skateboard park masculin. Les meilleurs riders mondiaux enchaînent leurs tricks dans un park en forme de cuvette entre l'obélisque et les Champs-Élysées.",
+    icon: "🛹",
     category: "Sport urbain",
     phase: "FINALE",
     location: "Place de la Concorde",
@@ -1280,6 +1369,7 @@ export const eventsSeed: EventSeed[] = [
     name: "Skateboard — Street Femme",
     description:
       "Finale de skateboard street féminin. Sur un module reproduisant une rue urbaine, les skateuses enchaînent figures sur obstacles fixes et en run. La pépite japonaise Momiji Nishiya défend son titre.",
+    icon: "🛹",
     category: "Sport urbain",
     phase: "FINALE",
     location: "Place de la Concorde",
@@ -1294,6 +1384,7 @@ export const eventsSeed: EventSeed[] = [
     name: "Breaking — Battle Finale B-Girls",
     description:
       "Première finale olympique de breaking féminin. Les deux meilleures B-Girls s'affrontent dans un battle de deux rounds jugé sur technique, musicalité, originalité et exécution.",
+    icon: "🕺",
     category: "Sport urbain",
     phase: "FINALE",
     location: "Place de la Concorde",
@@ -1308,6 +1399,7 @@ export const eventsSeed: EventSeed[] = [
     name: "Breaking — Battle Finale B-Boys",
     description:
       "Finale olympique de breaking masculin. Les deux meilleurs B-Boys au monde s'affrontent dans un battle épique. Paris, ville berceau du hip-hop européen, offre un écrin parfait.",
+    icon: "🕺",
     category: "Sport urbain",
     phase: "FINALE",
     location: "Place de la Concorde",
@@ -1323,6 +1415,7 @@ export const eventsSeed: EventSeed[] = [
     name: "Escalade — Finale Combiné Homme (Bloc + Difficulté)",
     description:
       "Finale de l'escalade masculine en format combiné bloc et difficulté au Bourget. Les grimpeurs s'affrontent sur des voies inédites, conçues pour l'événement par des setters internationaux.",
+    icon: "🧗",
     category: "Sport urbain",
     phase: "FINALE",
     location: "Le Bourget",
@@ -1337,6 +1430,7 @@ export const eventsSeed: EventSeed[] = [
     name: "Escalade — Finale Vitesse Femme",
     description:
       "Finale d'escalade vitesse féminine. Les grimpeuses s'élancent en duel sur un mur de 15 mètres standardisé, le record du monde actuel étant inférieur à 7 secondes.",
+    icon: "🧗",
     category: "Sport urbain",
     phase: "FINALE",
     location: "Le Bourget",
@@ -1352,6 +1446,7 @@ export const eventsSeed: EventSeed[] = [
     name: "Équitation — Concours Complet par Équipes",
     description:
       "Trois jours d'épreuves combinant dressage, cross-country et saut d'obstacles dans le parc du Château de Versailles. 300 hectares de jardins classés pour un cadre historique incomparable.",
+    icon: "🏇",
     category: "Sport équestre",
     phase: "EPREUVE_PAR_EQUIPES",
     location: "Château de Versailles",
@@ -1366,6 +1461,7 @@ export const eventsSeed: EventSeed[] = [
     name: "Équitation — Dressage Individuel (Grand Prix)",
     description:
       "La finale individuelle de dressage à Versailles. Les cavaliers exécutent une chorégraphie précise sur la musique de leur choix, jugée sur 15 exercices devant les jurés internationaux.",
+    icon: "🏇",
     category: "Sport équestre",
     phase: "FINALE",
     location: "Château de Versailles",
@@ -1380,6 +1476,7 @@ export const eventsSeed: EventSeed[] = [
     name: "Équitation — Saut d'Obstacles Individuel",
     description:
       "Finale individuelle de saut d'obstacles à Versailles. Les cavaliers négocient 12 à 15 obstacles, chaque faute comptant en pénalités dans ce format chronométré.",
+    icon: "🏇",
     category: "Sport équestre",
     phase: "FINALE",
     location: "Château de Versailles",
@@ -1395,6 +1492,7 @@ export const eventsSeed: EventSeed[] = [
     name: "Golf Homme — Dernière Journée (Tour 4)",
     description:
       "Le dernier tour du tournoi masculin au Golf National. Le parcours de l'Albatros, rendu célèbre par la Ryder Cup, accueille les meilleurs golfeurs du monde pour cette journée décisive.",
+    icon: "⛳",
     category: "Golf",
     phase: "FINALE",
     location: "Golf National",
@@ -1409,6 +1507,7 @@ export const eventsSeed: EventSeed[] = [
     name: "Golf Femme — Dernière Journée (Tour 4)",
     description:
       "Dernière journée du tournoi féminin. Nelly Korda, Lydia Ko et les meilleures joueuses du circuit LPGA se disputent la médaille d'or sur un parcours redoutable.",
+    icon: "⛳",
     category: "Golf",
     phase: "FINALE",
     location: "Golf National",
@@ -1424,6 +1523,7 @@ export const eventsSeed: EventSeed[] = [
     name: "Haltérophilie — Finale -73kg Homme",
     description:
       "Finale d'haltérophilie masculine dans la catégorie -73 kg. Les haltérophiles tentent leurs maximaux à l'arraché et à l'épaulé-jeté dans cette catégorie très disputée.",
+    icon: "🏋️",
     category: "Sport de force",
     phase: "FINALE",
     location: "South Paris Arena",
@@ -1438,6 +1538,7 @@ export const eventsSeed: EventSeed[] = [
     name: "Haltérophilie — Finale -59kg Femme",
     description:
       "Finale féminine dans la catégorie -59 kg. La Chine, la Thaïlande et la Corée dominent historiquement la discipline féminine, mais de nouvelles nations émergent à chaque olympiade.",
+    icon: "🏋️",
     category: "Sport de force",
     phase: "FINALE",
     location: "South Paris Arena",
@@ -1453,6 +1554,7 @@ export const eventsSeed: EventSeed[] = [
     name: "Pentathlon Moderne — Finale Homme",
     description:
       "La grande finale du pentathlon moderne masculin en une journée : escrime, natation 200m, équitation et laser-run (tir laser + course). L'épreuve olympique la plus complète de tout le programme.",
+    icon: "🎖️",
     category: "Sport combiné",
     phase: "FINALE",
     location: "Château de Versailles",
@@ -1467,6 +1569,7 @@ export const eventsSeed: EventSeed[] = [
     name: "Pentathlon Moderne — Finale Femme",
     description:
       "Finale du pentathlon moderne féminin. Laura Colladant et les meilleures pentathloniennes du monde s'affrontent dans les cinq disciplines sur une journée complète à Versailles.",
+    icon: "🎖️",
     category: "Sport combiné",
     phase: "FINALE",
     location: "Château de Versailles",

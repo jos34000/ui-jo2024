@@ -50,7 +50,7 @@ export const LoginForm = () => {
           setPendingEmail(data.email)
           setShowOtpDialog(true)
         } else {
-          setUser(data.user)
+          setUser(data)
           toast.success("Connexion réussie")
           router.push("/")
         }

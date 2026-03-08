@@ -33,7 +33,7 @@ export const HeroSection = () => {
 
                 <p className="text-lg text-muted-foreground max-w-lg leading-relaxed">
                   {
-                    "Retrouvez vos billets, explorez les prochains événements et ne manquez aucun moment des Jeux Olympiques de Paris 2024."
+                    "Retrouvez vos billets, explorez les prochains évènements et ne manquez aucun moment des Jeux Olympiques de Paris 2024."
                   }
                 </p>
 
@@ -49,7 +49,7 @@ export const HeroSection = () => {
                     asChild
                   >
                     <Link href="#events">
-                      Explorer les événements
+                      Explorer les évènements
                       <ArrowRight className="ml-2 h-4 w-4" />
                     </Link>
                   </Button>
@@ -79,7 +79,7 @@ export const HeroSection = () => {
 
                 <div className="flex flex-col sm:flex-row gap-4">
                   <Button size="lg" className="text-base">
-                    Voir les événements
+                    Voir les évènements
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
                   <Button

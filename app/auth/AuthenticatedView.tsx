@@ -124,7 +124,7 @@ export const AuthenticatedView = ({
                     Acheter des billets
                   </h3>
                   <p className="text-xs sm:text-sm text-muted-foreground">
-                    {"Explorez les evenements"}
+                    {"Explorez les évènements"}
                   </p>
                 </div>
                 <ArrowRight className="h-4 w-4 text-muted-foreground shrink-0" />

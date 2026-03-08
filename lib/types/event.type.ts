@@ -1,9 +1,10 @@
-import { SportCategory } from "@/lib/types/category.type"
+import { SportCategory } from "@/lib/types/sport.type"
 import { EventPhase } from "@/lib/types/phases.type"
 
 export interface EventSeed {
   name: string
   description: string
+  icon: string
   category: SportCategory
   phase: EventPhase
   location: string
@@ -19,6 +20,7 @@ export interface EventDTO {
   id: number
   name: string
   description: string
+  icon: string
   category: SportCategory
   phase: EventPhase
   location: string
@@ -36,6 +38,7 @@ export interface OlympicEvent {
   id: number
   name: string
   description: string
+  icon: string
   category: SportCategory
   phase: EventPhase
   location: string
