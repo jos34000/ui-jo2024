@@ -5,7 +5,6 @@ import {
   ChevronDown,
   LogOut,
   Menu,
-  ShoppingCart,
   Ticket,
   User,
 } from "lucide-react"
@@ -32,6 +31,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet"
+import { CartSidebar } from "@/components/cart/CartSidebar"
 
 const navigation = [
   { name: "Événements", href: "#events" },
@@ -195,10 +195,7 @@ export const Header = () => {
 
         <div className="hidden lg:flex lg:flex-1 lg:justify-end lg:gap-x-4 lg:items-center">
           <ThemeToggle />
-          <Button variant="ghost" size="icon">
-            <ShoppingCart className="h-5 w-5" />
-            <span className="sr-only">Panier</span>
-          </Button>
+          <CartSidebar />
 
           {isAuthenticated && user ? (
             <DropdownMenu>
