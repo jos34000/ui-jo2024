@@ -1,4 +1,6 @@
-export const offersCatalog = [
+import { OfferSeed } from "@/lib/types/offer.type"
+
+export const offersCatalog: OfferSeed[] = [
   {
     name: "Solo",
     description: "Parfait pour vivre votre passion en toute liberté.",

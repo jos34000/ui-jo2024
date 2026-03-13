@@ -1,5 +1,15 @@
 import { LucideIcon } from "lucide-react"
 
+export interface OfferSeed {
+  name: string
+  description: string
+  price: number
+  numberOfTickets: number
+  isActive: boolean
+  displayOrder: number
+  features: string[]
+}
+
 export interface OfferDTO {
   id: number
   name: string
