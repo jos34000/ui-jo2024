@@ -7,8 +7,8 @@ import { Footer } from "@/components/Footer"
 import { EventDTO } from "@/lib/types/event.type"
 import { toOlympicEvent } from "@/lib/utils/eventMapper"
 
-export default async function HomePage() {
-  const apiUrl = process.env.API_BASE_URL
+const HomePage = async () => {
+  const apiUrl = process.env.API_BASE_URL ?? "http://localhost:8000"
   const events = await fetch(`${apiUrl}/events/all`).then(r => r.json())
   const mappedEvents = events.map((event: EventDTO) => toOlympicEvent(event))
   const featuredEvents = mappedEvents.slice(0, 6)
@@ -28,3 +28,5 @@ export default async function HomePage() {
     </div>
   )
 }
+
+export default HomePage
