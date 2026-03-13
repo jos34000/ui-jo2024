@@ -3,14 +3,14 @@ import { InputField } from "@/components/form/fields/InputField"
 import { SelectField } from "@/components/form/fields/SelectField"
 import { TextAreaField } from "@/components/form/fields/TextAreaField"
 import { PasswordField } from "@/components/form/fields/PasswordField"
-import { createFormHook, createFormHookContexts } from "@tanstack/react-form"
+import { createFormHook } from "@tanstack/react-form"
 import { RememberMeField } from "@/components/form/fields/RememberMeField"
 import { AcceptTermsField } from "@/components/form/fields/AcceptTermsField"
 import { TwoFactorField } from "@/components/form/fields/TwoFactorField"
 import { OTPField } from "@/components/form/fields/OTPField"
+import { fieldContext, formContext } from "./formContexts"
 
-export const { fieldContext, formContext, useFieldContext, useFormContext } =
-  createFormHookContexts()
+export { fieldContext, formContext, useFieldContext, useFormContext } from "./formContexts"
 
 export const { useAppForm, withForm } = createFormHook({
   fieldComponents: {
