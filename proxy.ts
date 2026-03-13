@@ -1,5 +1,6 @@
 import type { NextRequest } from "next/server"
 import { NextResponse } from "next/server"
+import { decodeJwt } from "jose"
 
 export function proxy(request: NextRequest) {
   const accessToken = request.cookies.get("access_token")?.value
@@ -20,8 +21,8 @@ export function proxy(request: NextRequest) {
   }
 
   try {
-    const payload = JSON.parse(atob(accessToken.split(".")[1]))
-    const expirationTime = payload.exp * 1000
+    const payload = decodeJwt(accessToken)
+    const expirationTime = (payload.exp ?? 0) * 1000
 
     if (Date.now() >= expirationTime) {
       const authUrl = new URL("/auth", request.url)

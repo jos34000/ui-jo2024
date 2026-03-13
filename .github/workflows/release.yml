@@ -50,3 +50,14 @@ jobs:
           GIT_COMMITTER_NAME: Release Bot
           GIT_COMMITTER_EMAIL: noreply@project.com
         run: pnpm exec semantic-release
+
+      - name: Create release branch
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          VERSION=$(git describe --tags --abbrev=0 2>/dev/null || echo "")
+          if [ -n "$VERSION" ]; then
+            BRANCH="release/${VERSION#v}"
+            git checkout -b "$BRANCH"
+            git push origin "$BRANCH"
+          fi

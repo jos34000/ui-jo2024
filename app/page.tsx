@@ -10,7 +10,7 @@ import { toOlympicEvent } from "@/lib/utils/eventMapper"
 export const dynamic = "force-dynamic"
 
 const HomePage = async () => {
-  const apiUrl = process.env.API_BASE_URL
+  const apiUrl = process.env.NEXT_PUBLIC_API_BASE_URL
   const events = await fetch(`${apiUrl}/events/all`).then(r => r.json())
   const mappedEvents = events.map((event: EventDTO) => toOlympicEvent(event))
   const featuredEvents = mappedEvents.slice(0, 6)

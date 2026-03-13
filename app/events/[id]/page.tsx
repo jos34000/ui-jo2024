@@ -41,7 +41,7 @@ const statusConfig: Record<EventStatus, EventStatusProps> = {
 }
 
 const getThisEvent = async (id: number): Promise<OlympicEvent | null> => {
-  const url = `${process.env.API_BASE_URL}/events/${id}`
+  const url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/events/${id}`
   const res = await fetch(url, { cache: "no-store" })
 
   if (!res.ok) return null
@@ -54,7 +54,7 @@ const getAllEventsBySport = async (
   sport: string,
   thisId: number,
 ): Promise<OlympicEvent[] | null> => {
-  const res = await fetch(`${process.env.API_BASE_URL}/events/sport/${sport}`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/events/sport/${sport}`, {
     cache: "no-store",
   })
 

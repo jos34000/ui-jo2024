@@ -52,7 +52,7 @@ export async function apiClient(endpoint: string, options?: RequestInit) {
       })
     } else {
       getAuthStore().logout()
-      globalThis.location.href = "/auth"
+      window.location.href = "/auth"
     }
   }
 

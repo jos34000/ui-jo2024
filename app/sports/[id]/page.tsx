@@ -19,7 +19,7 @@ import { EVENT_PHASE_LABELS, EventPhase } from "@/lib/types/phases.type"
 const getCurrentSport = async (
   id: number,
 ): Promise<SportResponseDTO | null> => {
-  const res = await fetch(`${process.env.API_BASE_URL}/sport/${id}`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/sport/${id}`, {
     cache: "no-store",
   })
 
@@ -28,7 +28,7 @@ const getCurrentSport = async (
 }
 
 const getAllSports = async (): Promise<SportResponseDTO[] | null> => {
-  const res = await fetch(`${process.env.API_BASE_URL}/sport`)
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/sport`)
   if (!res.ok) return null
   return await res.json()
 }

@@ -4,7 +4,7 @@ import { ArrowRight } from "lucide-react"
 import { SportResponseDTO } from "@/lib/types/sport.type"
 
 const getAllSport = async (): Promise<SportResponseDTO[] | null> => {
-  const res = await fetch(`${process.env.API_BASE_URL}/sport`)
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/sport`)
   if (!res.ok) return null
   return await res.json()
 }
