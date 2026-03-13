@@ -2,6 +2,8 @@ import { EventDTO } from "@/lib/types/event.type"
 import { toOlympicEvent } from "@/lib/utils/eventMapper"
 import { Calendar } from "@/app/calendrier/Calendar"
 
+export const dynamic = "force-dynamic"
+
 async function getEvents() {
   try {
     const response = await fetch(`${process.env.API_BASE_URL}/events/all`, {
