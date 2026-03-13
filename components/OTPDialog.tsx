@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/dialog"
 import { useAppForm } from "@/lib/hooks/useAppForm"
 import { User } from "@/lib/types/user.types"
-import { apiClient } from "@/lib/utils/apiClient"
+import { apiClient, parseApiError } from "@/lib/utils/apiClient"
 import { toast } from "sonner"
 import { useAuthStore } from "@/lib/stores/auth.store"
 
@@ -48,8 +48,7 @@ export const OTPDialog = ({
         toast.success("Connexion réussie!")
         router.push("/")
       } else {
-        const error = await res.json().catch(() => ({}))
-        toast.error(error.message || "Code invalide.")
+        toast.error(await parseApiError(res, "Code invalide."))
       }
     },
   })

@@ -7,7 +7,8 @@ import { profileSchema } from "@/lib/schemas/profile.schema"
 import { StoredUser } from "@/lib/types/user.types"
 import { useAppForm } from "@/lib/hooks/useAppForm"
 import { Button } from "@/components/ui/button"
-import { apiClient } from "@/lib/utils/apiClient"
+import { apiClient, parseApiError } from "@/lib/utils/apiClient"
+import { toast } from "sonner"
 
 type ProfileFormValues = z.infer<typeof profileSchema>
 
@@ -32,10 +33,14 @@ export const ProfileForm = ({
       twoFactor: user.mfaEnabled,
     } as ProfileFormValues,
     onSubmit: async ({ value }) => {
-      const response = await apiClient("/users", {
+      const response = await apiClient("/user", {
         method: "PUT",
         body: JSON.stringify(value),
       })
+      if (!response.ok) {
+        toast.error(await parseApiError(response, "Erreur lors de la mise à jour du profil"))
+        return
+      }
       const data = await response.json()
       updateUser(data)
       onSuccess()

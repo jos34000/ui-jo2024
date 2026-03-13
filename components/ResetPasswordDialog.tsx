@@ -14,9 +14,8 @@ import {
 import { emailForReset } from "@/lib/schemas/resetPassword.schema"
 import { changePasswordSchema } from "@/lib/schemas/changePassword.schema"
 import { useAppForm } from "@/lib/hooks/useAppForm"
-import { apiClient } from "@/lib/utils/apiClient"
+import { apiClient, parseApiError } from "@/lib/utils/apiClient"
 import { toast } from "sonner"
-import { useRouter } from "next/navigation"
 
 interface ResetPasswordDialogProps {
   mode: "request" | "change" | undefined
@@ -31,7 +30,6 @@ export const ResetPasswordDialog = ({
 }: ResetPasswordDialogProps) => {
   const [open, setOpen] = useState(false)
   const [success, setSuccess] = useState(false)
-  const router = useRouter()
 
   const requestForm = useAppForm({
     defaultValues: {
@@ -39,14 +37,19 @@ export const ResetPasswordDialog = ({
     },
     onSubmit: async ({ value }) => {
       try {
-        const response = await apiClient("/users/forget-password", {
+        const response = await apiClient("/user/forget-password", {
           method: "POST",
           body: JSON.stringify({
             email: value.email,
           }),
         })
 
-        toast.success("Si un comtpe est lié a cet email, un lien a été envoyé.")
+        if (!response.ok) {
+          toast.error(await parseApiError(response, "Une erreur est survenue"))
+          return
+        }
+
+        toast.success("Si un compte est lié à cet email, un lien a été envoyé.")
         setSuccess(true)
       } catch (error) {
         console.error("Reset error:", error)
@@ -66,7 +69,7 @@ export const ResetPasswordDialog = ({
     },
     onSubmit: async ({ value }) => {
       try {
-        const response = await apiClient("/users/password", {
+        const response = await apiClient("/user/password", {
           method: "PUT",
           body: JSON.stringify({
             oldPassword: value.currentPassword,
@@ -75,8 +78,7 @@ export const ResetPasswordDialog = ({
         })
 
         if (!response.ok) {
-          const error = await response.json().catch(() => ({}))
-          toast.error(error.message || "Une erreur est survenue.")
+          toast.error(await parseApiError(response, "Une erreur est survenue."))
           return
         }
 

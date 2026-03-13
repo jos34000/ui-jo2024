@@ -27,11 +27,13 @@ export default function ImportEventsPage() {
       })
 
       if (!response.ok) {
-        console.log(response)
+        const err = await response.json().catch(() => ({}))
+        setError(err.message || "Erreur lors de l'import des événements")
+        return
       }
 
       const data = await response.json()
-      setEventResult(data)
+      setEventResult({ ...data, skipped: eventsSeed.length - (data.created ?? 0) })
     } catch (err) {
       setError(err instanceof Error ? err.message : "Une erreur est survenue")
     } finally {
@@ -51,12 +53,13 @@ export default function ImportEventsPage() {
       })
 
       if (!response.ok) {
-        setError("Erreur")
-        console.log(response)
+        const err = await response.json().catch(() => ({}))
+        setError(err.message || "Erreur lors de l'import des offres")
+        return
       }
 
       const data = await response.json()
-      setOfferResult(data)
+      setOfferResult({ ...data, skipped: offersCatalog.length - (data.created ?? 0) })
     } catch (err) {
       setError(err instanceof Error ? err.message : "Une erreur est survenue")
     } finally {
@@ -67,7 +70,7 @@ export default function ImportEventsPage() {
   const handleImportSports = async () => {
     setIsLoading(true)
     setError(null)
-    setOfferResult(null)
+    setSportResult(null)
 
     try {
       const response = await apiClient("/sport/bulk", {
@@ -76,12 +79,13 @@ export default function ImportEventsPage() {
       })
 
       if (!response.ok) {
-        setError("Erreur")
-        console.log(response)
+        const err = await response.json().catch(() => ({}))
+        setError(err.message || "Erreur lors de l'import des sports")
+        return
       }
 
       const data = await response.json()
-      setSportResult(data)
+      setSportResult({ ...data, skipped: sportsSeed.length - (data.created ?? 0) })
     } catch (err) {
       setError(err instanceof Error ? err.message : "Une erreur est survenue")
     } finally {

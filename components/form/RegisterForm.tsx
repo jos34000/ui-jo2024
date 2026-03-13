@@ -6,7 +6,7 @@ import { registerSchema } from "@/lib/schemas/register.schema"
 import { useRouter } from "next/navigation"
 import { useAuthStore } from "@/lib/stores/auth.store"
 import { z } from "zod"
-import { apiClient } from "@/lib/utils/apiClient"
+import { apiClient, parseApiError } from "@/lib/utils/apiClient"
 import { toast } from "sonner"
 
 type RegisterFormValues = z.infer<typeof registerSchema>
@@ -39,8 +39,7 @@ export const RegisterForm = () => {
         })
 
         if (!response.ok) {
-          const error = await response.json().catch(() => ({}))
-          toast.error(error.message || "Erreur lors de l'inscription")
+          toast.error(await parseApiError(response, "Erreur lors de l'inscription"))
           return
         }
 

@@ -58,3 +58,14 @@ export async function apiClient(endpoint: string, options?: RequestInit) {
 
   return response
 }
+
+export async function parseApiError(
+  response: Response,
+  fallback = "Une erreur est survenue",
+): Promise<string> {
+  const error = await response.json().catch(() => ({}))
+  if (error.message) return error.message
+  const values = Object.values(error).filter(v => typeof v === "string")
+  if (values.length > 0) return values.join(", ")
+  return fallback
+}

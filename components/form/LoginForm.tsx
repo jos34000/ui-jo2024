@@ -5,7 +5,7 @@ import { useAppForm } from "@/lib/hooks/useAppForm"
 import { toast } from "sonner"
 import { loginSchema } from "@/lib/schemas/login.schema"
 import { useAuthStore } from "@/lib/stores/auth.store"
-import { apiClient } from "@/lib/utils/apiClient"
+import { apiClient, parseApiError } from "@/lib/utils/apiClient"
 import { z } from "zod"
 import { useState } from "react"
 import { OTPDialog } from "@/components/OTPDialog"
@@ -38,8 +38,7 @@ export const LoginForm = () => {
         })
 
         if (!response.ok) {
-          const error = await response.json().catch(() => ({}))
-          toast.error(error.message || "Email ou mot de passe incorrect")
+          toast.error(await parseApiError(response, "Email ou mot de passe incorrect"))
           return
         }
 
