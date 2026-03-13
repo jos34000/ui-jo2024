@@ -1,12 +1,7 @@
 import { useFieldContext } from "@/lib/hooks/useAppForm"
 import { ComponentProps, useState } from "react"
 import { Input } from "@/components/ui/input"
-import {
-  Field,
-  FieldDescription,
-  FieldError,
-  FieldLabel,
-} from "@/components/ui/field"
+import { Field, FieldError, FieldLabel } from "@/components/ui/field"
 import {
   InputGroup,
   InputGroupAddon,
@@ -14,16 +9,19 @@ import {
   InputGroupInput,
 } from "@/components/ui/input-group"
 import { Eye, EyeOff, Lock } from "lucide-react"
-import Link from "next/link"
+import { ResetPasswordDialog } from "@/components/ResetPasswordDialog"
+import { Button } from "@/components/ui/button"
 
 interface PasswordFieldProps extends ComponentProps<typeof Input> {
   label: string
   showForgetPassword: boolean
+  resetPasswordMode?: "request" | "change"
 }
 
 export const PasswordField = ({
   label,
   showForgetPassword,
+  resetPasswordMode,
   placeholder,
   ...inputProps
 }: Readonly<PasswordFieldProps>) => {
@@ -33,7 +31,23 @@ export const PasswordField = ({
 
   return (
     <Field>
-      <FieldLabel htmlFor={field.name}>{label}</FieldLabel>
+      <div className="flex items-center justify-between">
+        <FieldLabel htmlFor={field.name}>{label}</FieldLabel>
+        {showForgetPassword && resetPasswordMode && (
+          <ResetPasswordDialog
+            mode={resetPasswordMode}
+            trigger={
+              <Button
+                variant="link"
+                className="h-auto p-0 text-sm"
+                type="button"
+              >
+                Mot de passe oublié ?
+              </Button>
+            }
+          />
+        )}
+      </div>
       <InputGroup>
         <InputGroupInput
           {...inputProps}
@@ -59,11 +73,6 @@ export const PasswordField = ({
         </InputGroupAddon>
       </InputGroup>
       <FieldError>{error}</FieldError>
-      {showForgetPassword && (
-        <FieldDescription>
-          <Link href="/">Mot de passe oublié ? </Link>
-        </FieldDescription>
-      )}
     </Field>
   )
 }

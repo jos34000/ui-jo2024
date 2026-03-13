@@ -1,179 +1,419 @@
-export interface Sport {
-  name: string
-  slug: string
-  icon: string
-  events: number
-  description: string
-  venues: string[]
-  dates: string
-  phases: string[]
-}
+import { SportSeed } from "@/lib/types/sport.type"
 
-export const sports: Sport[] = [
+export const sportsSeed: SportSeed[] = [
   {
-    name: "Athletisme",
-    slug: "athletisme",
-    icon: "\u{1F3C3}",
-    events: 48,
+    name: "Sprint",
     description:
-      "Le programme d'athletisme des Jeux Olympiques de Paris 2024 comprend 48 epreuves allant du sprint au marathon, en passant par les sauts, lancers et epreuves combinees.",
-    venues: ["Stade de France", "Hotel de Ville (Marathon)"],
-    dates: "1 - 11 aout 2024",
-    phases: ["Series", "Qualifications", "Demi-finales", "Finales"],
+      "Épreuves de course à pied sur courtes distances : 100m, 200m et 400m.",
+    icon: "🏃",
+    phases: ["SERIES", "DEMI_FINALE", "FINALE"],
+  },
+  {
+    name: "Marathon",
+    description: "Course à pied longue distance de 42,195 km sur route.",
+    icon: "🏅",
+    phases: ["FINALE"],
   },
   {
     name: "Natation",
-    slug: "natation",
-    icon: "\u{1F3CA}",
-    events: 35,
     description:
-      "Les epreuves de natation se deroulent a la Paris La Defense Arena, transformee en centre aquatique pour l'occasion. 35 epreuves de nage libre, dos, brasse, papillon et relais.",
-    venues: ["Paris La Defense Arena"],
-    dates: "27 juillet - 4 aout 2024",
-    phases: ["Series", "Demi-finales", "Finales"],
+      "Épreuves en piscine couvrant nage libre, dos, brasse, papillon et relais.",
+    icon: "🏊",
+    phases: ["SERIES", "DEMI_FINALE", "FINALE"],
   },
   {
-    name: "Gymnastique",
-    slug: "gymnastique",
-    icon: "\u{1F938}",
-    events: 18,
+    name: "Natation en eau libre",
+    description: "Course de 10 km en milieu naturel, ici dans la Seine.",
+    icon: "🌊",
+    phases: ["FINALE"],
+  },
+  {
+    name: "Triathlon",
     description:
-      "La gymnastique artistique, rythmique et le trampoline se disputent a la Bercy Arena. 18 finales au programme dans ce sports spectaculaire.",
-    venues: ["Bercy Arena"],
-    dates: "27 juillet - 5 aout 2024",
-    phases: ["Qualifications", "Finales par equipe", "Finales individuelles"],
+      "Enchaînement natation, cyclisme et course à pied en milieu urbain.",
+    icon: "🤸",
+    phases: ["FINALE", "RELAIS_MIXTE"],
+  },
+  {
+    name: "Aviron",
+    description:
+      "Épreuves sur plan d'eau en embarcations individuelles et collectives.",
+    icon: "🚣",
+    phases: ["SERIES", "REPECHAGE", "DEMI_FINALE", "FINALE", "CLASSEMENT"],
+  },
+  {
+    name: "Canoë-kayak sprint",
+    description: "Courses de vitesse sur eau calme en canoë et kayak.",
+    icon: "🛶",
+    phases: ["SERIES", "DEMI_FINALE", "FINALE"],
+  },
+  {
+    name: "Canoë-kayak slalom",
+    description:
+      "Descente de parcours artificiels avec portes, en kayak monoplace et canoë.",
+    icon: "🌀",
+    phases: ["QUALIFICATION", "DEMI_FINALE", "FINALE"],
+  },
+  {
+    name: "Water-polo",
+    description:
+      "Sport collectif aquatique opposant deux équipes de sept joueurs.",
+    icon: "🤽",
+    phases: [
+      "PHASE_DE_GROUPES",
+      "QUART_DE_FINALE",
+      "DEMI_FINALE",
+      "MATCH_BRONZE",
+      "FINALE",
+    ],
+  },
+  {
+    name: "Plongeon",
+    description:
+      "Épreuves depuis le tremplin 3m et la plateforme 10m, individuel et synchronisé.",
+    icon: "🤿",
+    phases: ["QUALIFICATION", "FINALE"],
+  },
+  {
+    name: "Voile",
+    description:
+      "Régates olympiques en plusieurs classes de bateaux sur la rade de Marseille.",
+    icon: "⛵",
+    phases: ["SERIES", "FINALE"],
+  },
+  {
+    name: "Surf",
+    description: "Discipline sur vagues naturelles à Teahupo'o, Tahiti.",
+    icon: "🏄",
+    phases: [
+      "TOUR_PRELIMINAIRE",
+      "SEIZIEME_DE_FINALE",
+      "QUART_DE_FINALE",
+      "DEMI_FINALE",
+      "FINALE",
+    ],
+  },
+  {
+    name: "Gymnastique artistique",
+    description:
+      "Agilité, force et grâce sur agrès : sol, barres, poutre, saut.",
+    icon: "🤸",
+    phases: ["QUALIFICATION", "FINALE", "EPREUVE_PAR_EQUIPES"],
+  },
+  {
+    name: "Gymnastique rythmique",
+    description: "Enchaînements avec engins (cerceau, ballon, massues, ruban).",
+    icon: "🎀",
+    phases: ["QUALIFICATION", "FINALE"],
+  },
+  {
+    name: "Trampoline",
+    description: "Figures acrobatiques enchaînées sur trampoline.",
+    icon: "⬆️",
+    phases: ["QUALIFICATION", "FINALE"],
   },
   {
     name: "Basketball",
-    slug: "basketball",
-    icon: "\u{1F3C0}",
-    events: 4,
     description:
-      "Le tournoi olympique de basketball reunit les meilleures equipes nationales du monde. Phase de poules, quarts de finale, demi-finales et finales hommes et femmes.",
-    venues: ["Bercy Arena", "Stade Pierre-Mauroy (Lille)"],
-    dates: "27 juillet - 11 aout 2024",
-    phases: ["Phase de poules", "Quarts de finale", "Demi-finales", "Finales"],
+      "Sport collectif en salle opposant deux équipes de cinq joueurs.",
+    icon: "🏀",
+    phases: [
+      "PHASE_DE_GROUPES",
+      "QUART_DE_FINALE",
+      "DEMI_FINALE",
+      "MATCH_BRONZE",
+      "FINALE",
+    ],
   },
   {
-    name: "Football",
-    slug: "football",
-    icon: "\u26BD",
-    events: 4,
+    name: "Basketball 3x3",
     description:
-      "Le tournoi de football olympique se joue dans plusieurs stades a travers la France. Les equipes U23 renforcees de 3 joueurs seniors s'affrontent pour la medaille d'or.",
-    venues: [
-      "Parc des Princes",
-      "Stade de Lyon",
-      "Stade de Marseille",
-      "Stade de Bordeaux",
-    ],
-    dates: "24 juillet - 10 aout 2024",
+      "Format urbain du basketball sur demi-terrain, en équipes de trois joueurs.",
+    icon: "🏀",
+    phases: ["PHASE_DE_GROUPES", "QUART_DE_FINALE", "DEMI_FINALE", "FINALE"],
+  },
+  {
+    name: "Volleyball",
+    description:
+      "Sport collectif en salle opposant deux équipes de six joueurs.",
+    icon: "🏐",
     phases: [
-      "Phase de poules",
-      "Quarts de finale",
-      "Demi-finales",
-      "Match pour le bronze",
-      "Finale",
+      "PHASE_DE_GROUPES",
+      "QUART_DE_FINALE",
+      "DEMI_FINALE",
+      "MATCH_BRONZE",
+      "FINALE",
+    ],
+  },
+  {
+    name: "Beach volley",
+    description: "Volleyball pratiqué sur sable, en équipes de deux joueurs.",
+    icon: "🏖️",
+    phases: [
+      "PHASE_DE_GROUPES",
+      "SEIZIEME_DE_FINALE",
+      "QUART_DE_FINALE",
+      "DEMI_FINALE",
+      "MATCH_BRONZE",
+      "FINALE",
+    ],
+  },
+  {
+    name: "Rugby à 7",
+    description: "Format raccourci du rugby à XV, joué à 7 par équipe.",
+    icon: "🏉",
+    phases: [
+      "PHASE_DE_GROUPES",
+      "QUART_DE_FINALE",
+      "DEMI_FINALE",
+      "MATCH_BRONZE",
+      "FINALE",
     ],
   },
   {
     name: "Tennis",
-    slug: "tennis",
-    icon: "\u{1F3BE}",
-    events: 5,
-    description:
-      "Les epreuves de tennis se jouent sur la terre battue mythique de Roland-Garros. Simple, double et double mixte sont au programme.",
-    venues: ["Roland-Garros"],
-    dates: "27 juillet - 4 aout 2024",
+    description: "Sport de raquette sur terre battue à Roland-Garros.",
+    icon: "🎾",
     phases: [
-      "1er tour",
-      "2e tour",
-      "3e tour",
-      "Quarts de finale",
-      "Demi-finales",
-      "Finales",
+      "TOUR_PRELIMINAIRE",
+      "SEIZIEME_DE_FINALE",
+      "QUART_DE_FINALE",
+      "DEMI_FINALE",
+      "MATCH_BRONZE",
+      "FINALE",
     ],
   },
   {
-    name: "Cyclisme",
-    slug: "cyclisme",
-    icon: "\u{1F6B4}",
-    events: 22,
+    name: "Badminton",
     description:
-      "Le cyclisme aux JO 2024 couvre la route, la piste, le VTT et le BMX. Les epreuves sur route traversent le coeur de Paris avec des paysages spectaculaires.",
-    venues: [
-      "Trocadero",
-      "Velodrome de Saint-Quentin",
-      "Colline d'Elancourt",
-      "Stade BMX",
-    ],
-    dates: "27 juillet - 11 aout 2024",
+      "Sport de raquette au volant, en simple et double sur surface indoor.",
+    icon: "🏸",
     phases: [
-      "Contre-la-montre",
-      "Course en ligne",
-      "Poursuite",
-      "Sprint",
-      "Finales",
+      "PHASE_DE_GROUPES",
+      "SEIZIEME_DE_FINALE",
+      "QUART_DE_FINALE",
+      "DEMI_FINALE",
+      "MATCH_BRONZE",
+      "FINALE",
     ],
   },
   {
-    name: "Escrime",
-    slug: "escrime",
-    icon: "\u{1F93A}",
-    events: 12,
-    description:
-      "L'escrime, sports olympique historique depuis 1896, se deroule dans le cadre exceptionnel du Grand Palais. Epee, fleuret et sabre en individuel et par equipe.",
-    venues: ["Grand Palais"],
-    dates: "27 juillet - 4 aout 2024",
+    name: "Tennis de table",
+    description: "Sport de raquette sur table, en simple et par équipes.",
+    icon: "🏓",
     phases: [
-      "Tableau principal",
-      "Quarts de finale",
-      "Demi-finales",
-      "Finales",
+      "TOUR_PRELIMINAIRE",
+      "SEIZIEME_DE_FINALE",
+      "QUART_DE_FINALE",
+      "DEMI_FINALE",
+      "MATCH_BRONZE",
+      "FINALE",
+    ],
+  },
+  {
+    name: "Football",
+    description:
+      "Sport collectif opposant deux équipes de onze joueurs sur gazon.",
+    icon: "⚽",
+    phases: [
+      "PHASE_DE_GROUPES",
+      "QUART_DE_FINALE",
+      "DEMI_FINALE",
+      "MATCH_BRONZE",
+      "FINALE",
+    ],
+  },
+  {
+    name: "Handball",
+    description:
+      "Sport collectif en salle opposant deux équipes de sept joueurs.",
+    icon: "🤾",
+    phases: [
+      "PHASE_DE_GROUPES",
+      "QUART_DE_FINALE",
+      "DEMI_FINALE",
+      "MATCH_BRONZE",
+      "FINALE",
+    ],
+  },
+  {
+    name: "Hockey sur gazon",
+    description:
+      "Sport collectif joué sur gazon synthétique avec crosses et balle.",
+    icon: "🏑",
+    phases: [
+      "PHASE_DE_GROUPES",
+      "QUART_DE_FINALE",
+      "DEMI_FINALE",
+      "MATCH_BRONZE",
+      "FINALE",
     ],
   },
   {
     name: "Judo",
-    slug: "judo",
-    icon: "\u{1F94B}",
-    events: 15,
     description:
-      "Le judo se dispute au Champ-de-Mars Arena, au pied de la Tour Eiffel. 15 categories de poids chez les hommes et les femmes plus l'epreuve par equipe mixte.",
-    venues: ["Champ-de-Mars Arena"],
-    dates: "27 juillet - 3 aout 2024",
-    phases: ["Eliminatoires", "Repechages", "Demi-finales", "Finales"],
+      "Art martial japonais basé sur les projections et les immobilisations.",
+    icon: "🥋",
+    phases: [
+      "TOUR_PRELIMINAIRE",
+      "REPECHAGE",
+      "DEMI_FINALE",
+      "MATCH_BRONZE",
+      "FINALE",
+      "EPREUVE_PAR_EQUIPES",
+    ],
   },
   {
-    name: "Aviron",
-    slug: "aviron",
-    icon: "\u{1F6A3}",
-    events: 14,
-    description:
-      "Les epreuves d'aviron se tiennent au Stade Nautique de Vaires-sur-Marne. 14 epreuves en skiff, deux de couple, quatre de couple et plus.",
-    venues: ["Stade Nautique de Vaires-sur-Marne"],
-    dates: "27 juillet - 3 aout 2024",
-    phases: ["Series", "Repechages", "Demi-finales", "Finales"],
+    name: "Boxe",
+    description: "Sport de combat en ring à coups de poings gantés.",
+    icon: "🥊",
+    phases: [
+      "TOUR_PRELIMINAIRE",
+      "SEIZIEME_DE_FINALE",
+      "QUART_DE_FINALE",
+      "DEMI_FINALE",
+      "FINALE",
+    ],
   },
   {
-    name: "Voile",
-    slug: "voile",
-    icon: "\u26F5",
-    events: 10,
+    name: "Taekwondo",
     description:
-      "La voile se deroule a Marseille, dans la rade naturelle du Roucas Blanc. 10 epreuves dans differentes classes de bateaux.",
-    venues: ["Marina de Marseille"],
-    dates: "28 juillet - 8 aout 2024",
-    phases: ["Regates de flotte", "Medal Race"],
+      "Art martial coréen basé sur les techniques de pieds et de poings.",
+    icon: "🦵",
+    phases: [
+      "TOUR_PRELIMINAIRE",
+      "QUART_DE_FINALE",
+      "DEMI_FINALE",
+      "MATCH_BRONZE",
+      "FINALE",
+    ],
   },
   {
-    name: "Equitation",
-    slug: "equitation",
-    icon: "\u{1F3C7}",
-    events: 6,
+    name: "Lutte",
     description:
-      "Les epreuves equestres se tiennent au Chateau de Versailles. Dressage, saut d'obstacles et concours complet sont au programme dans un cadre historique.",
-    venues: ["Chateau de Versailles"],
-    dates: "27 juillet - 6 aout 2024",
-    phases: ["Dressage", "Cross-country", "Saut d'obstacles", "Finales"],
+      "Discipline de combat en gréco-romaine et libre, hommes et femmes.",
+    icon: "🤼",
+    phases: [
+      "TOUR_PRELIMINAIRE",
+      "REPECHAGE",
+      "DEMI_FINALE",
+      "MATCH_BRONZE",
+      "FINALE",
+    ],
+  },
+  {
+    name: "Escrime",
+    description:
+      "Combat à l'arme blanche : fleuret, épée et sabre, en individuel et par équipes.",
+    icon: "🤺",
+    phases: [
+      "TOUR_PRELIMINAIRE",
+      "TRENTE_DEUXIEME_DE_FINALE",
+      "SEIZIEME_DE_FINALE",
+      "QUART_DE_FINALE",
+      "DEMI_FINALE",
+      "MATCH_BRONZE",
+      "FINALE",
+      "EPREUVE_PAR_EQUIPES",
+    ],
+  },
+  {
+    name: "Tir à l'arc",
+    description:
+      "Précision sur cibles à 70m, en individuel et par équipes mixtes.",
+    icon: "🏹",
+    phases: [
+      "SOIXANTE_QUATRIEME_DE_FINALE",
+      "TRENTE_DEUXIEME_DE_FINALE",
+      "SEIZIEME_DE_FINALE",
+      "QUART_DE_FINALE",
+      "DEMI_FINALE",
+      "MATCH_BRONZE",
+      "FINALE",
+    ],
+  },
+  {
+    name: "Tir sportif",
+    description:
+      "Épreuves de précision au pistolet et à la carabine, à 10m, 25m et 50m.",
+    icon: "🎯",
+    phases: ["QUALIFICATION", "FINALE"],
+  },
+  {
+    name: "Cyclisme sur route",
+    description:
+      "Course en ligne et contre-la-montre sur les routes d'Île-de-France.",
+    icon: "🚴",
+    phases: ["FINALE", "CONTRE_LA_MONTRE"],
+  },
+  {
+    name: "Cyclisme sur piste",
+    description: "Épreuves de vitesse et d'endurance sur vélodrome.",
+    icon: "🚵",
+    phases: ["QUALIFICATION", "DEMI_FINALE", "FINALE"],
+  },
+  {
+    name: "VTT",
+    description: "Cross-country olympique sur parcours tout-terrain en forêt.",
+    icon: "🌲",
+    phases: ["FINALE"],
+  },
+  {
+    name: "BMX Racing",
+    description: "Descente de piste en terre avec sauts et virages relevés.",
+    icon: "🏎️",
+    phases: ["SERIES", "QUART_DE_FINALE", "DEMI_FINALE", "FINALE"],
+  },
+  {
+    name: "BMX Freestyle",
+    description: "Figures acrobatiques sur rampe de skatepark.",
+    icon: "🛹",
+    phases: ["QUALIFICATION", "FINALE"],
+  },
+  {
+    name: "Skateboard",
+    description:
+      "Disciplines street et park avec figures techniques et acrobatiques.",
+    icon: "🛹",
+    phases: ["QUALIFICATION", "FINALE"],
+  },
+  {
+    name: "Breaking",
+    description:
+      "Danse hip-hop compétitive en battle, discipline olympique depuis Paris 2024.",
+    icon: "🕺",
+    phases: ["QUALIFICATION", "QUART_DE_FINALE", "DEMI_FINALE", "FINALE"],
+  },
+  {
+    name: "Escalade sportive",
+    description: "Combiné vitesse et bloc/difficulté sur mur artificiel.",
+    icon: "🧗",
+    phases: ["QUALIFICATION", "DEMI_FINALE", "FINALE"],
+  },
+  {
+    name: "Équitation",
+    description:
+      "Dressage, saut d'obstacles et concours complet dans le parc de Versailles.",
+    icon: "🏇",
+    phases: ["QUALIFICATION", "FINALE", "EPREUVE_PAR_EQUIPES"],
+  },
+  {
+    name: "Golf",
+    description: "Tournoi de 72 trous sur le parcours du Golf National.",
+    icon: "⛳",
+    phases: ["FINALE"],
+  },
+  {
+    name: "Haltérophilie",
+    description: "Épreuves d'arraché et d'épaulé-jeté par catégories de poids.",
+    icon: "🏋️",
+    phases: ["FINALE"],
+  },
+  {
+    name: "Pentathlon moderne",
+    description:
+      "Combiné de cinq disciplines : escrime, natation, équitation, tir et course.",
+    icon: "🎖️",
+    phases: ["QUALIFICATION", "FINALE"],
   },
 ]

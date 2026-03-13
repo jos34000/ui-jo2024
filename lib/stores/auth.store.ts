@@ -1,6 +1,6 @@
 import { create } from "zustand"
 import { createJSONStorage, persist } from "zustand/middleware"
-import { AuthState } from "@/lib/types/user.types"
+import { AuthState, User } from "@/lib/types/user.types"
 
 export const useAuthStore = create<AuthState>()(
   persist(
@@ -19,6 +19,11 @@ export const useAuthStore = create<AuthState>()(
           user: null,
           isAuthenticated: false,
         }),
+
+      updateUser: (data: Partial<Omit<User, "password">>) =>
+        set(state => ({
+          user: state.user ? { ...state.user, ...data } : null,
+        })),
     }),
     {
       name: "auth-storage",
@@ -26,3 +31,5 @@ export const useAuthStore = create<AuthState>()(
     },
   ),
 )
+
+export const getAuthStore = () => useAuthStore.getState()

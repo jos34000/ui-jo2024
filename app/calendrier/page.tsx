@@ -1,5 +1,5 @@
-import { EventResponseDTO } from "@/lib/types/event.type"
-import { mapEventFromDTO } from "@/lib/utils/eventMapper"
+import { EventDTO } from "@/lib/types/event.type"
+import { toOlympicEvent } from "@/lib/utils/eventMapper"
 import { Calendar } from "@/app/calendrier/Calendar"
 
 async function getEvents() {
@@ -16,8 +16,8 @@ async function getEvents() {
       return []
     }
 
-    const data: EventResponseDTO[] = await response.json()
-    return data.map(element => mapEventFromDTO(element))
+    const data: EventDTO[] = await response.json()
+    return data.map(element => toOlympicEvent(element))
   } catch (err) {
     console.error("Erreur lors du chargement:", err)
     return []

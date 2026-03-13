@@ -7,10 +7,10 @@ import { Footer } from "@/components/Footer"
 import { Search, Trophy, X } from "lucide-react"
 import { Input } from "@/components/ui/input"
 import { formatDateFull } from "@/lib/utils/date"
-import { DayTimeline } from "@/app/sports/[slug]/DayTimeLine"
-import { EventCard } from "@/app/sports/[slug]/EventCard"
-import { SportFilter } from "@/app/sports/[slug]/SportFilter"
-import { NothingFound } from "@/app/sports/[slug]/NothingFound"
+import { DayTimeline } from "@/app/calendrier/DayTimeLine"
+import { EventCard } from "@/app/calendrier/EventCard"
+import { SportFilter } from "@/app/calendrier/SportFilter"
+import { NothingFound } from "@/app/sports/[id]/NothingFound"
 import { OlympicEvent } from "@/lib/types/event.type"
 
 interface CalendarProps {
@@ -19,12 +19,10 @@ interface CalendarProps {
 
 export const Calendar = ({ initialEvents }: CalendarProps) => {
   const [selectedDate, setSelectedDate] = useState("2024-07-26")
-  const [selectedSport, setSelectedSport] = useState<string | null>(null)
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
   const [searchQuery, setSearchQuery] = useState("")
 
-  const sports = useMemo(() => {
-    return [...new Set(initialEvents.map(e => e.sport))]
-  }, [initialEvents])
+  const sports = [...new Set(initialEvents?.map(e => e.category))]
 
   const eventCounts = useMemo(() => {
     const counts: Record<string, number> = {}
@@ -38,11 +36,12 @@ export const Calendar = ({ initialEvents }: CalendarProps) => {
     return initialEvents
       .filter(event => {
         if (event.date !== selectedDate) return false
-        if (selectedSport && event.sport !== selectedSport) return false
+        if (selectedCategory && event.category !== selectedCategory)
+          return false
         if (searchQuery) {
           const q = searchQuery.toLowerCase()
           return (
-            event.title.toLowerCase().includes(q) ||
+            event.name.toLowerCase().includes(q) ||
             event.sport.toLowerCase().includes(q) ||
             event.location.toLowerCase().includes(q)
           )
@@ -50,7 +49,7 @@ export const Calendar = ({ initialEvents }: CalendarProps) => {
         return true
       })
       .sort((a, b) => a.time.localeCompare(b.time))
-  }, [initialEvents, selectedDate, selectedSport, searchQuery])
+  }, [initialEvents, selectedDate, selectedCategory, searchQuery])
 
   const totalForDay = initialEvents.filter(e => e.date === selectedDate).length
 
@@ -64,10 +63,10 @@ export const Calendar = ({ initialEvents }: CalendarProps) => {
             <div className="flex items-start justify-between gap-4">
               <div>
                 <h1 className="text-2xl sm:text-3xl font-bold tracking-tight font-mono">
-                  Calendrier des epreuves
+                  Calendrier des épreuves
                 </h1>
                 <p className="mt-1.5 text-sm text-muted-foreground">
-                  {"Du 26 juillet au 11 aout 2024 — 17 jours de competition"}
+                  {"Du 26 juillet au 11 août 2024 — 17 jours de competition"}
                 </p>
               </div>
               <div className="hidden sm:flex items-center gap-2 text-sm text-muted-foreground">
@@ -75,7 +74,7 @@ export const Calendar = ({ initialEvents }: CalendarProps) => {
                 <span className="font-mono font-medium">
                   {initialEvents.length}
                 </span>
-                <span>evenements</span>
+                <span>évènements</span>
               </div>
             </div>
           </div>
@@ -100,7 +99,7 @@ export const Calendar = ({ initialEvents }: CalendarProps) => {
                     {formatDateFull(selectedDate)}
                   </h2>
                   <Badge variant="secondary" className="text-xs font-mono">
-                    {totalForDay} {totalForDay > 1 ? "evenements" : "evenement"}
+                    {totalForDay} {totalForDay > 1 ? "évènements" : "évènement"}
                   </Badge>
                 </div>
 
@@ -125,20 +124,22 @@ export const Calendar = ({ initialEvents }: CalendarProps) => {
               </div>
 
               <SportFilter
-                selected={selectedSport}
-                onSelect={setSelectedSport}
-                sports={sports}
+                selected={selectedCategory}
+                onSelect={setSelectedCategory}
+                categories={sports}
               />
             </div>
 
             {filteredEvents.length > 0 ? (
               <div className="space-y-3">
                 {filteredEvents.map(event => (
-                  <EventCard key={event.title} event={event} />
+                  <EventCard key={event.name} event={event} />
                 ))}
               </div>
             ) : (
-              <NothingFound hasSportFilter={!!selectedSport || !!searchQuery} />
+              <NothingFound
+                hasSportFilter={!!selectedCategory || !!searchQuery}
+              />
             )}
           </div>
         </section>

@@ -37,7 +37,6 @@ const navigation = [
   { name: "Événements", href: "#events" },
   { name: "Sports", href: "#sports" },
   { name: "Calendrier", href: "/calendrier" },
-  { name: "FAQ", href: "#faq" },
 ]
 
 export const Header = () => {
