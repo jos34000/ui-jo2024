@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { Calendar, MapPin, Ticket, Trash2 } from "lucide-react"
+import { Calendar, MapPin, Minus, Plus, Ticket } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
 import { Button } from "@/components/ui/button"
@@ -29,17 +29,17 @@ function formatPrice(amount: number): string {
 }
 
 export const CartItemCard = ({ item }: CartItemCardProps) => {
-  const removeItem = useCartStore(state => state.removeItem)
-  const [isRemoving, setIsRemoving] = useState(false)
+  const updateQuantity = useCartStore(state => state.updateQuantity)
+  const [isUpdating, setIsUpdating] = useState(false)
 
-  const handleRemove = async () => {
-    setIsRemoving(true)
+  const handleQuantityChange = async (newQuantity: number) => {
+    setIsUpdating(true)
     try {
-      await removeItem(item.id)
+      await updateQuantity(item.id, newQuantity)
     } catch {
-      toast.error("Impossible de supprimer l'article")
+      toast.error("Impossible de modifier la quantité")
     } finally {
-      setIsRemoving(false)
+      setIsUpdating(false)
     }
   }
 
@@ -74,16 +74,31 @@ export const CartItemCard = ({ item }: CartItemCardProps) => {
                 {formatPrice(item.unitPrice)} / formule
               </p>
             </div>
-            <Button
-              variant="ghost"
-              size="icon"
-              className="h-7 w-7 text-muted-foreground hover:text-destructive hover:bg-destructive/10"
-              onClick={handleRemove}
-              disabled={isRemoving}
-              aria-label="Supprimer l'article"
-            >
-              <Trash2 className="h-3.5 w-3.5" />
-            </Button>
+            <div className="flex items-center gap-1">
+              <Button
+                variant="outline"
+                size="icon"
+                className="h-6 w-6"
+                onClick={() => handleQuantityChange(item.quantity - 1)}
+                disabled={isUpdating}
+                aria-label="Diminuer la quantité"
+              >
+                <Minus className="h-3 w-3" />
+              </Button>
+              <span className="w-6 text-center text-sm font-mono font-medium">
+                {item.quantity}
+              </span>
+              <Button
+                variant="outline"
+                size="icon"
+                className="h-6 w-6"
+                onClick={() => handleQuantityChange(item.quantity + 1)}
+                disabled={isUpdating}
+                aria-label="Augmenter la quantité"
+              >
+                <Plus className="h-3 w-3" />
+              </Button>
+            </div>
           </div>
         </div>
         <Separator className="mt-3" />
