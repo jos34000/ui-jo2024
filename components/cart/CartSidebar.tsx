@@ -1,5 +1,6 @@
 "use client"
 
+import { useEffect } from "react"
 import { ShoppingCart, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
@@ -29,11 +30,14 @@ export const CartSidebar = () => {
   const { cart, isLoading, fetchCart, sidebarOpen, setSidebarOpen } =
     useCartStore()
 
-  const handleOpenChange = (open: boolean) => {
-    setSidebarOpen(open)
-    if (open && isAuthenticated) {
+  useEffect(() => {
+    if (sidebarOpen && isAuthenticated) {
       fetchCart()
     }
+  }, [fetchCart, isAuthenticated, sidebarOpen])
+
+  const handleOpenChange = (open: boolean) => {
+    setSidebarOpen(open)
   }
 
   const itemCount = cart?.items.length ?? 0

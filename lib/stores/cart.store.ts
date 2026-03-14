@@ -38,4 +38,14 @@ export const useCartStore = create<CartState>()(set => ({
     const data: Cart = await response.json()
     set({ cart: data })
   },
+
+  removeItem: async (itemId: number) => {
+    const response = await apiClient(`/cart/items/${itemId}`, { method: "DELETE" })
+    if (!response.ok) {
+      const error = await response.json().catch(() => ({}))
+      throw new Error(error.message || "Impossible de supprimer l'article")
+    }
+    const data: Cart = await response.json()
+    set({ cart: data })
+  },
 }))

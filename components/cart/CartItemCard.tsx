@@ -1,9 +1,13 @@
 "use client"
 
-import { Calendar, MapPin, Ticket } from "lucide-react"
+import { useState } from "react"
+import { Calendar, MapPin, Ticket, Trash2 } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
+import { Button } from "@/components/ui/button"
 import { CartItemResponse } from "@/lib/types/cart.type"
+import { useCartStore } from "@/lib/stores/cart.store"
+import { toast } from "sonner"
 
 interface CartItemCardProps {
   item: CartItemResponse
@@ -25,6 +29,20 @@ function formatPrice(amount: number): string {
 }
 
 export const CartItemCard = ({ item }: CartItemCardProps) => {
+  const removeItem = useCartStore(state => state.removeItem)
+  const [isRemoving, setIsRemoving] = useState(false)
+
+  const handleRemove = async () => {
+    setIsRemoving(true)
+    try {
+      await removeItem(item.id)
+    } catch {
+      toast.error("Impossible de supprimer l'article")
+    } finally {
+      setIsRemoving(false)
+    }
+  }
+
   return (
     <Card className="gap-0 py-0 overflow-hidden">
       <CardContent className="p-4">
@@ -49,11 +67,23 @@ export const CartItemCard = ({ item }: CartItemCardProps) => {
               </span>
             </div>
           </div>
-          <div className="text-right shrink-0">
-            <p className="font-bold text-sm">{formatPrice(item.subtotal)}</p>
-            <p className="text-xs text-muted-foreground mt-0.5">
-              {formatPrice(item.unitPrice)} / formule
-            </p>
+          <div className="flex flex-col items-end gap-2 shrink-0">
+            <div className="text-right">
+              <p className="font-bold text-sm">{formatPrice(item.subtotal)}</p>
+              <p className="text-xs text-muted-foreground mt-0.5">
+                {formatPrice(item.unitPrice)} / formule
+              </p>
+            </div>
+            <Button
+              variant="ghost"
+              size="icon"
+              className="h-7 w-7 text-muted-foreground hover:text-destructive hover:bg-destructive/10"
+              onClick={handleRemove}
+              disabled={isRemoving}
+              aria-label="Supprimer l'article"
+            >
+              <Trash2 className="h-3.5 w-3.5" />
+            </Button>
           </div>
         </div>
         <Separator className="mt-3" />
