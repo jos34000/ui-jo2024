@@ -21,6 +21,7 @@ import { EventDTO, EventStatus, OlympicEvent } from "@/lib/types/event.type"
 import { ReservationDialog } from "@/components/ReservationDialog"
 import { EventStatusProps } from "@/lib/types/props.type"
 import { toOlympicEvent } from "@/lib/utils/eventMapper"
+import { OfferDTO } from "@/lib/types/offer.type"
 
 const statusConfig: Record<EventStatus, EventStatusProps> = {
   available: {
@@ -50,6 +51,14 @@ const getThisEvent = async (id: number): Promise<OlympicEvent | null> => {
   return toOlympicEvent(data)
 }
 
+const getOffers = async (): Promise<OfferDTO[]> => {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/offer/all`, {
+    cache: "no-store",
+  })
+  if (!res.ok) return []
+  return res.json()
+}
+
 const getAllEventsBySport = async (
   sport: string,
   thisId: number,
@@ -71,7 +80,10 @@ const EventPage = async ({ params }: { params: Promise<{ id: number }> }) => {
 
   if (!event) notFound()
 
-  const otherEvents = await getAllEventsBySport(event.sport, event.id)
+  const [otherEvents, offers] = await Promise.all([
+    getAllEventsBySport(event.sport, event.id),
+    getOffers(),
+  ])
 
   const status = statusConfig[event.status as EventStatus]
   const occupancyRate =
@@ -151,7 +163,7 @@ const EventPage = async ({ params }: { params: Promise<{ id: number }> }) => {
                 </div>
 
                 <div className="lg:hidden mb-6">
-                  <ReservationDialog event={event} disabled={isSoldOut} />
+                  <ReservationDialog event={event} offers={offers} disabled={isSoldOut} />
                 </div>
 
                 <div className="flex items-center gap-3">
@@ -220,7 +232,7 @@ const EventPage = async ({ params }: { params: Promise<{ id: number }> }) => {
                       </p>
                     </div>
 
-                    <ReservationDialog event={event} disabled={isSoldOut} />
+                    <ReservationDialog event={event} offers={offers} disabled={isSoldOut} />
 
                     {isSoldOut && (
                       <p className="text-xs text-center text-muted-foreground">
