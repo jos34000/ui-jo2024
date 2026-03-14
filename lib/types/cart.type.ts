@@ -41,4 +41,5 @@ export interface CartState {
   addItem: (eventId: number, offerId: number, quantity?: number) => Promise<void>
   removeItem: (itemId: number) => Promise<void>
   updateQuantity: (itemId: number, quantity: number) => Promise<void>
+  clearCart: () => Promise<void>
 }

@@ -49,6 +49,16 @@ export const useCartStore = create<CartState>()(set => ({
     set({ cart: data })
   },
 
+  clearCart: async () => {
+    const response = await apiClient("/cart/items", { method: "DELETE" })
+    if (!response.ok) {
+      const error = await response.json().catch(() => ({}))
+      throw new Error(error.message || "Impossible de vider le panier")
+    }
+    const data: Cart = await response.json()
+    set({ cart: data })
+  },
+
   updateQuantity: async (itemId: number, quantity: number) => {
     const response = await apiClient(`/cart/items/${itemId}`, {
       method: "PATCH",
