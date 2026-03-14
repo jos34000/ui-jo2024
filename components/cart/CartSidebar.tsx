@@ -1,11 +1,12 @@
 "use client"
 
-import { ShoppingCart } from "lucide-react"
+import { ShoppingCart, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
 import {
   Sheet,
+  SheetClose,
   SheetContent,
   SheetHeader,
   SheetTitle,
@@ -25,18 +26,20 @@ function formatPrice(amount: number): string {
 
 export const CartSidebar = () => {
   const isAuthenticated = useAuthStore(state => state.isAuthenticated)
-  const { cart, isLoading, fetchCart } = useCartStore()
+  const { cart, isLoading, fetchCart, sidebarOpen, setSidebarOpen } =
+    useCartStore()
 
   const handleOpenChange = (open: boolean) => {
+    setSidebarOpen(open)
     if (open && isAuthenticated) {
       fetchCart()
     }
   }
 
-  const itemCount = cart?.itemCount ?? 0
+  const itemCount = cart?.items.length ?? 0
 
   return (
-    <Sheet onOpenChange={handleOpenChange}>
+    <Sheet open={sidebarOpen} onOpenChange={handleOpenChange}>
       <SheetTrigger asChild>
         <Button variant="ghost" size="icon" className="relative">
           <ShoppingCart className="h-5 w-5" />
@@ -49,16 +52,26 @@ export const CartSidebar = () => {
         </Button>
       </SheetTrigger>
 
-      <SheetContent side="right" className="w-[400px] flex flex-col p-0">
+      <SheetContent
+        side="right"
+        className="w-full sm:w-[400px] flex flex-col p-0"
+        showCloseButton={false}
+      >
         <SheetHeader className="border-b border-border px-5 py-4">
           <SheetTitle className="flex items-center gap-2">
-            <ShoppingCart className="h-5 w-5" />
-            Mon panier
+            <ShoppingCart className="h-5 w-5 shrink-0" />
+            <span className="flex-1 truncate">Mon panier</span>
             {itemCount > 0 && (
-              <Badge variant="secondary" className="ml-auto font-mono">
+              <Badge variant="secondary" className="shrink-0 font-mono">
                 {itemCount} article{itemCount > 1 ? "s" : ""}
               </Badge>
             )}
+            <SheetClose asChild>
+              <Button variant="ghost" size="icon" className="shrink-0 h-7 w-7">
+                <X className="h-4 w-4" />
+                <span className="sr-only">Fermer</span>
+              </Button>
+            </SheetClose>
           </SheetTitle>
         </SheetHeader>
 
@@ -67,7 +80,9 @@ export const CartSidebar = () => {
             <div className="flex flex-col items-center justify-center h-full gap-4 text-center py-16">
               <ShoppingCart className="h-12 w-12 text-muted-foreground/40" />
               <div>
-                <p className="font-medium">Connectez-vous pour voir votre panier</p>
+                <p className="font-medium">
+                  Connectez-vous pour voir votre panier
+                </p>
                 <p className="text-sm text-muted-foreground mt-1">
                   Vos articles seront sauvegardés dans votre compte.
                 </p>
@@ -107,7 +122,7 @@ export const CartSidebar = () => {
             <div className="flex items-center justify-between mb-4">
               <span className="text-sm text-muted-foreground">Total</span>
               <span className="font-bold font-mono text-lg">
-                {formatPrice(cart.totalAmount)}
+                {formatPrice(cart.totalPrice)}
               </span>
             </div>
             <Separator className="mb-4" />

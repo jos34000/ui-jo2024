@@ -11,7 +11,13 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
-import { CalendarDays, CheckCircle2, Info, Ticket } from "lucide-react"
+import {
+  CalendarDays,
+  CheckCircle2,
+  Info,
+  ShoppingCart,
+  Ticket,
+} from "lucide-react"
 import { formatDateLong } from "@/lib/utils/date"
 import {
   Select,
@@ -21,32 +27,63 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { OlympicEvent } from "@/lib/types/event.type"
+import { OfferDTO } from "@/lib/types/offer.type"
+import { useCartStore } from "@/lib/stores/cart.store"
+import { Label } from "@/components/ui/label"
 
 interface ReservationDialogProps {
   event: OlympicEvent
+  offers: OfferDTO[]
   disabled: boolean
+}
+
+function formatPrice(amount: number): string {
+  return new Intl.NumberFormat("fr-FR", {
+    style: "currency",
+    currency: "EUR",
+  }).format(amount)
 }
 
 export const ReservationDialog = ({
   event,
+  offers,
   disabled,
 }: ReservationDialogProps) => {
-  const [ticketType, setTicketType] = useState<string>("")
+  const [selectedOfferId, setSelectedOfferId] = useState<string | undefined>(
+    undefined,
+  )
   const [isConfirming, setIsConfirming] = useState(false)
   const [isComplete, setIsComplete] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+
+  const addItem = useCartStore(state => state.addItem)
+  const setSidebarOpen = useCartStore(state => state.setSidebarOpen)
 
   const handleReserve = async () => {
+    if (!selectedOfferId) return
     setIsConfirming(true)
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1500))
-    setIsConfirming(false)
-    setIsComplete(true)
+    setError(null)
+    try {
+      await addItem(event.id, Number(selectedOfferId), 1)
+      setIsComplete(true)
+    } catch (e) {
+      setError(
+        e instanceof Error
+          ? e.message
+          : "Une erreur est survenue. Veuillez réessayer.",
+      )
+    } finally {
+      setIsConfirming(false)
+    }
   }
 
   const resetDialog = () => {
-    setTicketType("")
+    setSelectedOfferId(undefined)
     setIsComplete(false)
+    setError(null)
   }
+
+  const activeOffers = offers.filter(o => o.isActive)
 
   return (
     <Dialog onOpenChange={open => !open && resetDialog()}>
@@ -66,16 +103,27 @@ export const ReservationDialog = ({
                 </div>
               </div>
               <DialogTitle className="text-center font-mono">
-                Reservation confirmee
+                Ajouté au panier
               </DialogTitle>
               <DialogDescription className="text-center">
-                Votre reservation pour {event.name} a ete enregistree. Vous
-                recevrez un email de confirmation.
+                {event.name} a été ajouté à votre panier. Finalisez votre
+                commande depuis le panier.
               </DialogDescription>
             </DialogHeader>
-            <DialogFooter className="mt-4">
+            <DialogFooter className="mt-4 flex flex-col gap-2 sm:flex-row">
               <DialogClose asChild>
-                <Button className="w-full">Fermer</Button>
+                <Button
+                  variant="outline"
+                  className="bg-transparent w-full sm:w-auto"
+                >
+                  Continuer
+                </Button>
+              </DialogClose>
+              <DialogClose asChild>
+                <Button className="w-full sm:w-auto gap-2" onClick={() => setSidebarOpen(true)}>
+                  <ShoppingCart className="h-4 w-4" />
+                  Voir le panier
+                </Button>
               </DialogClose>
             </DialogFooter>
           </>
@@ -102,18 +150,29 @@ export const ReservationDialog = ({
               </div>
 
               <div className="space-y-2">
-                <label className="text-sm font-medium">Type de billet</label>
-                <Select value={ticketType} onValueChange={setTicketType}>
+                <Label className="text-sm font-medium">Type de billet</Label>
+                <Select
+                  value={selectedOfferId}
+                  onValueChange={setSelectedOfferId}
+                >
                   <SelectTrigger>
                     <SelectValue placeholder="Selectionnez une formule" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="solo">Solo - 1 billet</SelectItem>
-                    <SelectItem value="duo">Duo - 2 billets</SelectItem>
-                    <SelectItem value="famille">Famille - 4 billets</SelectItem>
+                    {activeOffers.map(offer => (
+                      <SelectItem key={offer.id} value={String(offer.id)}>
+                        <span>
+                          {offer.name} — {offer.numberOfTickets} billet
+                          {offer.numberOfTickets > 1 ? "s" : ""} ·{" "}
+                          {formatPrice(offer.price)}
+                        </span>
+                      </SelectItem>
+                    ))}
                   </SelectContent>
                 </Select>
               </div>
+
+              {error && <p className="text-sm text-destructive">{error}</p>}
 
               <div className="p-3 rounded-lg border border-border bg-card">
                 <div className="flex items-start gap-2">
@@ -127,7 +186,7 @@ export const ReservationDialog = ({
               </div>
             </div>
 
-            <DialogFooter className="gap-2 sm:gap-0">
+            <DialogFooter className="gap-2">
               <DialogClose asChild>
                 <Button variant="outline" className="bg-transparent">
                   Annuler
@@ -135,9 +194,9 @@ export const ReservationDialog = ({
               </DialogClose>
               <Button
                 onClick={handleReserve}
-                disabled={!ticketType || isConfirming}
+                disabled={!selectedOfferId || isConfirming}
               >
-                {isConfirming ? "Reservation..." : "Confirmer"}
+                {isConfirming ? "Ajout en cours..." : "Ajouter au panier"}
               </Button>
             </DialogFooter>
           </>

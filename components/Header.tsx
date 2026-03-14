@@ -5,8 +5,10 @@ import {
   ChevronDown,
   LogOut,
   Menu,
+  ShoppingCart,
   Ticket,
   User,
+  X,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { ThemeToggle } from "@/components/theme-toggle"
@@ -32,6 +34,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet"
 import { CartSidebar } from "@/components/cart/CartSidebar"
+import { useCartStore } from "@/lib/stores/cart.store"
 
 const navigation = [
   { name: "Événements", href: "#events" },
@@ -45,6 +48,7 @@ export const Header = () => {
   const user = useAuthStore(state => state.user)
   const isAuthenticated = useAuthStore(state => state.isAuthenticated)
   const logout = useAuthStore(state => state.logout)
+  const setSidebarOpen = useCartStore(state => state.setSidebarOpen)
 
   const handleLogout = async () => {
     try {
@@ -75,6 +79,7 @@ export const Header = () => {
 
         <div className="flex lg:hidden items-center gap-1">
           <ThemeToggle />
+          <CartSidebar />
           <Sheet>
             <SheetTrigger asChild>
               <Button variant="ghost" size="icon">
@@ -82,13 +87,19 @@ export const Header = () => {
                 <span className="sr-only">Ouvrir le menu</span>
               </Button>
             </SheetTrigger>
-            <SheetContent side="right" className="w-[300px] p-0">
+            <SheetContent side="right" className="w-[300px] p-0" showCloseButton={false}>
               <SheetHeader className="border-b border-border px-5 py-4">
                 <SheetTitle className="flex items-center gap-3">
-                  <OlympicRings className="h-7 w-auto" />
-                  <span className="font-bold text-lg font-mono">
+                  <OlympicRings className="h-7 w-auto shrink-0" />
+                  <span className="flex-1 font-bold text-lg font-mono truncate">
                     Paris 2024
                   </span>
+                  <SheetClose asChild>
+                    <Button variant="ghost" size="icon" className="shrink-0 h-7 w-7">
+                      <X className="h-4 w-4" />
+                      <span className="sr-only">Fermer</span>
+                    </Button>
+                  </SheetClose>
                 </SheetTitle>
               </SheetHeader>
 
@@ -137,6 +148,15 @@ export const Header = () => {
                       <User className="h-4 w-4" />
                       Mon compte
                     </Link>
+                  </SheetClose>
+                  <SheetClose asChild>
+                    <button
+                      onClick={() => setSidebarOpen(true)}
+                      className="flex items-center gap-3 rounded-md px-3 py-2.5 text-sm font-medium text-muted-foreground hover:bg-primary/5 hover:text-primary transition-colors w-full text-left"
+                    >
+                      <ShoppingCart className="h-4 w-4" />
+                      Mon panier
+                    </button>
                   </SheetClose>
                   <SheetClose asChild>
                     <Link
