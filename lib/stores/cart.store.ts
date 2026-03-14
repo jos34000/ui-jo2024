@@ -38,4 +38,38 @@ export const useCartStore = create<CartState>()(set => ({
     const data: Cart = await response.json()
     set({ cart: data })
   },
+
+  removeItem: async (itemId: number) => {
+    const response = await apiClient(`/cart/items/${itemId}`, { method: "DELETE" })
+    if (!response.ok) {
+      const error = await response.json().catch(() => ({}))
+      throw new Error(error.message || "Impossible de supprimer l'article")
+    }
+    const data: Cart = await response.json()
+    set({ cart: data })
+  },
+
+  clearCart: async () => {
+    const response = await apiClient("/cart/items", { method: "DELETE" })
+    if (!response.ok) {
+      const error = await response.json().catch(() => ({}))
+      throw new Error(error.message || "Impossible de vider le panier")
+    }
+    const data: Cart = await response.json()
+    set({ cart: data })
+  },
+
+  updateQuantity: async (itemId: number, quantity: number) => {
+    const response = await apiClient(`/cart/items/${itemId}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ quantity }),
+    })
+    if (!response.ok) {
+      const error = await response.json().catch(() => ({}))
+      throw new Error(error.message || "Impossible de modifier la quantité")
+    }
+    const data: Cart = await response.json()
+    set({ cart: data })
+  },
 }))

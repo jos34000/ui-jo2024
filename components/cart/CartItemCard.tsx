@@ -1,9 +1,13 @@
 "use client"
 
-import { Calendar, MapPin, Ticket } from "lucide-react"
+import { useState } from "react"
+import { Calendar, MapPin, Minus, Plus, Ticket } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
+import { Button } from "@/components/ui/button"
 import { CartItemResponse } from "@/lib/types/cart.type"
+import { useCartStore } from "@/lib/stores/cart.store"
+import { toast } from "sonner"
 
 interface CartItemCardProps {
   item: CartItemResponse
@@ -25,6 +29,20 @@ function formatPrice(amount: number): string {
 }
 
 export const CartItemCard = ({ item }: CartItemCardProps) => {
+  const updateQuantity = useCartStore(state => state.updateQuantity)
+  const [isUpdating, setIsUpdating] = useState(false)
+
+  const handleQuantityChange = async (newQuantity: number) => {
+    setIsUpdating(true)
+    try {
+      await updateQuantity(item.id, newQuantity)
+    } catch {
+      toast.error("Impossible de modifier la quantité")
+    } finally {
+      setIsUpdating(false)
+    }
+  }
+
   return (
     <Card className="gap-0 py-0 overflow-hidden">
       <CardContent className="p-4">
@@ -49,11 +67,38 @@ export const CartItemCard = ({ item }: CartItemCardProps) => {
               </span>
             </div>
           </div>
-          <div className="text-right shrink-0">
-            <p className="font-bold text-sm">{formatPrice(item.subtotal)}</p>
-            <p className="text-xs text-muted-foreground mt-0.5">
-              {formatPrice(item.unitPrice)} / formule
-            </p>
+          <div className="flex flex-col items-end gap-2 shrink-0">
+            <div className="text-right">
+              <p className="font-bold text-sm">{formatPrice(item.subtotal)}</p>
+              <p className="text-xs text-muted-foreground mt-0.5">
+                {formatPrice(item.unitPrice)} / formule
+              </p>
+            </div>
+            <div className="flex items-center gap-1">
+              <Button
+                variant="outline"
+                size="icon"
+                className="h-6 w-6"
+                onClick={() => handleQuantityChange(item.quantity - 1)}
+                disabled={isUpdating}
+                aria-label="Diminuer la quantité"
+              >
+                <Minus className="h-3 w-3" />
+              </Button>
+              <span className="w-6 text-center text-sm font-mono font-medium">
+                {item.quantity}
+              </span>
+              <Button
+                variant="outline"
+                size="icon"
+                className="h-6 w-6"
+                onClick={() => handleQuantityChange(item.quantity + 1)}
+                disabled={isUpdating}
+                aria-label="Augmenter la quantité"
+              >
+                <Plus className="h-3 w-3" />
+              </Button>
+            </div>
           </div>
         </div>
         <Separator className="mt-3" />

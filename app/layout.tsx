@@ -3,6 +3,7 @@ import type { Metadata } from "next"
 import { JetBrains_Mono, Nunito } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import { ThemeProvider } from "@/components/ThemeProvider"
+import { CartInitializer } from "@/components/CartInitializer"
 import "./globals.css"
 import { Toaster } from "@/components/ui/sonner"
 
@@ -34,6 +35,7 @@ export default function RootLayout({ children }: Readonly<LayoutProps>) {
           enableSystem
           disableTransitionOnChange
         >
+          <CartInitializer />
           {children}
           <Toaster
             position="bottom-right"

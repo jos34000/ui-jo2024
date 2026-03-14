@@ -117,25 +117,13 @@ export default function ImportEventsPage() {
             </p>
           </div>
           <div className="space-x-2">
-            <Button
-              onClick={handleImportEvents}
-              disabled={isLoading}
-              className="rounded-md bg-blue-600 px-6 py-3 font-semibold text-white transition-colors hover:bg-blue-700 disabled:cursor-not-allowed disabled:bg-gray-400"
-            >
+            <Button onClick={handleImportEvents} disabled={isLoading}>
               {isLoading ? "Import en cours..." : "Importer les événements"}
             </Button>
-            <Button
-              onClick={handleImportOfferTypes}
-              disabled={isLoading}
-              className="rounded-md bg-blue-600 px-6 py-3 font-semibold text-white transition-colors hover:bg-blue-700 disabled:cursor-not-allowed disabled:bg-gray-400"
-            >
+            <Button onClick={handleImportOfferTypes} disabled={isLoading}>
               {isLoading ? "Import en cours..." : "Importer les offres"}
             </Button>
-            <Button
-              onClick={handleImportSports}
-              disabled={isLoading}
-              className="rounded-md bg-blue-600 px-6 py-3 font-semibold text-white transition-colors hover:bg-blue-700 disabled:cursor-not-allowed disabled:bg-gray-400"
-            >
+            <Button onClick={handleImportSports} disabled={isLoading}>
               {isLoading ? "Import en cours..." : "Importer les sports"}
             </Button>
           </div>

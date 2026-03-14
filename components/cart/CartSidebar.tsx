@@ -1,20 +1,15 @@
 "use client"
 
-import { ShoppingCart, X } from "lucide-react"
+import { useEffect, useState } from "react"
+import { ShoppingCart, Trash2, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
-import {
-  Sheet,
-  SheetClose,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet"
+import { Sheet, SheetClose, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
 import { useCartStore } from "@/lib/stores/cart.store"
 import { useAuthStore } from "@/lib/stores/auth.store"
 import { CartItemCard } from "@/components/cart/CartItemCard"
+import { toast } from "sonner"
 import Link from "next/link"
 
 function formatPrice(amount: number): string {
@@ -26,13 +21,29 @@ function formatPrice(amount: number): string {
 
 export const CartSidebar = () => {
   const isAuthenticated = useAuthStore(state => state.isAuthenticated)
-  const { cart, isLoading, fetchCart, sidebarOpen, setSidebarOpen } =
+  const { cart, isLoading, fetchCart, clearCart, sidebarOpen, setSidebarOpen } =
     useCartStore()
+  const [isClearing, setIsClearing] = useState(false)
+
+  useEffect(() => {
+    if (sidebarOpen && isAuthenticated) {
+      fetchCart()
+    }
+  }, [fetchCart, isAuthenticated, sidebarOpen])
 
   const handleOpenChange = (open: boolean) => {
     setSidebarOpen(open)
-    if (open && isAuthenticated) {
-      fetchCart()
+  }
+
+  const handleClearCart = async () => {
+    setIsClearing(true)
+    try {
+      await clearCart()
+      toast.success("Panier vidé")
+    } catch {
+      toast.error("Impossible de vider le panier")
+    } finally {
+      setIsClearing(false)
     }
   }
 
@@ -128,6 +139,16 @@ export const CartSidebar = () => {
             <Separator className="mb-4" />
             <Button className="w-full" size="lg">
               Procéder au paiement
+            </Button>
+            <Button
+              variant="ghost"
+              size="sm"
+              className="w-full mt-2 text-muted-foreground hover:text-destructive hover:bg-destructive/10"
+              onClick={handleClearCart}
+              disabled={isClearing}
+            >
+              <Trash2 className="h-3.5 w-3.5 mr-1.5" />
+              Vider le panier
             </Button>
           </div>
         )}
