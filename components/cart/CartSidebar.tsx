@@ -143,7 +143,7 @@ export const CartSidebar = () => {
             <Button
               variant="ghost"
               size="sm"
-              className="w-full mt-2 text-muted-foreground hover:text-destructive"
+              className="w-full mt-2 text-muted-foreground hover:text-destructive hover:bg-destructive/10"
               onClick={handleClearCart}
               disabled={isClearing}
             >

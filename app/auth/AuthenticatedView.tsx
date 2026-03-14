@@ -169,7 +169,7 @@ export const AuthenticatedView = ({
           <Button
             variant="ghost"
             onClick={onLogout}
-            className="text-destructive hover:text-destructive hover:bg-destructive/5"
+            className="text-destructive hover:text-destructive hover:bg-destructive/10"
           >
             <LogOut className="mr-2 h-4 w-4" />
             Se deconnecter
