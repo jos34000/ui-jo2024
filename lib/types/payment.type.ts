@@ -1,4 +1,4 @@
-export type PaymentMethod = "CREDIT_CARD" | "DEBIT_CARD" | "PAYPAL"
+export type PaymentMethod = "CREDIT_CARD" | "BANK_TRANSFER"
 
 export interface CheckoutRequest {
   cardNumber: string

@@ -3,6 +3,8 @@ import { InputField } from "@/components/form/fields/InputField"
 import { SelectField } from "@/components/form/fields/SelectField"
 import { TextAreaField } from "@/components/form/fields/TextAreaField"
 import { PasswordField } from "@/components/form/fields/PasswordField"
+import { ExpiryField } from "@/components/form/fields/ExpiryField"
+import { CvvField } from "@/components/form/fields/CvvField"
 import { createFormHook } from "@tanstack/react-form"
 import { RememberMeField } from "@/components/form/fields/RememberMeField"
 import { AcceptTermsField } from "@/components/form/fields/AcceptTermsField"
@@ -22,6 +24,8 @@ export const { useAppForm, withForm } = createFormHook({
     AcceptTermsField: AcceptTermsField,
     TwoFactorField: TwoFactorField,
     OTPField: OTPField,
+    ExpiryField: ExpiryField,
+    CvvField: CvvField,
   },
   formComponents: {
     SubmitButton: ButtonField,
