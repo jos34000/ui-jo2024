@@ -11,6 +11,7 @@ import { useAuthStore } from "@/lib/stores/auth.store"
 import { CartItemCard } from "@/components/cart/CartItemCard"
 import { toast } from "sonner"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 
 function formatPrice(amount: number): string {
   return new Intl.NumberFormat("fr-FR", {
@@ -20,6 +21,7 @@ function formatPrice(amount: number): string {
 }
 
 export const CartSidebar = () => {
+  const router = useRouter()
   const isAuthenticated = useAuthStore(state => state.isAuthenticated)
   const { cart, isLoading, fetchCart, clearCart, sidebarOpen, setSidebarOpen } =
     useCartStore()
@@ -137,7 +139,14 @@ export const CartSidebar = () => {
               </span>
             </div>
             <Separator className="mb-4" />
-            <Button className="w-full" size="lg">
+            <Button
+              className="w-full"
+              size="lg"
+              onClick={() => {
+                setSidebarOpen(false)
+                router.push("/checkout")
+              }}
+            >
               Procéder au paiement
             </Button>
             <Button
