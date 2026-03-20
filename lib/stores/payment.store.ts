@@ -1,5 +1,5 @@
 import { create } from "zustand"
-import { CheckoutRequest, PaymentState, TransactionResponse } from "@/lib/types/payment.type"
+import { CheckoutRequest, PaymentState, TicketGroup, TransactionResponse } from "@/lib/types/payment.type"
 import { apiClient } from "@/lib/utils/apiClient"
 import { useCartStore } from "@/lib/stores/cart.store"
 
@@ -31,6 +31,15 @@ export const usePaymentStore = create<PaymentState>()(set => ({
     if (!response.ok) {
       const error = await response.json().catch(() => ({}))
       throw new Error(error.message || "Transaction introuvable")
+    }
+    return response.json()
+  },
+
+  getUserTickets: async (): Promise<TicketGroup[]> => {
+    const response = await apiClient("/checkout/tickets")
+    if (!response.ok) {
+      const error = await response.json().catch(() => ({}))
+      throw new Error(error.message || "Impossible de récupérer vos billets")
     }
     return response.json()
   },

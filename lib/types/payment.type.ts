@@ -24,13 +24,29 @@ export interface TicketOfferSummary {
   price: number
 }
 
+export type TicketStatus = "VALID" | "USED" | "CANCELLED"
+
 export interface TicketResponse {
   id: number
   ticketKey: string
   barcode: string
   price: number
+  status: TicketStatus
+  createdAt: string
   event: TicketEventSummary
   offer: TicketOfferSummary
+}
+
+export interface TicketGroup {
+  transactionId: number
+  paymentReference: string
+  purchasedAt: string
+  event: TicketEventSummary
+  offer: TicketOfferSummary
+  totalSeats: number
+  totalPrice: number
+  groupStatus: TicketStatus
+  barcodes: string[]
 }
 
 export interface TransactionResponse {
@@ -47,4 +63,5 @@ export interface PaymentState {
   isProcessing: boolean
   checkout: (data: CheckoutRequest) => Promise<TransactionResponse>
   getTransaction: (transactionId: number) => Promise<TransactionResponse>
+  getUserTickets: () => Promise<TicketGroup[]>
 }

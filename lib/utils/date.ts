@@ -47,3 +47,19 @@ export const formatDateShort = (dateStr: string) => {
 export const getMonth = (dateStr: string) => {
   return new Date(dateStr + "T00:00:00").getMonth()
 }
+
+export const formatDateWithTime = (dateStr: string) =>
+  new Intl.DateTimeFormat("fr-FR", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+  }).format(new Date(dateStr))
+
+export const formatDatePurchase = (dateStr: string) =>
+  new Intl.DateTimeFormat("fr-FR", {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+  }).format(new Date(dateStr))

@@ -160,7 +160,7 @@ export const Header = () => {
                   </SheetClose>
                   <SheetClose asChild>
                     <Link
-                      href="#"
+                      href="/billets"
                       className="flex items-center gap-3 rounded-md px-3 py-2.5 text-sm font-medium text-muted-foreground hover:bg-primary/5 hover:text-primary transition-colors"
                     >
                       <Ticket className="h-4 w-4" />
@@ -242,9 +242,11 @@ export const Header = () => {
                     Mon compte
                   </Link>
                 </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <Ticket className="mr-2 h-4 w-4" />
-                  Mes billets
+                <DropdownMenuItem asChild>
+                  <Link href="/billets" className="cursor-pointer">
+                    <Ticket className="mr-2 h-4 w-4" />
+                    Mes billets
+                  </Link>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem
