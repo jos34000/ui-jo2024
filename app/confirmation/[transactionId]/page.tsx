@@ -8,7 +8,7 @@ import { usePaymentStore } from "@/lib/stores/payment.store"
 import { TransactionResponse } from "@/lib/types/payment.type"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
-import { CheckCircle2, Ticket, Loader2 } from "lucide-react"
+import { CheckCircle2, Ticket, Loader2, Mail } from "lucide-react"
 import Link from "next/link"
 
 function formatPrice(amount: number): string {
@@ -148,9 +148,17 @@ export default function ConfirmationPage() {
           </div>
         </div>
 
-        <Button asChild className="w-full" size="lg">
-          <Link href="/">Retour à l&apos;accueil</Link>
-        </Button>
+        <div className="flex flex-col gap-3">
+          <div className="flex items-center gap-3 rounded-xl border border-border bg-muted/40 px-4 py-3 text-sm text-muted-foreground">
+            <Mail className="h-4 w-4 shrink-0 text-primary" />
+            <span>
+              Vos billets ont été envoyés par email avec le PDF joint automatiquement.
+            </span>
+          </div>
+          <Button asChild size="lg" className="w-full">
+            <Link href="/">Retour à l&apos;accueil</Link>
+          </Button>
+        </div>
       </div>
     </main>
   )
