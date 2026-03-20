@@ -64,4 +64,5 @@ export interface PaymentState {
   checkout: (data: CheckoutRequest) => Promise<TransactionResponse>
   getTransaction: (transactionId: number) => Promise<TransactionResponse>
   getUserTickets: () => Promise<TicketGroup[]>
+  downloadTicketPdf: (transactionId: number) => Promise<void>
 }

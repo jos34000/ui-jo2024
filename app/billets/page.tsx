@@ -8,7 +8,7 @@ import { usePaymentStore } from "@/lib/stores/payment.store"
 import { TicketGroup, TicketStatus } from "@/lib/types/payment.type"
 import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
-import { CalendarDays, MapPin, Tag, Ticket, Users } from "lucide-react"
+import { CalendarDays, Download, MapPin, Tag, Ticket, Users } from "lucide-react"
 import { formatDateWithTime, formatDatePurchase } from "@/lib/utils/date"
 import { formatPrice, formatPhase } from "@/lib/utils/format"
 import { Header } from "@/components/Header"
@@ -23,8 +23,18 @@ const STATUS_CONFIG: Record<
   CANCELLED: { label: "Annulé",  variant: "destructive" },
 }
 
-function TicketGroupCard({ group }: Readonly<{ group: TicketGroup }>) {
+function TicketGroupCard({ group, onDownload }: Readonly<{ group: TicketGroup; onDownload: () => void }>) {
   const cfg = STATUS_CONFIG[group.groupStatus]
+  const [isDownloading, setIsDownloading] = useState(false)
+
+  const handleDownload = async () => {
+    setIsDownloading(true)
+    try {
+      await onDownload()
+    } finally {
+      setIsDownloading(false)
+    }
+  }
 
   return (
     <div className="rounded-xl border border-border bg-card overflow-hidden transition-shadow hover:shadow-md">
@@ -71,7 +81,19 @@ function TicketGroupCard({ group }: Readonly<{ group: TicketGroup }>) {
 
         <div className="flex items-center justify-between mt-4 pt-3 border-t border-border">
           <span className="text-xs text-muted-foreground">Acheté le {formatDatePurchase(group.purchasedAt)}</span>
-          <span className="font-mono font-bold text-sm">{formatPrice(group.totalPrice)}</span>
+          <div className="flex items-center gap-3">
+            {group.groupStatus === "VALID" && (
+              <button
+                onClick={handleDownload}
+                disabled={isDownloading}
+                className="flex items-center gap-1.5 text-xs font-medium text-primary hover:text-primary/80 disabled:opacity-50 transition-colors"
+              >
+                <Download className="h-3.5 w-3.5" />
+                {isDownloading ? "Téléchargement…" : "Télécharger PDF"}
+              </button>
+            )}
+            <span className="font-mono font-bold text-sm">{formatPrice(group.totalPrice)}</span>
+          </div>
         </div>
       </div>
     </div>
@@ -82,6 +104,7 @@ export default function BilletsPage() {
   const router = useRouter()
   const isAuthenticated = useAuthStore(state => state.isAuthenticated)
   const getUserTickets = usePaymentStore(state => state.getUserTickets)
+  const downloadTicketPdf = usePaymentStore(state => state.downloadTicketPdf)
 
   const [groups, setGroups] = useState<TicketGroup[]>([])
   const [isLoading, setIsLoading] = useState(true)
@@ -174,6 +197,7 @@ export default function BilletsPage() {
                 <TicketGroupCard
                   key={`${group.transactionId}-${group.event.id}-${group.offer.id}`}
                   group={group}
+                  onDownload={() => downloadTicketPdf(group.transactionId)}
                 />
               ))}
             </div>
