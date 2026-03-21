@@ -126,7 +126,7 @@ export const ResetPasswordDialog = ({
         onSubmit={e => {
           e.preventDefault()
           e.stopPropagation()
-          requestForm.handleSubmit()
+          requestForm.handleSubmit().then()
         }}
         className="space-y-4"
       >
@@ -173,7 +173,7 @@ export const ResetPasswordDialog = ({
         onSubmit={e => {
           e.preventDefault()
           e.stopPropagation()
-          changeForm.handleSubmit()
+          changeForm.handleSubmit().then()
         }}
         className="space-y-4"
       >

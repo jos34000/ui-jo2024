@@ -50,7 +50,7 @@ export default function ConfirmationPage() {
     }
 
     const transactionId = Number(params.transactionId)
-    if (isNaN(transactionId)) {
+    if (Number.isNaN(transactionId)) {
       router.push("/")
       return
     }
@@ -64,7 +64,14 @@ export default function ConfirmationPage() {
         setError(err instanceof Error ? err.message : t("error"))
       })
       .finally(() => setIsLoading(false))
-  }, [isAuthenticated, params.transactionId, router, getTransaction, setCart, t])
+  }, [
+    isAuthenticated,
+    params.transactionId,
+    router,
+    getTransaction,
+    setCart,
+    t,
+  ])
 
   if (!isAuthenticated) return null
 
@@ -79,9 +86,7 @@ export default function ConfirmationPage() {
   if (error || !transaction) {
     return (
       <main className="min-h-screen bg-background flex flex-col items-center justify-center gap-4">
-        <p className="text-muted-foreground">
-          {error ?? t("notFound")}
-        </p>
+        <p className="text-muted-foreground">{error ?? t("notFound")}</p>
         <Button asChild variant="outline">
           <Link href="/">{t("backHome")}</Link>
         </Button>
@@ -97,9 +102,7 @@ export default function ConfirmationPage() {
             <CheckCircle2 className="h-10 w-10 text-green-600 dark:text-green-400" />
           </div>
           <h1 className="text-2xl font-bold">{t("title")}</h1>
-          <p className="text-muted-foreground mt-1 text-sm">
-            {t("subtitle")}
-          </p>
+          <p className="text-muted-foreground mt-1 text-sm">{t("subtitle")}</p>
         </div>
 
         <div className="rounded-xl border border-border bg-card p-5 mb-5">
@@ -125,7 +128,9 @@ export default function ConfirmationPage() {
               </span>
             </div>
             <div className="flex justify-between">
-              <span className="text-muted-foreground">{t("ticketsGenerated")}</span>
+              <span className="text-muted-foreground">
+                {t("ticketsGenerated")}
+              </span>
               <span>
                 {t("ticketsCount", { count: transaction.tickets.length })}
               </span>
@@ -167,9 +172,7 @@ export default function ConfirmationPage() {
         <div className="flex flex-col gap-3">
           <div className="flex items-center gap-3 rounded-xl border border-border bg-muted/40 px-4 py-3 text-sm text-muted-foreground">
             <Mail className="h-4 w-4 shrink-0 text-primary" />
-            <span>
-              {t("emailSent")}
-            </span>
+            <span>{t("emailSent")}</span>
           </div>
           <Button asChild size="lg" className="w-full">
             <Link href="/">{t("backHome")}</Link>

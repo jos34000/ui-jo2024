@@ -48,7 +48,7 @@ export const HeroSection = () => {
                     className="text-base bg-transparent"
                     asChild
                   >
-                    <Link href="#events">
+                    <Link href="/events">
                       {t("authenticated.explore")}
                       <ArrowRight className="ml-2 h-4 w-4" />
                     </Link>
@@ -67,7 +67,9 @@ export const HeroSection = () => {
 
                 <h1 className="text-4xl font-bold tracking-tight sm:text-6xl lg:text-7xl text-balance font-mono">
                   {t.rich("unauthenticated.title", {
-                    highlight: (chunks) => <span className="text-primary">{chunks}</span>,
+                    highlight: chunks => (
+                      <span className="text-primary">{chunks}</span>
+                    ),
                   })}
                 </h1>
 
@@ -106,14 +108,18 @@ export const HeroSection = () => {
                   <Ticket className="h-4 w-4" />
                   <span className="text-2xl font-bold">32</span>
                 </div>
-                <p className="text-sm text-muted-foreground">{t("stats.sports")}</p>
+                <p className="text-sm text-muted-foreground">
+                  {t("stats.sports")}
+                </p>
               </div>
               <div className="space-y-1">
                 <div className="flex items-center gap-2 text-primary">
                   <MapPin className="h-4 w-4" />
                   <span className="text-2xl font-bold">35</span>
                 </div>
-                <p className="text-sm text-muted-foreground">{t("stats.venues")}</p>
+                <p className="text-sm text-muted-foreground">
+                  {t("stats.venues")}
+                </p>
               </div>
             </div>
           </div>
@@ -164,7 +170,9 @@ export const HeroSection = () => {
 
                 <div className="bg-[#00A651] rounded-2xl p-4 flex flex-col justify-center items-center text-white">
                   <span className="text-2xl font-mono font-bold">26/07</span>
-                  <span className="text-xs opacity-80">{t("labels.start")}</span>
+                  <span className="text-xs opacity-80">
+                    {t("labels.start")}
+                  </span>
                 </div>
 
                 <div className="bg-card border border-border rounded-2xl p-4 flex flex-col justify-center items-center">

@@ -14,15 +14,17 @@ import {
   Trophy,
 } from "lucide-react"
 import { SportResponseDTO } from "@/lib/types/sport.type"
-import { getTranslations, getMessages } from "next-intl/server"
-// getTranslations used for "sports" namespace (typed keys), getMessages for dynamic lookups
+import { getMessages, getTranslations } from "next-intl/server"
 
 const getCurrentSport = async (
   id: number,
 ): Promise<SportResponseDTO | null> => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/sport/${id}`, {
-    cache: "no-store",
-  })
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/sport/${id}`,
+    {
+      cache: "no-store",
+    },
+  )
 
   if (!res.ok) return null
   return await res.json()
@@ -42,9 +44,13 @@ const SportPage = async ({ params }: { params: Promise<{ id: number }> }) => {
   ])
   const t = await getTranslations("sports")
   const messages = await getMessages()
-  const sportNamesMap = (messages as Record<string, unknown>).sportNames as Record<string, string> | undefined
+  const sportNamesMap = (messages as Record<string, unknown>).sportNames as
+    | Record<string, string>
+    | undefined
   const translateSport = (name: string) => sportNamesMap?.[name] ?? name
-  const phasesMap = (messages as Record<string, unknown>).phases as Record<string, string> | undefined
+  const phasesMap = (messages as Record<string, unknown>).phases as
+    | Record<string, string>
+    | undefined
   const translatePhase = (phase: string) => phasesMap?.[phase] ?? phase
 
   if (!sport) {
@@ -72,7 +78,9 @@ const SportPage = async ({ params }: { params: Promise<{ id: number }> }) => {
                 {t("sports")}
               </Link>
               <span>/</span>
-              <span className="text-foreground font-medium">{translateSport(sport.name)}</span>
+              <span className="text-foreground font-medium">
+                {translateSport(sport.name)}
+              </span>
             </nav>
           </div>
         </div>

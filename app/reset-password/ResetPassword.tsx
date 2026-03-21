@@ -41,7 +41,7 @@ export default function ResetPassword() {
         else if (result.status === 410) setPageState("expired")
         else if (result.status === 400) setPageState("invalid")
         else setPageState("success")
-      } catch (error: any) {
+      } catch (error: unknown) {
         console.error(error)
       }
     }
@@ -71,9 +71,7 @@ export default function ResetPassword() {
             <h2 className="text-xl font-semibold font-mono mb-2">
               {t("loading")}
             </h2>
-            <p className="text-muted-foreground">
-              {t("loadingSubtitle")}
-            </p>
+            <p className="text-muted-foreground">{t("loadingSubtitle")}</p>
           </div>
         )
 
@@ -163,7 +161,7 @@ export default function ResetPassword() {
                 onSubmit={e => {
                   e.preventDefault()
                   e.stopPropagation()
-                  form.handleSubmit()
+                  form.handleSubmit().then()
                 }}
                 className="space-y-4"
               >
@@ -230,18 +228,18 @@ export default function ResetPassword() {
           <div className="flex items-center justify-between gap-3 text-xs sm:text-sm text-muted-foreground">
             <p className="shrink-0">Paris 2024</p>
             <nav className="flex items-center gap-3 sm:gap-6">
-              <a href="#" className="hover:text-primary transition-colors">
+              <Link href="#" className="hover:text-primary transition-colors">
                 {t("footerHelp")}
-              </a>
-              <a href="#" className="hover:text-primary transition-colors">
+              </Link>
+              <Link href="#" className="hover:text-primary transition-colors">
                 {t("footerPrivacy")}
-              </a>
-              <a
+              </Link>
+              <Link
                 href="#"
                 className="hidden sm:inline hover:text-primary transition-colors"
               >
                 {t("footerTerms")}
-              </a>
+              </Link>
             </nav>
           </div>
         </div>

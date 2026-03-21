@@ -68,7 +68,11 @@ export const NotFoundContent = ({
           label: t("sports"),
           icon: <Trophy className="h-4 w-4" />,
         },
-        { href: "/#faq", label: t("faq"), icon: <HelpCircle className="h-4 w-4" /> },
+        {
+          href: "/#faq",
+          label: t("faq"),
+          icon: <HelpCircle className="h-4 w-4" />,
+        },
       ],
     },
     event: {
@@ -120,19 +124,20 @@ export const NotFoundContent = ({
           label: t("tickets"),
           icon: <Ticket className="h-4 w-4" />,
         },
-        { href: "/#faq", label: t("faq"), icon: <HelpCircle className="h-4 w-4" /> },
+        {
+          href: "/#faq",
+          label: t("faq"),
+          icon: <HelpCircle className="h-4 w-4" />,
+        },
         { href: "/", label: t("home"), icon: <Home className="h-4 w-4" /> },
       ],
     },
   }
 
-  const preset = type !== "custom" ? presets[type] : null
+  const preset = type === "custom" ? null : presets[type]
 
   const displayTitle = title ?? preset?.title ?? t("title")
-  const displayDescription =
-    description ??
-    preset?.description ??
-    t("subtitle")
+  const displayDescription = description ?? preset?.description ?? t("subtitle")
   const displayIcon = icon ?? preset?.icon ?? <Search className="h-8 w-8" />
   const displayBackLink = backLink ??
     preset?.backLink ?? { href: "/", label: t("backHome") }

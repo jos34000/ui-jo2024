@@ -64,21 +64,19 @@ export default function CheckoutPage() {
     },
     validators: { onSubmit: checkoutSchema },
     onSubmit: async ({ value }) => {
-      const rawCard = value.cardNumber.replace(/\D/g, "")
+      const rawCard = value.cardNumber.replaceAll(/\D/g, "")
       const [month, year] = value.expiry.split("/")
       try {
         const transaction = await checkout({
           cardNumber: rawCard,
-          expiryMonth: parseInt(month, 10),
-          expiryYear: 2000 + parseInt(year, 10),
+          expiryMonth: Number.parseInt(month, 10),
+          expiryYear: 2000 + Number.parseInt(year, 10),
           cvv: value.cvv,
           paymentMethod: "CREDIT_CARD",
         })
         router.push(`/confirmation/${transaction.id}`)
       } catch (err) {
-        toast.error(
-          err instanceof Error ? err.message : t("paymentError"),
-        )
+        toast.error(err instanceof Error ? err.message : t("paymentError"))
       }
     },
   })
@@ -123,7 +121,8 @@ export default function CheckoutPage() {
                         {item.offer.name} · {item.quantity}×
                       </p>
                       <p className="text-muted-foreground text-xs">
-                        {formatDateWithTime(item.event.eventDate)} · {item.event.city}
+                        {formatDateWithTime(item.event.eventDate)} ·{" "}
+                        {item.event.city}
                       </p>
                     </div>
                     <span className="font-mono shrink-0">
@@ -190,7 +189,7 @@ export default function CheckoutPage() {
                 onSubmit={e => {
                   e.preventDefault()
                   e.stopPropagation()
-                  checkoutForm.handleSubmit()
+                  checkoutForm.handleSubmit().then()
                 }}
                 className="space-y-4"
               >

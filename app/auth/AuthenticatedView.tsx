@@ -49,9 +49,12 @@ export const AuthenticatedView = ({
   const [ticketsLoaded, setTicketsLoaded] = useState(false)
   const getUserTickets = usePaymentStore(state => state.getUserTickets)
 
-  const STATUS_BADGE: Record<string, { label: string; variant: "default" | "secondary" | "destructive" }> = {
-    VALID:     { label: t("status.VALID"),     variant: "default" },
-    USED:      { label: t("status.USED"),      variant: "secondary" },
+  const STATUS_BADGE: Record<
+    string,
+    { label: string; variant: "default" | "secondary" | "destructive" }
+  > = {
+    VALID: { label: t("status.VALID"), variant: "default" },
+    USED: { label: t("status.USED"), variant: "secondary" },
     CANCELLED: { label: t("status.CANCELLED"), variant: "destructive" },
   }
 
@@ -61,15 +64,15 @@ export const AuthenticatedView = ({
       .finally(() => setTicketsLoaded(true))
   }, [getUserTickets])
 
-  const totalSeats  = groups.reduce((sum, g) => sum + g.totalSeats, 0)
+  const totalSeats = groups.reduce((sum, g) => sum + g.totalSeats, 0)
   const activeCount = groups.filter(g => g.groupStatus === "VALID").length
   const recentGroups = groups.slice(0, 2)
 
-  const ticketSummary = !ticketsLoaded
-    ? t("loadingTickets")
-    : groups.length === 0
+  const ticketSummary = ticketsLoaded
+    ? groups.length === 0
       ? undefined
-      : `${t("ticketSummaryOrders", { count: groups.length })} · ${t("ticketSummarySeats", { count: totalSeats })}${activeCount > 0 ? ` · ${t("ticketSummaryActive", { count: activeCount })}` : ""}`
+      : `${t("ticketSummaryOrders", { count: groups.length })} · ${t("ticketSummarySeats", { count: totalSeats })}${activeCount > 0 ? ` · ${t(`ticketSummaryActive`, { count: activeCount })}` : ""}`
+    : t("loadingTickets")
 
   return (
     <main className="flex-1 mx-auto w-full max-w-3xl px-4 sm:px-6 py-8 sm:py-12 lg:py-16">
@@ -99,7 +102,12 @@ export const AuthenticatedView = ({
               </CardDescription>
             </div>
             {!isEditing && (
-              <Button variant="ghost" size="sm" onClick={() => setIsEditing(true)} className="shrink-0">
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => setIsEditing(true)}
+                className="shrink-0"
+              >
                 <Pencil className="mr-2 h-4 w-4" />
                 {t("edit")}
               </Button>
@@ -114,8 +122,18 @@ export const AuthenticatedView = ({
               />
             ) : (
               <div className="space-y-0">
-                <InfoRow icon={User} label={t("fullName")} value={`${user.firstName} ${user.lastName}`} hasBorder />
-                <InfoRow icon={Mail} label={t("email")} value={user.email} hasBorder />
+                <InfoRow
+                  icon={User}
+                  label={t("fullName")}
+                  value={`${user.firstName} ${user.lastName}`}
+                  hasBorder
+                />
+                <InfoRow
+                  icon={Mail}
+                  label={t("email")}
+                  value={user.email}
+                  hasBorder
+                />
                 <InfoRow
                   icon={Ticket}
                   label={t("tickets")}
@@ -130,8 +148,13 @@ export const AuthenticatedView = ({
         {ticketsLoaded && recentGroups.length > 0 && (
           <Card className="border-border/50">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
-              <CardTitle className="text-base font-mono">{t("recentTickets")}</CardTitle>
-              <Link href="/billets" className="text-xs text-muted-foreground hover:text-primary transition-colors">
+              <CardTitle className="text-base font-mono">
+                {t("recentTickets")}
+              </CardTitle>
+              <Link
+                href="/billets"
+                className="text-xs text-muted-foreground hover:text-primary transition-colors"
+              >
                 {t("viewAll")}
               </Link>
             </CardHeader>
@@ -144,12 +167,18 @@ export const AuthenticatedView = ({
                     className="flex items-center justify-between gap-3 rounded-lg bg-muted/40 px-3 py-2.5"
                   >
                     <div className="min-w-0 flex-1">
-                      <p className="text-sm font-medium truncate">{group.event.name}</p>
+                      <p className="text-sm font-medium truncate">
+                        {group.event.name}
+                      </p>
                       <p className="text-xs text-muted-foreground mt-0.5">
-                        {t("seatsCount", { count: group.totalSeats })} · {formatDatePurchase(group.purchasedAt)} · {formatPrice(group.totalPrice)}
+                        {t("seatsCount", { count: group.totalSeats })} ·{" "}
+                        {formatDatePurchase(group.purchasedAt)} ·{" "}
+                        {formatPrice(group.totalPrice)}
                       </p>
                     </div>
-                    <Badge variant={cfg.variant} className="text-xs shrink-0">{cfg.label}</Badge>
+                    <Badge variant={cfg.variant} className="text-xs shrink-0">
+                      {cfg.label}
+                    </Badge>
                   </div>
                 )
               })}
@@ -165,8 +194,12 @@ export const AuthenticatedView = ({
                   <Ticket className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <h3 className="font-semibold text-sm sm:text-base">{t("buyTickets")}</h3>
-                  <p className="text-xs sm:text-sm text-muted-foreground">{t("exploreEvents")}</p>
+                  <h3 className="font-semibold text-sm sm:text-base">
+                    {t("buyTickets")}
+                  </h3>
+                  <p className="text-xs sm:text-sm text-muted-foreground">
+                    {t("exploreEvents")}
+                  </p>
                 </div>
                 <ArrowRight className="h-4 w-4 text-muted-foreground shrink-0" />
               </CardContent>
@@ -180,7 +213,9 @@ export const AuthenticatedView = ({
                   <Shield className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <h3 className="font-semibold text-sm sm:text-base">{t("myTickets")}</h3>
+                  <h3 className="font-semibold text-sm sm:text-base">
+                    {t("myTickets")}
+                  </h3>
                   <p className="text-xs sm:text-sm text-muted-foreground">
                     {ticketsLoaded && groups.length > 0
                       ? t("ordersCount", { count: groups.length })

@@ -27,6 +27,7 @@ export const LanguageSwitcher = () => {
 
   const setLocale = async (code: string) => {
     if (code === locale) return
+    // eslint-disable-next-line react-hooks/immutability
     document.cookie = `NEXT_LOCALE=${code}; path=/; max-age=31536000`
 
     if (isAuthenticated) {
@@ -35,9 +36,7 @@ export const LanguageSwitcher = () => {
           method: "PATCH",
           body: JSON.stringify({ locale: code }),
         })
-      } catch {
-        // Non-blocking — the cookie change still takes effect
-      }
+      } catch {}
     }
 
     router.refresh()

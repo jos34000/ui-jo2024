@@ -67,9 +67,7 @@ export const OTPDialog = ({
           <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-primary/10">
             <Shield className="h-7 w-7 text-primary" />
           </div>
-          <DialogTitle className="text-xl font-mono">
-            {t("title")}
-          </DialogTitle>
+          <DialogTitle className="text-xl font-mono">{t("title")}</DialogTitle>
           <DialogDescription className="text-center">
             {t("description", { email: maskedEmail })}
           </DialogDescription>
@@ -79,9 +77,7 @@ export const OTPDialog = ({
           <div className="flex items-center gap-3 rounded-lg border border-border bg-muted/50 p-3">
             <Mail className="h-5 w-5 text-muted-foreground shrink-0" />
             <div className="text-sm">
-              <p className="text-muted-foreground">
-                {t("instruction")}
-              </p>
+              <p className="text-muted-foreground">{t("instruction")}</p>
             </div>
           </div>
 
@@ -91,14 +87,16 @@ export const OTPDialog = ({
               onSubmit={e => {
                 e.preventDefault()
                 e.stopPropagation()
-                form.handleSubmit()
+                form.handleSubmit().then()
               }}
             >
               <form.AppField name="otp">
                 {field => <field.OTPField label={t("label")} />}
               </form.AppField>
               <form.AppForm>
-                <form.SubmitButton className="w-full">{t("submit")}</form.SubmitButton>
+                <form.SubmitButton className="w-full">
+                  {t("submit")}
+                </form.SubmitButton>
               </form.AppForm>
             </form>
           </div>

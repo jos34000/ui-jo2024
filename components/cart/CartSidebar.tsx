@@ -5,7 +5,14 @@ import { ShoppingCart, Trash2, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
-import { Sheet, SheetClose, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet"
 import { useCartStore } from "@/lib/stores/cart.store"
 import { useAuthStore } from "@/lib/stores/auth.store"
 import { CartItemCard } from "@/components/cart/CartItemCard"
@@ -31,7 +38,7 @@ export const CartSidebar = () => {
 
   useEffect(() => {
     if (sidebarOpen && isAuthenticated) {
-      fetchCart()
+      fetchCart().then()
     }
   }, [fetchCart, isAuthenticated, sidebarOpen])
 
@@ -91,13 +98,36 @@ export const CartSidebar = () => {
         </SheetHeader>
 
         <div className="flex-1 overflow-y-auto px-4 py-4">
-          {!isAuthenticated ? (
+          {isAuthenticated ? (
+            isLoading ? (
+              <div className="flex flex-col gap-3">
+                {Array.from({ length: 3 }).map((_, i) => (
+                  <div
+                    key={i}
+                    className="h-24 rounded-lg bg-muted animate-pulse"
+                  />
+                ))}
+              </div>
+            ) : !cart || cart.items.length === 0 ? (
+              <div className="flex flex-col items-center justify-center h-full gap-3 text-center py-16">
+                <ShoppingCart className="h-12 w-12 text-muted-foreground/40" />
+                <p className="font-medium">{t("empty.title")}</p>
+                <p className="text-sm text-muted-foreground">
+                  {t("empty.subtitle")}
+                </p>
+              </div>
+            ) : (
+              <div className="flex flex-col gap-3">
+                {cart.items.map(item => (
+                  <CartItemCard key={item.id} item={item} />
+                ))}
+              </div>
+            )
+          ) : (
             <div className="flex flex-col items-center justify-center h-full gap-4 text-center py-16">
               <ShoppingCart className="h-12 w-12 text-muted-foreground/40" />
               <div>
-                <p className="font-medium">
-                  {t("notAuth.title")}
-                </p>
+                <p className="font-medium">{t("notAuth.title")}</p>
                 <p className="text-sm text-muted-foreground mt-1">
                   {t("notAuth.subtitle")}
                 </p>
@@ -106,36 +136,15 @@ export const CartSidebar = () => {
                 <Link href="/auth">{t("login")}</Link>
               </Button>
             </div>
-          ) : isLoading ? (
-            <div className="flex flex-col gap-3">
-              {Array.from({ length: 3 }).map((_, i) => (
-                <div
-                  key={i}
-                  className="h-24 rounded-lg bg-muted animate-pulse"
-                />
-              ))}
-            </div>
-          ) : !cart || cart.items.length === 0 ? (
-            <div className="flex flex-col items-center justify-center h-full gap-3 text-center py-16">
-              <ShoppingCart className="h-12 w-12 text-muted-foreground/40" />
-              <p className="font-medium">{t("empty.title")}</p>
-              <p className="text-sm text-muted-foreground">
-                {t("empty.subtitle")}
-              </p>
-            </div>
-          ) : (
-            <div className="flex flex-col gap-3">
-              {cart.items.map(item => (
-                <CartItemCard key={item.id} item={item} />
-              ))}
-            </div>
           )}
         </div>
 
         {isAuthenticated && cart && cart.items.length > 0 && (
           <div className="border-t border-border px-5 py-4">
             <div className="flex items-center justify-between mb-4">
-              <span className="text-sm text-muted-foreground">{t("total")}</span>
+              <span className="text-sm text-muted-foreground">
+                {t("total")}
+              </span>
               <span className="font-bold font-mono text-lg">
                 {formatPrice(cart.totalPrice)}
               </span>
