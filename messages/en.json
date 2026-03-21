@@ -541,5 +541,41 @@
     "E-billets sur mobile": "Mobile e-tickets",
     "Accès aux zones communes": "Access to common areas",
     "Sac souvenir Paris 2024 offert": "Free Paris 2024 souvenir bag"
+  },
+  "cookieBanner": {
+    "title": "Cookie settings",
+    "description": "We use cookies to improve your experience on our site. You can customize your preferences or accept all cookies.",
+    "showDetails": "Show details",
+    "hideDetails": "Hide details",
+    "acceptAll": "Accept all",
+    "rejectAll": "Reject all",
+    "customize": "Customize",
+    "save": "Save",
+    "saveChoices": "Save my choices",
+    "close": "Close",
+    "manage": "Manage cookies",
+    "required": "required",
+    "dialog": {
+      "title": "Cookie preferences",
+      "description": "Customize your cookie preferences"
+    },
+    "categories": {
+      "necessary": {
+        "title": "Necessary cookies",
+        "description": "These cookies are essential for the site to function. They enable navigation and the use of basic features."
+      },
+      "analytics": {
+        "title": "Analytics cookies",
+        "description": "These cookies help us understand how visitors interact with the site by collecting anonymous information."
+      },
+      "marketing": {
+        "title": "Marketing cookies",
+        "description": "These cookies are used to display relevant advertisements and measure the effectiveness of campaigns."
+      },
+      "preferences": {
+        "title": "Preference cookies",
+        "description": "These cookies allow us to remember your choices and preferences to personalize your experience."
+      }
+    }
   }
 }

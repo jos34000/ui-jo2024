@@ -4,10 +4,12 @@ import { JetBrains_Mono, Nunito } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import { ThemeProvider } from "@/components/ThemeProvider"
 import { CartInitializer } from "@/components/CartInitializer"
+import { CartSidebar } from "@/components/cart/CartSidebar"
 import { NextIntlClientProvider } from "next-intl"
-import { getMessages, getLocale } from "next-intl/server"
+import { getLocale, getMessages } from "next-intl/server"
 import "./globals.css"
 import { Toaster } from "@/components/ui/sonner"
+import { CookieBanner } from "@/components/CookieBanner"
 
 const _jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
@@ -42,12 +44,14 @@ export default async function RootLayout({ children }: Readonly<LayoutProps>) {
             disableTransitionOnChange
           >
             <CartInitializer />
+            <CartSidebar hideTrigger />
             {children}
             <Toaster
               position="bottom-right"
               richColors={true}
               closeButton={true}
             />
+            <CookieBanner />
           </ThemeProvider>
         </NextIntlClientProvider>
         <Analytics />

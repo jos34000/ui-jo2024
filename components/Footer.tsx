@@ -3,6 +3,7 @@
 import Link from "next/link"
 import { OlympicRings } from "@/lib/svg/OlympicRings"
 import { useTranslations } from "next-intl"
+import { CookieSettingsButton } from "@/components/CookieBanner"
 
 export const Footer = () => {
   const t = useTranslations("footer")
@@ -29,7 +30,6 @@ export const Footer = () => {
     legal: [
       { name: t("links.terms"), href: "#" },
       { name: t("links.privacy"), href: "#" },
-      { name: t("links.cookies"), href: "#" },
     ],
   }
 
@@ -115,6 +115,9 @@ export const Footer = () => {
                       </Link>
                     </li>
                   ))}
+                  <li>
+                    <CookieSettingsButton />
+                  </li>
                 </ul>
               </div>
             </div>

@@ -541,5 +541,41 @@
     "E-billets sur mobile": "Entradas electrónicas en móvil",
     "Accès aux zones communes": "Acceso a zonas comunes",
     "Sac souvenir Paris 2024 offert": "Bolsa de recuerdo Paris 2024 de regalo"
+  },
+  "cookieBanner": {
+    "title": "Configuración de cookies",
+    "description": "Utilizamos cookies para mejorar su experiencia en nuestro sitio. Puede personalizar sus preferencias o aceptar todas las cookies.",
+    "showDetails": "Ver detalles",
+    "hideDetails": "Ocultar detalles",
+    "acceptAll": "Aceptar todo",
+    "rejectAll": "Rechazar todo",
+    "customize": "Personalizar",
+    "save": "Guardar",
+    "saveChoices": "Guardar mis preferencias",
+    "close": "Cerrar",
+    "manage": "Gestionar cookies",
+    "required": "obligatorio",
+    "dialog": {
+      "title": "Preferencias de cookies",
+      "description": "Personalice sus preferencias de cookies"
+    },
+    "categories": {
+      "necessary": {
+        "title": "Cookies necesarias",
+        "description": "Estas cookies son esenciales para el funcionamiento del sitio. Permiten la navegación y el uso de las funciones básicas."
+      },
+      "analytics": {
+        "title": "Cookies analíticas",
+        "description": "Estas cookies nos ayudan a entender cómo interactúan los visitantes con el sitio recopilando información anónima."
+      },
+      "marketing": {
+        "title": "Cookies de marketing",
+        "description": "Estas cookies se utilizan para mostrar publicidad relevante y medir la efectividad de las campañas."
+      },
+      "preferences": {
+        "title": "Cookies de preferencias",
+        "description": "Estas cookies permiten recordar sus elecciones y preferencias para personalizar su experiencia."
+      }
+    }
   }
 }

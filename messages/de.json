@@ -541,5 +541,41 @@
     "E-billets sur mobile": "Mobile E-Tickets",
     "Accès aux zones communes": "Zugang zu Gemeinschaftsbereichen",
     "Sac souvenir Paris 2024 offert": "Kostenloses Paris 2024 Souvenir-Tasche"
+  },
+  "cookieBanner": {
+    "title": "Cookie-Einstellungen",
+    "description": "Wir verwenden Cookies, um Ihre Erfahrung auf unserer Website zu verbessern. Sie können Ihre Präferenzen anpassen oder alle Cookies akzeptieren.",
+    "showDetails": "Details anzeigen",
+    "hideDetails": "Details ausblenden",
+    "acceptAll": "Alle akzeptieren",
+    "rejectAll": "Alle ablehnen",
+    "customize": "Anpassen",
+    "save": "Speichern",
+    "saveChoices": "Meine Auswahl speichern",
+    "close": "Schließen",
+    "manage": "Cookies verwalten",
+    "required": "erforderlich",
+    "dialog": {
+      "title": "Cookie-Präferenzen",
+      "description": "Passen Sie Ihre Cookie-Präferenzen an"
+    },
+    "categories": {
+      "necessary": {
+        "title": "Notwendige Cookies",
+        "description": "Diese Cookies sind für die Funktion der Website unerlässlich. Sie ermöglichen die Navigation und die Nutzung grundlegender Funktionen."
+      },
+      "analytics": {
+        "title": "Analyse-Cookies",
+        "description": "Diese Cookies helfen uns zu verstehen, wie Besucher mit der Website interagieren, indem sie anonyme Informationen sammeln."
+      },
+      "marketing": {
+        "title": "Marketing-Cookies",
+        "description": "Diese Cookies werden verwendet, um relevante Werbung anzuzeigen und die Wirksamkeit von Kampagnen zu messen."
+      },
+      "preferences": {
+        "title": "Präferenz-Cookies",
+        "description": "Diese Cookies ermöglichen es, Ihre Auswahl und Präferenzen zu speichern, um Ihre Erfahrung zu personalisieren."
+      }
+    }
   }
 }

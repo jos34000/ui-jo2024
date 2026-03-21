@@ -541,5 +541,41 @@
     "E-billets sur mobile": "E-billets sur mobile",
     "Accès aux zones communes": "Accès aux zones communes",
     "Sac souvenir Paris 2024 offert": "Sac souvenir Paris 2024 offert"
+  },
+  "cookieBanner": {
+    "title": "Gestion des cookies",
+    "description": "Nous utilisons des cookies pour améliorer votre expérience sur notre site. Vous pouvez personnaliser vos préférences ou accepter tous les cookies.",
+    "showDetails": "Voir les détails",
+    "hideDetails": "Masquer les détails",
+    "acceptAll": "Accepter tout",
+    "rejectAll": "Refuser tout",
+    "customize": "Personnaliser",
+    "save": "Enregistrer",
+    "saveChoices": "Enregistrer mes choix",
+    "close": "Fermer",
+    "manage": "Gérer les cookies",
+    "required": "requis",
+    "dialog": {
+      "title": "Préférences de cookies",
+      "description": "Personnalisez vos préférences de cookies"
+    },
+    "categories": {
+      "necessary": {
+        "title": "Cookies nécessaires",
+        "description": "Ces cookies sont essentiels au fonctionnement du site. Ils permettent la navigation et l'utilisation des fonctionnalités de base."
+      },
+      "analytics": {
+        "title": "Cookies analytiques",
+        "description": "Ces cookies nous aident à comprendre comment les visiteurs interagissent avec le site en collectant des informations anonymes."
+      },
+      "marketing": {
+        "title": "Cookies marketing",
+        "description": "Ces cookies sont utilisés pour afficher des publicités pertinentes et mesurer l'efficacité des campagnes."
+      },
+      "preferences": {
+        "title": "Cookies de préférences",
+        "description": "Ces cookies permettent de mémoriser vos choix et préférences pour personnaliser votre expérience."
+      }
+    }
   }
 }
