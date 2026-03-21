@@ -61,6 +61,7 @@ export const AuthenticatedView = ({
   useEffect(() => {
     getUserTickets()
       .then(setGroups)
+      .catch(() => {})
       .finally(() => setTicketsLoaded(true))
   }, [getUserTickets])
 

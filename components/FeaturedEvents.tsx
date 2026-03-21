@@ -19,9 +19,18 @@ export function FeaturedEvents({ events }: Readonly<FeaturedEventsProps>) {
   const translateSport = useTranslateSport()
 
   const statusConfig = {
-    available: { label: t("status.available"), className: "bg-[#00A651] text-white" },
-    limited: { label: t("status.limited"), className: "bg-[#FCB131] text-black" },
-    soldout: { label: t("status.soldout"), className: "bg-[#EE334E] text-white" },
+    available: {
+      label: t("status.available"),
+      className: "bg-[#00A651] text-white",
+    },
+    limited: {
+      label: t("status.limited"),
+      className: "bg-[#FCB131] text-black",
+    },
+    soldout: {
+      label: t("status.soldout"),
+      className: "bg-[#EE334E] text-white",
+    },
   }
 
   return (
@@ -32,9 +41,7 @@ export function FeaturedEvents({ events }: Readonly<FeaturedEventsProps>) {
             <h2 className="text-3xl font-bold tracking-tight sm:text-4xl font-mono">
               {t("title")}
             </h2>
-            <p className="mt-2 text-muted-foreground">
-              {t("subtitle")}
-            </p>
+            <p className="mt-2 text-muted-foreground">{t("subtitle")}</p>
           </div>
           <Button variant="outline" className="w-fit bg-transparent" asChild>
             <Link href="/calendrier">

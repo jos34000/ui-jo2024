@@ -28,7 +28,7 @@ function formatPrice(amount: number): string {
   }).format(amount)
 }
 
-export const CartSidebar = () => {
+export const CartSidebar = ({ hideTrigger = false }: { hideTrigger?: boolean }) => {
   const router = useRouter()
   const t = useTranslations("cart")
   const isAuthenticated = useAuthStore(state => state.isAuthenticated)
@@ -62,17 +62,19 @@ export const CartSidebar = () => {
 
   return (
     <Sheet open={sidebarOpen} onOpenChange={handleOpenChange}>
-      <SheetTrigger asChild>
-        <Button variant="ghost" size="icon" className="relative">
-          <ShoppingCart className="h-5 w-5" />
-          {itemCount > 0 && (
-            <Badge className="absolute -top-1 -right-1 h-4 w-4 min-w-4 p-0 flex items-center justify-center text-[10px] font-bold rounded-full">
-              {itemCount > 9 ? "9+" : itemCount}
-            </Badge>
-          )}
-          <span className="sr-only">{t("title")}</span>
-        </Button>
-      </SheetTrigger>
+      {!hideTrigger && (
+        <SheetTrigger asChild>
+          <Button variant="ghost" size="icon" className="relative">
+            <ShoppingCart className="h-5 w-5" />
+            {itemCount > 0 && (
+              <Badge className="absolute -top-1 -right-1 h-4 w-4 min-w-4 p-0 flex items-center justify-center text-[10px] font-bold rounded-full">
+                {itemCount > 9 ? "9+" : itemCount}
+              </Badge>
+            )}
+            <span className="sr-only">{t("title")}</span>
+          </Button>
+        </SheetTrigger>
+      )}
 
       <SheetContent
         side="right"

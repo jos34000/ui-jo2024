@@ -33,7 +33,6 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet"
-import { CartSidebar } from "@/components/cart/CartSidebar"
 import { useCartStore } from "@/lib/stores/cart.store"
 import { useTranslations } from "next-intl"
 import { LanguageSwitcher } from "@/components/LanguageSwitcher"
@@ -68,6 +67,8 @@ export const Header = () => {
     ? `${user.firstName.charAt(0)}${user.lastName.charAt(0)}`.toUpperCase()
     : ""
 
+  const cartItemCount = useCartStore(state => state.cart?.items.length ?? 0)
+
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 py-3 sm:py-4 lg:px-8">
@@ -83,7 +84,15 @@ export const Header = () => {
         <div className="flex lg:hidden items-center gap-1">
           <LanguageSwitcher />
           <ThemeToggle />
-          <CartSidebar />
+          <Button variant="ghost" size="icon" className="relative" onClick={() => setSidebarOpen(true)}>
+            <ShoppingCart className="h-5 w-5" />
+            {cartItemCount > 0 && (
+              <span className="absolute -top-1 -right-1 h-4 w-4 min-w-4 p-0 flex items-center justify-center text-[10px] font-bold rounded-full bg-primary text-primary-foreground">
+                {cartItemCount > 9 ? "9+" : cartItemCount}
+              </span>
+            )}
+            <span className="sr-only">{t("myCart")}</span>
+          </Button>
           <Sheet>
             <SheetTrigger asChild>
               <Button variant="ghost" size="icon">
@@ -220,7 +229,15 @@ export const Header = () => {
         <div className="hidden lg:flex lg:flex-1 lg:justify-end lg:gap-x-4 lg:items-center">
           <LanguageSwitcher />
           <ThemeToggle />
-          <CartSidebar />
+          <Button variant="ghost" size="icon" className="relative" onClick={() => setSidebarOpen(true)}>
+            <ShoppingCart className="h-5 w-5" />
+            {cartItemCount > 0 && (
+              <span className="absolute -top-1 -right-1 h-4 w-4 min-w-4 p-0 flex items-center justify-center text-[10px] font-bold rounded-full bg-primary text-primary-foreground">
+                {cartItemCount > 9 ? "9+" : cartItemCount}
+              </span>
+            )}
+            <span className="sr-only">{t("myCart")}</span>
+          </Button>
 
           {isAuthenticated && user ? (
             <DropdownMenu>

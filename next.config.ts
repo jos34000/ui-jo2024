@@ -7,6 +7,7 @@ const nextConfig: NextConfig = {
   logging: {
     browserToTerminal: "warn",
   },
+  allowedDevOrigins: ["192.168.1.23"],
 }
 
 export default withNextIntl(nextConfig)
