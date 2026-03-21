@@ -3,7 +3,7 @@ import { PageLoader } from "@/components/Olympicloader"
 const Loading = () => {
   return (
     <PageLoader
-      variant="flame"
+      variant="torch"
       text="Chargement en cours..."
       subtext="Paris 2024"
     />
