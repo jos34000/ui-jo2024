@@ -2,231 +2,334 @@
 
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import {
-  ArrowLeft,
-  Calendar,
-  HelpCircle,
-  Home,
-  Search,
-  Ticket,
-  Trophy,
-} from "lucide-react"
+import { ArrowLeft, Calendar, Home, Trophy } from "lucide-react"
+import { cn } from "@/lib/utils"
 import React from "react"
-import { useTranslations } from "next-intl"
 
-type NotFoundType = "page" | "event" | "sport" | "ticket" | "custom"
+type NotFoundType = "page" | "event" | "sport" | "ticket"
 
 interface NotFoundContentProps {
   type?: NotFoundType
   title?: string
   description?: string
-  icon?: React.ReactNode
-  backLink?: {
-    href: string
-    label: string
-  }
-  suggestions?: {
-    href: string
-    label: string
-    icon?: React.ReactNode
-  }[]
 }
+
+const presets: Record<
+  NotFoundType,
+  {
+    title: string
+    description: string
+    backLink: { href: string; label: string }
+    suggestions: { href: string; label: string; icon: React.ReactNode }[]
+  }
+> = {
+  page: {
+    title: "Page introuvable",
+    description: "La page que vous recherchez n'existe pas ou a ete deplacee.",
+    backLink: { href: "/", label: "Retour a l'accueil" },
+    suggestions: [
+      {
+        href: "/calendrier",
+        label: "Calendrier",
+        icon: <Calendar className="h-3.5 w-3.5" />,
+      },
+      {
+        href: "/sports",
+        label: "Sports",
+        icon: <Trophy className="h-3.5 w-3.5" />,
+      },
+    ],
+  },
+  event: {
+    title: "Evenement introuvable",
+    description: "Cet evenement n'existe pas ou n'est plus disponible.",
+    backLink: { href: "/calendrier", label: "Voir le calendrier" },
+    suggestions: [
+      { href: "/", label: "Accueil", icon: <Home className="h-3.5 w-3.5" /> },
+      {
+        href: "/sports",
+        label: "Sports",
+        icon: <Trophy className="h-3.5 w-3.5" />,
+      },
+    ],
+  },
+  sport: {
+    title: "Sport introuvable",
+    description: "Ce sport ne fait pas partie du programme Paris 2024.",
+    backLink: { href: "/sports", label: "Voir les sports" },
+    suggestions: [
+      { href: "/", label: "Accueil", icon: <Home className="h-3.5 w-3.5" /> },
+      {
+        href: "/calendrier",
+        label: "Calendrier",
+        icon: <Calendar className="h-3.5 w-3.5" />,
+      },
+    ],
+  },
+  ticket: {
+    title: "Billet introuvable",
+    description: "Ce billet n'existe pas ou a ete annule.",
+    backLink: { href: "/panier", label: "Voir mon panier" },
+    suggestions: [
+      {
+        href: "/calendrier",
+        label: "Calendrier",
+        icon: <Calendar className="h-3.5 w-3.5" />,
+      },
+      { href: "/", label: "Accueil", icon: <Home className="h-3.5 w-3.5" /> },
+    ],
+  },
+}
+
+// 3D Olympic Rings with premium metallic effect
+const OlympicRings3D = () => (
+  <div className="relative">
+    {/* Glow layer */}
+    <div className="absolute inset-0 blur-2xl opacity-40">
+      <svg viewBox="0 0 280 140" className="w-full h-full">
+        <circle cx="70" cy="55" r="30" fill="#0081C8" />
+        <circle cx="120" cy="55" r="30" fill="#333" />
+        <circle cx="170" cy="55" r="30" fill="#EE334E" />
+        <circle cx="95" cy="90" r="30" fill="#FCB131" />
+        <circle cx="145" cy="90" r="30" fill="#00A651" />
+      </svg>
+    </div>
+
+    <svg
+      viewBox="0 0 280 140"
+      className="w-48 h-24 sm:w-56 sm:h-28 relative z-10"
+      style={{ filter: "drop-shadow(0 4px 12px rgba(0,0,0,0.15))" }}
+    >
+      <defs>
+        <linearGradient id="nf-blue" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#005A8C" />
+          <stop offset="50%" stopColor="#00B4F0" />
+          <stop offset="100%" stopColor="#005A8C" />
+        </linearGradient>
+        <linearGradient id="nf-black" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#1a1a1a" />
+          <stop offset="50%" stopColor="#4a4a4a" />
+          <stop offset="100%" stopColor="#1a1a1a" />
+        </linearGradient>
+        <linearGradient id="nf-red" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#B82438" />
+          <stop offset="50%" stopColor="#FF6B7A" />
+          <stop offset="100%" stopColor="#B82438" />
+        </linearGradient>
+        <linearGradient id="nf-yellow" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#C48A20" />
+          <stop offset="50%" stopColor="#FFD166" />
+          <stop offset="100%" stopColor="#C48A20" />
+        </linearGradient>
+        <linearGradient id="nf-green" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#007A3D" />
+          <stop offset="50%" stopColor="#00D96E" />
+          <stop offset="100%" stopColor="#007A3D" />
+        </linearGradient>
+        <filter id="nf-glow">
+          <feGaussianBlur stdDeviation="1.5" result="blur" />
+          <feMerge>
+            <feMergeNode in="blur" />
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
+        </filter>
+      </defs>
+
+      {/* Bottom row */}
+      <g filter="url(#nf-glow)">
+        <circle
+          cx="95"
+          cy="90"
+          r="32"
+          fill="none"
+          stroke="url(#nf-yellow)"
+          strokeWidth="6"
+          className="animate-[ringPulse_3s_ease-in-out_infinite]"
+          style={{ animationDelay: "0.6s" }}
+        />
+        <circle
+          cx="145"
+          cy="90"
+          r="32"
+          fill="none"
+          stroke="url(#nf-green)"
+          strokeWidth="6"
+          className="animate-[ringPulse_3s_ease-in-out_infinite]"
+          style={{ animationDelay: "0.8s" }}
+        />
+      </g>
+
+      {/* Top row */}
+      <g filter="url(#nf-glow)">
+        <circle
+          cx="70"
+          cy="55"
+          r="32"
+          fill="none"
+          stroke="url(#nf-blue)"
+          strokeWidth="6"
+          className="animate-[ringPulse_3s_ease-in-out_infinite]"
+          style={{ animationDelay: "0s" }}
+        />
+        <circle
+          cx="120"
+          cy="55"
+          r="32"
+          fill="none"
+          stroke="url(#nf-black)"
+          strokeWidth="6"
+          className="animate-[ringPulse_3s_ease-in-out_infinite]"
+          style={{ animationDelay: "0.2s" }}
+        />
+        <circle
+          cx="170"
+          cy="55"
+          r="32"
+          fill="none"
+          stroke="url(#nf-red)"
+          strokeWidth="6"
+          className="animate-[ringPulse_3s_ease-in-out_infinite]"
+          style={{ animationDelay: "0.4s" }}
+        />
+      </g>
+    </svg>
+  </div>
+)
 
 export const NotFoundContent = ({
   type = "page",
   title,
   description,
-  icon,
-  backLink,
-  suggestions,
 }: NotFoundContentProps) => {
-  const t = useTranslations("notFound")
-
-  const presets: Record<
-    Exclude<NotFoundType, "custom">,
-    {
-      title: string
-      description: string
-      icon: React.ReactNode
-      backLink: { href: string; label: string }
-      suggestions: { href: string; label: string; icon: React.ReactNode }[]
-    }
-  > = {
-    page: {
-      title: t("title"),
-      description: t("pageDescription"),
-      icon: <Search className="h-8 w-8" />,
-      backLink: { href: "/", label: t("backHome") },
-      suggestions: [
-        {
-          href: "/calendrier",
-          label: t("calendar"),
-          icon: <Calendar className="h-4 w-4" />,
-        },
-        {
-          href: "/#sports",
-          label: t("sports"),
-          icon: <Trophy className="h-4 w-4" />,
-        },
-        {
-          href: "/#faq",
-          label: t("faq"),
-          icon: <HelpCircle className="h-4 w-4" />,
-        },
-      ],
-    },
-    event: {
-      title: t("eventNotFound"),
-      description: t("eventDescription"),
-      icon: <Ticket className="h-8 w-8" />,
-      backLink: { href: "/calendrier", label: t("backToCalendar") },
-      suggestions: [
-        {
-          href: "/calendrier",
-          label: t("calendar"),
-          icon: <Calendar className="h-4 w-4" />,
-        },
-        {
-          href: "/#sports",
-          label: t("sports"),
-          icon: <Trophy className="h-4 w-4" />,
-        },
-        { href: "/", label: t("home"), icon: <Home className="h-4 w-4" /> },
-      ],
-    },
-    sport: {
-      title: t("sportNotFound"),
-      description: t("sportDescription"),
-      icon: <Trophy className="h-8 w-8" />,
-      backLink: { href: "/#sports", label: t("viewSports") },
-      suggestions: [
-        {
-          href: "/#sports",
-          label: t("sports"),
-          icon: <Trophy className="h-4 w-4" />,
-        },
-        {
-          href: "/calendrier",
-          label: t("calendar"),
-          icon: <Calendar className="h-4 w-4" />,
-        },
-        { href: "/", label: t("home"), icon: <Home className="h-4 w-4" /> },
-      ],
-    },
-    ticket: {
-      title: t("ticketNotFound"),
-      description: t("ticketDescription"),
-      icon: <Ticket className="h-8 w-8" />,
-      backLink: { href: "/auth", label: t("myAccount") },
-      suggestions: [
-        {
-          href: "/calendrier",
-          label: t("tickets"),
-          icon: <Ticket className="h-4 w-4" />,
-        },
-        {
-          href: "/#faq",
-          label: t("faq"),
-          icon: <HelpCircle className="h-4 w-4" />,
-        },
-        { href: "/", label: t("home"), icon: <Home className="h-4 w-4" /> },
-      ],
-    },
-  }
-
-  const preset = type === "custom" ? null : presets[type]
-
-  const displayTitle = title ?? preset?.title ?? t("title")
-  const displayDescription = description ?? preset?.description ?? t("subtitle")
-  const displayIcon = icon ?? preset?.icon ?? <Search className="h-8 w-8" />
-  const displayBackLink = backLink ??
-    preset?.backLink ?? { href: "/", label: t("backHome") }
-  const displaySuggestions = suggestions ?? preset?.suggestions ?? []
+  const preset = presets[type]
+  const displayTitle = title ?? preset.title
+  const displayDescription = description ?? preset.description
 
   return (
-    <div className="relative flex flex-col items-center justify-center text-center px-4 py-12 sm:py-20 overflow-hidden">
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-10 left-10 w-32 h-32 rounded-full bg-[#0081C8]/10 blur-3xl animate-pulse" />
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-background">
+      {/* Animated background - identical to loader */}
+      <div className="absolute inset-0 overflow-hidden">
+        {/* Olympic colored orbs */}
+        <div className="absolute top-1/4 left-[15%] w-96 h-96 rounded-full bg-[#0081C8]/10 blur-3xl animate-[float_8s_ease-in-out_infinite]" />
         <div
-          className="absolute top-20 right-20 w-40 h-40 rounded-full bg-[#EE334E]/10 blur-3xl animate-pulse"
-          style={{ animationDelay: "1s" }}
+          className="absolute top-1/2 right-[15%] w-80 h-80 rounded-full bg-[#EE334E]/10 blur-3xl animate-[float_8s_ease-in-out_infinite]"
+          style={{ animationDelay: "-2s" }}
         />
         <div
-          className="absolute bottom-20 left-1/4 w-36 h-36 rounded-full bg-[#FCB131]/10 blur-3xl animate-pulse"
-          style={{ animationDelay: "2s" }}
+          className="absolute bottom-1/4 left-1/3 w-72 h-72 rounded-full bg-[#FCB131]/10 blur-3xl animate-[float_8s_ease-in-out_infinite]"
+          style={{ animationDelay: "-4s" }}
         />
         <div
-          className="absolute bottom-10 right-1/3 w-28 h-28 rounded-full bg-[#00A651]/10 blur-3xl animate-pulse"
-          style={{ animationDelay: "0.5s" }}
+          className="absolute bottom-1/3 right-1/3 w-64 h-64 rounded-full bg-[#00A651]/10 blur-3xl animate-[float_8s_ease-in-out_infinite]"
+          style={{ animationDelay: "-6s" }}
+        />
+
+        {/* Grid pattern */}
+        <div
+          className="absolute inset-0 opacity-[0.015] dark:opacity-[0.03]"
+          style={{
+            backgroundImage: `linear-gradient(to right, currentColor 1px, transparent 1px), linear-gradient(to bottom, currentColor 1px, transparent 1px)`,
+            backgroundSize: "60px 60px",
+          }}
         />
       </div>
 
-      <div className="relative z-10 w-full max-w-md">
-        <div className="relative backdrop-blur-xl bg-card/60 dark:bg-card/40 border border-white/20 dark:border-white/10 rounded-3xl p-8 sm:p-10 shadow-2xl">
-          <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-white/20 via-transparent to-transparent pointer-events-none" />
+      {/* Glassy card - identical style to loader */}
+      <div
+        className={cn(
+          "relative z-10 mx-4 w-full max-w-md",
+          "backdrop-blur-xl bg-card/60 dark:bg-card/40",
+          "rounded-2xl border border-white/10 dark:border-white/5",
+          "shadow-2xl",
+          "p-8 sm:p-10",
+        )}
+      >
+        {/* Card shine effect */}
+        <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-white/10 via-transparent to-transparent pointer-events-none" />
+        <div className="absolute top-0 left-4 right-4 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
 
-          <div className="relative z-10">
-            <div className="flex justify-center mb-6">
-              <div className="relative">
-                <div className="absolute inset-0 bg-primary/30 rounded-2xl blur-xl" />
-                <div className="relative flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-primary to-primary/80 text-primary-foreground shadow-lg transform hover:scale-105 transition-transform">
-                  {displayIcon}
-                </div>
-              </div>
-            </div>
+        {/* Content */}
+        <div className="relative flex flex-col items-center text-center">
+          {/* Olympic Rings */}
+          <div className="mb-6">
+            <OlympicRings3D />
+          </div>
 
-            <div className="relative mb-4">
-              <span className="absolute inset-0 text-7xl sm:text-8xl font-bold font-mono text-primary/5 transform translate-x-1 translate-y-1">
-                404
-              </span>
-              <span className="relative text-7xl sm:text-8xl font-bold font-mono bg-gradient-to-br from-primary via-primary/80 to-primary/60 bg-clip-text text-transparent">
-                404
-              </span>
-            </div>
-
-            <h1 className="text-xl sm:text-2xl font-bold tracking-tight font-mono mb-2 text-foreground">
-              {displayTitle}
-            </h1>
-
-            <p className="text-sm text-muted-foreground mb-8 leading-relaxed">
-              {displayDescription}
-            </p>
-
-            <Button
-              asChild
-              size="lg"
-              className="w-full mb-4 shadow-lg hover:shadow-xl transition-shadow"
+          {/* 404 with 3D effect */}
+          <div className="relative mb-6">
+            {/* Shadow layers for 3D depth */}
+            <span
+              className="absolute inset-0 flex justify-center font-mono text-7xl sm:text-8xl font-black text-foreground/5 select-none"
+              style={{ transform: "translate(3px, 3px)" }}
+              aria-hidden="true"
             >
-              <Link href={displayBackLink.href}>
-                <ArrowLeft className="mr-2 h-4 w-4" />
-                {displayBackLink.label}
-              </Link>
-            </Button>
+              404
+            </span>
+            <span
+              className="absolute inset-0 flex justify-center font-mono text-7xl sm:text-8xl font-black text-foreground/10 select-none"
+              style={{ transform: "translate(1.5px, 1.5px)" }}
+              aria-hidden="true"
+            >
+              404
+            </span>
+            {/* Main 404 with gradient */}
+            <span className="relative font-mono text-7xl sm:text-8xl font-black bg-gradient-to-b from-foreground via-foreground/80 to-foreground/60 bg-clip-text text-transparent">
+              404
+            </span>
+          </div>
 
-            {displaySuggestions.length > 0 && (
-              <div className="pt-4 border-t border-border/50">
-                <p className="text-xs text-muted-foreground mb-3 uppercase tracking-wider font-mono">
-                  {t("explore")}
-                </p>
-                <div className="flex flex-wrap justify-center gap-2">
-                  {displaySuggestions.map(suggestion => (
-                    <Link
-                      key={suggestion.href}
-                      href={suggestion.href}
-                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium bg-secondary/50 hover:bg-secondary text-secondary-foreground border border-border/50 hover:border-primary/30 transition-all hover:scale-105"
-                    >
-                      {suggestion.icon}
-                      {suggestion.label}
-                    </Link>
-                  ))}
-                </div>
-              </div>
-            )}
+          {/* Title */}
+          <h1 className="text-lg sm:text-xl font-bold font-mono text-foreground mb-2">
+            {displayTitle}
+          </h1>
+
+          {/* Description */}
+          <p className="text-sm text-muted-foreground mb-8 max-w-xs">
+            {displayDescription}
+          </p>
+
+          {/* Primary CTA */}
+          <Button asChild size="lg" className="w-full mb-6 shadow-lg">
+            <Link href={preset.backLink.href}>
+              <ArrowLeft className="mr-2 h-4 w-4" />
+              {preset.backLink.label}
+            </Link>
+          </Button>
+
+          {/* Suggestions */}
+          <div className="flex items-center gap-2 text-xs text-muted-foreground">
+            <span>Ou explorez</span>
+            <span className="text-border">|</span>
+            {preset.suggestions.map(suggestion => (
+              <Link
+                key={suggestion.href}
+                href={suggestion.href}
+                className={cn(
+                  "inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full",
+                  "bg-white/5 hover:bg-white/10 dark:bg-white/5 dark:hover:bg-white/10",
+                  "border border-white/10 hover:border-primary/30",
+                  "transition-all hover:scale-105",
+                )}
+              >
+                {suggestion.icon}
+                {suggestion.label}
+              </Link>
+            ))}
           </div>
         </div>
 
-        <div className="absolute -inset-4 bg-gradient-to-r from-[#0081C8]/20 via-[#FCB131]/20 to-[#EE334E]/20 rounded-3xl blur-2xl opacity-50 -z-10" />
+        {/* Bottom gradient */}
+        <div className="absolute bottom-0 left-0 right-0 h-24 rounded-b-2xl bg-gradient-to-t from-primary/5 to-transparent pointer-events-none" />
+      </div>
+
+      {/* Bottom branding */}
+      <div className="absolute bottom-8 left-0 right-0 text-center">
+        <span className="text-xs font-mono text-muted-foreground/40 tracking-widest">
+          PARIS 2024
+        </span>
       </div>
     </div>
   )
 }
+
+export default NotFoundContent
