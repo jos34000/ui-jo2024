@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button"
 import { ArrowLeft, Calendar, Home, Trophy } from "lucide-react"
 import { cn } from "@/lib/utils"
 import React from "react"
+import { useTranslations } from "next-intl"
 
 type NotFoundType = "page" | "event" | "sport" | "ticket"
 
@@ -12,73 +13,6 @@ interface NotFoundContentProps {
   type?: NotFoundType
   title?: string
   description?: string
-}
-
-const presets: Record<
-  NotFoundType,
-  {
-    title: string
-    description: string
-    backLink: { href: string; label: string }
-    suggestions: { href: string; label: string; icon: React.ReactNode }[]
-  }
-> = {
-  page: {
-    title: "Page introuvable",
-    description: "La page que vous recherchez n'existe pas ou a ete deplacee.",
-    backLink: { href: "/", label: "Retour a l'accueil" },
-    suggestions: [
-      {
-        href: "/calendrier",
-        label: "Calendrier",
-        icon: <Calendar className="h-3.5 w-3.5" />,
-      },
-      {
-        href: "/sports",
-        label: "Sports",
-        icon: <Trophy className="h-3.5 w-3.5" />,
-      },
-    ],
-  },
-  event: {
-    title: "Evenement introuvable",
-    description: "Cet evenement n'existe pas ou n'est plus disponible.",
-    backLink: { href: "/calendrier", label: "Voir le calendrier" },
-    suggestions: [
-      { href: "/", label: "Accueil", icon: <Home className="h-3.5 w-3.5" /> },
-      {
-        href: "/sports",
-        label: "Sports",
-        icon: <Trophy className="h-3.5 w-3.5" />,
-      },
-    ],
-  },
-  sport: {
-    title: "Sport introuvable",
-    description: "Ce sport ne fait pas partie du programme Paris 2024.",
-    backLink: { href: "/sports", label: "Voir les sports" },
-    suggestions: [
-      { href: "/", label: "Accueil", icon: <Home className="h-3.5 w-3.5" /> },
-      {
-        href: "/calendrier",
-        label: "Calendrier",
-        icon: <Calendar className="h-3.5 w-3.5" />,
-      },
-    ],
-  },
-  ticket: {
-    title: "Billet introuvable",
-    description: "Ce billet n'existe pas ou a ete annule.",
-    backLink: { href: "/panier", label: "Voir mon panier" },
-    suggestions: [
-      {
-        href: "/calendrier",
-        label: "Calendrier",
-        icon: <Calendar className="h-3.5 w-3.5" />,
-      },
-      { href: "/", label: "Accueil", icon: <Home className="h-3.5 w-3.5" /> },
-    ],
-  },
 }
 
 // 3D Olympic Rings with premium metallic effect
@@ -201,6 +135,55 @@ export const NotFoundContent = ({
   title,
   description,
 }: NotFoundContentProps) => {
+  const t = useTranslations("notFound")
+
+  const presets: Record<
+    NotFoundType,
+    {
+      title: string
+      description: string
+      backLink: { href: string; label: string }
+      suggestions: { href: string; label: string; icon: React.ReactNode }[]
+    }
+  > = {
+    page: {
+      title: t("title"),
+      description: t("pageDescription"),
+      backLink: { href: "/", label: t("backHome") },
+      suggestions: [
+        { href: "/calendrier", label: t("calendar"), icon: <Calendar className="h-3.5 w-3.5" /> },
+        { href: "/sports", label: t("sports"), icon: <Trophy className="h-3.5 w-3.5" /> },
+      ],
+    },
+    event: {
+      title: t("eventNotFound"),
+      description: t("eventDescription"),
+      backLink: { href: "/calendrier", label: t("viewCalendar") },
+      suggestions: [
+        { href: "/", label: t("home"), icon: <Home className="h-3.5 w-3.5" /> },
+        { href: "/sports", label: t("sports"), icon: <Trophy className="h-3.5 w-3.5" /> },
+      ],
+    },
+    sport: {
+      title: t("sportNotFound"),
+      description: t("sportDescription"),
+      backLink: { href: "/sports", label: t("viewSports") },
+      suggestions: [
+        { href: "/", label: t("home"), icon: <Home className="h-3.5 w-3.5" /> },
+        { href: "/calendrier", label: t("calendar"), icon: <Calendar className="h-3.5 w-3.5" /> },
+      ],
+    },
+    ticket: {
+      title: t("ticketNotFound"),
+      description: t("ticketDescription"),
+      backLink: { href: "/panier", label: t("viewCart") },
+      suggestions: [
+        { href: "/calendrier", label: t("calendar"), icon: <Calendar className="h-3.5 w-3.5" /> },
+        { href: "/", label: t("home"), icon: <Home className="h-3.5 w-3.5" /> },
+      ],
+    },
+  }
+
   const preset = presets[type]
   const displayTitle = title ?? preset.title
   const displayDescription = description ?? preset.description
@@ -298,7 +281,7 @@ export const NotFoundContent = ({
 
           {/* Suggestions */}
           <div className="flex items-center gap-2 text-xs text-muted-foreground">
-            <span>Ou explorez</span>
+            <span>{t("explore")}</span>
             <span className="text-border">|</span>
             {preset.suggestions.map(suggestion => (
               <Link

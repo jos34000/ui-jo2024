@@ -11,6 +11,7 @@ import {
 import { Eye, EyeOff, Lock } from "lucide-react"
 import { ResetPasswordDialog } from "@/components/ResetPasswordDialog"
 import { Button } from "@/components/ui/button"
+import { useTranslations } from "next-intl"
 
 interface PasswordFieldProps extends ComponentProps<typeof Input> {
   label: string
@@ -25,6 +26,7 @@ export const PasswordField = ({
   placeholder,
   ...inputProps
 }: Readonly<PasswordFieldProps>) => {
+  const t = useTranslations("common")
   const field = useFieldContext<string>()
   const error = field.state.meta.errors[0]?.message
   const [showPassword, setShowPassword] = useState(false)
@@ -42,7 +44,7 @@ export const PasswordField = ({
                 className="h-auto p-0 text-sm"
                 type="button"
               >
-                Mot de passe oublié ?
+                {t("forgotPassword")}
               </Button>
             }
           />
@@ -63,8 +65,7 @@ export const PasswordField = ({
         </InputGroupAddon>
         <InputGroupAddon align="inline-end">
           <InputGroupButton
-            aria-label="Show password"
-            title="show"
+            aria-label={t("showPassword")}
             size="icon-xs"
             onClick={() => setShowPassword(!showPassword)}
           >

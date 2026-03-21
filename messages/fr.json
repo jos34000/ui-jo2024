@@ -6,7 +6,9 @@
     "cancel": "Annuler",
     "save": "Enregistrer",
     "back": "Retour",
-    "backHome": "Retour à l'accueil"
+    "backHome": "Retour à l'accueil",
+    "forgotPassword": "Mot de passe oublié ?",
+    "showPassword": "Afficher le mot de passe"
   },
   "header": {
     "nav": {
@@ -22,7 +24,9 @@
     "account": "Compte",
     "openMenu": "Ouvrir le menu",
     "closeMenu": "Fermer",
-    "logoutSuccess": "Vous êtes maintenant déconnecté."
+    "logoutSuccess": "Vous êtes maintenant déconnecté.",
+    "mainMenuLabel": "Menu principal",
+    "userMenuLabel": "Menu utilisateur"
   },
   "footer": {
     "description": "Billetterie officielle des Jeux Olympiques et Paralympiques de Paris 2024.",
@@ -157,6 +161,8 @@
     "accountSubtitle": "Créez votre compte pour accéder à la billetterie officielle des Jeux Olympiques et Paralympiques de Paris 2024.",
     "moreThan10M": "Plus de 10 millions de billets disponibles pour les Jeux Olympiques et Paralympiques de Paris 2024.",
     "backHome": "Retour à l'accueil",
+    "noAccount": "Pas encore de compte ?",
+    "alreadyAccount": "Déjà un compte ?",
     "features": {
       "priority": {
         "title": "Accès prioritaire",
@@ -248,7 +254,18 @@
       "VALID": "Actif",
       "USED": "Utilisé",
       "CANCELLED": "Annulé"
-    }
+    },
+    "identity": "Identité",
+    "contact": "Contact",
+    "security": "Sécurité",
+    "firstName": "Prénom",
+    "lastName": "Nom",
+    "emailLabel": "Email",
+    "firstNamePlaceholder": "Votre prénom",
+    "lastNamePlaceholder": "Votre nom",
+    "emailPlaceholder": "votre@email.com",
+    "save": "Modifier",
+    "updateError": "Erreur lors de la mise à jour du profil"
   },
   "tickets": {
     "title": "Mes billets",
@@ -352,7 +369,12 @@
     "allCategories": "Toutes catégories",
     "noEventsFound": "Aucun évènement",
     "noEventsForDay": "Pas d'évènement programmé pour cette journée.",
-    "noEventsForFilter": "Aucun évènement pour ce sport à cette date. Essayez un autre filtre ou changez de jour."
+    "noEventsForFilter": "Aucun évènement pour ce sport à cette date. Essayez un autre filtre ou changez de jour.",
+    "july": "Juillet",
+    "august": "Août",
+    "scrollLeft": "Défiler à gauche",
+    "scrollRight": "Défiler à droite",
+    "viewEventsOf": "Voir les évènements du {date}"
   },
   "notFound": {
     "title": "Page introuvable",
@@ -378,7 +400,8 @@
     "myAccount": "Mon compte",
     "tickets": "Billets",
     "backToCalendar": "Retour au calendrier",
-    "faq": "FAQ"
+    "faq": "FAQ",
+    "viewCart": "Voir mon panier"
   },
   "resetPassword": {
     "title": "Réinitialisation du mot de passe",
@@ -482,6 +505,31 @@
     "Solo": "Parfait pour vivre votre passion en toute liberté.",
     "Duo": "Partagez des moments uniques à deux, côte à côte.",
     "Famille": "Vivez les Jeux en famille avec des places regroupées."
+  },
+  "changePassword": {
+    "forgotTitle": "Réinitialiser le mot de passe",
+    "changeTitle": "Changer le mot de passe",
+    "forgotDescription": "Entrez votre adresse email pour recevoir un lien de réinitialisation.",
+    "changeDescription": "Entrez votre mot de passe actuel puis choisissez un nouveau mot de passe.",
+    "emailLabel": "Adresse email",
+    "emailPlaceholder": "votre@email.com",
+    "sendLink": "Envoyer le lien",
+    "currentPassword": "Mot de passe actuel",
+    "currentPasswordPlaceholder": "Votre mot de passe actuel",
+    "newPassword": "Nouveau mot de passe",
+    "newPasswordPlaceholder": "Nouveau mot de passe",
+    "confirmPassword": "Confirmez le mot de passe",
+    "confirmPasswordPlaceholder": "Confirmation",
+    "submit": "Modifier le mot de passe",
+    "forgotTrigger": "Mot de passe oublié ?",
+    "emailSentTitle": "Email envoyé",
+    "emailSentDescription": "Si un compte existe avec cette adresse, vous recevrez un email avec les instructions pour réinitialiser votre mot de passe.",
+    "successTitle": "Mot de passe modifié",
+    "successDescription": "Votre mot de passe a été modifié avec succès. Vous pouvez maintenant utiliser votre nouveau mot de passe pour vous connecter.",
+    "close": "Fermer",
+    "genericError": "Une erreur est survenue",
+    "requestSent": "Si un compte est lié à cet email, un lien a été envoyé.",
+    "changeSuccess": "Modification réussie"
   },
   "offerFeatures": {
     "Accès a tous les évènements": "Accès à tous les évènements",

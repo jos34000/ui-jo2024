@@ -6,7 +6,9 @@
     "cancel": "Cancelar",
     "save": "Guardar",
     "back": "Volver",
-    "backHome": "Volver al inicio"
+    "backHome": "Volver al inicio",
+    "forgotPassword": "¿Olvidó su contraseña?",
+    "showPassword": "Mostrar contraseña"
   },
   "header": {
     "nav": {
@@ -22,7 +24,9 @@
     "account": "Cuenta",
     "openMenu": "Abrir menú",
     "closeMenu": "Cerrar",
-    "logoutSuccess": "Ha cerrado sesión correctamente."
+    "logoutSuccess": "Ha cerrado sesión correctamente.",
+    "mainMenuLabel": "Menú principal",
+    "userMenuLabel": "Menú de usuario"
   },
   "footer": {
     "description": "Plataforma oficial de venta de entradas para los Juegos Olímpicos y Paralímpicos de París 2024.",
@@ -157,6 +161,8 @@
     "accountSubtitle": "Cree su cuenta para acceder a la plataforma oficial de venta de entradas de los Juegos Olímpicos y Paralímpicos de París 2024.",
     "moreThan10M": "Más de 10 millones de entradas disponibles para los Juegos Olímpicos y Paralímpicos de París 2024.",
     "backHome": "Volver al inicio",
+    "noAccount": "¿Aún no tiene cuenta?",
+    "alreadyAccount": "¿Ya tiene una cuenta?",
     "features": {
       "priority": {
         "title": "Acceso prioritario",
@@ -248,7 +254,18 @@
       "VALID": "Activa",
       "USED": "Usada",
       "CANCELLED": "Cancelada"
-    }
+    },
+    "identity": "Identidad",
+    "contact": "Contacto",
+    "security": "Seguridad",
+    "firstName": "Nombre",
+    "lastName": "Apellidos",
+    "emailLabel": "Correo electrónico",
+    "firstNamePlaceholder": "Su nombre",
+    "lastNamePlaceholder": "Sus apellidos",
+    "emailPlaceholder": "su@email.com",
+    "save": "Editar",
+    "updateError": "Error al actualizar el perfil"
   },
   "tickets": {
     "title": "Mis entradas",
@@ -352,7 +369,12 @@
     "allCategories": "Todas las categorías",
     "noEventsFound": "Sin eventos",
     "noEventsForDay": "No hay eventos programados para este día.",
-    "noEventsForFilter": "No hay eventos para este deporte en esta fecha. Pruebe otro filtro."
+    "noEventsForFilter": "No hay eventos para este deporte en esta fecha. Pruebe otro filtro.",
+    "july": "Julio",
+    "august": "Agosto",
+    "scrollLeft": "Desplazar a la izquierda",
+    "scrollRight": "Desplazar a la derecha",
+    "viewEventsOf": "Ver eventos del {date}"
   },
   "notFound": {
     "title": "Página no encontrada",
@@ -378,7 +400,8 @@
     "myAccount": "Mi cuenta",
     "tickets": "Entradas",
     "backToCalendar": "Volver al calendario",
-    "faq": "FAQ"
+    "faq": "FAQ",
+    "viewCart": "Ver mi carrito"
   },
   "resetPassword": {
     "title": "Restablecer contraseña",
@@ -482,6 +505,31 @@
     "Solo": "Perfecto para vivir tu pasión con total libertad.",
     "Duo": "Comparte momentos únicos de dos, lado a lado.",
     "Famille": "Vive los Juegos en familia con asientos agrupados."
+  },
+  "changePassword": {
+    "forgotTitle": "Restablecer contraseña",
+    "changeTitle": "Cambiar contraseña",
+    "forgotDescription": "Introduzca su dirección de correo electrónico para recibir un enlace de restablecimiento.",
+    "changeDescription": "Introduzca su contraseña actual y elija una nueva.",
+    "emailLabel": "Dirección de correo electrónico",
+    "emailPlaceholder": "su@email.com",
+    "sendLink": "Enviar enlace",
+    "currentPassword": "Contraseña actual",
+    "currentPasswordPlaceholder": "Su contraseña actual",
+    "newPassword": "Nueva contraseña",
+    "newPasswordPlaceholder": "Nueva contraseña",
+    "confirmPassword": "Confirmar contraseña",
+    "confirmPasswordPlaceholder": "Confirmación",
+    "submit": "Cambiar contraseña",
+    "forgotTrigger": "¿Olvidó su contraseña?",
+    "emailSentTitle": "Correo enviado",
+    "emailSentDescription": "Si existe una cuenta con esta dirección, recibirá un correo con instrucciones para restablecer su contraseña.",
+    "successTitle": "Contraseña actualizada",
+    "successDescription": "Su contraseña ha sido actualizada correctamente. Ahora puede usar su nueva contraseña para iniciar sesión.",
+    "close": "Cerrar",
+    "genericError": "Se ha producido un error",
+    "requestSent": "Si una cuenta está vinculada a este correo, se ha enviado un enlace.",
+    "changeSuccess": "Actualización exitosa"
   },
   "offerFeatures": {
     "Accès a tous les évènements": "Acceso a todos los eventos",

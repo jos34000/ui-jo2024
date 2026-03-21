@@ -6,7 +6,9 @@
     "cancel": "Abbrechen",
     "save": "Speichern",
     "back": "Zurück",
-    "backHome": "Zurück zur Startseite"
+    "backHome": "Zurück zur Startseite",
+    "forgotPassword": "Passwort vergessen?",
+    "showPassword": "Passwort anzeigen"
   },
   "header": {
     "nav": {
@@ -22,7 +24,9 @@
     "account": "Konto",
     "openMenu": "Menü öffnen",
     "closeMenu": "Schließen",
-    "logoutSuccess": "Sie sind jetzt abgemeldet."
+    "logoutSuccess": "Sie sind jetzt abgemeldet.",
+    "mainMenuLabel": "Hauptmenü",
+    "userMenuLabel": "Benutzermenü"
   },
   "footer": {
     "description": "Offizielle Ticketplattform der Olympischen und Paralympischen Spiele Paris 2024.",
@@ -157,6 +161,8 @@
     "accountSubtitle": "Erstellen Sie Ihr Konto für den Zugang zur offiziellen Ticketplattform der Olympischen und Paralympischen Spiele Paris 2024.",
     "moreThan10M": "Mehr als 10 Millionen Tickets für die Olympischen und Paralympischen Spiele Paris 2024 verfügbar.",
     "backHome": "Zurück zur Startseite",
+    "noAccount": "Noch kein Konto?",
+    "alreadyAccount": "Bereits ein Konto?",
     "features": {
       "priority": {
         "title": "Vorrangiger Zugang",
@@ -248,7 +254,18 @@
       "VALID": "Aktiv",
       "USED": "Verwendet",
       "CANCELLED": "Storniert"
-    }
+    },
+    "identity": "Identität",
+    "contact": "Kontakt",
+    "security": "Sicherheit",
+    "firstName": "Vorname",
+    "lastName": "Nachname",
+    "emailLabel": "E-Mail",
+    "firstNamePlaceholder": "Ihr Vorname",
+    "lastNamePlaceholder": "Ihr Nachname",
+    "emailPlaceholder": "ihre@email.com",
+    "save": "Bearbeiten",
+    "updateError": "Fehler beim Aktualisieren des Profils"
   },
   "tickets": {
     "title": "Meine Tickets",
@@ -352,7 +369,12 @@
     "allCategories": "Alle Kategorien",
     "noEventsFound": "Keine Veranstaltungen",
     "noEventsForDay": "Für diesen Tag sind keine Veranstaltungen geplant.",
-    "noEventsForFilter": "Keine Veranstaltungen für diese Sportart an diesem Tag. Versuchen Sie einen anderen Filter."
+    "noEventsForFilter": "Keine Veranstaltungen für diese Sportart an diesem Tag. Versuchen Sie einen anderen Filter.",
+    "july": "Juli",
+    "august": "August",
+    "scrollLeft": "Nach links scrollen",
+    "scrollRight": "Nach rechts scrollen",
+    "viewEventsOf": "Veranstaltungen vom {date} anzeigen"
   },
   "notFound": {
     "title": "Seite nicht gefunden",
@@ -378,7 +400,8 @@
     "myAccount": "Mein Konto",
     "tickets": "Tickets",
     "backToCalendar": "Zurück zum Kalender",
-    "faq": "FAQ"
+    "faq": "FAQ",
+    "viewCart": "Warenkorb anzeigen"
   },
   "resetPassword": {
     "title": "Passwort zurücksetzen",
@@ -482,6 +505,31 @@
     "Solo": "Perfekt, um Ihre Leidenschaft in völliger Freiheit zu erleben.",
     "Duo": "Teilen Sie einzigartige Momente zu zweit, Seite an Seite.",
     "Famille": "Erleben Sie die Spiele mit der Familie auf benachbarten Plätzen."
+  },
+  "changePassword": {
+    "forgotTitle": "Passwort zurücksetzen",
+    "changeTitle": "Passwort ändern",
+    "forgotDescription": "Geben Sie Ihre E-Mail-Adresse ein, um einen Reset-Link zu erhalten.",
+    "changeDescription": "Geben Sie Ihr aktuelles Passwort ein und wählen Sie ein neues.",
+    "emailLabel": "E-Mail-Adresse",
+    "emailPlaceholder": "ihre@email.com",
+    "sendLink": "Link senden",
+    "currentPassword": "Aktuelles Passwort",
+    "currentPasswordPlaceholder": "Ihr aktuelles Passwort",
+    "newPassword": "Neues Passwort",
+    "newPasswordPlaceholder": "Neues Passwort",
+    "confirmPassword": "Passwort bestätigen",
+    "confirmPasswordPlaceholder": "Bestätigung",
+    "submit": "Passwort ändern",
+    "forgotTrigger": "Passwort vergessen?",
+    "emailSentTitle": "E-Mail gesendet",
+    "emailSentDescription": "Wenn ein Konto mit dieser Adresse existiert, erhalten Sie eine E-Mail mit Anweisungen zum Zurücksetzen Ihres Passworts.",
+    "successTitle": "Passwort aktualisiert",
+    "successDescription": "Ihr Passwort wurde erfolgreich aktualisiert. Sie können sich jetzt mit Ihrem neuen Passwort anmelden.",
+    "close": "Schließen",
+    "genericError": "Ein Fehler ist aufgetreten",
+    "requestSent": "Wenn ein Konto mit dieser E-Mail verknüpft ist, wurde ein Link gesendet.",
+    "changeSuccess": "Aktualisierung erfolgreich"
   },
   "offerFeatures": {
     "Accès a tous les évènements": "Zugang zu allen Veranstaltungen",

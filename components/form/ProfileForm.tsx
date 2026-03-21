@@ -9,6 +9,7 @@ import { useAppForm } from "@/lib/hooks/useAppForm"
 import { Button } from "@/components/ui/button"
 import { apiClient, parseApiError } from "@/lib/utils/apiClient"
 import { toast } from "sonner"
+import { useTranslations } from "next-intl"
 
 type ProfileFormValues = z.infer<typeof profileSchema>
 
@@ -23,6 +24,8 @@ export const ProfileForm = ({
   onCancel,
   onSuccess,
 }: ProfileFormProps) => {
+  const t = useTranslations("profile")
+  const tCommon = useTranslations("common")
   const updateUser = useAuthStore(state => state.updateUser)
 
   const form = useAppForm({
@@ -38,7 +41,7 @@ export const ProfileForm = ({
         body: JSON.stringify(value),
       })
       if (!response.ok) {
-        toast.error(await parseApiError(response, "Erreur lors de la mise à jour du profil"))
+        toast.error(await parseApiError(response, t("updateError")))
         return
       }
       const data = await response.json()
@@ -61,39 +64,39 @@ export const ProfileForm = ({
     >
       <div>
         <h3 className="text-sm font-medium text-muted-foreground mb-3 uppercase tracking-wider font-mono">
-          Identite
+          {t("identity")}
         </h3>
         <div className="grid sm:grid-cols-2 gap-4">
           <form.AppField name="firstName">
             {field => (
               <field.TextField
-                label="Prenom"
-                placeholder="Votre prénom"
+                label={t("firstName")}
+                placeholder={t("firstNamePlaceholder")}
                 icon={<UserIcon />}
               />
             )}
           </form.AppField>
           <form.AppField name="lastName">
-            {field => <field.TextField label="Nom" placeholder="Votre nom" />}
+            {field => <field.TextField label={t("lastName")} placeholder={t("lastNamePlaceholder")} />}
           </form.AppField>
         </div>
       </div>
 
       <div>
         <h3 className="text-sm font-medium text-muted-foreground mb-3 uppercase tracking-wider font-mono">
-          Contact
+          {t("contact")}
         </h3>
         <div className="space-y-4">
           <form.AppField name="email">
             {field => (
-              <field.TextField label="Email" placeholder="votre@email.com" />
+              <field.TextField label={t("emailLabel")} placeholder={t("emailPlaceholder")} />
             )}
           </form.AppField>
         </div>
       </div>
       <div>
         <h3 className="text-sm font-medium text-muted-foreground mb-3 uppercase tracking-wider font-mono">
-          Securité
+          {t("security")}
         </h3>
         <div className="space-y-4">
           <form.AppField name="twoFactor">
@@ -104,14 +107,14 @@ export const ProfileForm = ({
 
       <div className="flex flex-col gap-3 pt-2 border-t border-border">
         <form.AppForm>
-          <form.SubmitButton className="w-full">Modifier</form.SubmitButton>
+          <form.SubmitButton className="w-full">{t("save")}</form.SubmitButton>
         </form.AppForm>
         <Button
           variant="secondary"
           className="w-full"
           onClick={() => onCancel()}
         >
-          Annuler
+          {tCommon("cancel")}
         </Button>
       </div>
     </form>

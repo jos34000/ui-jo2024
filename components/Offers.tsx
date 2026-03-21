@@ -1,14 +1,17 @@
 "use client"
 
-import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Check } from "lucide-react"
 import React from "react"
 import { OfferDTO, OlympicOffer } from "@/lib/types/offer.type"
 import { toOlympicOffer } from "@/lib/utils/offerMapper"
 import { useTranslations } from "next-intl"
-import { useTranslateOffer, useTranslateOfferDescription, useTranslateOfferFeature } from "@/lib/utils/i18nHelpers"
+import {
+  useTranslateOffer,
+  useTranslateOfferDescription,
+  useTranslateOfferFeature,
+} from "@/lib/utils/i18nHelpers"
 
 interface OffersProps {
   offers: OlympicOffer[]
@@ -84,14 +87,14 @@ export const Offers = ({ offers }: Readonly<OffersProps>) => {
                   ))}
                 </ul>
               </CardContent>
-              <CardFooter>
+              {/*<CardFooter>
                 <Button
                   className="w-full"
                   variant={offer.style.isPopular ? "default" : "outline"}
                 >
                   {t("choose", { name: translateOffer(offer.name) })}
                 </Button>
-              </CardFooter>
+              </CardFooter>*/}
             </Card>
           ))}
         </div>

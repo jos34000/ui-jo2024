@@ -125,7 +125,7 @@ export const Header = () => {
 
               <nav
                 className="flex flex-col px-3 py-3 border-b border-border"
-                aria-label="Menu principal mobile"
+                aria-label={t("mainMenuLabel")}
               >
                 {navigation.map(item => (
                   <SheetClose key={item.name} asChild>
@@ -142,7 +142,7 @@ export const Header = () => {
               {isAuthenticated && user && (
                 <nav
                   className="flex flex-col px-3 py-3 border-b border-border"
-                  aria-label="Menu utilisateur mobile"
+                  aria-label={t("userMenuLabel")}
                 >
                   <SheetClose asChild>
                     <Link

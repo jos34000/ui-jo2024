@@ -6,7 +6,9 @@
     "cancel": "Cancel",
     "save": "Save",
     "back": "Back",
-    "backHome": "Back to home"
+    "backHome": "Back to home",
+    "forgotPassword": "Forgot password?",
+    "showPassword": "Show password"
   },
   "header": {
     "nav": {
@@ -22,7 +24,9 @@
     "account": "Account",
     "openMenu": "Open menu",
     "closeMenu": "Close",
-    "logoutSuccess": "You are now signed out."
+    "logoutSuccess": "You are now signed out.",
+    "mainMenuLabel": "Main menu",
+    "userMenuLabel": "User menu"
   },
   "footer": {
     "description": "Official ticketing platform for the Paris 2024 Olympic and Paralympic Games.",
@@ -157,6 +161,8 @@
     "accountSubtitle": "Create your account to access the official ticketing platform for the Paris 2024 Olympic and Paralympic Games.",
     "moreThan10M": "More than 10 million tickets available for the Paris 2024 Olympic and Paralympic Games.",
     "backHome": "Back to home",
+    "noAccount": "Don't have an account yet?",
+    "alreadyAccount": "Already have an account?",
     "features": {
       "priority": {
         "title": "Priority access",
@@ -248,7 +254,18 @@
       "VALID": "Active",
       "USED": "Used",
       "CANCELLED": "Cancelled"
-    }
+    },
+    "identity": "Identity",
+    "contact": "Contact",
+    "security": "Security",
+    "firstName": "First name",
+    "lastName": "Last name",
+    "emailLabel": "Email",
+    "firstNamePlaceholder": "Your first name",
+    "lastNamePlaceholder": "Your last name",
+    "emailPlaceholder": "your@email.com",
+    "save": "Edit",
+    "updateError": "Error updating profile"
   },
   "tickets": {
     "title": "My tickets",
@@ -352,7 +369,12 @@
     "allCategories": "All categories",
     "noEventsFound": "No events",
     "noEventsForDay": "No events scheduled for this day.",
-    "noEventsForFilter": "No events for this sport on this date. Try another filter or change the day."
+    "noEventsForFilter": "No events for this sport on this date. Try another filter or change the day.",
+    "july": "July",
+    "august": "August",
+    "scrollLeft": "Scroll left",
+    "scrollRight": "Scroll right",
+    "viewEventsOf": "View events of {date}"
   },
   "notFound": {
     "title": "Page not found",
@@ -378,7 +400,8 @@
     "myAccount": "My account",
     "tickets": "Tickets",
     "backToCalendar": "Back to calendar",
-    "faq": "FAQ"
+    "faq": "FAQ",
+    "viewCart": "View my cart"
   },
   "resetPassword": {
     "title": "Reset password",
@@ -482,6 +505,31 @@
     "Solo": "Perfect for experiencing your passion in complete freedom.",
     "Duo": "Share unique moments together, side by side.",
     "Famille": "Experience the Games as a family with grouped seats."
+  },
+  "changePassword": {
+    "forgotTitle": "Reset password",
+    "changeTitle": "Change password",
+    "forgotDescription": "Enter your email address to receive a reset link.",
+    "changeDescription": "Enter your current password then choose a new one.",
+    "emailLabel": "Email address",
+    "emailPlaceholder": "your@email.com",
+    "sendLink": "Send link",
+    "currentPassword": "Current password",
+    "currentPasswordPlaceholder": "Your current password",
+    "newPassword": "New password",
+    "newPasswordPlaceholder": "New password",
+    "confirmPassword": "Confirm password",
+    "confirmPasswordPlaceholder": "Confirm",
+    "submit": "Change password",
+    "forgotTrigger": "Forgot password?",
+    "emailSentTitle": "Email sent",
+    "emailSentDescription": "If an account exists with this address, you will receive an email with instructions to reset your password.",
+    "successTitle": "Password updated",
+    "successDescription": "Your password has been successfully updated. You can now use your new password to sign in.",
+    "close": "Close",
+    "genericError": "An error occurred",
+    "requestSent": "If an account is linked to this email, a link has been sent.",
+    "changeSuccess": "Update successful"
   },
   "offerFeatures": {
     "Accès a tous les évènements": "Access to all events",
