@@ -49,7 +49,7 @@ export const RegisterForm = () => {
         }
 
         const data = await response.json()
-        setUser(data.user)
+        setUser(data)
 
         toast.success(t("success"))
         router.push("/")
