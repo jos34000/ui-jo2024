@@ -8,12 +8,13 @@ import { useAuthStore } from "@/lib/stores/auth.store"
 import { z } from "zod"
 import { apiClient, parseApiError } from "@/lib/utils/apiClient"
 import { toast } from "sonner"
-import { useTranslations } from "next-intl"
+import { useLocale, useTranslations } from "next-intl"
 
 type RegisterFormValues = z.infer<typeof registerSchema>
 
 export const RegisterForm = () => {
   const router = useRouter()
+  const locale = useLocale()
   const { setUser } = useAuthStore()
   const t = useTranslations("registerForm")
 
@@ -26,6 +27,7 @@ export const RegisterForm = () => {
       confirmPassword: "",
       enableTwoFactor: false,
       acceptTerms: false,
+      locale: "fr",
     } as RegisterFormValues,
     onSubmit: async ({ value }) => {
       try {
@@ -37,6 +39,7 @@ export const RegisterForm = () => {
             firstName: value.firstName,
             lastName: value.lastName,
             enableTwoFactor: value.enableTwoFactor,
+            locale: locale,
           }),
         })
 
@@ -71,7 +74,10 @@ export const RegisterForm = () => {
       <div className="grid grid-cols-2 gap-4">
         <registerForm.AppField name="firstName">
           {field => (
-            <field.TextField label={t("firstName")} placeholder={t("firstNamePlaceholder")} />
+            <field.TextField
+              label={t("firstName")}
+              placeholder={t("firstNamePlaceholder")}
+            />
           )}
         </registerForm.AppField>
 
