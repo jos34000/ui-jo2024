@@ -1,14 +1,16 @@
 import { EventDTO } from "@/lib/types/event.type"
 import { toOlympicEvent } from "@/lib/utils/eventMapper"
 import { Calendar } from "@/app/calendrier/Calendar"
+import { getLocale } from "next-intl/server"
 
 export const dynamic = "force-dynamic"
 
-async function getEvents() {
+async function getEvents(locale: string) {
   try {
     const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/events/all`, {
       cache: "force-cache",
       next: { revalidate: 60 },
+      headers: { "Accept-Language": locale },
     })
 
     if (!response.ok) {
@@ -27,7 +29,8 @@ async function getEvents() {
 }
 
 export default async function CalendrierPage() {
-  const events = await getEvents()
+  const locale = await getLocale()
+  const events = await getEvents(locale)
 
   return <Calendar initialEvents={events} />
 }

@@ -15,6 +15,7 @@ import { User } from "@/lib/types/user.types"
 import { apiClient, parseApiError } from "@/lib/utils/apiClient"
 import { toast } from "sonner"
 import { useAuthStore } from "@/lib/stores/auth.store"
+import { useTranslations } from "next-intl"
 
 interface OTPDialogProps {
   open: boolean
@@ -31,6 +32,7 @@ export const OTPDialog = ({
 }: OTPDialogProps) => {
   const router = useRouter()
   const { setUser } = useAuthStore()
+  const t = useTranslations("otp")
 
   const form = useAppForm({
     defaultValues: {
@@ -45,10 +47,10 @@ export const OTPDialog = ({
       if (res.ok) {
         setUser(pendingUser)
         onOpenChange(false)
-        toast.success("Connexion réussie!")
+        toast.success(t("success"))
         router.push("/")
       } else {
-        toast.error(await parseApiError(res, "Code invalide."))
+        toast.error(await parseApiError(res, t("invalidCode")))
       }
     },
   })
@@ -66,11 +68,10 @@ export const OTPDialog = ({
             <Shield className="h-7 w-7 text-primary" />
           </div>
           <DialogTitle className="text-xl font-mono">
-            Vérification en deux étapes
+            {t("title")}
           </DialogTitle>
           <DialogDescription className="text-center">
-            Un code de vérification a été envoyé a{" "}
-            <span className="font-medium text-foreground">{maskedEmail}</span>
+            {t("description", { email: maskedEmail })}
           </DialogDescription>
         </DialogHeader>
 
@@ -79,8 +80,7 @@ export const OTPDialog = ({
             <Mail className="h-5 w-5 text-muted-foreground shrink-0" />
             <div className="text-sm">
               <p className="text-muted-foreground">
-                Consultez votre boite de reception et entrez le code a 6
-                chiffres
+                {t("instruction")}
               </p>
             </div>
           </div>
@@ -95,18 +95,18 @@ export const OTPDialog = ({
               }}
             >
               <form.AppField name="otp">
-                {field => <field.OTPField label="Code" />}
+                {field => <field.OTPField label={t("label")} />}
               </form.AppField>
               <form.AppForm>
-                <form.SubmitButton className="w-full">Send</form.SubmitButton>
+                <form.SubmitButton className="w-full">{t("submit")}</form.SubmitButton>
               </form.AppForm>
             </form>
           </div>
 
           <p className="text-xs text-muted-foreground text-center">
-            {"Vous n'avez pas recu le code ? Verifiez vos spams ou"}{" "}
+            {t("noCode")}{" "}
             <button type="button" className="text-primary hover:underline">
-              renvoyez-le
+              {t("resend")}
             </button>
           </p>
         </div>

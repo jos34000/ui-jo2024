@@ -12,6 +12,7 @@ import { CartItemCard } from "@/components/cart/CartItemCard"
 import { toast } from "sonner"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
+import { useTranslations } from "next-intl"
 
 function formatPrice(amount: number): string {
   return new Intl.NumberFormat("fr-FR", {
@@ -22,6 +23,7 @@ function formatPrice(amount: number): string {
 
 export const CartSidebar = () => {
   const router = useRouter()
+  const t = useTranslations("cart")
   const isAuthenticated = useAuthStore(state => state.isAuthenticated)
   const { cart, isLoading, fetchCart, clearCart, sidebarOpen, setSidebarOpen } =
     useCartStore()
@@ -41,9 +43,9 @@ export const CartSidebar = () => {
     setIsClearing(true)
     try {
       await clearCart()
-      toast.success("Panier vidé")
+      toast.success(t("cleared"))
     } catch {
-      toast.error("Impossible de vider le panier")
+      toast.error(t("clearError"))
     } finally {
       setIsClearing(false)
     }
@@ -61,7 +63,7 @@ export const CartSidebar = () => {
               {itemCount > 9 ? "9+" : itemCount}
             </Badge>
           )}
-          <span className="sr-only">Panier</span>
+          <span className="sr-only">{t("title")}</span>
         </Button>
       </SheetTrigger>
 
@@ -73,16 +75,16 @@ export const CartSidebar = () => {
         <SheetHeader className="border-b border-border px-5 py-4">
           <SheetTitle className="flex items-center gap-2">
             <ShoppingCart className="h-5 w-5 shrink-0" />
-            <span className="flex-1 truncate">Mon panier</span>
+            <span className="flex-1 truncate">{t("title")}</span>
             {itemCount > 0 && (
               <Badge variant="secondary" className="shrink-0 font-mono">
-                {itemCount} article{itemCount > 1 ? "s" : ""}
+                {t("articles", { count: itemCount })}
               </Badge>
             )}
             <SheetClose asChild>
               <Button variant="ghost" size="icon" className="shrink-0 h-7 w-7">
                 <X className="h-4 w-4" />
-                <span className="sr-only">Fermer</span>
+                <span className="sr-only">{t("close")}</span>
               </Button>
             </SheetClose>
           </SheetTitle>
@@ -94,14 +96,14 @@ export const CartSidebar = () => {
               <ShoppingCart className="h-12 w-12 text-muted-foreground/40" />
               <div>
                 <p className="font-medium">
-                  Connectez-vous pour voir votre panier
+                  {t("notAuth.title")}
                 </p>
                 <p className="text-sm text-muted-foreground mt-1">
-                  Vos articles seront sauvegardés dans votre compte.
+                  {t("notAuth.subtitle")}
                 </p>
               </div>
               <Button asChild className="mt-2">
-                <Link href="/auth">Se connecter</Link>
+                <Link href="/auth">{t("login")}</Link>
               </Button>
             </div>
           ) : isLoading ? (
@@ -116,9 +118,9 @@ export const CartSidebar = () => {
           ) : !cart || cart.items.length === 0 ? (
             <div className="flex flex-col items-center justify-center h-full gap-3 text-center py-16">
               <ShoppingCart className="h-12 w-12 text-muted-foreground/40" />
-              <p className="font-medium">Votre panier est vide</p>
+              <p className="font-medium">{t("empty.title")}</p>
               <p className="text-sm text-muted-foreground">
-                Ajoutez des billets pour les retrouver ici.
+                {t("empty.subtitle")}
               </p>
             </div>
           ) : (
@@ -133,7 +135,7 @@ export const CartSidebar = () => {
         {isAuthenticated && cart && cart.items.length > 0 && (
           <div className="border-t border-border px-5 py-4">
             <div className="flex items-center justify-between mb-4">
-              <span className="text-sm text-muted-foreground">Total</span>
+              <span className="text-sm text-muted-foreground">{t("total")}</span>
               <span className="font-bold font-mono text-lg">
                 {formatPrice(cart.totalPrice)}
               </span>
@@ -147,7 +149,7 @@ export const CartSidebar = () => {
                 router.push("/checkout")
               }}
             >
-              Procéder au paiement
+              {t("checkout")}
             </Button>
             <Button
               variant="ghost"
@@ -157,7 +159,7 @@ export const CartSidebar = () => {
               disabled={isClearing}
             >
               <Trash2 className="h-3.5 w-3.5 mr-1.5" />
-              Vider le panier
+              {t("clearCart")}
             </Button>
           </div>
         )}

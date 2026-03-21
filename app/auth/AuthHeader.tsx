@@ -1,11 +1,15 @@
+"use client"
+
 import React from "react"
 import Link from "next/link"
 import { OlympicRings } from "@/lib/svg/OlympicRings"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { ArrowLeft } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { useTranslations } from "next-intl"
 
 export const AuthHeader = () => {
+  const t = useTranslations("auth")
   return (
     <header className="border-b border-border bg-background/95 backdrop-blur shrink-0">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 py-3 sm:py-4">
@@ -20,13 +24,13 @@ export const AuthHeader = () => {
           <Button variant="ghost" size="icon" asChild className="sm:hidden">
             <Link href="/">
               <ArrowLeft className="h-5 w-5" />
-              <span className="sr-only">{"Retour à l'accueil"}</span>
+              <span className="sr-only">{t("backHome")}</span>
             </Link>
           </Button>
           <Button variant="ghost" asChild className="hidden sm:inline-flex">
             <Link href="/">
               <ArrowLeft className="mr-2 h-4 w-4" />
-              {"Retour à l'accueil"}
+              {t("backHome")}
             </Link>
           </Button>
         </div>

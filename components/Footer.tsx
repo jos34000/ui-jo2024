@@ -1,33 +1,38 @@
+"use client"
+
 import Link from "next/link"
 import { OlympicRings } from "@/lib/svg/OlympicRings"
-
-const footerNavigation = {
-  billetterie: [
-    { name: "Tous les événements", href: "#" },
-    { name: "Calendrier", href: "#" },
-    { name: "Revente officielle", href: "#" },
-    { name: "Pack famille", href: "#" },
-  ],
-  sports: [
-    { name: "Athlétisme", href: "#" },
-    { name: "Natation", href: "#" },
-    { name: "Basketball", href: "#" },
-    { name: "Football", href: "#" },
-  ],
-  infos: [
-    { name: "À propos", href: "#" },
-    { name: "FAQ", href: "#" },
-    { name: "Accessibilité", href: "#" },
-    { name: "Contact", href: "#" },
-  ],
-  legal: [
-    { name: "Conditions générales", href: "#" },
-    { name: "Politique de confidentialité", href: "#" },
-    { name: "Cookies", href: "#" },
-  ],
-}
+import { useTranslations } from "next-intl"
 
 export const Footer = () => {
+  const t = useTranslations("footer")
+
+  const footerNavigation = {
+    billetterie: [
+      { name: t("links.allEvents"), href: "#" },
+      { name: t("links.calendar"), href: "#" },
+      { name: t("links.resale"), href: "#" },
+      { name: t("links.familyPack"), href: "#" },
+    ],
+    sports: [
+      { name: t("links.athletics"), href: "#" },
+      { name: t("links.swimming"), href: "#" },
+      { name: t("links.basketball"), href: "#" },
+      { name: t("links.football"), href: "#" },
+    ],
+    infos: [
+      { name: t("links.about"), href: "#" },
+      { name: t("links.faq"), href: "#" },
+      { name: t("links.accessibility"), href: "#" },
+      { name: t("links.contact"), href: "#" },
+    ],
+    legal: [
+      { name: t("links.terms"), href: "#" },
+      { name: t("links.privacy"), href: "#" },
+      { name: t("links.cookies"), href: "#" },
+    ],
+  }
+
   return (
     <footer className="bg-card border-t border-border">
       <div className="mx-auto max-w-7xl px-6 py-12 lg:px-8 lg:py-16">
@@ -38,8 +43,7 @@ export const Footer = () => {
               <span className="font-bold text-xl font-mono">Paris 2024</span>
             </div>
             <p className="text-sm text-muted-foreground max-w-xs leading-relaxed">
-              Billetterie officielle des Jeux Olympiques et Paralympiques de
-              Paris 2024.
+              {t("description")}
             </p>
             <div className="flex gap-1 pt-2">
               <div className="w-4 h-4 rounded-full bg-[#0081C8]" />
@@ -52,7 +56,7 @@ export const Footer = () => {
           <div className="mt-16 grid grid-cols-2 gap-8 xl:col-span-2 xl:mt-0">
             <div className="md:grid md:grid-cols-2 md:gap-8">
               <div>
-                <h3 className="text-sm font-semibold">Billetterie</h3>
+                <h3 className="text-sm font-semibold">{t("sections.ticketing")}</h3>
                 <ul className="mt-4 space-y-3">
                   {footerNavigation.billetterie.map(item => (
                     <li key={item.name}>
@@ -67,7 +71,7 @@ export const Footer = () => {
                 </ul>
               </div>
               <div className="mt-10 md:mt-0">
-                <h3 className="text-sm font-semibold">Sports populaires</h3>
+                <h3 className="text-sm font-semibold">{t("sections.popularSports")}</h3>
                 <ul className="mt-4 space-y-3">
                   {footerNavigation.sports.map(item => (
                     <li key={item.name}>
@@ -84,7 +88,7 @@ export const Footer = () => {
             </div>
             <div className="md:grid md:grid-cols-2 md:gap-8">
               <div>
-                <h3 className="text-sm font-semibold">Informations</h3>
+                <h3 className="text-sm font-semibold">{t("sections.information")}</h3>
                 <ul className="mt-4 space-y-3">
                   {footerNavigation.infos.map(item => (
                     <li key={item.name}>
@@ -99,7 +103,7 @@ export const Footer = () => {
                 </ul>
               </div>
               <div className="mt-10 md:mt-0">
-                <h3 className="text-sm font-semibold">Légal</h3>
+                <h3 className="text-sm font-semibold">{t("sections.legal")}</h3>
                 <ul className="mt-4 space-y-3">
                   {footerNavigation.legal.map(item => (
                     <li key={item.name}>
@@ -118,8 +122,7 @@ export const Footer = () => {
         </div>
         <div className="mt-12 border-t border-border pt-8">
           <p className="text-xs text-muted-foreground text-center">
-            &copy; 2024 Comité d&apos;Organisation des Jeux Olympiques et
-            Paralympiques de Paris 2024. Tous droits réservés.
+            {t("copyright")}
           </p>
         </div>
       </div>

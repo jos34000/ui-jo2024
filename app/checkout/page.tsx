@@ -13,46 +13,47 @@ import { CreditCard, Info } from "lucide-react"
 import Link from "next/link"
 import { formatDateWithTime } from "@/lib/utils/date"
 import { formatPrice } from "@/lib/utils/format"
-
-const TEST_CARDS = [
-  {
-    number: "4242424242424242",
-    label: "4242 4242 4242 4242",
-    result: "Paiement accepté",
-    success: true,
-  },
-  {
-    number: "5555555555554444",
-    label: "5555 5555 5555 4444",
-    result: "Accepté (Mastercard)",
-    success: true,
-  },
-  {
-    number: "4000000000000002",
-    label: "4000 0000 0000 0002",
-    result: "Carte déclinée",
-    success: false,
-  },
-  {
-    number: "4000000000009995",
-    label: "4000 0000 0000 9995",
-    result: "Fonds insuffisants",
-    success: false,
-  },
-  {
-    number: "4000000000000069",
-    label: "4000 0000 0000 0069",
-    result: "Carte expirée",
-    success: false,
-  },
-]
-
+import { useTranslations } from "next-intl"
 
 export default function CheckoutPage() {
   const router = useRouter()
+  const t = useTranslations("checkout")
   const isAuthenticated = useAuthStore(state => state.isAuthenticated)
   const cart = useCartStore(state => state.cart)
   const { isProcessing, checkout } = usePaymentStore()
+
+  const TEST_CARDS = [
+    {
+      number: "4242424242424242",
+      label: "4242 4242 4242 4242",
+      result: t("testCards.accepted"),
+      success: true,
+    },
+    {
+      number: "5555555555554444",
+      label: "5555 5555 5555 4444",
+      result: t("testCards.mastercard"),
+      success: true,
+    },
+    {
+      number: "4000000000000002",
+      label: "4000 0000 0000 0002",
+      result: t("testCards.declined"),
+      success: false,
+    },
+    {
+      number: "4000000000009995",
+      label: "4000 0000 0000 9995",
+      result: t("testCards.insufficientFunds"),
+      success: false,
+    },
+    {
+      number: "4000000000000069",
+      label: "4000 0000 0000 0069",
+      result: t("testCards.expired"),
+      success: false,
+    },
+  ]
 
   const checkoutForm = useAppForm({
     defaultValues: {
@@ -76,7 +77,7 @@ export default function CheckoutPage() {
         router.push(`/confirmation/${transaction.id}`)
       } catch (err) {
         toast.error(
-          err instanceof Error ? err.message : "Erreur lors du paiement",
+          err instanceof Error ? err.message : t("paymentError"),
         )
       }
     },
@@ -101,15 +102,15 @@ export default function CheckoutPage() {
             href="/"
             className="text-sm text-muted-foreground hover:text-foreground transition-colors"
           >
-            ← Retour
+            {t("back")}
           </Link>
-          <h1 className="text-2xl font-bold mt-3">Finaliser la commande</h1>
+          <h1 className="text-2xl font-bold mt-3">{t("title")}</h1>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           <div className="order-2 lg:order-1">
             <div className="rounded-xl border border-border bg-card p-5">
-              <h2 className="font-semibold text-base mb-4">Récapitulatif</h2>
+              <h2 className="font-semibold text-base mb-4">{t("summary")}</h2>
               <div className="flex flex-col gap-3">
                 {cart.items.map(item => (
                   <div
@@ -134,8 +135,7 @@ export default function CheckoutPage() {
               <Separator className="my-4" />
               <div className="flex items-center justify-between">
                 <span className="text-sm text-muted-foreground">
-                  Total ({cart.totalTickets} billet
-                  {cart.totalTickets > 1 ? "s" : ""})
+                  {t("totalTickets", { count: cart.totalTickets })}
                 </span>
                 <span className="font-bold font-mono text-lg">
                   {formatPrice(cart.totalPrice)}
@@ -147,7 +147,7 @@ export default function CheckoutPage() {
               <div className="flex items-center gap-2 mb-3">
                 <Info className="h-4 w-4 text-muted-foreground shrink-0" />
                 <span className="text-xs font-medium text-muted-foreground uppercase tracking-wide">
-                  Environnement de test
+                  {t("testEnv")}
                 </span>
               </div>
               <div className="flex flex-col gap-1.5">
@@ -173,7 +173,7 @@ export default function CheckoutPage() {
                   </div>
                 ))}
                 <p className="text-xs text-muted-foreground mt-1">
-                  Cliquez sur un numéro pour le copier dans le formulaire.
+                  {t("clickToCopy")}
                 </p>
               </div>
             </div>
@@ -183,7 +183,7 @@ export default function CheckoutPage() {
             <div className="rounded-xl border border-border bg-card p-5">
               <div className="flex items-center gap-2 mb-5">
                 <CreditCard className="h-4 w-4 text-muted-foreground" />
-                <h2 className="font-semibold text-base">Carte bancaire</h2>
+                <h2 className="font-semibold text-base">{t("cardSection")}</h2>
               </div>
 
               <form
@@ -197,8 +197,8 @@ export default function CheckoutPage() {
                 <checkoutForm.AppField name="cardHolder">
                   {field => (
                     <field.TextField
-                      label="Titulaire de la carte"
-                      placeholder="Jean Dupont"
+                      label={t("cardHolder")}
+                      placeholder={t("cardHolderPlaceholder")}
                       autoComplete="cc-name"
                     />
                   )}
@@ -207,7 +207,7 @@ export default function CheckoutPage() {
                 <checkoutForm.AppField name="cardNumber">
                   {field => (
                     <field.TextField
-                      label="Numéro de carte"
+                      label={t("cardNumber")}
                       placeholder="1234567890123456"
                       autoComplete="cc-number"
                       inputMode="numeric"
@@ -230,7 +230,7 @@ export default function CheckoutPage() {
                 <Separator />
 
                 <div className="flex items-center justify-between text-sm text-muted-foreground mb-1">
-                  <span>Total à payer</span>
+                  <span>{t("totalToPay")}</span>
                   <span className="font-bold font-mono text-foreground text-base">
                     {formatPrice(cart.totalPrice)}
                   </span>
@@ -243,8 +243,8 @@ export default function CheckoutPage() {
                     disabled={isProcessing}
                   >
                     {isProcessing
-                      ? "Traitement en cours…"
-                      : `Payer ${formatPrice(cart.totalPrice)}`}
+                      ? t("processing")
+                      : t("pay", { amount: formatPrice(cart.totalPrice) })}
                   </checkoutForm.SubmitButton>
                 </checkoutForm.AppForm>
               </form>

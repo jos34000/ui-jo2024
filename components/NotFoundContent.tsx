@@ -12,6 +12,7 @@ import {
   Trophy,
 } from "lucide-react"
 import React from "react"
+import { useTranslations } from "next-intl"
 
 type NotFoundType = "page" | "event" | "sport" | "ticket" | "custom"
 
@@ -31,90 +32,6 @@ interface NotFoundContentProps {
   }[]
 }
 
-const presets: Record<
-  Exclude<NotFoundType, "custom">,
-  {
-    title: string
-    description: string
-    icon: React.ReactNode
-    backLink: { href: string; label: string }
-    suggestions: { href: string; label: string; icon: React.ReactNode }[]
-  }
-> = {
-  page: {
-    title: "Page introuvable",
-    description: "La page que vous recherchez n'existe pas ou a ete deplacee.",
-    icon: <Search className="h-8 w-8" />,
-    backLink: { href: "/", label: "Retour a l'accueil" },
-    suggestions: [
-      {
-        href: "/calendrier",
-        label: "Calendrier",
-        icon: <Calendar className="h-4 w-4" />,
-      },
-      {
-        href: "/#sports",
-        label: "Sports",
-        icon: <Trophy className="h-4 w-4" />,
-      },
-      { href: "/#faq", label: "FAQ", icon: <HelpCircle className="h-4 w-4" /> },
-    ],
-  },
-  event: {
-    title: "Évènement introuvable",
-    description: "Cet évènement n'existe pas ou n'est plus disponible.",
-    icon: <Ticket className="h-8 w-8" />,
-    backLink: { href: "/calendrier", label: "Voir le calendrier" },
-    suggestions: [
-      {
-        href: "/calendrier",
-        label: "Évènement",
-        icon: <Calendar className="h-4 w-4" />,
-      },
-      {
-        href: "/#sports",
-        label: "Sports",
-        icon: <Trophy className="h-4 w-4" />,
-      },
-      { href: "/", label: "Accueil", icon: <Home className="h-4 w-4" /> },
-    ],
-  },
-  sport: {
-    title: "Sport introuvable",
-    description: "Ce sport ne fait pas partie du programme Paris 2024.",
-    icon: <Trophy className="h-8 w-8" />,
-    backLink: { href: "/#sports", label: "Voir les sports" },
-    suggestions: [
-      {
-        href: "/#sports",
-        label: "Sports",
-        icon: <Trophy className="h-4 w-4" />,
-      },
-      {
-        href: "/calendrier",
-        label: "Calendrier",
-        icon: <Calendar className="h-4 w-4" />,
-      },
-      { href: "/", label: "Accueil", icon: <Home className="h-4 w-4" /> },
-    ],
-  },
-  ticket: {
-    title: "Billet introuvable",
-    description: "Ce billet n'existe pas ou a ete annule.",
-    icon: <Ticket className="h-8 w-8" />,
-    backLink: { href: "/auth", label: "Mon compte" },
-    suggestions: [
-      {
-        href: "/calendrier",
-        label: "Billets",
-        icon: <Ticket className="h-4 w-4" />,
-      },
-      { href: "/#faq", label: "FAQ", icon: <HelpCircle className="h-4 w-4" /> },
-      { href: "/", label: "Accueil", icon: <Home className="h-4 w-4" /> },
-    ],
-  },
-}
-
 export const NotFoundContent = ({
   type = "page",
   title,
@@ -123,16 +40,102 @@ export const NotFoundContent = ({
   backLink,
   suggestions,
 }: NotFoundContentProps) => {
+  const t = useTranslations("notFound")
+
+  const presets: Record<
+    Exclude<NotFoundType, "custom">,
+    {
+      title: string
+      description: string
+      icon: React.ReactNode
+      backLink: { href: string; label: string }
+      suggestions: { href: string; label: string; icon: React.ReactNode }[]
+    }
+  > = {
+    page: {
+      title: t("title"),
+      description: t("pageDescription"),
+      icon: <Search className="h-8 w-8" />,
+      backLink: { href: "/", label: t("backHome") },
+      suggestions: [
+        {
+          href: "/calendrier",
+          label: t("calendar"),
+          icon: <Calendar className="h-4 w-4" />,
+        },
+        {
+          href: "/#sports",
+          label: t("sports"),
+          icon: <Trophy className="h-4 w-4" />,
+        },
+        { href: "/#faq", label: t("faq"), icon: <HelpCircle className="h-4 w-4" /> },
+      ],
+    },
+    event: {
+      title: t("eventNotFound"),
+      description: t("eventDescription"),
+      icon: <Ticket className="h-8 w-8" />,
+      backLink: { href: "/calendrier", label: t("backToCalendar") },
+      suggestions: [
+        {
+          href: "/calendrier",
+          label: t("calendar"),
+          icon: <Calendar className="h-4 w-4" />,
+        },
+        {
+          href: "/#sports",
+          label: t("sports"),
+          icon: <Trophy className="h-4 w-4" />,
+        },
+        { href: "/", label: t("home"), icon: <Home className="h-4 w-4" /> },
+      ],
+    },
+    sport: {
+      title: t("sportNotFound"),
+      description: t("sportDescription"),
+      icon: <Trophy className="h-8 w-8" />,
+      backLink: { href: "/#sports", label: t("viewSports") },
+      suggestions: [
+        {
+          href: "/#sports",
+          label: t("sports"),
+          icon: <Trophy className="h-4 w-4" />,
+        },
+        {
+          href: "/calendrier",
+          label: t("calendar"),
+          icon: <Calendar className="h-4 w-4" />,
+        },
+        { href: "/", label: t("home"), icon: <Home className="h-4 w-4" /> },
+      ],
+    },
+    ticket: {
+      title: t("ticketNotFound"),
+      description: t("ticketDescription"),
+      icon: <Ticket className="h-8 w-8" />,
+      backLink: { href: "/auth", label: t("myAccount") },
+      suggestions: [
+        {
+          href: "/calendrier",
+          label: t("tickets"),
+          icon: <Ticket className="h-4 w-4" />,
+        },
+        { href: "/#faq", label: t("faq"), icon: <HelpCircle className="h-4 w-4" /> },
+        { href: "/", label: t("home"), icon: <Home className="h-4 w-4" /> },
+      ],
+    },
+  }
+
   const preset = type !== "custom" ? presets[type] : null
 
-  const displayTitle = title ?? preset?.title ?? "Page introuvable"
+  const displayTitle = title ?? preset?.title ?? t("title")
   const displayDescription =
     description ??
     preset?.description ??
-    "La page que vous recherchez n'existe pas."
+    t("subtitle")
   const displayIcon = icon ?? preset?.icon ?? <Search className="h-8 w-8" />
   const displayBackLink = backLink ??
-    preset?.backLink ?? { href: "/", label: "Retour a l'accueil" }
+    preset?.backLink ?? { href: "/", label: t("backHome") }
   const displaySuggestions = suggestions ?? preset?.suggestions ?? []
 
   return (
@@ -198,7 +201,7 @@ export const NotFoundContent = ({
             {displaySuggestions.length > 0 && (
               <div className="pt-4 border-t border-border/50">
                 <p className="text-xs text-muted-foreground mb-3 uppercase tracking-wider font-mono">
-                  Ou explorez
+                  {t("explore")}
                 </p>
                 <div className="flex flex-wrap justify-center gap-2">
                   {displaySuggestions.map(suggestion => (

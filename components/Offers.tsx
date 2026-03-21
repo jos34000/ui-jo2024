@@ -7,12 +7,18 @@ import { Check } from "lucide-react"
 import React from "react"
 import { OfferDTO, OlympicOffer } from "@/lib/types/offer.type"
 import { toOlympicOffer } from "@/lib/utils/offerMapper"
+import { useTranslations } from "next-intl"
+import { useTranslateOffer, useTranslateOfferDescription, useTranslateOfferFeature } from "@/lib/utils/i18nHelpers"
 
 interface OffersProps {
   offers: OlympicOffer[]
 }
 
 export const Offers = ({ offers }: Readonly<OffersProps>) => {
+  const t = useTranslations("offers")
+  const translateOffer = useTranslateOffer()
+  const translateDescription = useTranslateOfferDescription()
+  const translateFeature = useTranslateOfferFeature()
   const mappedOffers = offers
     .map((offer: OfferDTO) => toOlympicOffer(offer))
     .toSorted((a, b) => a.displayOrder - b.displayOrder)
@@ -22,12 +28,10 @@ export const Offers = ({ offers }: Readonly<OffersProps>) => {
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold tracking-tight sm:text-4xl font-mono">
-            Nos offres
+            {t("title")}
           </h2>
           <p className="mt-2 text-muted-foreground max-w-2xl mx-auto">
-            {
-              "Choisissez la formule adaptée a votre expérience. Chaque billet donne accès a l'ensemble des évènements."
-            }
+            {t("subtitle")}
           </p>
         </div>
 
@@ -44,7 +48,7 @@ export const Offers = ({ offers }: Readonly<OffersProps>) => {
               {offer.style.isPopular && (
                 <div className="absolute -top-3 left-1/2 -translate-x-1/2">
                   <Badge className="bg-primary text-primary-foreground shadow-sm">
-                    Le plus choisi
+                    {t("mostChosen")}
                   </Badge>
                 </div>
               )}
@@ -57,15 +61,15 @@ export const Offers = ({ offers }: Readonly<OffersProps>) => {
                   </div>
                   <div>
                     <h3 className="text-lg font-bold font-mono">
-                      {offer.name}
+                      {translateOffer(offer.name)}
                     </h3>
                     <p className="text-xs text-muted-foreground">
-                      {offer.subtitle}
+                      {t("ticketCount", { count: offer.numberOfTickets })}
                     </p>
                   </div>
                 </div>
                 <p className="text-sm text-muted-foreground leading-relaxed">
-                  {offer.description}
+                  {translateDescription(offer.name)}
                 </p>
               </CardHeader>
               <CardContent className="flex-1">
@@ -74,7 +78,7 @@ export const Offers = ({ offers }: Readonly<OffersProps>) => {
                     <li key={feature} className="flex items-start gap-3">
                       <Check className="h-4 w-4 text-primary shrink-0 mt-0.5" />
                       <span className="text-sm text-muted-foreground">
-                        {feature}
+                        {translateFeature(feature)}
                       </span>
                     </li>
                   ))}
@@ -85,9 +89,7 @@ export const Offers = ({ offers }: Readonly<OffersProps>) => {
                   className="w-full"
                   variant={offer.style.isPopular ? "default" : "outline"}
                 >
-                  {offer.style.isPopular
-                    ? "Choisir Duo"
-                    : `Choisir ${offer.name}`}
+                  {t("choose", { name: translateOffer(offer.name) })}
                 </Button>
               </CardFooter>
             </Card>

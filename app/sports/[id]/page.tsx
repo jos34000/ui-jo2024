@@ -14,7 +14,8 @@ import {
   Trophy,
 } from "lucide-react"
 import { SportResponseDTO } from "@/lib/types/sport.type"
-import { EVENT_PHASE_LABELS, EventPhase } from "@/lib/types/phases.type"
+import { getTranslations, getMessages } from "next-intl/server"
+// getTranslations used for "sports" namespace (typed keys), getMessages for dynamic lookups
 
 const getCurrentSport = async (
   id: number,
@@ -39,6 +40,12 @@ const SportPage = async ({ params }: { params: Promise<{ id: number }> }) => {
     getCurrentSport(id),
     getAllSports(),
   ])
+  const t = await getTranslations("sports")
+  const messages = await getMessages()
+  const sportNamesMap = (messages as Record<string, unknown>).sportNames as Record<string, string> | undefined
+  const translateSport = (name: string) => sportNamesMap?.[name] ?? name
+  const phasesMap = (messages as Record<string, unknown>).phases as Record<string, string> | undefined
+  const translatePhase = (phase: string) => phasesMap?.[phase] ?? phase
 
   if (!sport) {
     notFound()
@@ -55,17 +62,17 @@ const SportPage = async ({ params }: { params: Promise<{ id: number }> }) => {
           <div className="mx-auto max-w-5xl px-4 sm:px-6 py-3">
             <nav className="flex items-center gap-2 text-sm text-muted-foreground">
               <Link href="/" className="hover:text-primary transition-colors">
-                Accueil
+                {t("home")}
               </Link>
               <span>/</span>
               <Link
                 href="/#sports"
                 className="hover:text-primary transition-colors"
               >
-                Sports
+                {t("sports")}
               </Link>
               <span>/</span>
-              <span className="text-foreground font-medium">{sport.name}</span>
+              <span className="text-foreground font-medium">{translateSport(sport.name)}</span>
             </nav>
           </div>
         </div>
@@ -78,7 +85,7 @@ const SportPage = async ({ params }: { params: Promise<{ id: number }> }) => {
               </div>
               <div className="flex-1 min-w-0">
                 <h1 className="text-3xl sm:text-4xl font-bold tracking-tight font-mono">
-                  {sport.name}
+                  {translateSport(sport.name)}
                 </h1>
                 <p className="mt-3 text-muted-foreground leading-relaxed max-w-2xl">
                   {sport.description}
@@ -89,13 +96,13 @@ const SportPage = async ({ params }: { params: Promise<{ id: number }> }) => {
                       href={`/calendrier?sport=${encodeURIComponent(sport.name)}`}
                     >
                       <CalendarDays className="mr-2 h-4 w-4" />
-                      Voir le calendrier
+                      {t("viewCalendar")}
                     </Link>
                   </Button>
                   <Button variant="outline" className="bg-transparent" asChild>
                     <Link href="/#sports">
                       <ArrowLeft className="mr-2 h-4 w-4" />
-                      Tous les sports
+                      {t("allSports")}
                     </Link>
                   </Button>
                 </div>
@@ -114,7 +121,7 @@ const SportPage = async ({ params }: { params: Promise<{ id: number }> }) => {
                       <Trophy className="h-4 w-4 text-primary" />
                     </div>
                     <span className="text-sm font-medium text-muted-foreground">
-                      Épreuves
+                      {t("events")}
                     </span>
                   </div>
                   <p className="text-2xl font-bold font-mono">
@@ -146,7 +153,7 @@ const SportPage = async ({ params }: { params: Promise<{ id: number }> }) => {
                       <MapPin className="h-4 w-4 text-primary" />
                     </div>
                     <span className="text-sm font-medium text-muted-foreground">
-                      {sport.places.length > 1 ? "Sites" : "Site"}
+                      {sport.places.length > 1 ? t("sites") : t("site")}
                     </span>
                   </div>
                   <ul className="space-y-1">
@@ -169,7 +176,7 @@ const SportPage = async ({ params }: { params: Promise<{ id: number }> }) => {
                       <Layers className="h-4 w-4 text-primary" />
                     </div>
                     <span className="text-sm font-medium text-muted-foreground">
-                      Phases
+                      {t("phases")}
                     </span>
                   </div>
                   <div className="flex flex-wrap gap-1.5">
@@ -179,7 +186,7 @@ const SportPage = async ({ params }: { params: Promise<{ id: number }> }) => {
                         variant="secondary"
                         className="text-xs"
                       >
-                        {EVENT_PHASE_LABELS[phase as EventPhase]}
+                        {translatePhase(phase)}
                       </Badge>
                     ))}
                   </div>
@@ -192,7 +199,7 @@ const SportPage = async ({ params }: { params: Promise<{ id: number }> }) => {
         <section className="border-t border-border bg-background">
           <div className="mx-auto max-w-5xl px-4 sm:px-6 py-10 sm:py-12">
             <h2 className="text-xl font-bold font-mono mb-6">
-              Découvrir d{"'"}autres sports
+              {t("discoverOthers")}
             </h2>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
               {otherSports?.map(s => (
@@ -205,10 +212,10 @@ const SportPage = async ({ params }: { params: Promise<{ id: number }> }) => {
                     {s.icon}
                   </span>
                   <span className="font-medium text-foreground text-sm">
-                    {s.name}
+                    {translateSport(s.name)}
                   </span>
                   <span className="text-xs text-muted-foreground mt-0.5">
-                    {s.eventCount} epreuves
+                    {s.eventCount} {t("eventsCount")}
                   </span>
                 </Link>
               ))}
@@ -216,7 +223,7 @@ const SportPage = async ({ params }: { params: Promise<{ id: number }> }) => {
             <div className="text-center mt-6">
               <Button variant="ghost" asChild>
                 <Link href="/#sports">
-                  Tous les sports
+                  {t("allSports")}
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>

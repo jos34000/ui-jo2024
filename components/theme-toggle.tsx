@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { Moon, Sun } from "lucide-react"
+import { Monitor, Moon, Sun } from "lucide-react"
 import { useTheme } from "next-themes"
 
 import { Button } from "@/components/ui/button"
@@ -24,14 +24,17 @@ export const ThemeToggle = () => {
           <span className="sr-only">Changer le thème</span>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
-        <DropdownMenuItem onClick={() => setTheme("light")}>
+      <DropdownMenuContent align="center">
+        <DropdownMenuItem onClick={() => setTheme("light")} className="gap-2 cursor-pointer">
+          <Sun className="h-4 w-4" />
           Clair
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("dark")}>
+        <DropdownMenuItem onClick={() => setTheme("dark")} className="gap-2 cursor-pointer">
+          <Moon className="h-4 w-4" />
           Sombre
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("system")}>
+        <DropdownMenuItem onClick={() => setTheme("system")} className="gap-2 cursor-pointer">
+          <Monitor className="h-4 w-4" />
           Système
         </DropdownMenuItem>
       </DropdownMenuContent>

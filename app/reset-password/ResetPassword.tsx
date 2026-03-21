@@ -17,6 +17,7 @@ import { useAppForm } from "@/lib/hooks/useAppForm"
 import { OlympicRings } from "@/lib/svg/OlympicRings"
 import { resetPasswordSchema } from "@/lib/schemas/resetPassword.schema"
 import { apiClient } from "@/lib/utils/apiClient"
+import { useTranslations } from "next-intl"
 
 type PageState = "loading" | "valid" | "invalid" | "expired" | "success"
 
@@ -24,6 +25,7 @@ export default function ResetPassword() {
   const searchParams = useSearchParams()
   const token = searchParams.get("token")
   const [pageState, setPageState] = useState<PageState>("loading")
+  const t = useTranslations("resetPassword")
 
   useEffect(() => {
     const validateToken = async () => {
@@ -67,10 +69,10 @@ export default function ResetPassword() {
           <div className="flex flex-col items-center py-12 text-center">
             <Loader2 className="h-12 w-12 animate-spin text-primary mb-4" />
             <h2 className="text-xl font-semibold font-mono mb-2">
-              Verification en cours
+              {t("loading")}
             </h2>
             <p className="text-muted-foreground">
-              Nous verifions la validite de votre lien...
+              {t("loadingSubtitle")}
             </p>
           </div>
         )
@@ -82,21 +84,20 @@ export default function ResetPassword() {
               <AlertCircle className="h-8 w-8 text-destructive" />
             </div>
             <h2 className="text-xl font-semibold font-mono mb-2">
-              Lien invalide
+              {t("invalidTitle")}
             </h2>
             <p className="text-muted-foreground mb-6 max-w-sm">
-              Ce lien de réinitialisation est invalide ou a déjà été utilisé.
-              Veuillez demander un nouveau lien.
+              {t("invalidDescription")}
             </p>
             <div className="flex flex-col sm:flex-row gap-3">
               <Button variant="outline" asChild className="bg-transparent">
                 <Link href="/">
                   <ArrowLeft className="mr-2 h-4 w-4" />
-                  {"Retour a l'accueil"}
+                  {t("backToLogin")}
                 </Link>
               </Button>
               <Button asChild>
-                <Link href="/auth">Demander un nouveau lien</Link>
+                <Link href="/auth">{t("requestNew")}</Link>
               </Button>
             </div>
           </div>
@@ -109,21 +110,20 @@ export default function ResetPassword() {
               <AlertCircle className="h-8 w-8 text-destructive" />
             </div>
             <h2 className="text-xl font-semibold font-mono mb-2">
-              Lien expiré
+              {t("expiredTitle")}
             </h2>
             <p className="text-muted-foreground mb-6 max-w-sm">
-              Ce lien de réinitialisation a expiré. Les liens sont valides
-              pendant 1 heure. Veuillez en demander un nouveau.
+              {t("expiredDescription")}
             </p>
             <div className="flex flex-col sm:flex-row gap-3">
               <Button variant="outline" asChild className="bg-transparent">
                 <Link href="/">
                   <ArrowLeft className="mr-2 h-4 w-4" />
-                  {"Retour a l'accueil"}
+                  {t("backToLogin")}
                 </Link>
               </Button>
               <Button asChild>
-                <Link href="/auth">Demander un nouveau lien</Link>
+                <Link href="/auth">{t("requestNew")}</Link>
               </Button>
             </div>
           </div>
@@ -136,14 +136,13 @@ export default function ResetPassword() {
               <CheckCircle2 className="h-8 w-8 text-primary" />
             </div>
             <h2 className="text-xl font-semibold font-mono mb-2">
-              Mot de passe modifié
+              {t("successTitle")}
             </h2>
             <p className="text-muted-foreground mb-6 max-w-sm">
-              Votre mot de passe a ete réinitialise avec succès. Vous pouvez
-              maintenant vous connecter avec votre nouveau mot de passe.
+              {t("successDescription")}
             </p>
             <Button asChild>
-              <Link href="/auth">Se connecter</Link>
+              <Link href="/auth">{t("signIn")}</Link>
             </Button>
           </div>
         )
@@ -153,10 +152,10 @@ export default function ResetPassword() {
           <>
             <CardHeader className="space-y-1 pb-6">
               <CardTitle className="text-2xl text-center font-mono">
-                Nouveau mot de passe
+                {t("newPasswordTitle")}
               </CardTitle>
               <CardDescription className="text-center">
-                Choisissez un nouveau mot de passe sécurisé pour votre compte.
+                {t("newPasswordSubtitle")}
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -171,8 +170,8 @@ export default function ResetPassword() {
                 <form.AppField name="password">
                   {field => (
                     <field.PasswordField
-                      label="Nouveau mot de passe"
-                      placeholder="Votre nouveau mot de passe"
+                      label={t("newPassword")}
+                      placeholder={t("newPasswordPlaceholder")}
                       showForgetPassword={false}
                     />
                   )}
@@ -180,15 +179,15 @@ export default function ResetPassword() {
                 <form.AppField name="confirmPassword">
                   {field => (
                     <field.PasswordField
-                      label="Confirmation du mot de passe"
-                      placeholder="Validez le mot de passe"
+                      label={t("confirmPassword")}
+                      placeholder={t("confirmPasswordPlaceholder")}
                       showForgetPassword={false}
                     />
                   )}
                 </form.AppField>
                 <form.AppForm>
                   <form.SubmitButton className="w-full">
-                    Réinitialiser le mot de passe
+                    {t("submit")}
                   </form.SubmitButton>
                 </form.AppForm>
               </form>
@@ -197,7 +196,7 @@ export default function ResetPassword() {
                 <Button variant="ghost" asChild>
                   <Link href="/auth">
                     <ArrowLeft className="mr-2 h-4 w-4" />
-                    Retour a la connexion
+                    {t("backToLogin")}
                   </Link>
                 </Button>
               </div>
@@ -232,16 +231,16 @@ export default function ResetPassword() {
             <p className="shrink-0">Paris 2024</p>
             <nav className="flex items-center gap-3 sm:gap-6">
               <a href="#" className="hover:text-primary transition-colors">
-                Aide
+                {t("footerHelp")}
               </a>
               <a href="#" className="hover:text-primary transition-colors">
-                Confidentialite
+                {t("footerPrivacy")}
               </a>
               <a
                 href="#"
                 className="hidden sm:inline hover:text-primary transition-colors"
               >
-                Mentions legales
+                {t("footerTerms")}
               </a>
             </nav>
           </div>

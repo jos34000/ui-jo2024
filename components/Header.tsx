@@ -35,27 +35,30 @@ import {
 } from "@/components/ui/sheet"
 import { CartSidebar } from "@/components/cart/CartSidebar"
 import { useCartStore } from "@/lib/stores/cart.store"
-
-const navigation = [
-  { name: "Événements", href: "#events" },
-  { name: "Sports", href: "#sports" },
-  { name: "Calendrier", href: "/calendrier" },
-]
+import { useTranslations } from "next-intl"
+import { LanguageSwitcher } from "@/components/LanguageSwitcher"
 
 export const Header = () => {
   const router = useRouter()
+  const t = useTranslations("header")
 
   const user = useAuthStore(state => state.user)
   const isAuthenticated = useAuthStore(state => state.isAuthenticated)
   const logout = useAuthStore(state => state.logout)
   const setSidebarOpen = useCartStore(state => state.setSidebarOpen)
 
+  const navigation = [
+    { name: t("nav.events"), href: "#events" },
+    { name: t("nav.sports"), href: "#sports" },
+    { name: t("nav.calendar"), href: "/calendrier" },
+  ]
+
   const handleLogout = async () => {
     try {
       await apiClient("/auth/logout", { method: "POST" })
       logout()
       router.push("/")
-      toast.success("Vous êtes maintenant déconnecté.")
+      toast.success(t("logoutSuccess"))
     } catch (error) {
       console.error("Logout failed:", error)
     }
@@ -78,13 +81,14 @@ export const Header = () => {
         </div>
 
         <div className="flex lg:hidden items-center gap-1">
+          <LanguageSwitcher />
           <ThemeToggle />
           <CartSidebar />
           <Sheet>
             <SheetTrigger asChild>
               <Button variant="ghost" size="icon">
                 <Menu className="h-5 w-5" />
-                <span className="sr-only">Ouvrir le menu</span>
+                <span className="sr-only">{t("openMenu")}</span>
               </Button>
             </SheetTrigger>
             <SheetContent side="right" className="w-[300px] p-0" showCloseButton={false}>
@@ -97,7 +101,7 @@ export const Header = () => {
                   <SheetClose asChild>
                     <Button variant="ghost" size="icon" className="shrink-0 h-7 w-7">
                       <X className="h-4 w-4" />
-                      <span className="sr-only">Fermer</span>
+                      <span className="sr-only">{t("closeMenu")}</span>
                     </Button>
                   </SheetClose>
                 </SheetTitle>
@@ -146,7 +150,7 @@ export const Header = () => {
                       className="flex items-center gap-3 rounded-md px-3 py-2.5 text-sm font-medium text-muted-foreground hover:bg-primary/5 hover:text-primary transition-colors"
                     >
                       <User className="h-4 w-4" />
-                      Mon compte
+                      {t("myAccount")}
                     </Link>
                   </SheetClose>
                   <SheetClose asChild>
@@ -155,7 +159,7 @@ export const Header = () => {
                       className="flex items-center gap-3 rounded-md px-3 py-2.5 text-sm font-medium text-muted-foreground hover:bg-primary/5 hover:text-primary transition-colors w-full text-left"
                     >
                       <ShoppingCart className="h-4 w-4" />
-                      Mon panier
+                      {t("myCart")}
                     </button>
                   </SheetClose>
                   <SheetClose asChild>
@@ -164,7 +168,7 @@ export const Header = () => {
                       className="flex items-center gap-3 rounded-md px-3 py-2.5 text-sm font-medium text-muted-foreground hover:bg-primary/5 hover:text-primary transition-colors"
                     >
                       <Ticket className="h-4 w-4" />
-                      Mes billets
+                      {t("myTickets")}
                     </Link>
                   </SheetClose>
                 </nav>
@@ -172,7 +176,7 @@ export const Header = () => {
 
               <SheetFooter className="flex flex-col gap-3 px-5 py-4">
                 <SheetClose asChild>
-                  <Button className="w-full">Acheter des billets</Button>
+                  <Button className="w-full">{t("buyTickets")}</Button>
                 </SheetClose>
                 {isAuthenticated && user ? (
                   <SheetClose asChild>
@@ -182,7 +186,7 @@ export const Header = () => {
                       onClick={handleLogout}
                     >
                       <LogOut className="mr-2 h-4 w-4" />
-                      Se déconnecter
+                      {t("logout")}
                     </Button>
                   </SheetClose>
                 ) : (
@@ -192,7 +196,7 @@ export const Header = () => {
                       className="w-full bg-transparent"
                       asChild
                     >
-                      <Link href="/auth">Mon compte</Link>
+                      <Link href="/auth">{t("myAccount")}</Link>
                     </Button>
                   </SheetClose>
                 )}
@@ -214,6 +218,7 @@ export const Header = () => {
         </div>
 
         <div className="hidden lg:flex lg:flex-1 lg:justify-end lg:gap-x-4 lg:items-center">
+          <LanguageSwitcher />
           <ThemeToggle />
           <CartSidebar />
 
@@ -224,7 +229,6 @@ export const Header = () => {
                   <span className="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-primary-foreground text-xs font-mono font-bold">
                     {initials}
                   </span>
-
                   <ChevronDown className="h-4 w-4 text-muted-foreground" />
                 </Button>
               </DropdownMenuTrigger>
@@ -239,13 +243,13 @@ export const Header = () => {
                 <DropdownMenuItem asChild>
                   <Link href="/auth" className="cursor-pointer">
                     <User className="mr-2 h-4 w-4" />
-                    Mon compte
+                    {t("myAccount")}
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
                   <Link href="/billets" className="cursor-pointer">
                     <Ticket className="mr-2 h-4 w-4" />
-                    Mes billets
+                    {t("myTickets")}
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
@@ -254,7 +258,7 @@ export const Header = () => {
                   className="text-destructive focus:text-destructive cursor-pointer"
                 >
                   <LogOut className="mr-2 h-4 w-4" />
-                  Se déconnecter
+                  {t("logout")}
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
@@ -262,7 +266,7 @@ export const Header = () => {
             <Button variant="ghost" size="icon" asChild>
               <Link href="/auth">
                 <User className="h-5 w-5" />
-                <span className="sr-only">Compte</span>
+                <span className="sr-only">{t("account")}</span>
               </Link>
             </Button>
           )}

@@ -2,6 +2,7 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { ArrowRight } from "lucide-react"
 import { SportResponseDTO } from "@/lib/types/sport.type"
+import { getTranslations, getMessages } from "next-intl/server"
 
 const getAllSport = async (): Promise<SportResponseDTO[] | null> => {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/sport`)
@@ -12,16 +13,20 @@ const getAllSport = async (): Promise<SportResponseDTO[] | null> => {
 export const SportCategories = async () => {
   const sports = await getAllSport()
   const featuredSports = sports?.splice(0, 12)
+  const t = await getTranslations("sportCategories")
+  const messages = await getMessages()
+  const sportNamesMap = (messages as Record<string, unknown>).sportNames as Record<string, string> | undefined
+  const translateSport = (name: string) => sportNamesMap?.[name] ?? name
+
   return (
     <section id="sports" className="py-20 bg-background">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold tracking-tight sm:text-4xl font-mono">
-            Explorer par sport
+            {t("title")}
           </h2>
           <p className="mt-2 text-muted-foreground max-w-2xl mx-auto">
-            {sports?.length} sports, 329 évènements. Trouvez les billets pour
-            vos sports préférés.
+            {t("subtitle", { count: sports?.length ?? 0 })}
           </p>
         </div>
 
@@ -36,10 +41,10 @@ export const SportCategories = async () => {
                 {sport.icon}
               </span>
               <span className="font-medium text-foreground text-sm">
-                {sport.name}
+                {translateSport(sport.name)}
               </span>
               <span className="text-xs text-muted-foreground mt-1">
-                {sport.eventCount} epreuves
+                {sport.eventCount} {t("events")}
               </span>
             </Link>
           ))}
@@ -48,7 +53,7 @@ export const SportCategories = async () => {
         <div className="text-center mt-10">
           <Button variant="outline" size="lg" asChild>
             <Link href="/calendrier">
-              Voir le calendrier complet
+              {t("viewCalendar")}
               <ArrowRight className="ml-2 h-4 w-4" />
             </Link>
           </Button>

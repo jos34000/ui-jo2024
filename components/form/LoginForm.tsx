@@ -11,6 +11,7 @@ import { useState } from "react"
 import { OTPDialog } from "@/components/OTPDialog"
 import { User } from "@/lib/types/user.types"
 import { User as UserIcon } from "lucide-react"
+import { useTranslations } from "next-intl"
 
 type LoginFormValues = z.infer<typeof loginSchema>
 
@@ -20,6 +21,7 @@ export const LoginForm = () => {
   const [pendingUser, setPendingUser] = useState<User | null>(null)
   const [pendingEmail, setPendingEmail] = useState("")
   const { setUser } = useAuthStore()
+  const t = useTranslations("loginForm")
 
   const loginForm = useAppForm({
     defaultValues: {
@@ -38,7 +40,7 @@ export const LoginForm = () => {
         })
 
         if (!response.ok) {
-          toast.error(await parseApiError(response, "Email ou mot de passe incorrect"))
+          toast.error(await parseApiError(response, t("error")))
           return
         }
 
@@ -50,12 +52,12 @@ export const LoginForm = () => {
           setShowOtpDialog(true)
         } else {
           setUser(data)
-          toast.success("Connexion réussie")
+          toast.success(t("success"))
           router.push("/")
         }
       } catch (error) {
         console.error("Login error:", error)
-        toast.error("Une erreur est survenue")
+        toast.error(t("genericError"))
       }
     },
     validators: {
@@ -84,8 +86,8 @@ export const LoginForm = () => {
         <loginForm.AppField name="email">
           {field => (
             <field.TextField
-              label="E-mail"
-              placeholder="Entrez votre mail"
+              label={t("email")}
+              placeholder={t("emailPlaceholder")}
               icon={<UserIcon />}
             />
           )}
@@ -94,8 +96,8 @@ export const LoginForm = () => {
         <loginForm.AppField name="password">
           {field => (
             <field.PasswordField
-              label="Mot de passe"
-              placeholder="Entrez votre mot de passe ..."
+              label={t("password")}
+              placeholder={t("passwordPlaceholder")}
               showForgetPassword={true}
               resetPasswordMode="request"
             ></field.PasswordField>
@@ -108,7 +110,7 @@ export const LoginForm = () => {
 
         <loginForm.AppForm>
           <loginForm.SubmitButton className="w-full">
-            Se connecter
+            {t("submit")}
           </loginForm.SubmitButton>
         </loginForm.AppForm>
       </form>

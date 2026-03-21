@@ -1,7 +1,11 @@
+"use client"
+
 import React from "react"
 import Link from "next/link"
+import { useTranslations } from "next-intl"
 
 export const AuthFooter = () => {
+  const t = useTranslations("auth")
   return (
     <footer className="border-t border-border shrink-0">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 py-4">
@@ -9,16 +13,16 @@ export const AuthFooter = () => {
           <p className="shrink-0">Paris 2024</p>
           <nav className="flex items-center gap-3 sm:gap-6">
             <Link href="#" className="hover:text-primary transition-colors">
-              Aide
+              {t("footer.help")}
             </Link>
             <Link href="#" className="hover:text-primary transition-colors">
-              Confidentialité
+              {t("footer.privacy")}
             </Link>
             <Link
               href="#"
               className="hidden sm:inline hover:text-primary transition-colors"
             >
-              Mentions légales
+              {t("footer.terms")}
             </Link>
           </nav>
         </div>

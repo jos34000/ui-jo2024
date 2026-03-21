@@ -1,3 +1,8 @@
+"use client"
+
+import { useTranslations } from "next-intl"
+import { useTranslateSport } from "@/lib/utils/i18nHelpers"
+
 interface SportFilterProps {
   selected: string | null
   onSelect: (sport: string | null) => void
@@ -9,6 +14,8 @@ export const SportFilter = ({
   onSelect,
   categories,
 }: SportFilterProps) => {
+  const t = useTranslations("calendar")
+  const translateSport = useTranslateSport()
   return (
     <div className="flex flex-wrap gap-1.5">
       <button
@@ -20,7 +27,7 @@ export const SportFilter = ({
             : "bg-primary text-primary-foreground"
         }`}
       >
-        Toutes catégories
+        {t("allCategories")}
       </button>
       {categories.map((cat, index) => (
         <button
@@ -32,7 +39,7 @@ export const SportFilter = ({
               : "bg-card border border-border text-muted-foreground hover:border-primary/40 hover:text-foreground"
           }`}
         >
-          {cat}
+          {translateSport(cat)}
         </button>
       ))}
     </div>

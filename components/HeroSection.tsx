@@ -4,10 +4,12 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { ArrowRight, Calendar, MapPin, Star, Ticket } from "lucide-react"
 import { useAuthStore } from "@/lib/stores/auth.store"
+import { useTranslations } from "next-intl"
 
 export const HeroSection = () => {
   const user = useAuthStore(state => state.user)
   const isAuthenticated = useAuthStore(state => state.isAuthenticated)
+  const t = useTranslations("hero")
 
   return (
     <section className="relative overflow-hidden bg-background">
@@ -23,24 +25,22 @@ export const HeroSection = () => {
               <>
                 <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-1.5 text-sm font-medium text-primary">
                   <Star className="h-3.5 w-3.5 fill-primary" />
-                  {"Bienvenue dans votre espace"}
+                  {t("authenticated.badge")}
                 </div>
 
                 <h1 className="text-4xl font-bold tracking-tight sm:text-6xl lg:text-7xl text-balance font-mono">
-                  Bonjour,{" "}
+                  {t("authenticated.greeting")}{" "}
                   <span className="text-primary">{user.firstName.trim()}</span>
                 </h1>
 
                 <p className="text-lg text-muted-foreground max-w-lg leading-relaxed">
-                  {
-                    "Retrouvez vos billets, explorez les prochains évènements et ne manquez aucun moment des Jeux Olympiques de Paris 2024."
-                  }
+                  {t("authenticated.subtitle")}
                 </p>
 
                 <div className="flex flex-col sm:flex-row gap-4">
                   <Button size="lg" className="text-base">
                     <Ticket className="mr-2 h-4 w-4" />
-                    Mes billets
+                    {t("authenticated.myTickets")}
                   </Button>
                   <Button
                     size="lg"
@@ -49,7 +49,7 @@ export const HeroSection = () => {
                     asChild
                   >
                     <Link href="#events">
-                      Explorer les évènements
+                      {t("authenticated.explore")}
                       <ArrowRight className="ml-2 h-4 w-4" />
                     </Link>
                   </Button>
@@ -62,24 +62,22 @@ export const HeroSection = () => {
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
                     <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
                   </span>
-                  Billets disponibles maintenant
+                  {t("unauthenticated.badge")}
                 </div>
 
                 <h1 className="text-4xl font-bold tracking-tight sm:text-6xl lg:text-7xl text-balance font-mono">
-                  Vivez les{" "}
-                  <span className="text-primary">Jeux Olympiques</span> de Paris
-                  2024
+                  {t.rich("unauthenticated.title", {
+                    highlight: (chunks) => <span className="text-primary">{chunks}</span>,
+                  })}
                 </h1>
 
                 <p className="text-lg text-muted-foreground max-w-lg leading-relaxed">
-                  {
-                    "Soyez au cœur de l'action. Réservez vos places pour assister aux plus grands athlètes du monde dans la ville lumière."
-                  }
+                  {t("unauthenticated.subtitle")}
                 </p>
 
                 <div className="flex flex-col sm:flex-row gap-4">
                   <Button size="lg" className="text-base">
-                    Voir les évènements
+                    {t("unauthenticated.seeEvents")}
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
                   <Button
@@ -87,7 +85,7 @@ export const HeroSection = () => {
                     variant="outline"
                     className="text-base bg-transparent"
                   >
-                    {"Guide d'achat"}
+                    {t("unauthenticated.buyingGuide")}
                   </Button>
                 </div>
               </>
@@ -100,7 +98,7 @@ export const HeroSection = () => {
                   <span className="text-2xl font-bold">16</span>
                 </div>
                 <p className="text-sm text-muted-foreground">
-                  Jours de compétition
+                  {t("stats.days")}
                 </p>
               </div>
               <div className="space-y-1">
@@ -108,14 +106,14 @@ export const HeroSection = () => {
                   <Ticket className="h-4 w-4" />
                   <span className="text-2xl font-bold">32</span>
                 </div>
-                <p className="text-sm text-muted-foreground">Sports</p>
+                <p className="text-sm text-muted-foreground">{t("stats.sports")}</p>
               </div>
               <div className="space-y-1">
                 <div className="flex items-center gap-2 text-primary">
                   <MapPin className="h-4 w-4" />
                   <span className="text-2xl font-bold">35</span>
                 </div>
-                <p className="text-sm text-muted-foreground">Sites</p>
+                <p className="text-sm text-muted-foreground">{t("stats.venues")}</p>
               </div>
             </div>
           </div>
@@ -126,7 +124,7 @@ export const HeroSection = () => {
                 <div className="col-span-2 row-span-2 bg-card border border-border rounded-2xl p-6 flex flex-col justify-between min-h-[280px]">
                   <div>
                     <span className="text-xs font-mono uppercase tracking-wider text-muted-foreground">
-                      Jeux Olympiques
+                      {t("labels.olympicGames")}
                     </span>
                     <h3 className="text-5xl sm:text-6xl font-mono font-bold mt-2 tracking-tight">
                       <span className="text-[#0081C8]">P</span>
@@ -153,20 +151,20 @@ export const HeroSection = () => {
                 <div className="bg-[#0081C8] rounded-2xl p-4 flex flex-col justify-center items-center text-white">
                   <span className="text-3xl font-mono font-bold">206</span>
                   <span className="text-xs opacity-80 text-center">
-                    Nations
+                    {t("labels.nations")}
                   </span>
                 </div>
 
                 <div className="bg-[#FCB131] rounded-2xl p-4 flex flex-col justify-center items-center text-black">
                   <span className="text-3xl font-mono font-bold">329</span>
                   <span className="text-xs opacity-80 text-center">
-                    Épreuves
+                    {t("labels.events")}
                   </span>
                 </div>
 
                 <div className="bg-[#00A651] rounded-2xl p-4 flex flex-col justify-center items-center text-white">
                   <span className="text-2xl font-mono font-bold">26/07</span>
-                  <span className="text-xs opacity-80">Début</span>
+                  <span className="text-xs opacity-80">{t("labels.start")}</span>
                 </div>
 
                 <div className="bg-card border border-border rounded-2xl p-4 flex flex-col justify-center items-center">
@@ -174,13 +172,13 @@ export const HeroSection = () => {
                     10K+
                   </span>
                   <span className="text-xs text-muted-foreground">
-                    Athlètes
+                    {t("labels.athletes")}
                   </span>
                 </div>
 
                 <div className="bg-[#EE334E] rounded-2xl p-4 flex flex-col justify-center items-center text-white">
                   <span className="text-2xl font-mono font-bold">11/08</span>
-                  <span className="text-xs opacity-80">Fin</span>
+                  <span className="text-xs opacity-80">{t("labels.end")}</span>
                 </div>
               </div>
             </div>
