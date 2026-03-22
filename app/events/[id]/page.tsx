@@ -25,7 +25,7 @@ import { OfferDTO } from "@/lib/types/offer.type"
 import { getTranslations, getMessages, getLocale } from "next-intl/server"
 
 const getThisEvent = async (id: number, locale: string): Promise<OlympicEvent | null> => {
-  const url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/events/${id}`
+  const url = `${(process.env.API_BASE_URL ?? process.env.NEXT_PUBLIC_API_BASE_URL)}/events/${id}`
   const res = await fetch(url, {
     cache: "no-store",
     headers: { "Accept-Language": locale },
@@ -38,7 +38,7 @@ const getThisEvent = async (id: number, locale: string): Promise<OlympicEvent | 
 }
 
 const getOffers = async (): Promise<OfferDTO[]> => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/offer/all`, {
+  const res = await fetch(`${(process.env.API_BASE_URL ?? process.env.NEXT_PUBLIC_API_BASE_URL)}/offer/all`, {
     cache: "no-store",
   })
   if (!res.ok) return []
@@ -50,7 +50,7 @@ const getAllEventsBySport = async (
   thisId: number,
   locale: string,
 ): Promise<OlympicEvent[] | null> => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/events/sport/${sport}`, {
+  const res = await fetch(`${(process.env.API_BASE_URL ?? process.env.NEXT_PUBLIC_API_BASE_URL)}/events/sport/${sport}`, {
     cache: "no-store",
     headers: { "Accept-Language": locale },
   })

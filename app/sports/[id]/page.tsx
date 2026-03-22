@@ -20,7 +20,7 @@ const getCurrentSport = async (
   id: number,
 ): Promise<SportResponseDTO | null> => {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_BASE_URL}/sport/${id}`,
+    `${(process.env.API_BASE_URL ?? process.env.NEXT_PUBLIC_API_BASE_URL)}/sport/${id}`,
     {
       cache: "no-store",
     },
@@ -31,7 +31,7 @@ const getCurrentSport = async (
 }
 
 const getAllSports = async (): Promise<SportResponseDTO[] | null> => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/sport`)
+  const res = await fetch(`${(process.env.API_BASE_URL ?? process.env.NEXT_PUBLIC_API_BASE_URL)}/sport`)
   if (!res.ok) return null
   return await res.json()
 }
