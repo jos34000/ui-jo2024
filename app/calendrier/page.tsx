@@ -7,7 +7,7 @@ export const dynamic = "force-dynamic"
 
 async function getEvents(locale: string) {
   try {
-    const response = await fetch(`${(process.env.API_BASE_URL ?? process.env.NEXT_PUBLIC_API_BASE_URL)}/events/all`, {
+    const response = await fetch(`${process.env.API_BASE_URL}/events/all`, {
       cache: "force-cache",
       next: { revalidate: 60 },
       headers: { "Accept-Language": locale },

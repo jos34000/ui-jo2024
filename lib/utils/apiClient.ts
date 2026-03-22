@@ -1,7 +1,7 @@
 import { getAuthStore } from "@/lib/stores/auth.store"
 import { resolveBackendErrorKey } from "@/lib/utils/apiErrors"
 
-const API_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:8000"
+const API_BASE = "/api"
 const PUBLIC_ENDPOINTS = ["/auth/", "/2fa/send", "/2fa/verify"]
 
 let isRefreshing = false
@@ -13,7 +13,7 @@ async function refreshTokens(): Promise<boolean> {
   }
 
   isRefreshing = true
-  refreshPromise = fetch(`${API_URL}/auth/refresh`, {
+  refreshPromise = fetch(`${API_BASE}/auth/refresh`, {
     method: "POST",
     credentials: "include",
   })
@@ -27,7 +27,7 @@ async function refreshTokens(): Promise<boolean> {
 }
 
 export async function apiClient(endpoint: string, options?: RequestInit) {
-  let response = await fetch(`${API_URL}${endpoint}`, {
+  let response = await fetch(`${API_BASE}${endpoint}`, {
     ...options,
     credentials: "include",
     headers: {
@@ -43,7 +43,7 @@ export async function apiClient(endpoint: string, options?: RequestInit) {
     const refreshed = await refreshTokens()
 
     if (refreshed) {
-      response = await fetch(`${API_URL}${endpoint}`, {
+      response = await fetch(`${API_BASE}${endpoint}`, {
         ...options,
         credentials: "include",
         headers: {

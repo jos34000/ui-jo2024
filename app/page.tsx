@@ -11,7 +11,7 @@ import { getLocale } from "next-intl/server"
 export const dynamic = "force-dynamic"
 
 const HomePage = async () => {
-  const apiUrl = (process.env.API_BASE_URL ?? process.env.NEXT_PUBLIC_API_BASE_URL)
+  const apiUrl = process.env.API_BASE_URL
   const locale = await getLocale()
   const events = await fetch(`${apiUrl}/events/all`, {
     headers: { "Accept-Language": locale },
