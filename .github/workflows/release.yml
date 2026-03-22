@@ -14,6 +14,9 @@ permissions:
 jobs:
   release:
     runs-on: ubuntu-latest
+    outputs:
+      released: ${{ steps.check_release.outputs.released }}
+      version: ${{ steps.check_release.outputs.version }}
 
     steps:
       - uses: actions/checkout@v3
@@ -42,6 +45,10 @@ jobs:
         run: |
           pnpm add -g semantic-release @semantic-release/git @semantic-release/changelog @semantic-release/exec @semantic-release/github
 
+      - name: Get pre-release tag
+        id: pre_tag
+        run: echo "tag=$(git describe --tags --abbrev=0 2>/dev/null || echo '')" >> $GITHUB_OUTPUT
+
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -50,6 +57,18 @@ jobs:
           GIT_COMMITTER_NAME: Release Bot
           GIT_COMMITTER_EMAIL: noreply@project.com
         run: pnpm exec semantic-release
+
+      - name: Check new release
+        id: check_release
+        run: |
+          git fetch --tags
+          NEW_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "")
+          if [ -n "$NEW_TAG" ] && [ "$NEW_TAG" != "${{ steps.pre_tag.outputs.tag }}" ]; then
+            echo "released=true" >> $GITHUB_OUTPUT
+            echo "version=$NEW_TAG" >> $GITHUB_OUTPUT
+          else
+            echo "released=false" >> $GITHUB_OUTPUT
+          fi
 
       - name: Create release branch
         env:
@@ -62,3 +81,26 @@ jobs:
             git remote set-url origin "https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git"
             git push origin "$BRANCH"
           fi
+
+  docker:
+    needs: release
+    if: needs.release.outputs.released == 'true'
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: |
+            ${{ secrets.DOCKER_USERNAME }}/ui-jo2024:${{ needs.release.outputs.version }}
+            ${{ secrets.DOCKER_USERNAME }}/ui-jo2024:latest
