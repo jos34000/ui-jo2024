@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button"
 import { CartItemResponse } from "@/lib/types/cart.type"
 import { useCartStore } from "@/lib/stores/cart.store"
 import { toast } from "sonner"
+import { useTranslations } from "next-intl"
 
 interface CartItemCardProps {
   item: CartItemResponse
@@ -31,13 +32,14 @@ function formatPrice(amount: number): string {
 export const CartItemCard = ({ item }: CartItemCardProps) => {
   const updateQuantity = useCartStore(state => state.updateQuantity)
   const [isUpdating, setIsUpdating] = useState(false)
+  const t = useTranslations("cart")
 
   const handleQuantityChange = async (newQuantity: number) => {
     setIsUpdating(true)
     try {
       await updateQuantity(item.id, newQuantity)
     } catch {
-      toast.error("Impossible de modifier la quantité")
+      toast.error(t("updateError"))
     } finally {
       setIsUpdating(false)
     }
@@ -62,8 +64,7 @@ export const CartItemCard = ({ item }: CartItemCardProps) => {
               </span>
               <span className="flex items-center gap-1.5 text-xs text-muted-foreground">
                 <Ticket className="h-3.5 w-3.5 shrink-0" />
-                {item.offer.name} — {item.offer.numberOfTickets * item.quantity} billet
-                {item.offer.numberOfTickets * item.quantity > 1 ? "s" : ""}
+                {item.offer.name} — {t("tickets", { count: item.offer.numberOfTickets * item.quantity })}
               </span>
             </div>
           </div>
@@ -71,7 +72,7 @@ export const CartItemCard = ({ item }: CartItemCardProps) => {
             <div className="text-right">
               <p className="font-bold text-sm">{formatPrice(item.subtotal)}</p>
               <p className="text-xs text-muted-foreground mt-0.5">
-                {formatPrice(item.unitPrice)} / formule
+                {formatPrice(item.unitPrice)} {t("formule")}
               </p>
             </div>
             <div className="flex items-center gap-1">
@@ -81,7 +82,7 @@ export const CartItemCard = ({ item }: CartItemCardProps) => {
                 className="h-6 w-6"
                 onClick={() => handleQuantityChange(item.quantity - 1)}
                 disabled={isUpdating}
-                aria-label="Diminuer la quantité"
+                aria-label={t("decreaseQty")}
               >
                 <Minus className="h-3 w-3" />
               </Button>
@@ -94,7 +95,7 @@ export const CartItemCard = ({ item }: CartItemCardProps) => {
                 className="h-6 w-6"
                 onClick={() => handleQuantityChange(item.quantity + 1)}
                 disabled={isUpdating}
-                aria-label="Augmenter la quantité"
+                aria-label={t("increaseQty")}
               >
                 <Plus className="h-3 w-3" />
               </Button>

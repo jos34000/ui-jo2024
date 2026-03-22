@@ -9,6 +9,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
+import { useTranslations } from "next-intl"
+import { translateValidationError } from "@/lib/utils/validationErrors"
 
 interface SelectOption {
   label: string
@@ -26,8 +28,10 @@ export const SelectField = ({
   placeholder,
   ...selectProps
 }: Readonly<SelectFieldProps>) => {
+  const tV = useTranslations("validation")
   const field = useFieldContext<string>()
-  const error = field.state.meta.errors[0]?.message
+  const rawError = field.state.meta.errors[0]?.message
+  const error = rawError ? translateValidationError(rawError, tV) : undefined
 
   return (
     <div className="space-y-2">

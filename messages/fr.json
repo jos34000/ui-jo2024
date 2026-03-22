@@ -1,0 +1,1031 @@
+{
+  "common": {
+    "loading": "Chargement…",
+    "error": "Une erreur est survenue",
+    "close": "Fermer",
+    "cancel": "Annuler",
+    "save": "Enregistrer",
+    "back": "Retour",
+    "backHome": "Retour à l'accueil",
+    "forgotPassword": "Mot de passe oublié ?",
+    "showPassword": "Afficher le mot de passe"
+  },
+  "header": {
+    "nav": {
+      "events": "Événements",
+      "sports": "Sports",
+      "calendar": "Calendrier"
+    },
+    "myAccount": "Mon compte",
+    "myCart": "Mon panier",
+    "myTickets": "Mes billets",
+    "buyTickets": "Acheter des billets",
+    "logout": "Se déconnecter",
+    "account": "Compte",
+    "openMenu": "Ouvrir le menu",
+    "closeMenu": "Fermer",
+    "logoutSuccess": "Vous êtes maintenant déconnecté.",
+    "mainMenuLabel": "Menu principal",
+    "userMenuLabel": "Menu utilisateur"
+  },
+  "footer": {
+    "description": "Billetterie officielle des Jeux Olympiques et Paralympiques de Paris 2024.",
+    "copyright": "© 2024 Comité d'Organisation des Jeux Olympiques et Paralympiques de Paris 2024. Tous droits réservés.",
+    "sections": {
+      "ticketing": "Billetterie",
+      "popularSports": "Sports populaires",
+      "information": "Informations",
+      "legal": "Légal"
+    },
+    "links": {
+      "allEvents": "Tous les événements",
+      "calendar": "Calendrier",
+      "resale": "Revente officielle",
+      "familyPack": "Pack famille",
+      "athletics": "Athlétisme",
+      "swimming": "Natation",
+      "basketball": "Basketball",
+      "football": "Football",
+      "about": "À propos",
+      "faq": "FAQ",
+      "accessibility": "Accessibilité",
+      "contact": "Contact",
+      "mentions": "Mentions légales",
+      "terms": "Conditions générales",
+      "privacy": "Politique de confidentialité",
+      "cookiesPolicy": "Politique des cookies",
+      "cookies": "Cookies"
+    }
+  },
+  "hero": {
+    "authenticated": {
+      "badge": "Bienvenue dans votre espace",
+      "greeting": "Bonjour,",
+      "subtitle": "Retrouvez vos billets, explorez les prochains évènements et ne manquez aucun moment des Jeux Olympiques de Paris 2024.",
+      "myTickets": "Mes billets",
+      "explore": "Explorer les évènements"
+    },
+    "unauthenticated": {
+      "badge": "Billets disponibles maintenant",
+      "title": "Vivez les <highlight>Jeux Olympiques</highlight> de Paris 2024",
+      "subtitle": "Soyez au cœur de l'action. Réservez vos places pour assister aux plus grands athlètes du monde dans la ville lumière.",
+      "seeEvents": "Voir les évènements",
+      "buyingGuide": "Guide d'achat"
+    },
+    "stats": {
+      "days": "Jours de compétition",
+      "sports": "Sports",
+      "venues": "Sites"
+    },
+    "labels": {
+      "olympicGames": "Jeux Olympiques",
+      "nations": "Nations",
+      "events": "Épreuves",
+      "athletes": "Athlètes",
+      "start": "Début",
+      "end": "Fin"
+    }
+  },
+  "featuredEvents": {
+    "title": "Évènements populaires",
+    "subtitle": "Les évènements les plus attendus des Jeux Olympiques 2024",
+    "viewCalendar": "Voir tout le calendrier",
+    "status": {
+      "available": "Disponible",
+      "limited": "Dernières places",
+      "soldout": "Complet"
+    },
+    "reserve": "Réserver",
+    "soldout": "Complet"
+  },
+  "sportCategories": {
+    "title": "Explorer par sport",
+    "subtitle": "{count} sports, 329 évènements. Trouvez les billets pour vos sports préférés.",
+    "events": "épreuves",
+    "viewCalendar": "Voir le calendrier complet"
+  },
+  "offers": {
+    "title": "Nos offres",
+    "subtitle": "Choisissez la formule adaptée à votre expérience. Chaque billet donne accès à l'ensemble des évènements.",
+    "mostChosen": "Le plus choisi",
+    "choose": "Choisir {name}",
+    "ticketCount": "{count, plural, one {# billet} other {# billets}}"
+  },
+  "cart": {
+    "title": "Mon panier",
+    "articles": "{count, plural, one {# article} other {# articles}}",
+    "empty": {
+      "title": "Votre panier est vide",
+      "subtitle": "Ajoutez des billets pour les retrouver ici."
+    },
+    "notAuth": {
+      "title": "Connectez-vous pour voir votre panier",
+      "subtitle": "Vos articles seront sauvegardés dans votre compte."
+    },
+    "login": "Se connecter",
+    "total": "Total",
+    "checkout": "Procéder au paiement",
+    "clearCart": "Vider le panier",
+    "cleared": "Panier vidé",
+    "clearError": "Impossible de vider le panier",
+    "formule": "/ formule",
+    "tickets": "{count, plural, one {# billet} other {# billets}}",
+    "decreaseQty": "Diminuer la quantité",
+    "increaseQty": "Augmenter la quantité",
+    "updateError": "Impossible de modifier la quantité",
+    "close": "Fermer"
+  },
+  "reservation": {
+    "title": "Réserver des billets",
+    "added": {
+      "title": "Ajouté au panier",
+      "subtitle": "{name} a été ajouté à votre panier. Finalisez votre commande depuis le panier."
+    },
+    "continue": "Continuer",
+    "viewCart": "Voir le panier",
+    "ticketType": "Type de billet",
+    "selectOffer": "Sélectionnez une formule",
+    "tickets": "{count, plural, one {# billet} other {# billets}}",
+    "addToCart": "Ajouter au panier",
+    "adding": "Ajout en cours...",
+    "cancel": "Annuler",
+    "disabled": "Complet",
+    "reserveNow": "Réserver maintenant",
+    "info": "Votre billet donne accès à tous les évènements des Jeux Olympiques. Les places sont attribuées selon la disponibilité.",
+    "error": "Une erreur est survenue. Veuillez réessayer."
+  },
+  "auth": {
+    "login": "Connexion",
+    "register": "Créer un compte",
+    "loginSubtitle": "Connectez-vous pour accéder à vos billets et achats",
+    "registerSubtitle": "Rejoignez la communauté Paris 2024",
+    "accountTitle": "Votre compte",
+    "accountSubtitle": "Créez votre compte pour accéder à la billetterie officielle des Jeux Olympiques et Paralympiques de Paris 2024.",
+    "moreThan10M": "Plus de 10 millions de billets disponibles pour les Jeux Olympiques et Paralympiques de Paris 2024.",
+    "backHome": "Retour à l'accueil",
+    "noAccount": "Pas encore de compte ?",
+    "alreadyAccount": "Déjà un compte ?",
+    "features": {
+      "priority": {
+        "title": "Accès prioritaire",
+        "description": "Soyez informé en avant-première des nouvelles ventes de billets"
+      },
+      "secure": {
+        "title": "Billets sécurisés",
+        "description": "Vos billets sont garantis authentiques et protégés"
+      },
+      "history": {
+        "title": "Historique complet",
+        "description": "Retrouvez tous vos achats et billets en un seul endroit"
+      }
+    },
+    "header": {
+      "tagline": "JEUX OLYMPIQUES · BILLETTERIE OFFICIELLE"
+    },
+    "footer": {
+      "help": "Aide",
+      "privacy": "Confidentialité",
+      "terms": "CGV"
+    }
+  },
+  "loginForm": {
+    "email": "E-mail",
+    "emailPlaceholder": "Entrez votre mail",
+    "password": "Mot de passe",
+    "passwordPlaceholder": "Entrez votre mot de passe ...",
+    "submit": "Se connecter",
+    "success": "Connexion réussie",
+    "error": "Email ou mot de passe incorrect",
+    "genericError": "Une erreur est survenue"
+  },
+  "registerForm": {
+    "firstName": "Prénom",
+    "firstNamePlaceholder": "Entrez votre prénom",
+    "lastName": "Nom",
+    "lastNamePlaceholder": "Entrez votre nom de famille",
+    "email": "E-mail",
+    "emailPlaceholder": "Entrez votre mail",
+    "password": "Mot de passe",
+    "passwordPlaceholder": "Entrez votre mot de passe",
+    "confirmPassword": "Confirmation",
+    "confirmPasswordPlaceholder": "Confirmez votre mot de passe",
+    "submit": "S'enregistrer",
+    "success": "Inscription réussie",
+    "error": "Erreur lors de l'inscription",
+    "genericError": "Une erreur est survenue"
+  },
+  "otp": {
+    "title": "Vérification en deux étapes",
+    "description": "Un code de vérification a été envoyé à {email}",
+    "instruction": "Consultez votre boite de reception et entrez le code à 6 chiffres",
+    "label": "Code",
+    "submit": "Envoyer",
+    "noCode": "Vous n'avez pas reçu le code ? Vérifiez vos spams ou",
+    "resend": "renvoyez-le",
+    "success": "Connexion réussie!",
+    "invalidCode": "Code invalide."
+  },
+  "profile": {
+    "title": "Informations du compte",
+    "editTitle": "Modifier mes informations",
+    "description": "Vos informations personnelles",
+    "editDescription": "Mettez à jour vos informations personnelles",
+    "edit": "Modifier",
+    "greeting": "Bonjour, {name}",
+    "welcomeSubtitle": "Bienvenue dans votre espace personnel Paris 2024",
+    "fullName": "Nom complet",
+    "email": "Email",
+    "tickets": "Billets",
+    "noTickets": "Aucun billet pour le moment",
+    "loadingTickets": "Chargement…",
+    "recentTickets": "Billets récents",
+    "viewAll": "Voir tout →",
+    "seatsCount": "{count, plural, one {# place} other {# places}}",
+    "buyTickets": "Acheter des billets",
+    "exploreEvents": "Explorez les évènements",
+    "myTickets": "Mes billets",
+    "viewReservations": "Consultez vos réservations",
+    "ordersCount": "{count, plural, one {# commande} other {# commandes}}",
+    "backHome": "Retour à l'accueil",
+    "changePassword": "Changer le mot de passe",
+    "logout": "Se déconnecter",
+    "ticketSummaryOrders": "{count, plural, one {# commande} other {# commandes}}",
+    "ticketSummarySeats": "{count, plural, one {# place} other {# places}}",
+    "ticketSummaryActive": "{count, plural, one {# actif} other {# actifs}}",
+    "status": {
+      "VALID": "Actif",
+      "USED": "Utilisé",
+      "CANCELLED": "Annulé"
+    },
+    "identity": "Identité",
+    "contact": "Contact",
+    "security": "Sécurité",
+    "firstName": "Prénom",
+    "lastName": "Nom",
+    "emailLabel": "Email",
+    "firstNamePlaceholder": "Votre prénom",
+    "lastNamePlaceholder": "Votre nom",
+    "emailPlaceholder": "votre@email.com",
+    "save": "Modifier",
+    "updateError": "Erreur lors de la mise à jour du profil"
+  },
+  "tickets": {
+    "title": "Mes billets",
+    "noOrders": "Aucune commande pour le moment",
+    "ordersCount": "{count, plural, one {# commande} other {# commandes}}",
+    "seatsCount": "{count, plural, one {# place} other {# places}}",
+    "activeCount": "{count, plural, one {# actif} other {# actifs}}",
+    "usedCount": "{count} utilisé{count, plural, one {} other {s}}",
+    "ref": "Réf. {ref}",
+    "purchasedOn": "Acheté le {date}",
+    "downloadPdf": "Télécharger PDF",
+    "downloading": "Téléchargement…",
+    "noTickets": "Aucun billet pour le moment",
+    "noTicketsSubtitle": "Vos billets apparaîtront ici après un achat.",
+    "discover": "Découvrir les épreuves",
+    "loadingError": "Erreur lors du chargement",
+    "status": {
+      "VALID": "Actif",
+      "USED": "Utilisé",
+      "CANCELLED": "Annulé"
+    }
+  },
+  "checkout": {
+    "title": "Finaliser la commande",
+    "back": "← Retour",
+    "summary": "Récapitulatif",
+    "totalTickets": "{count, plural, one {# billet} other {# billets}}",
+    "cardHolder": "Titulaire de la carte",
+    "cardHolderPlaceholder": "Jean Dupont",
+    "cardNumber": "Numéro de carte",
+    "cardSection": "Carte bancaire",
+    "totalToPay": "Total à payer",
+    "pay": "Payer {amount}",
+    "processing": "Traitement en cours…",
+    "testEnv": "Environnement de test",
+    "clickToCopy": "Cliquez sur un numéro pour le copier dans le formulaire.",
+    "testCards": {
+      "accepted": "Paiement accepté",
+      "mastercard": "Accepté (Mastercard)",
+      "declined": "Carte déclinée",
+      "insufficientFunds": "Fonds insuffisants",
+      "expired": "Carte expirée"
+    },
+    "paymentError": "Erreur lors du paiement"
+  },
+  "confirmation": {
+    "title": "Paiement confirmé !",
+    "subtitle": "Votre commande a été enregistrée avec succès.",
+    "reference": "Référence",
+    "date": "Date",
+    "amount": "Montant total",
+    "ticketsGenerated": "Billets générés",
+    "ticketsCount": "{count, plural, one {# billet} other {# billets}}",
+    "yourTickets": "Vos billets",
+    "emailSent": "Vos billets ont été envoyés par email avec le PDF joint automatiquement.",
+    "backHome": "Retour à l'accueil",
+    "notFound": "Transaction introuvable",
+    "error": "Transaction introuvable"
+  },
+  "events": {
+    "home": "Accueil",
+    "calendar": "Calendrier",
+    "available": "Disponible",
+    "limited": "Dernières places",
+    "soldout": "Complet",
+    "capacityTotal": "Capacité totale",
+    "spectators": "spectateurs",
+    "availableSlots": "Places disponibles",
+    "location": "Lieu",
+    "favorites": "Favoris",
+    "share": "Partager",
+    "viewCalendar": "Calendrier",
+    "availability": "Disponibilité",
+    "placesAvailable": "{count} places",
+    "percentSold": "{percent}% des places vendues",
+    "startAt": "Debut à {time}",
+    "soldoutInfo": "Cet évènement est complet. Consultez les autres épreuves de {sport}.",
+    "reservation": "Reservation",
+    "otherEvents": "Autres épreuves de {sport}",
+    "otherCeremonies": "Autres cérémonies"
+  },
+  "sports": {
+    "home": "Accueil",
+    "sports": "Sports",
+    "viewCalendar": "Voir le calendrier",
+    "allSports": "Tous les sports",
+    "events": "Épreuves",
+    "sites": "Sites",
+    "site": "Site",
+    "phases": "Phases",
+    "discoverOthers": "Découvrir d'autres sports",
+    "eventsCount": "épreuves"
+  },
+  "calendar": {
+    "title": "Calendrier des épreuves",
+    "subtitle": "Du 26 juillet au 11 août 2024 — 17 jours de compétition",
+    "events": "évènements",
+    "event": "évènement",
+    "search": "Rechercher...",
+    "clearSearch": "Effacer la recherche",
+    "allCategories": "Toutes catégories",
+    "noEventsFound": "Aucun évènement",
+    "noEventsForDay": "Pas d'évènement programmé pour cette journée.",
+    "noEventsForFilter": "Aucun évènement pour ce sport à cette date. Essayez un autre filtre ou changez de jour.",
+    "july": "Juillet",
+    "august": "Août",
+    "scrollLeft": "Défiler à gauche",
+    "scrollRight": "Défiler à droite",
+    "viewEventsOf": "Voir les évènements du {date}"
+  },
+  "notFound": {
+    "title": "Page introuvable",
+    "subtitle": "La page que vous recherchez n'existe pas.",
+    "backHome": "Retour à l'accueil",
+    "eventNotFound": "Évènement introuvable",
+    "sportNotFound": "Sport introuvable",
+    "noEventsFound": "Aucun évènement trouvé",
+    "noEventsFoundDesc": "Aucun évènement ne correspond à votre recherche.",
+    "noEventsForSport": "Aucun évènement pour ce sport pour le moment.",
+    "tryOtherFilters": "Essayez d'autres filtres ou revenez plus tard.",
+    "pageDescription": "La page que vous recherchez n'existe pas ou a été déplacée.",
+    "eventDescription": "Cet évènement n'existe pas ou n'est plus disponible.",
+    "sportDescription": "Ce sport ne fait pas partie du programme Paris 2024.",
+    "ticketNotFound": "Billet introuvable",
+    "ticketDescription": "Ce billet n'existe pas ou a été annulé.",
+    "explore": "Ou explorez",
+    "calendar": "Calendrier",
+    "sports": "Sports",
+    "home": "Accueil",
+    "viewCalendar": "Voir le calendrier",
+    "viewSports": "Voir les sports",
+    "myAccount": "Mon compte",
+    "tickets": "Billets",
+    "backToCalendar": "Retour au calendrier",
+    "faq": "FAQ",
+    "viewCart": "Voir mon panier"
+  },
+  "resetPassword": {
+    "title": "Réinitialisation du mot de passe",
+    "subtitle": "Entrez votre nouveau mot de passe",
+    "invalidToken": "Lien de réinitialisation invalide ou expiré.",
+    "backToLogin": "Retour à la connexion",
+    "loading": "Vérification en cours",
+    "loadingSubtitle": "Nous vérifions la validité de votre lien…",
+    "invalidTitle": "Lien invalide",
+    "invalidDescription": "Ce lien de réinitialisation est invalide ou a déjà été utilisé. Veuillez demander un nouveau lien.",
+    "requestNew": "Demander un nouveau lien",
+    "expiredTitle": "Lien expiré",
+    "expiredDescription": "Ce lien de réinitialisation a expiré. Les liens sont valides pendant 1 heure. Veuillez en demander un nouveau.",
+    "successTitle": "Mot de passe modifié",
+    "successDescription": "Votre mot de passe a été réinitialisé avec succès. Vous pouvez maintenant vous connecter avec votre nouveau mot de passe.",
+    "signIn": "Se connecter",
+    "newPasswordTitle": "Nouveau mot de passe",
+    "newPasswordSubtitle": "Choisissez un nouveau mot de passe sécurisé pour votre compte.",
+    "newPassword": "Nouveau mot de passe",
+    "newPasswordPlaceholder": "Votre nouveau mot de passe",
+    "confirmPassword": "Confirmation du mot de passe",
+    "confirmPasswordPlaceholder": "Validez le mot de passe",
+    "submit": "Réinitialiser le mot de passe",
+    "footerHelp": "Aide",
+    "footerPrivacy": "Confidentialité",
+    "footerTerms": "Mentions légales"
+  },
+  "phases": {
+    "SERIES": "Séries",
+    "REPECHAGE": "Repêchage",
+    "QUALIFICATION": "Qualification",
+    "TOUR_PRELIMINAIRE": "Tour préliminaire",
+    "PHASE_DE_POULES": "Phase de poules",
+    "PHASE_DE_GROUPES": "Phase de groupes",
+    "SOIXANTE_QUATRIEME_DE_FINALE": "64e de finale",
+    "TRENTE_DEUXIEME_DE_FINALE": "32e de finale",
+    "SEIZIEME_DE_FINALE": "16e de finale",
+    "QUART_DE_FINALE": "Quart de finale",
+    "DEMI_FINALE": "Demi-finale",
+    "FINALE": "Finale",
+    "CONTRE_LA_MONTRE": "Contre-la-montre",
+    "CLASSEMENT": "Match de classement",
+    "RELAIS_MIXTE": "Relais mixte",
+    "MATCH_BRONZE": "Match pour la médaille de bronze",
+    "EPREUVE_PAR_EQUIPES": "Épreuve par équipes"
+  },
+  "sportNames": {
+    "Sprint": "Sprint",
+    "Marathon": "Marathon",
+    "Natation": "Natation",
+    "Natation en eau libre": "Natation en eau libre",
+    "Triathlon": "Triathlon",
+    "Aviron": "Aviron",
+    "Canoë-kayak sprint": "Canoë-kayak sprint",
+    "Canoë-kayak slalom": "Canoë-kayak slalom",
+    "Water-polo": "Water-polo",
+    "Plongeon": "Plongeon",
+    "Voile": "Voile",
+    "Surf": "Surf",
+    "Gymnastique artistique": "Gymnastique artistique",
+    "Gymnastique rythmique": "Gymnastique rythmique",
+    "Trampoline": "Trampoline",
+    "Basketball": "Basketball",
+    "Basketball 3x3": "Basketball 3x3",
+    "Volleyball": "Volleyball",
+    "Beach volley": "Beach volley",
+    "Rugby à 7": "Rugby à 7",
+    "Tennis": "Tennis",
+    "Badminton": "Badminton",
+    "Tennis de table": "Tennis de table",
+    "Football": "Football",
+    "Handball": "Handball",
+    "Hockey sur gazon": "Hockey sur gazon",
+    "Judo": "Judo",
+    "Boxe": "Boxe",
+    "Taekwondo": "Taekwondo",
+    "Lutte": "Lutte",
+    "Escrime": "Escrime",
+    "Tir à l'arc": "Tir à l'arc",
+    "Tir sportif": "Tir sportif",
+    "Cyclisme sur route": "Cyclisme sur route",
+    "Cyclisme sur piste": "Cyclisme sur piste",
+    "VTT": "VTT",
+    "BMX Racing": "BMX Racing",
+    "BMX Freestyle": "BMX Freestyle",
+    "Skateboard": "Skateboard",
+    "Breaking": "Breaking",
+    "Escalade sportive": "Escalade sportive",
+    "Équitation": "Équitation",
+    "Golf": "Golf",
+    "Haltérophilie": "Haltérophilie",
+    "Pentathlon moderne": "Pentathlon moderne"
+  },
+  "offerNames": {
+    "Solo": "Solo",
+    "Duo": "Duo",
+    "Famille": "Famille"
+  },
+  "offerSubtitle": "{count, plural, one {# billet} other {# billets}}",
+  "offerDescriptions": {
+    "Solo": "Parfait pour vivre votre passion en toute liberté.",
+    "Duo": "Partagez des moments uniques à deux, côte à côte.",
+    "Famille": "Vivez les Jeux en famille avec des places regroupées."
+  },
+  "changePassword": {
+    "forgotTitle": "Réinitialiser le mot de passe",
+    "changeTitle": "Changer le mot de passe",
+    "forgotDescription": "Entrez votre adresse email pour recevoir un lien de réinitialisation.",
+    "changeDescription": "Entrez votre mot de passe actuel puis choisissez un nouveau mot de passe.",
+    "emailLabel": "Adresse email",
+    "emailPlaceholder": "votre@email.com",
+    "sendLink": "Envoyer le lien",
+    "currentPassword": "Mot de passe actuel",
+    "currentPasswordPlaceholder": "Votre mot de passe actuel",
+    "newPassword": "Nouveau mot de passe",
+    "newPasswordPlaceholder": "Nouveau mot de passe",
+    "confirmPassword": "Confirmez le mot de passe",
+    "confirmPasswordPlaceholder": "Confirmation",
+    "submit": "Modifier le mot de passe",
+    "forgotTrigger": "Mot de passe oublié ?",
+    "emailSentTitle": "Email envoyé",
+    "emailSentDescription": "Si un compte existe avec cette adresse, vous recevrez un email avec les instructions pour réinitialiser votre mot de passe.",
+    "successTitle": "Mot de passe modifié",
+    "successDescription": "Votre mot de passe a été modifié avec succès. Vous pouvez maintenant utiliser votre nouveau mot de passe pour vous connecter.",
+    "close": "Fermer",
+    "genericError": "Une erreur est survenue",
+    "requestSent": "Si un compte est lié à cet email, un lien a été envoyé.",
+    "changeSuccess": "Modification réussie"
+  },
+  "offerFeatures": {
+    "Accès a tous les évènements": "Accès à tous les évènements",
+    "Accès à tous les évènements": "Accès à tous les évènements",
+    "1 place assise garantie": "1 place assise garantie",
+    "2 places côte à côte garanties": "2 places côte à côte garanties",
+    "4 places regroupées garanties": "4 places regroupées garanties",
+    "E-billet sur mobile": "E-billet sur mobile",
+    "E-billets sur mobile": "E-billets sur mobile",
+    "Accès aux zones communes": "Accès aux zones communes",
+    "Sac souvenir Paris 2024 offert": "Sac souvenir Paris 2024 offert"
+  },
+  "cookieBanner": {
+    "title": "Gestion des cookies",
+    "description": "Nous utilisons des cookies pour améliorer votre expérience sur notre site. Vous pouvez personnaliser vos préférences ou accepter tous les cookies.",
+    "showDetails": "Voir les détails",
+    "hideDetails": "Masquer les détails",
+    "acceptAll": "Accepter tout",
+    "rejectAll": "Refuser tout",
+    "customize": "Personnaliser",
+    "save": "Enregistrer",
+    "saveChoices": "Enregistrer mes choix",
+    "close": "Fermer",
+    "manage": "Gérer les cookies",
+    "required": "requis",
+    "dialog": {
+      "title": "Préférences de cookies",
+      "description": "Personnalisez vos préférences de cookies"
+    },
+    "categories": {
+      "necessary": {
+        "title": "Cookies nécessaires",
+        "description": "Ces cookies sont essentiels au fonctionnement du site. Ils permettent la navigation et l'utilisation des fonctionnalités de base."
+      },
+      "analytics": {
+        "title": "Cookies analytiques",
+        "description": "Ces cookies nous aident à comprendre comment les visiteurs interagissent avec le site en collectant des informations anonymes."
+      },
+      "marketing": {
+        "title": "Cookies marketing",
+        "description": "Ces cookies sont utilisés pour afficher des publicités pertinentes et mesurer l'efficacité des campagnes."
+      },
+      "preferences": {
+        "title": "Cookies de préférences",
+        "description": "Ces cookies permettent de mémoriser vos choix et préférences pour personnaliser votre expérience."
+      }
+    }
+  },
+  "legal": {
+    "badge": "Document légal",
+    "backHome": "Retour à l'accueil",
+    "lastUpdated": "Dernière mise à jour : 22 mars 2026",
+    "mentions": {
+      "title": "Mentions légales",
+      "editor": {
+        "title": "1. Éditeur du site",
+        "intro": "Le présent site internet est édité par :",
+        "companyName": "ESN InfoEvent",
+        "companyType": "Société par actions simplifiée (SAS)",
+        "address": "Siège social : 42 Avenue de la République, 75011 Paris, France",
+        "siret": "SIRET : 123 456 789 00015",
+        "tva": "N° TVA intracommunautaire : FR 12 123456789",
+        "directorLabel": "Directeur de la publication",
+        "directorName": "José, Président-Directeur Général",
+        "emailLabel": "Email",
+        "phoneLabel": "Téléphone"
+      },
+      "hosting": {
+        "title": "2. Hébergement",
+        "intro": "Le site est hébergé par :"
+      },
+      "contact": {
+        "title": "3. Contact",
+        "intro": "Pour toute question ou réclamation concernant le site :"
+      },
+      "ip": {
+        "title": "4. Propriété intellectuelle",
+        "copyright": {
+          "title": "4.1 Droits d'auteur",
+          "content": "L'ensemble des contenus (textes, images, vidéos, graphismes, logos, icônes, sons, logiciels) présents sur ce site sont protégés par le droit d'auteur et le droit des marques. Toute reproduction, représentation, modification, publication ou adaptation de tout ou partie des éléments du site, quel que soit le moyen ou le procédé utilisé, est interdite sans autorisation écrite préalable."
+        },
+        "brands": {
+          "title": "4.2 Marques",
+          "content": "Les marques et logos figurant sur le site sont des marques déposées. Leur reproduction ou utilisation sans autorisation est strictement interdite."
+        },
+        "olympic": "Les symboles olympiques, l'emblème olympique, le drapeau olympique, la devise olympique, les hymnes olympiques et les termes « Jeux Olympiques » et « Olympiade » sont la propriété exclusive du Comité International Olympique."
+      },
+      "liability": {
+        "title": "5. Limitation de responsabilité",
+        "intro": "ESN InfoEvent décline toute responsabilité pour :",
+        "items": [
+          "Toute imprécision, inexactitude ou omission portant sur des informations disponibles sur le site",
+          "Tous dommages résultant d'une intrusion frauduleuse d'un tiers",
+          "Tout dommage causé au système informatique de l'utilisateur",
+          "Toute interruption du site"
+        ]
+      },
+      "links": {
+        "title": "6. Liens hypertextes",
+        "outgoing": {
+          "title": "6.1 Liens sortants",
+          "content": "Le site peut contenir des liens vers d'autres sites internet. ESN InfoEvent n'exerce aucun contrôle sur ces sites et décline toute responsabilité quant à leur contenu."
+        },
+        "incoming": {
+          "title": "6.2 Liens entrants",
+          "content": "La création de liens hypertextes vers le site est soumise à l'accord préalable et écrit d'ESN InfoEvent. Toute demande doit être adressée à"
+        }
+      },
+      "dataLink": {
+        "title": "7. Protection des données personnelles",
+        "content": "Pour toute information concernant le traitement de vos données personnelles, veuillez consulter notre",
+        "linkLabel": "Politique de Confidentialité"
+      },
+      "cookiesLink": {
+        "title": "8. Cookies",
+        "content": "Pour toute information concernant l'utilisation des cookies sur ce site, veuillez consulter notre",
+        "linkLabel": "Politique relative aux Cookies"
+      },
+      "law": {
+        "title": "9. Droit applicable",
+        "content": "Les présentes mentions légales sont soumises au droit français. En cas de litige, et après échec de toute tentative de recherche d'une solution amiable, les tribunaux français seront seuls compétents."
+      },
+      "credits": {
+        "title": "10. Crédits",
+        "dev": {
+          "title": "10.1 Conception et développement",
+          "content": "Site conçu et développé par ESN InfoEvent dans le cadre d'un projet pédagogique."
+        },
+        "photos": {
+          "title": "10.2 Crédits photos et illustrations",
+          "content": "Les photographies et illustrations utilisées sur ce site sont la propriété d'ESN InfoEvent ou utilisées avec l'autorisation de leurs auteurs respectifs."
+        }
+      }
+    },
+    "terms": {
+      "title": "Conditions générales d'utilisation",
+      "object": {
+        "title": "1. Objet",
+        "content1": "Les présentes Conditions Générales d'Utilisation (ci-après « CGU ») ont pour objet de définir les modalités et conditions d'utilisation de la plateforme de billetterie officielle des Jeux Olympiques et Paralympiques de Paris 2024 (ci-après « la Plateforme »), ainsi que les droits et obligations des utilisateurs.",
+        "content2": "L'accès et l'utilisation de la Plateforme impliquent l'acceptation sans réserve des présentes CGU par l'utilisateur."
+      },
+      "definitions": {
+        "title": "2. Définitions",
+        "items": [
+          {
+            "term": "Utilisateur",
+            "definition": "Toute personne physique accédant à la Plateforme, qu'elle soit inscrite ou non."
+          },
+          {
+            "term": "Compte",
+            "definition": "Espace personnel de l'Utilisateur lui permettant d'accéder aux services de la Plateforme."
+          },
+          {
+            "term": "Billet",
+            "definition": "Titre d'accès à un événement des Jeux Olympiques et Paralympiques de Paris 2024."
+          },
+          {
+            "term": "Événement",
+            "definition": "Compétition, cérémonie ou manifestation faisant partie du programme officiel des Jeux."
+          }
+        ]
+      },
+      "access": {
+        "title": "3. Accès à la Plateforme",
+        "conditions": {
+          "title": "3.1 Conditions d'accès",
+          "content": "L'accès à la Plateforme est ouvert à toute personne disposant d'une connexion internet. Certaines fonctionnalités, notamment l'achat de billets, nécessitent la création d'un Compte."
+        },
+        "account": {
+          "title": "3.2 Création de compte",
+          "content1": "Pour créer un Compte, l'Utilisateur doit fournir des informations exactes et complètes. Il s'engage à mettre à jour ces informations en cas de modification.",
+          "content2": "L'Utilisateur est responsable de la confidentialité de ses identifiants de connexion et de toutes les actions effectuées depuis son Compte."
+        }
+      },
+      "purchase": {
+        "title": "4. Achat de billets",
+        "process": {
+          "title": "4.1 Processus d'achat",
+          "content": "L'achat de Billets s'effectue exclusivement en ligne via la Plateforme. L'Utilisateur sélectionne l'Événement souhaité, la catégorie de places et le nombre de billets désirés."
+        },
+        "price": {
+          "title": "4.2 Prix et paiement",
+          "content": "Les prix des Billets sont indiqués en euros TTC. Le paiement s'effectue par carte bancaire ou tout autre moyen de paiement proposé sur la Plateforme."
+        },
+        "confirmation": {
+          "title": "4.3 Confirmation de commande",
+          "content": "Toute commande validée fait l'objet d'un email de confirmation. Le Billet électronique est disponible dans l'espace personnel de l'Utilisateur."
+        }
+      },
+      "ticketUse": {
+        "title": "5. Utilisation des billets",
+        "nominal": {
+          "title": "5.1 Billets nominatifs",
+          "content": "Tous les Billets sont nominatifs et non cessibles, sauf via la plateforme officielle de revente autorisée par l'organisateur."
+        },
+        "access": {
+          "title": "5.2 Contrôle d'accès",
+          "content": "L'accès aux sites olympiques est soumis à la présentation d'un Billet valide et d'une pièce d'identité correspondant au nom indiqué sur le Billet."
+        }
+      },
+      "cancellation": {
+        "title": "6. Annulation et remboursement",
+        "withdrawal": {
+          "title": "6.1 Droit de rétractation",
+          "content": "Conformément à l'article L.221-28 du Code de la consommation, le droit de rétractation ne s'applique pas aux contrats de services de loisirs devant être fournis à une date déterminée."
+        },
+        "byOrganizer": {
+          "title": "6.2 Annulation par l'organisateur",
+          "content": "En cas d'annulation d'un Événement, l'Utilisateur sera remboursé du montant du Billet dans un délai de 30 jours."
+        }
+      },
+      "liability": {
+        "title": "7. Responsabilité",
+        "content1": "ESN InfoEvent s'efforce d'assurer la disponibilité et le bon fonctionnement de la Plateforme. Toutefois, sa responsabilité ne saurait être engagée en cas d'interruption temporaire du service pour maintenance ou mise à jour.",
+        "content2": "L'Utilisateur est seul responsable de l'utilisation qu'il fait de son Compte et des informations qu'il communique."
+      },
+      "ip": {
+        "title": "8. Propriété intellectuelle",
+        "content": "L'ensemble des éléments de la Plateforme (logos, textes, images, vidéos, etc.) sont protégés par les droits de propriété intellectuelle. Toute reproduction ou utilisation non autorisée est strictement interdite."
+      },
+      "changes": {
+        "title": "9. Modification des CGU",
+        "content": "ESN InfoEvent se réserve le droit de modifier les présentes CGU à tout moment. Les Utilisateurs seront informés de toute modification par email ou notification sur la Plateforme."
+      },
+      "law": {
+        "title": "10. Droit applicable",
+        "content": "Les présentes CGU sont soumises au droit français. En cas de litige, les tribunaux français seront seuls compétents."
+      },
+      "contact": {
+        "title": "11. Contact",
+        "content": "Pour toute question relative aux présentes CGU, vous pouvez nous contacter à l'adresse :"
+      }
+    },
+    "privacy": {
+      "title": "Politique de confidentialité",
+      "intro": {
+        "title": "1. Introduction",
+        "content1": "ESN InfoEvent s'engage à protéger la vie privée des utilisateurs de sa plateforme de billetterie.",
+        "content2": "La présente Politique de Confidentialité décrit comment nous collectons, utilisons, stockons et protégeons vos données personnelles conformément au Règlement Général sur la Protection des Données (RGPD) et à la loi Informatique et Libertés."
+      },
+      "controller": {
+        "title": "2. Responsable du traitement",
+        "intro": "Le responsable du traitement des données personnelles est :"
+      },
+      "collected": {
+        "title": "3. Données collectées",
+        "intro": "Nous collectons les catégories de données suivantes :",
+        "identity": {
+          "title": "3.1 Données d'identification",
+          "items": [
+            "Nom et prénom",
+            "Adresse email"
+          ]
+        },
+        "transaction": {
+          "title": "3.2 Données de transaction",
+          "items": [
+            "Historique des achats",
+            "Informations de paiement (traitées par notre prestataire sécurisé)",
+            "Préférences de billets"
+          ]
+        },
+        "technical": {
+          "title": "3.3 Données techniques",
+          "items": [
+            "Adresse IP",
+            "Type de navigateur et appareil",
+            "Données de navigation",
+            "Cookies et traceurs"
+          ]
+        }
+      },
+      "purpose": {
+        "title": "4. Finalités du traitement",
+        "intro": "Vos données personnelles sont collectées pour les finalités suivantes :",
+        "items": [
+          "Gestion de votre compte et de vos commandes",
+          "Émission et livraison des billets",
+          "Contrôle d'accès aux sites olympiques",
+          "Service client et assistance",
+          "Envoi de communications relatives à vos achats",
+          "Envoi de communications marketing (avec votre consentement)",
+          "Prévention de la fraude",
+          "Amélioration de nos services",
+          "Respect de nos obligations légales"
+        ]
+      },
+      "legalBasis": {
+        "title": "5. Base légale du traitement",
+        "intro": "Le traitement de vos données repose sur les bases légales suivantes :",
+        "items": [
+          {
+            "term": "Exécution du contrat",
+            "definition": "pour la gestion de vos commandes et la fourniture de nos services."
+          },
+          {
+            "term": "Consentement",
+            "definition": "pour l'envoi de communications marketing et l'utilisation de certains cookies."
+          },
+          {
+            "term": "Intérêt légitime",
+            "definition": "pour la prévention de la fraude et l'amélioration de nos services."
+          },
+          {
+            "term": "Obligation légale",
+            "definition": "pour le respect de nos obligations comptables et fiscales."
+          }
+        ]
+      },
+      "retention": {
+        "title": "6. Durée de conservation",
+        "intro": "Vos données personnelles sont conservées pendant les durées suivantes :",
+        "items": [
+          "Données de compte : 3 ans après la dernière activité",
+          "Données de transaction : 10 ans (obligations comptables)",
+          "Données marketing : 3 ans après le dernier contact",
+          "Cookies : selon leur nature (voir notre politique cookies)"
+        ]
+      },
+      "recipients": {
+        "title": "7. Destinataires des données",
+        "intro": "Vos données peuvent être transmises aux destinataires suivants :",
+        "items": [
+          "Nos services internes (billetterie, marketing, service client)",
+          "Nos prestataires techniques (hébergement Cloudflare, paiement)",
+          "Le Comité International Olympique",
+          "Les autorités compétentes en cas d'obligation légale"
+        ]
+      },
+      "transfers": {
+        "title": "8. Transferts internationaux",
+        "content": "Vos données sont principalement traitées au sein de l'Union Européenne. En cas de transfert vers un pays tiers, nous veillons à ce que des garanties appropriées soient mises en place (clauses contractuelles types, décision d'adéquation)."
+      },
+      "rights": {
+        "title": "9. Vos droits",
+        "intro": "Conformément au RGPD, vous disposez des droits suivants :",
+        "items": [
+          {
+            "term": "Droit d'accès",
+            "definition": "obtenir une copie de vos données personnelles."
+          },
+          {
+            "term": "Droit de rectification",
+            "definition": "corriger vos données inexactes ou incomplètes."
+          },
+          {
+            "term": "Droit à l'effacement",
+            "definition": "demander la suppression de vos données."
+          },
+          {
+            "term": "Droit à la limitation",
+            "definition": "limiter le traitement de vos données."
+          },
+          {
+            "term": "Droit à la portabilité",
+            "definition": "recevoir vos données dans un format structuré."
+          },
+          {
+            "term": "Droit d'opposition",
+            "definition": "vous opposer à certains traitements."
+          },
+          {
+            "term": "Droit de retrait du consentement",
+            "definition": "retirer votre consentement à tout moment."
+          }
+        ],
+        "contact": "Pour exercer vos droits, contactez notre Délégué à la Protection des Données à :"
+      },
+      "security": {
+        "title": "10. Sécurité",
+        "content": "Nous mettons en œuvre des mesures techniques et organisationnelles appropriées pour protéger vos données contre tout accès non autorisé, modification, divulgation ou destruction. Ces mesures incluent le chiffrement des données, des contrôles d'accès stricts et des audits de sécurité réguliers."
+      },
+      "cookiesLink": {
+        "title": "11. Cookies",
+        "content": "Nous utilisons des cookies et technologies similaires pour améliorer votre expérience. Pour plus d'informations, consultez notre",
+        "linkLabel": "Politique relative aux cookies"
+      },
+      "contact": {
+        "title": "12. Contact et réclamation",
+        "content": "Pour toute question concernant cette politique ou vos données personnelles, contactez-nous à :",
+        "cnil": "Vous avez également le droit d'introduire une réclamation auprès de la CNIL (Commission Nationale de l'Informatique et des Libertés) :"
+      }
+    },
+    "cookies": {
+      "title": "Politique relative aux cookies",
+      "whatIs": {
+        "title": "1. Qu'est-ce qu'un cookie ?",
+        "content1": "Un cookie est un petit fichier texte déposé sur votre terminal (ordinateur, tablette, smartphone) lors de la visite d'un site web. Il permet au site de mémoriser des informations sur votre visite, comme vos préférences de langue ou d'autres paramètres.",
+        "content2": "Les cookies peuvent être « de session » (supprimés à la fermeture du navigateur) ou « persistants » (conservés pendant une durée déterminée)."
+      },
+      "types": {
+        "title": "2. Types de cookies utilisés",
+        "necessary": {
+          "title": "2.1 Cookies strictement nécessaires",
+          "content": "Ces cookies sont indispensables au fonctionnement du site et ne peuvent pas être désactivés. Ils sont généralement définis en réponse à vos actions (connexion, remplissage de formulaires, préférences de confidentialité)."
+        },
+        "analytics": {
+          "title": "2.2 Cookies analytiques",
+          "content": "Ces cookies nous permettent de mesurer l'audience du site et d'analyser la navigation pour améliorer nos services. Les données collectées sont anonymisées."
+        },
+        "marketing": {
+          "title": "2.3 Cookies marketing",
+          "content": "Ces cookies sont utilisés pour vous proposer des publicités pertinentes en fonction de vos centres d'intérêt. Ils permettent également de limiter le nombre de fois que vous voyez une publicité."
+        },
+        "preferences": {
+          "title": "2.4 Cookies de préférences",
+          "content": "Ces cookies permettent de mémoriser vos choix (langue, région, thème) pour personnaliser votre expérience sur le site."
+        }
+      },
+      "table": {
+        "name": "Nom",
+        "purpose": "Finalité",
+        "duration": "Durée",
+        "rows": {
+          "auth": "Authentification utilisateur",
+          "authDuration": "Session",
+          "cart": "Panier d'achat",
+          "cartDuration": "7 jours",
+          "consent": "Préférences cookies",
+          "consentDuration": "1 an",
+          "cfbm": "Protection anti-bot Cloudflare",
+          "cflb": "Équilibrage de charge",
+          "cflbDuration": "Session"
+        }
+      },
+      "management": {
+        "title": "3. Gestion des cookies",
+        "intro": "Vous pouvez à tout moment modifier vos préférences en matière de cookies en cliquant sur le bouton ci-dessous :",
+        "browser": {
+          "title": "3.1 Via votre navigateur",
+          "content": "Vous pouvez également configurer votre navigateur pour accepter ou refuser les cookies :"
+        }
+      },
+      "refusal": {
+        "title": "4. Conséquences du refus",
+        "content": "Le refus de certains cookies peut entraîner une dégradation de l'expérience utilisateur. Par exemple, le site ne pourra pas mémoriser vos préférences ou votre panier d'achat. Les cookies strictement nécessaires ne peuvent pas être refusés car ils sont indispensables au fonctionnement du site."
+      },
+      "thirdParty": {
+        "title": "5. Cookies tiers",
+        "content": "Certains cookies peuvent être déposés par des partenaires tiers (Cloudflare pour la sécurité et les performances, prestataires de paiement). Ces partenaires ont leurs propres politiques de confidentialité que nous vous invitons à consulter."
+      },
+      "contact": {
+        "title": "6. Contact",
+        "content": "Pour toute question concernant notre utilisation des cookies, contactez notre Délégué à la Protection des Données :"
+      }
+    }
+  },
+  "validation": {
+    "invalidEmail":           "Adresse email invalide",
+    "passwordMin":            "Le mot de passe doit contenir au moins 8 caractères",
+    "passwordUppercase":      "Le mot de passe doit contenir au moins une majuscule",
+    "passwordDigit":          "Le mot de passe doit contenir au moins un chiffre",
+    "passwordsMustMatch":     "Les mots de passe ne correspondent pas",
+    "firstNameMin":           "Le prénom doit contenir au moins 2 caractères",
+    "firstNameMax":           "Le prénom fait maximum 30 caractères",
+    "lastNameMin":            "Le nom doit contenir au moins 2 caractères",
+    "lastNameMax":            "Le nom fait maximum 30 caractères",
+    "termsRequired":          "Vous devez accepter les conditions d'utilisation",
+    "currentPasswordRequired": "Mot de passe actuel requis",
+    "cardHolderMin":          "Nom du titulaire requis",
+    "cardNumberLength":       "Le numéro de carte doit contenir 16 chiffres",
+    "expiryFormat":           "Format MM/AA invalide",
+    "expiryMonth":            "Mois invalide",
+    "cvvFormat":              "CVV invalide (3 ou 4 chiffres)"
+  },
+  "errors": {
+    "invalidCredentials":  "Email ou mot de passe incorrect",
+    "emailAlreadyUsed":    "Cette adresse email est déjà utilisée",
+    "accountNotFound":     "Aucun compte trouvé avec cette adresse",
+    "accountDisabled":     "Ce compte a été désactivé",
+    "invalidOtpCode":      "Code de vérification invalide",
+    "expiredOtpCode":      "Code de vérification expiré",
+    "wrongPassword":       "Mot de passe actuel incorrect",
+    "invalidResetLink":    "Lien de réinitialisation invalide ou expiré",
+    "expiredResetLink":    "Lien de réinitialisation expiré",
+    "userNotFound":        "Utilisateur introuvable",
+    "cartNotActive":       "Aucun panier actif",
+    "cartExpired":         "Votre panier a expiré",
+    "itemNotFound":        "Article introuvable",
+    "insufficientStock":   "Stock insuffisant pour cette quantité",
+    "eventNotFound":       "Évènement introuvable",
+    "eventSoldOut":        "Cet évènement est complet",
+    "offerNotFound":       "Cette offre n'est plus disponible",
+    "eventAlreadyExists":  "Cet événement existe déjà",
+    "transactionNotFound": "Transaction introuvable",
+    "offerAlreadyExists":  "Cette offre existe déjà",
+    "cartAlreadyPaid":     "Ce panier a déjà été payé",
+    "cartEmpty":           "Le panier est vide",
+    "cardDeclined":        "Carte déclinée",
+    "insufficientFunds":   "Fonds insuffisants",
+    "cardExpired":         "Carte expirée",
+    "noValidTickets":      "Aucun billet valide disponible pour cette transaction",
+    "otpExpired":          "Code de vérification expiré",
+    "otpMaxAttempts":      "Nombre maximum de tentatives atteint pour ce code",
+    "genericError":        "Une erreur est survenue"
+  }
+}

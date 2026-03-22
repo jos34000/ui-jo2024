@@ -1,3 +1,5 @@
+"use client"
+
 import {
   Card,
   CardContent,
@@ -10,6 +12,7 @@ import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { ArrowLeft, Clock, Shield, Ticket } from "lucide-react"
 import { AuthForm } from "@/components/AuthForm"
+import { useTranslations } from "next-intl"
 
 interface UnauthenticatedViewProps {
   mode: "login" | "register"
@@ -20,22 +23,22 @@ export const UnauthenticatedView = ({
   mode,
   onToggleMode,
 }: Readonly<UnauthenticatedViewProps>) => {
+  const t = useTranslations("auth")
   const features = [
     {
       icon: Ticket,
-      title: "Accès prioritaire",
-      description:
-        "Soyez informé en avant-première des nouvelles ventes de billets",
+      title: t("features.priority.title"),
+      description: t("features.priority.description"),
     },
     {
       icon: Shield,
-      title: "Billets sécurisés",
-      description: "Vos billets sont garantis authentiques et protégés",
+      title: t("features.secure.title"),
+      description: t("features.secure.description"),
     },
     {
       icon: Clock,
-      title: "Historique complet",
-      description: "Retrouvez tous vos achats et billets en un seul endroit",
+      title: t("features.history.title"),
+      description: t("features.history.description"),
     },
   ]
   return (
@@ -45,13 +48,11 @@ export const UnauthenticatedView = ({
           <div className="space-y-8">
             <div>
               <h1 className="text-4xl font-bold tracking-tight text-balance font-mono">
-                Votre compte
+                {t("accountTitle")}
                 <span className="block text-primary">Paris 2024</span>
               </h1>
               <p className="mt-4 text-lg text-muted-foreground leading-relaxed">
-                {
-                  "Créez votre compte pour accéder à la billetterie officielle des Jeux Olympiques et Paralympiques de Paris 2024."
-                }
+                {t("accountSubtitle")}
               </p>
             </div>
 
@@ -80,8 +81,7 @@ export const UnauthenticatedView = ({
                 <div className="h-3 w-3 rounded-full bg-[#EE334E]" />
               </div>
               <p className="mt-4 text-sm text-muted-foreground">
-                Plus de 10 millions de billets disponibles pour les Jeux
-                Olympiques et Paralympiques de Paris 2024.
+                {t("moreThan10M")}
               </p>
             </div>
           </div>
@@ -94,12 +94,12 @@ export const UnauthenticatedView = ({
                 <OlympicRings className="h-10 w-auto" />
               </div>
               <CardTitle className="text-2xl text-center lg:text-left">
-                {mode === "login" ? "Connexion" : "Créer un compte"}
+                {mode === "login" ? t("login") : t("register")}
               </CardTitle>
               <CardDescription className="text-center lg:text-left">
                 {mode === "login"
-                  ? "Connectez-vous pour accéder à vos billets et achats"
-                  : "Rejoignez la communauté Paris 2024"}
+                  ? t("loginSubtitle")
+                  : t("registerSubtitle")}
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -111,7 +111,7 @@ export const UnauthenticatedView = ({
             <Button variant="ghost" asChild>
               <Link href="/">
                 <ArrowLeft className="mr-2 h-4 w-4" />
-                {"Retour à l'accueil"}
+                {t("backHome")}
               </Link>
             </Button>
           </div>

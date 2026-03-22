@@ -4,8 +4,12 @@ import { JetBrains_Mono, Nunito } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import { ThemeProvider } from "@/components/ThemeProvider"
 import { CartInitializer } from "@/components/CartInitializer"
+import { CartSidebar } from "@/components/cart/CartSidebar"
+import { NextIntlClientProvider } from "next-intl"
+import { getLocale, getMessages } from "next-intl/server"
 import "./globals.css"
 import { Toaster } from "@/components/ui/sonner"
+import { CookieBanner } from "@/components/CookieBanner"
 
 const _jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
@@ -23,26 +27,33 @@ interface LayoutProps {
   children: React.ReactNode
 }
 
-export default function RootLayout({ children }: Readonly<LayoutProps>) {
+export default async function RootLayout({ children }: Readonly<LayoutProps>) {
+  const locale = await getLocale()
+  const messages = await getMessages()
+
   return (
-    <html lang="fr" suppressHydrationWarning>
+    <html lang={locale} suppressHydrationWarning>
       <body
         className={`${_jetbrainsMono.variable} ${_nunito.variable} font-sans antialiased`}
       >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <CartInitializer />
-          {children}
-          <Toaster
-            position="bottom-right"
-            richColors={true}
-            closeButton={true}
-          />
-        </ThemeProvider>
+        <NextIntlClientProvider messages={messages}>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <CartInitializer />
+            <CartSidebar hideTrigger />
+            {children}
+            <Toaster
+              position="bottom-right"
+              richColors={true}
+              closeButton={true}
+            />
+            <CookieBanner />
+          </ThemeProvider>
+        </NextIntlClientProvider>
         <Analytics />
       </body>
     </html>

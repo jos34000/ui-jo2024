@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button"
 import { LoginForm } from "@/components/form/LoginForm"
 import { RegisterForm } from "@/components/form/RegisterForm"
+import { useTranslations } from "next-intl"
 
 interface AuthFormProps {
   mode: "login" | "register"
@@ -10,6 +11,8 @@ interface AuthFormProps {
 }
 
 export const AuthForm = ({ mode, onToggleMode }: Readonly<AuthFormProps>) => {
+  const t = useTranslations("auth")
+  const tLogin = useTranslations("loginForm")
   const isLogin = mode === "login"
 
   return (
@@ -22,7 +25,7 @@ export const AuthForm = ({ mode, onToggleMode }: Readonly<AuthFormProps>) => {
         </div>
         <div className="relative flex justify-center text-sm">
           <span className="bg-card px-4 text-muted-foreground">
-            {isLogin ? "Pas encore de compte ?" : "Déjà un compte ?"}
+            {isLogin ? t("noAccount") : t("alreadyAccount")}
           </span>
         </div>
       </div>
@@ -33,7 +36,7 @@ export const AuthForm = ({ mode, onToggleMode }: Readonly<AuthFormProps>) => {
         className="w-full bg-transparent"
         onClick={onToggleMode}
       >
-        {isLogin ? "Créer un compte" : "Se connecter"}
+        {isLogin ? t("register") : tLogin("submit")}
       </Button>
     </>
   )

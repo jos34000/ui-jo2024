@@ -22,28 +22,14 @@ import { ReservationDialog } from "@/components/ReservationDialog"
 import { EventStatusProps } from "@/lib/types/props.type"
 import { toOlympicEvent } from "@/lib/utils/eventMapper"
 import { OfferDTO } from "@/lib/types/offer.type"
+import { getTranslations, getMessages, getLocale } from "next-intl/server"
 
-const statusConfig: Record<EventStatus, EventStatusProps> = {
-  available: {
-    label: "Disponible",
-    className: "bg-[#00A651] text-white",
-    dotColor: "bg-[#00A651]",
-  },
-  limited: {
-    label: "Dernières places",
-    className: "bg-[#FCB131] text-black",
-    dotColor: "bg-[#FCB131]",
-  },
-  soldout: {
-    label: "Complet",
-    className: "bg-[#EE334E] text-white",
-    dotColor: "bg-[#EE334E]",
-  },
-}
-
-const getThisEvent = async (id: number): Promise<OlympicEvent | null> => {
+const getThisEvent = async (id: number, locale: string): Promise<OlympicEvent | null> => {
   const url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/events/${id}`
-  const res = await fetch(url, { cache: "no-store" })
+  const res = await fetch(url, {
+    cache: "no-store",
+    headers: { "Accept-Language": locale },
+  })
 
   if (!res.ok) return null
 
@@ -62,9 +48,11 @@ const getOffers = async (): Promise<OfferDTO[]> => {
 const getAllEventsBySport = async (
   sport: string,
   thisId: number,
+  locale: string,
 ): Promise<OlympicEvent[] | null> => {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/events/sport/${sport}`, {
     cache: "no-store",
+    headers: { "Accept-Language": locale },
   })
 
   if (!res.ok) return null
@@ -76,14 +64,37 @@ const getAllEventsBySport = async (
 }
 
 const EventPage = async ({ params }: { params: Promise<{ id: number }> }) => {
-  const event = await getThisEvent((await params).id)
+  const t = await getTranslations("events")
+  const messages = await getMessages()
+  const locale = await getLocale()
+  const sportNamesMap = (messages as Record<string, unknown>).sportNames as Record<string, string> | undefined
+  const translateSport = (name: string) => sportNamesMap?.[name] ?? name
+  const event = await getThisEvent((await params).id, locale)
 
   if (!event) notFound()
 
   const [otherEvents, offers] = await Promise.all([
-    getAllEventsBySport(event.sport, event.id),
+    getAllEventsBySport(event.sport, event.id, locale),
     getOffers(),
   ])
+
+  const statusConfig: Record<EventStatus, EventStatusProps> = {
+    available: {
+      label: t("available"),
+      className: "bg-[#00A651] text-white",
+      dotColor: "bg-[#00A651]",
+    },
+    limited: {
+      label: t("limited"),
+      className: "bg-[#FCB131] text-black",
+      dotColor: "bg-[#FCB131]",
+    },
+    soldout: {
+      label: t("soldout"),
+      className: "bg-[#EE334E] text-white",
+      dotColor: "bg-[#EE334E]",
+    },
+  }
 
   const status = statusConfig[event.status as EventStatus]
   const occupancyRate =
@@ -99,14 +110,14 @@ const EventPage = async ({ params }: { params: Promise<{ id: number }> }) => {
           <div className="mx-auto max-w-5xl px-4 sm:px-6 py-3">
             <nav className="flex items-center gap-2 text-sm text-muted-foreground">
               <Link href="/" className="hover:text-primary transition-colors">
-                Accueil
+                {t("home")}
               </Link>
               <span>/</span>
               <Link
                 href="/calendrier"
                 className="hover:text-primary transition-colors"
               >
-                Calendrier
+                {t("calendar")}
               </Link>
               <span>/</span>
               <span className="text-foreground font-medium truncate">
@@ -122,7 +133,7 @@ const EventPage = async ({ params }: { params: Promise<{ id: number }> }) => {
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-3 mb-4">
                   <Badge className={status.className}>{status.label}</Badge>
-                  <Badge variant="outline">{event.sport}</Badge>
+                  <Badge variant="outline">{translateSport(event.sport)}</Badge>
                 </div>
 
                 <div className="flex items-start gap-4 mb-4">
@@ -134,7 +145,7 @@ const EventPage = async ({ params }: { params: Promise<{ id: number }> }) => {
                       {event.name}
                     </h1>
                     <p className="text-muted-foreground mt-1">
-                      {event.category}
+                      {translateSport(event.category)}
                     </p>
                   </div>
                 </div>
@@ -173,7 +184,7 @@ const EventPage = async ({ params }: { params: Promise<{ id: number }> }) => {
                     className="bg-transparent"
                   >
                     <Heart className="mr-2 h-4 w-4" />
-                    Favoris
+                    {t("favorites")}
                   </Button>
                   <Button
                     variant="outline"
@@ -181,12 +192,12 @@ const EventPage = async ({ params }: { params: Promise<{ id: number }> }) => {
                     className="bg-transparent"
                   >
                     <Share2 className="mr-2 h-4 w-4" />
-                    Partager
+                    {t("share")}
                   </Button>
                   <Button variant="ghost" size="sm" asChild>
                     <Link href="/calendrier">
                       <ArrowLeft className="mr-2 h-4 w-4" />
-                      Calendrier
+                      {t("viewCalendar")}
                     </Link>
                   </Button>
                 </div>
@@ -196,22 +207,22 @@ const EventPage = async ({ params }: { params: Promise<{ id: number }> }) => {
                 <Card className="sticky top-24">
                   <CardHeader className="pb-4">
                     <CardTitle className="text-lg font-mono">
-                      Reservation
+                      {t("reservation")}
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-4">
                     <div className="space-y-2">
                       <div className="flex items-center justify-between text-sm">
                         <span className="text-muted-foreground">
-                          Disponibilite
+                          {t("availability")}
                         </span>
                         <span className="font-medium">
-                          {event.availableSlots.toLocaleString("fr-FR")} places
+                          {t("placesAvailable", { count: event.availableSlots.toLocaleString("fr-FR") })}
                         </span>
                       </div>
                       <Progress value={occupancyRate} className="h-2" />
                       <p className="text-xs text-muted-foreground">
-                        {Math.round(occupancyRate)}% des places vendues
+                        {t("percentSold", { percent: Math.round(occupancyRate) })}
                       </p>
                     </div>
 
@@ -228,7 +239,7 @@ const EventPage = async ({ params }: { params: Promise<{ id: number }> }) => {
                         {formatDateLong(event.date)}
                       </div>
                       <p className="text-xs text-muted-foreground pl-6">
-                        Debut a {event.time}
+                        {t("startAt", { time: event.time })}
                       </p>
                     </div>
 
@@ -236,8 +247,7 @@ const EventPage = async ({ params }: { params: Promise<{ id: number }> }) => {
 
                     {isSoldOut && (
                       <p className="text-xs text-center text-muted-foreground">
-                        Cet évènement est complet. Consultez les autres epreuves
-                        de {event.sport}.
+                        {t("soldoutInfo", { sport: translateSport(event.sport) })}
                       </p>
                     )}
                   </CardContent>
@@ -257,14 +267,14 @@ const EventPage = async ({ params }: { params: Promise<{ id: number }> }) => {
                       <Users className="h-4 w-4 text-primary" />
                     </div>
                     <span className="text-sm font-medium text-muted-foreground">
-                      Capacité totale
+                      {t("capacityTotal")}
                     </span>
                   </div>
                   <p className="text-2xl font-bold font-mono">
                     {event.capacity.toLocaleString("fr-FR")}
                   </p>
                   <p className="text-xs text-muted-foreground mt-1">
-                    spectateurs
+                    {t("spectators")}
                   </p>
                 </CardContent>
               </Card>
@@ -276,7 +286,7 @@ const EventPage = async ({ params }: { params: Promise<{ id: number }> }) => {
                       <Ticket className="h-4 w-4 text-primary" />
                     </div>
                     <span className="text-sm font-medium text-muted-foreground">
-                      Places disponibles
+                      {t("availableSlots")}
                     </span>
                   </div>
                   <p className="text-2xl font-bold font-mono">
@@ -300,7 +310,7 @@ const EventPage = async ({ params }: { params: Promise<{ id: number }> }) => {
                       <MapPin className="h-4 w-4 text-primary" />
                     </div>
                     <span className="text-sm font-medium text-muted-foreground">
-                      Lieu
+                      {t("location")}
                     </span>
                   </div>
                   <p className="text-base font-bold leading-tight">
@@ -317,8 +327,8 @@ const EventPage = async ({ params }: { params: Promise<{ id: number }> }) => {
             <div className="mx-auto max-w-5xl px-4 sm:px-6 py-8 sm:py-10">
               <h2 className="text-xl font-bold font-mono mb-6">
                 {event.sport === "Cérémonie"
-                  ? "Autres cérémonies"
-                  : `Autres épreuves de ${event.sport}`}
+                  ? t("otherCeremonies")
+                  : t("otherEvents", { sport: translateSport(event.sport) })}
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 {otherEvents.map(event => (

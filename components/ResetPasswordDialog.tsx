@@ -16,6 +16,7 @@ import { changePasswordSchema } from "@/lib/schemas/changePassword.schema"
 import { useAppForm } from "@/lib/hooks/useAppForm"
 import { apiClient, parseApiError } from "@/lib/utils/apiClient"
 import { toast } from "sonner"
+import { useTranslations } from "next-intl"
 
 interface ResetPasswordDialogProps {
   mode: "request" | "change" | undefined
@@ -28,6 +29,8 @@ export const ResetPasswordDialog = ({
   trigger,
   userEmail,
 }: ResetPasswordDialogProps) => {
+  const t = useTranslations("changePassword")
+  const tErrors = useTranslations("errors")
   const [open, setOpen] = useState(false)
   const [success, setSuccess] = useState(false)
 
@@ -45,15 +48,15 @@ export const ResetPasswordDialog = ({
         })
 
         if (!response.ok) {
-          toast.error(await parseApiError(response, "Une erreur est survenue"))
+          toast.error(await parseApiError(response, t("genericError"), tErrors))
           return
         }
 
-        toast.success("Si un compte est lié à cet email, un lien a été envoyé.")
+        toast.success(t("requestSent"))
         setSuccess(true)
       } catch (error) {
         console.error("Reset error:", error)
-        toast.error("Une erreur est survenue")
+        toast.error(t("genericError"))
       }
     },
     validators: {
@@ -78,15 +81,15 @@ export const ResetPasswordDialog = ({
         })
 
         if (!response.ok) {
-          toast.error(await parseApiError(response, "Une erreur est survenue."))
+          toast.error(await parseApiError(response, t("genericError"), tErrors))
           return
         }
 
-        toast.success("Modification réussie")
+        toast.success(t("changeSuccess"))
         setSuccess(true)
       } catch (error) {
         console.error("Update error:", error)
-        toast.error("Une erreur est survenue")
+        toast.error(t("genericError"))
       }
     },
     validators: {
@@ -109,13 +112,12 @@ export const ResetPasswordDialog = ({
           <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 mb-4">
             <CheckCircle2 className="h-8 w-8 text-primary" />
           </div>
-          <h3 className="text-lg font-semibold mb-2">Email envoyé</h3>
+          <h3 className="text-lg font-semibold mb-2">{t("emailSentTitle")}</h3>
           <p className="text-sm text-muted-foreground mb-6">
-            Si un compte existe avec cette adresse, vous recevrez un email avec
-            les instructions pour reinitialiser votre mot de passe.
+            {t("emailSentDescription")}
           </p>
           <Button onClick={() => handleOpenChange(false)} className="w-full">
-            Fermer
+            {t("close")}
           </Button>
         </div>
       )
@@ -126,15 +128,15 @@ export const ResetPasswordDialog = ({
         onSubmit={e => {
           e.preventDefault()
           e.stopPropagation()
-          requestForm.handleSubmit()
+          requestForm.handleSubmit().then()
         }}
         className="space-y-4"
       >
         <requestForm.AppField name="email">
           {field => (
             <field.TextField
-              label="Adresse email"
-              placeholder="votre@email.com"
+              label={t("emailLabel")}
+              placeholder={t("emailPlaceholder")}
               icon={<Mail />}
             />
           )}
@@ -142,7 +144,7 @@ export const ResetPasswordDialog = ({
 
         <requestForm.AppForm>
           <requestForm.SubmitButton className="w-full">
-            Envoyer le lien
+            {t("sendLink")}
           </requestForm.SubmitButton>
         </requestForm.AppForm>
       </form>
@@ -156,13 +158,12 @@ export const ResetPasswordDialog = ({
           <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 mb-4">
             <CheckCircle2 className="h-8 w-8 text-primary" />
           </div>
-          <h3 className="text-lg font-semibold mb-2">Mot de passe modifié</h3>
+          <h3 className="text-lg font-semibold mb-2">{t("successTitle")}</h3>
           <p className="text-sm text-muted-foreground mb-6">
-            Votre mot de passe a ete modifie avec succes. Vous pouvez maintenant
-            utiliser votre nouveau mot de passe pour vous connecter.
+            {t("successDescription")}
           </p>
           <Button onClick={() => handleOpenChange(false)} className="w-full">
-            Fermer
+            {t("close")}
           </Button>
         </div>
       )
@@ -173,41 +174,41 @@ export const ResetPasswordDialog = ({
         onSubmit={e => {
           e.preventDefault()
           e.stopPropagation()
-          changeForm.handleSubmit()
+          changeForm.handleSubmit().then()
         }}
         className="space-y-4"
       >
         <changeForm.AppField name="currentPassword">
           {field => (
             <field.PasswordField
-              label="Mot de passe actuel"
+              label={t("currentPassword")}
               showForgetPassword={false}
-              placeholder="Votre mot de passe actuel"
+              placeholder={t("currentPasswordPlaceholder")}
             />
           )}
         </changeForm.AppField>
         <changeForm.AppField name="newPassword">
           {field => (
             <field.PasswordField
-              label="Nouveau mot de passe."
+              label={t("newPassword")}
               showForgetPassword={false}
-              placeholder="Nouveau mot de passe"
+              placeholder={t("newPasswordPlaceholder")}
             />
           )}
         </changeForm.AppField>
         <changeForm.AppField name="confirmPassword">
           {field => (
             <field.PasswordField
-              label="Confirmez le mot de passe."
+              label={t("confirmPassword")}
               showForgetPassword={false}
-              placeholder="Confirmation"
+              placeholder={t("confirmPasswordPlaceholder")}
             />
           )}
         </changeForm.AppField>
 
         <changeForm.AppForm>
           <changeForm.SubmitButton className="w-full">
-            Modifier le mot de passe
+            {t("submit")}
           </changeForm.SubmitButton>
         </changeForm.AppForm>
       </form>
@@ -222,21 +223,17 @@ export const ResetPasswordDialog = ({
             type="button"
             className="text-sm text-primary hover:underline"
           >
-            Mot de passe oublie ?
+            {t("forgotTrigger")}
           </button>
         )}
       </DialogTrigger>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle className="font-mono">
-            {mode === "request"
-              ? "Reinitialiser le mot de passe"
-              : "Changer le mot de passe"}
+            {mode === "request" ? t("forgotTitle") : t("changeTitle")}
           </DialogTitle>
           <DialogDescription>
-            {mode === "request"
-              ? "Entrez votre adresse email pour recevoir un lien de reinitialisation."
-              : "Entrez votre mot de passe actuel puis choisissez un nouveau mot de passe."}
+            {mode === "request" ? t("forgotDescription") : t("changeDescription")}
           </DialogDescription>
         </DialogHeader>
         {mode === "request" ? renderRequestForm() : renderChangeForm()}

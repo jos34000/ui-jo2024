@@ -10,20 +10,26 @@ import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
 import { CalendarDays, Download, MapPin, Tag, Ticket, Users } from "lucide-react"
 import { formatDateWithTime, formatDatePurchase } from "@/lib/utils/date"
-import { formatPrice, formatPhase } from "@/lib/utils/format"
+import { formatPrice } from "@/lib/utils/format"
+import { useTranslatePhase, useTranslateOffer } from "@/lib/utils/i18nHelpers"
 import { Header } from "@/components/Header"
 import { Footer } from "@/components/Footer"
-
-const STATUS_CONFIG: Record<
-  TicketStatus,
-  { label: string; variant: "default" | "secondary" | "destructive" | "outline" }
-> = {
-  VALID:     { label: "Actif",   variant: "default" },
-  USED:      { label: "Utilisé", variant: "secondary" },
-  CANCELLED: { label: "Annulé",  variant: "destructive" },
-}
+import { useTranslations } from "next-intl"
 
 function TicketGroupCard({ group, onDownload }: Readonly<{ group: TicketGroup; onDownload: () => void }>) {
+  const t = useTranslations("tickets")
+  const translatePhase = useTranslatePhase()
+  const translateOffer = useTranslateOffer()
+
+  const STATUS_CONFIG: Record<
+    TicketStatus,
+    { label: string; variant: "default" | "secondary" | "destructive" | "outline" }
+  > = {
+    VALID:     { label: t("status.VALID"),     variant: "default" },
+    USED:      { label: t("status.USED"),      variant: "secondary" },
+    CANCELLED: { label: t("status.CANCELLED"), variant: "destructive" },
+  }
+
   const cfg = STATUS_CONFIG[group.groupStatus]
   const [isDownloading, setIsDownloading] = useState(false)
 
@@ -43,7 +49,7 @@ function TicketGroupCard({ group, onDownload }: Readonly<{ group: TicketGroup; o
         <div className="flex items-start justify-between gap-3 mb-3">
           <div className="min-w-0">
             <p className="font-semibold text-base leading-tight truncate">{group.event.name}</p>
-            <p className="text-xs text-muted-foreground font-mono mt-0.5">Réf. {group.paymentReference}</p>
+            <p className="text-xs text-muted-foreground font-mono mt-0.5">{t("ref", { ref: group.paymentReference })}</p>
           </div>
           <Badge variant={cfg.variant} className="shrink-0 text-xs">{cfg.label}</Badge>
         </div>
@@ -61,7 +67,7 @@ function TicketGroupCard({ group, onDownload }: Readonly<{ group: TicketGroup; o
           </div>
           <div className="flex items-center gap-2 text-muted-foreground">
             <Tag className="h-3.5 w-3.5 shrink-0" />
-            <span className="truncate">{group.offer.name} · {formatPhase(group.event.phase)}</span>
+            <span className="truncate">{translateOffer(group.offer.name)} · {translatePhase(group.event.phase)}</span>
           </div>
           <div className="flex items-center gap-2 text-muted-foreground">
             <Users className="h-3.5 w-3.5 shrink-0" />
@@ -80,7 +86,7 @@ function TicketGroupCard({ group, onDownload }: Readonly<{ group: TicketGroup; o
         )}
 
         <div className="flex items-center justify-between mt-4 pt-3 border-t border-border">
-          <span className="text-xs text-muted-foreground">Acheté le {formatDatePurchase(group.purchasedAt)}</span>
+          <span className="text-xs text-muted-foreground">{t("purchasedOn", { date: formatDatePurchase(group.purchasedAt) })}</span>
           <div className="flex items-center gap-3">
             {group.groupStatus === "VALID" && (
               <button
@@ -89,7 +95,7 @@ function TicketGroupCard({ group, onDownload }: Readonly<{ group: TicketGroup; o
                 className="flex items-center gap-1.5 text-xs font-medium text-primary hover:text-primary/80 disabled:opacity-50 transition-colors"
               >
                 <Download className="h-3.5 w-3.5" />
-                {isDownloading ? "Téléchargement…" : "Télécharger PDF"}
+                {isDownloading ? t("downloading") : t("downloadPdf")}
               </button>
             )}
             <span className="font-mono font-bold text-sm">{formatPrice(group.totalPrice)}</span>
@@ -102,6 +108,7 @@ function TicketGroupCard({ group, onDownload }: Readonly<{ group: TicketGroup; o
 
 export default function BilletsPage() {
   const router = useRouter()
+  const t = useTranslations("tickets")
   const isAuthenticated = useAuthStore(state => state.isAuthenticated)
   const getUserTickets = usePaymentStore(state => state.getUserTickets)
   const downloadTicketPdf = usePaymentStore(state => state.downloadTicketPdf)
@@ -120,12 +127,12 @@ export default function BilletsPage() {
         const data = await getUserTickets()
         setGroups(data)
       } catch (err) {
-        setError(err instanceof Error ? err.message : "Erreur lors du chargement")
+        setError(err instanceof Error ? err.message : t("loadingError"))
       } finally {
         setIsLoading(false)
       }
     })()
-  }, [isAuthenticated, getUserTickets, router])
+  }, [isAuthenticated, getUserTickets, router, t])
 
   const totalSeats  = groups.reduce((sum, g) => sum + g.totalSeats, 0)
   const activeCount = groups.filter(g => g.groupStatus === "VALID").length
@@ -141,17 +148,17 @@ export default function BilletsPage() {
             <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 shrink-0">
               <Ticket className="h-5 w-5 text-primary" />
             </div>
-            <h1 className="text-2xl font-bold tracking-tight">Mes billets</h1>
+            <h1 className="text-2xl font-bold tracking-tight">{t("title")}</h1>
           </div>
           {!isLoading && !error && (
             <p className="text-sm text-muted-foreground ml-13">
               {groups.length === 0
-                ? "Aucune commande pour le moment"
+                ? t("noOrders")
                 : <>
-                    {groups.length} commande{groups.length > 1 ? "s" : ""}
-                    {" · "}{totalSeats} place{totalSeats > 1 ? "s" : ""}
-                    {activeCount > 0 && <> · <span className="text-green-600 dark:text-green-400 font-medium">{activeCount} actif{activeCount > 1 ? "s" : ""}</span></>}
-                    {usedCount   > 0 && <> · {usedCount} utilisé{usedCount > 1 ? "s" : ""}</>}
+                    {t("ordersCount", { count: groups.length })}
+                    {" · "}{t("seatsCount", { count: totalSeats })}
+                    {activeCount > 0 && <> · <span className="text-green-600 dark:text-green-400 font-medium">{t("activeCount", { count: activeCount })}</span></>}
+                    {usedCount   > 0 && <> · {t("usedCount", { count: usedCount })}</>}
                   </>
               }
             </p>
@@ -178,15 +185,15 @@ export default function BilletsPage() {
           {!isLoading && !error && groups.length === 0 && (
             <div className="rounded-xl border border-border bg-card p-12 text-center">
               <Ticket className="h-10 w-10 text-muted-foreground mx-auto mb-3" />
-              <p className="font-medium">Aucun billet pour le moment</p>
+              <p className="font-medium">{t("noTickets")}</p>
               <p className="text-sm text-muted-foreground mt-1 mb-5">
-                Vos billets apparaîtront ici après un achat.
+                {t("noTicketsSubtitle")}
               </p>
               <Link
                 href="/"
                 className="inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90 transition-colors"
               >
-                Découvrir les épreuves
+                {t("discover")}
               </Link>
             </div>
           )}

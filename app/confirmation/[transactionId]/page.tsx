@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 import { CheckCircle2, Loader2, Mail, Ticket } from "lucide-react"
 import Link from "next/link"
+import { useTranslations } from "next-intl"
 
 function formatPrice(amount: number): string {
   return new Intl.NumberFormat("fr-FR", {
@@ -31,6 +32,7 @@ function formatDate(dateStr: string): string {
 export default function ConfirmationPage() {
   const params = useParams()
   const router = useRouter()
+  const t = useTranslations("confirmation")
   const isAuthenticated = useAuthStore(state => state.isAuthenticated)
   const setCart = useCartStore(state => state.fetchCart)
   const { getTransaction } = usePaymentStore()
@@ -48,7 +50,7 @@ export default function ConfirmationPage() {
     }
 
     const transactionId = Number(params.transactionId)
-    if (isNaN(transactionId)) {
+    if (Number.isNaN(transactionId)) {
       router.push("/")
       return
     }
@@ -59,10 +61,17 @@ export default function ConfirmationPage() {
         useCartStore.setState({ cart: null })
       })
       .catch(err => {
-        setError(err instanceof Error ? err.message : "Transaction introuvable")
+        setError(err instanceof Error ? err.message : t("error"))
       })
       .finally(() => setIsLoading(false))
-  }, [isAuthenticated, params.transactionId, router, getTransaction, setCart])
+  }, [
+    isAuthenticated,
+    params.transactionId,
+    router,
+    getTransaction,
+    setCart,
+    t,
+  ])
 
   if (!isAuthenticated) return null
 
@@ -77,11 +86,9 @@ export default function ConfirmationPage() {
   if (error || !transaction) {
     return (
       <main className="min-h-screen bg-background flex flex-col items-center justify-center gap-4">
-        <p className="text-muted-foreground">
-          {error ?? "Transaction introuvable"}
-        </p>
+        <p className="text-muted-foreground">{error ?? t("notFound")}</p>
         <Button asChild variant="outline">
-          <Link href="/">Retour à l&apos;accueil</Link>
+          <Link href="/">{t("backHome")}</Link>
         </Button>
       </main>
     )
@@ -94,22 +101,20 @@ export default function ConfirmationPage() {
           <div className="rounded-full bg-green-100 dark:bg-green-900/30 p-4 mb-4">
             <CheckCircle2 className="h-10 w-10 text-green-600 dark:text-green-400" />
           </div>
-          <h1 className="text-2xl font-bold">Paiement confirmé !</h1>
-          <p className="text-muted-foreground mt-1 text-sm">
-            Votre commande a été enregistrée avec succès.
-          </p>
+          <h1 className="text-2xl font-bold">{t("title")}</h1>
+          <p className="text-muted-foreground mt-1 text-sm">{t("subtitle")}</p>
         </div>
 
         <div className="rounded-xl border border-border bg-card p-5 mb-5">
           <div className="flex flex-col gap-2 text-sm">
             <div className="flex justify-between">
-              <span className="text-muted-foreground">Référence</span>
+              <span className="text-muted-foreground">{t("reference")}</span>
               <span className="font-mono font-medium">
                 {transaction.paymentReference}
               </span>
             </div>
             <div className="flex justify-between">
-              <span className="text-muted-foreground">Date</span>
+              <span className="text-muted-foreground">{t("date")}</span>
               <span>
                 {transaction.payedDate
                   ? formatDate(transaction.payedDate)
@@ -117,16 +122,17 @@ export default function ConfirmationPage() {
               </span>
             </div>
             <div className="flex justify-between">
-              <span className="text-muted-foreground">Montant total</span>
+              <span className="text-muted-foreground">{t("amount")}</span>
               <span className="font-bold font-mono text-base">
                 {formatPrice(transaction.amount)}
               </span>
             </div>
             <div className="flex justify-between">
-              <span className="text-muted-foreground">Billets générés</span>
+              <span className="text-muted-foreground">
+                {t("ticketsGenerated")}
+              </span>
               <span>
-                {transaction.tickets.length} billet
-                {transaction.tickets.length > 1 ? "s" : ""}
+                {t("ticketsCount", { count: transaction.tickets.length })}
               </span>
             </div>
           </div>
@@ -135,7 +141,7 @@ export default function ConfirmationPage() {
         <div className="rounded-xl border border-border bg-card p-5 mb-6">
           <div className="flex items-center gap-2 mb-4">
             <Ticket className="h-4 w-4 text-muted-foreground" />
-            <h2 className="font-semibold text-sm">Vos billets</h2>
+            <h2 className="font-semibold text-sm">{t("yourTickets")}</h2>
           </div>
           <div className="flex flex-col gap-3">
             {transaction.tickets.map((ticket, index) => (
@@ -166,13 +172,10 @@ export default function ConfirmationPage() {
         <div className="flex flex-col gap-3">
           <div className="flex items-center gap-3 rounded-xl border border-border bg-muted/40 px-4 py-3 text-sm text-muted-foreground">
             <Mail className="h-4 w-4 shrink-0 text-primary" />
-            <span>
-              Vos billets ont été envoyés par email avec le PDF joint
-              automatiquement.
-            </span>
+            <span>{t("emailSent")}</span>
           </div>
           <Button asChild size="lg" className="w-full">
-            <Link href="/">Retour à l&apos;accueil</Link>
+            <Link href="/">{t("backHome")}</Link>
           </Button>
         </div>
       </div>

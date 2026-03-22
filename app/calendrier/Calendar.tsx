@@ -12,12 +12,14 @@ import { EventCard } from "@/app/calendrier/EventCard"
 import { SportFilter } from "@/app/calendrier/SportFilter"
 import { NothingFound } from "@/app/sports/[id]/NothingFound"
 import { OlympicEvent } from "@/lib/types/event.type"
+import { useTranslations } from "next-intl"
 
 interface CalendarProps {
   initialEvents: OlympicEvent[]
 }
 
 export const Calendar = ({ initialEvents }: CalendarProps) => {
+  const t = useTranslations("calendar")
   const [selectedDate, setSelectedDate] = useState("2024-07-26")
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
   const [searchQuery, setSearchQuery] = useState("")
@@ -63,10 +65,10 @@ export const Calendar = ({ initialEvents }: CalendarProps) => {
             <div className="flex items-start justify-between gap-4">
               <div>
                 <h1 className="text-2xl sm:text-3xl font-bold tracking-tight font-mono">
-                  Calendrier des épreuves
+                  {t("title")}
                 </h1>
                 <p className="mt-1.5 text-sm text-muted-foreground">
-                  {"Du 26 juillet au 11 août 2024 — 17 jours de competition"}
+                  {t("subtitle")}
                 </p>
               </div>
               <div className="hidden sm:flex items-center gap-2 text-sm text-muted-foreground">
@@ -74,7 +76,7 @@ export const Calendar = ({ initialEvents }: CalendarProps) => {
                 <span className="font-mono font-medium">
                   {initialEvents.length}
                 </span>
-                <span>évènements</span>
+                <span>{t("events")}</span>
               </div>
             </div>
           </div>
@@ -99,7 +101,7 @@ export const Calendar = ({ initialEvents }: CalendarProps) => {
                     {formatDateFull(selectedDate)}
                   </h2>
                   <Badge variant="secondary" className="text-xs font-mono">
-                    {totalForDay} {totalForDay > 1 ? "évènements" : "évènement"}
+                    {totalForDay} {totalForDay > 1 ? t("events") : t("event")}
                   </Badge>
                 </div>
 
@@ -108,14 +110,14 @@ export const Calendar = ({ initialEvents }: CalendarProps) => {
                   <Input
                     value={searchQuery}
                     onChange={e => setSearchQuery(e.target.value)}
-                    placeholder="Rechercher..."
+                    placeholder={t("search")}
                     className="pl-9 pr-8 h-9 text-sm"
                   />
                   {searchQuery && (
                     <button
                       onClick={() => setSearchQuery("")}
                       className="absolute right-2.5 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
-                      aria-label="Effacer la recherche"
+                      aria-label={t("clearSearch")}
                     >
                       <X className="h-3.5 w-3.5" />
                     </button>

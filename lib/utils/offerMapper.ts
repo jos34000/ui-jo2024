@@ -20,8 +20,6 @@ export const toOlympicOffer = (dto: OfferDTO): OlympicOffer => {
     },
   }
 
-  const subtitle = (nb: number) => `${nb} ${nb > 1 ? "billets" : "billet"}`
-
   return {
     id: dto.id,
     name: dto.name,
@@ -31,7 +29,6 @@ export const toOlympicOffer = (dto: OfferDTO): OlympicOffer => {
     isActive: dto.isActive,
     displayOrder: dto.displayOrder,
     features: dto.features,
-    subtitle: subtitle(dto.numberOfTickets),
     style: offerStyles[dto.name],
   }
 }

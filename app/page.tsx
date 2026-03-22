@@ -6,12 +6,16 @@ import { Offers } from "@/components/Offers"
 import { Footer } from "@/components/Footer"
 import { EventDTO } from "@/lib/types/event.type"
 import { toOlympicEvent } from "@/lib/utils/eventMapper"
+import { getLocale } from "next-intl/server"
 
 export const dynamic = "force-dynamic"
 
 const HomePage = async () => {
   const apiUrl = process.env.NEXT_PUBLIC_API_BASE_URL
-  const events = await fetch(`${apiUrl}/events/all`).then(r => r.json())
+  const locale = await getLocale()
+  const events = await fetch(`${apiUrl}/events/all`, {
+    headers: { "Accept-Language": locale },
+  }).then(r => r.json())
   const mappedEvents = events.map((event: EventDTO) => toOlympicEvent(event))
   const featuredEvents = mappedEvents.slice(0, 6)
 

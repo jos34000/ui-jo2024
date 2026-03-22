@@ -1,21 +1,28 @@
+"use client"
+
 import { OlympicEvent } from "@/lib/types/event.type"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { MapPin } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
+import { useTranslations } from "next-intl"
+import { useTranslateSport } from "@/lib/utils/i18nHelpers"
 
 interface EventCardProps {
   event: OlympicEvent
 }
 
-const statusConfig = {
-  available: { label: "Disponible", dot: "bg-[#00A651]" },
-  limited: { label: "Dernieres places", dot: "bg-[#FCB131]" },
-  soldout: { label: "Complet", dot: "bg-[#EE334E]" },
-}
-
 export const EventCard = ({ event }: EventCardProps) => {
+  const t = useTranslations("featuredEvents")
+  const translateSport = useTranslateSport()
+
+  const statusConfig = {
+    available: { label: t("status.available"), dot: "bg-[#00A651]" },
+    limited: { label: t("status.limited"), dot: "bg-[#FCB131]" },
+    soldout: { label: t("status.soldout"), dot: "bg-[#EE334E]" },
+  }
+
   const status = statusConfig[event.status]
   const getStatusClassName = (status: string) => {
     if (status === "available") return "border-[#00A651]/30 text-[#00A651]"
@@ -41,7 +48,7 @@ export const EventCard = ({ event }: EventCardProps) => {
               <div className="flex items-start justify-between gap-3">
                 <div className="min-w-0">
                   <p className="text-xs font-medium text-primary mb-0.5">
-                    {event.sport}
+                    {translateSport(event.sport)}
                   </p>
                   <h3 className="text-sm sm:text-base font-semibold leading-tight group-hover:text-primary transition-colors">
                     {event.name}
@@ -69,7 +76,7 @@ export const EventCard = ({ event }: EventCardProps) => {
                   variant={event.status === "soldout" ? "outline" : "default"}
                   className="text-xs h-8"
                 >
-                  {event.status === "soldout" ? "Complet" : "Reserver"}
+                  {event.status === "soldout" ? t("soldout") : t("reserve")}
                 </Button>
               </div>
             </div>

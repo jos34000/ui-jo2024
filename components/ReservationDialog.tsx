@@ -30,6 +30,7 @@ import { OlympicEvent } from "@/lib/types/event.type"
 import { OfferDTO } from "@/lib/types/offer.type"
 import { useCartStore } from "@/lib/stores/cart.store"
 import { Label } from "@/components/ui/label"
+import { useTranslations } from "next-intl"
 
 interface ReservationDialogProps {
   event: OlympicEvent
@@ -49,6 +50,7 @@ export const ReservationDialog = ({
   offers,
   disabled,
 }: ReservationDialogProps) => {
+  const t = useTranslations("reservation")
   const [selectedOfferId, setSelectedOfferId] = useState<string | undefined>(
     undefined,
   )
@@ -70,7 +72,7 @@ export const ReservationDialog = ({
       setError(
         e instanceof Error
           ? e.message
-          : "Une erreur est survenue. Veuillez réessayer.",
+          : t("error"),
       )
     } finally {
       setIsConfirming(false)
@@ -90,7 +92,7 @@ export const ReservationDialog = ({
       <DialogTrigger asChild>
         <Button size="lg" className="w-full sm:w-auto" disabled={disabled}>
           <Ticket className="mr-2 h-4 w-4" />
-          {disabled ? "Complet" : "Reserver maintenant"}
+          {disabled ? t("disabled") : t("reserveNow")}
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-md">
@@ -103,11 +105,10 @@ export const ReservationDialog = ({
                 </div>
               </div>
               <DialogTitle className="text-center font-mono">
-                Ajouté au panier
+                {t("added.title")}
               </DialogTitle>
               <DialogDescription className="text-center">
-                {event.name} a été ajouté à votre panier. Finalisez votre
-                commande depuis le panier.
+                {t("added.subtitle", { name: event.name })}
               </DialogDescription>
             </DialogHeader>
             <DialogFooter className="mt-4 flex flex-col gap-2 sm:flex-row">
@@ -116,13 +117,13 @@ export const ReservationDialog = ({
                   variant="outline"
                   className="bg-transparent w-full sm:w-auto"
                 >
-                  Continuer
+                  {t("continue")}
                 </Button>
               </DialogClose>
               <DialogClose asChild>
                 <Button className="w-full sm:w-auto gap-2" onClick={() => setSidebarOpen(true)}>
                   <ShoppingCart className="h-4 w-4" />
-                  Voir le panier
+                  {t("viewCart")}
                 </Button>
               </DialogClose>
             </DialogFooter>
@@ -131,7 +132,7 @@ export const ReservationDialog = ({
           <>
             <DialogHeader>
               <DialogTitle className="font-mono">
-                Reserver des billets
+                {t("title")}
               </DialogTitle>
               <DialogDescription>{event.name}</DialogDescription>
             </DialogHeader>
@@ -150,20 +151,19 @@ export const ReservationDialog = ({
               </div>
 
               <div className="space-y-2">
-                <Label className="text-sm font-medium">Type de billet</Label>
+                <Label className="text-sm font-medium">{t("ticketType")}</Label>
                 <Select
                   value={selectedOfferId}
                   onValueChange={setSelectedOfferId}
                 >
                   <SelectTrigger>
-                    <SelectValue placeholder="Selectionnez une formule" />
+                    <SelectValue placeholder={t("selectOffer")} />
                   </SelectTrigger>
                   <SelectContent>
                     {activeOffers.map(offer => (
                       <SelectItem key={offer.id} value={String(offer.id)}>
                         <span>
-                          {offer.name} — {offer.numberOfTickets} billet
-                          {offer.numberOfTickets > 1 ? "s" : ""} ·{" "}
+                          {offer.name} — {t("tickets", { count: offer.numberOfTickets })} ·{" "}
                           {formatPrice(offer.price)}
                         </span>
                       </SelectItem>
@@ -178,9 +178,7 @@ export const ReservationDialog = ({
                 <div className="flex items-start gap-2">
                   <Info className="h-4 w-4 text-primary mt-0.5 shrink-0" />
                   <p className="text-xs text-muted-foreground">
-                    Votre billet donne accès a tous les évènement des Jeux
-                    Olympiques. Les places sont attribuees selon la
-                    disponibilite.
+                    {t("info")}
                   </p>
                 </div>
               </div>
@@ -189,14 +187,14 @@ export const ReservationDialog = ({
             <DialogFooter className="gap-2">
               <DialogClose asChild>
                 <Button variant="outline" className="bg-transparent">
-                  Annuler
+                  {t("cancel")}
                 </Button>
               </DialogClose>
               <Button
                 onClick={handleReserve}
                 disabled={!selectedOfferId || isConfirming}
               >
-                {isConfirming ? "Ajout en cours..." : "Ajouter au panier"}
+                {isConfirming ? t("adding") : t("addToCart")}
               </Button>
             </DialogFooter>
           </>

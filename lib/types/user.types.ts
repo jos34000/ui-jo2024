@@ -4,6 +4,7 @@ export interface User {
   firstName: string
   lastName: string
   mfaEnabled: boolean
+  locale: string
   createdDate: string
 }
 
@@ -20,6 +21,7 @@ export interface StoredUser {
   lastName: string
   email: string
   mfaEnabled: boolean
+  locale: string
 }
 
 export interface UpdateUser {

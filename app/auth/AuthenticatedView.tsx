@@ -30,12 +30,7 @@ import { usePaymentStore } from "@/lib/stores/payment.store"
 import { TicketGroup } from "@/lib/types/payment.type"
 import { formatDatePurchase } from "@/lib/utils/date"
 import { formatPrice } from "@/lib/utils/format"
-
-const STATUS_BADGE: Record<string, { label: string; variant: "default" | "secondary" | "destructive" }> = {
-  VALID:     { label: "Actif",   variant: "default" },
-  USED:      { label: "Utilisé", variant: "secondary" },
-  CANCELLED: { label: "Annulé",  variant: "destructive" },
-}
+import { useTranslations } from "next-intl"
 
 interface AuthenticatedViewProps {
   user: StoredUser
@@ -48,26 +43,37 @@ export const AuthenticatedView = ({
   onLogout,
   initials,
 }: Readonly<AuthenticatedViewProps>) => {
+  const t = useTranslations("profile")
   const [isEditing, setIsEditing] = useState(false)
   const [groups, setGroups] = useState<TicketGroup[]>([])
   const [ticketsLoaded, setTicketsLoaded] = useState(false)
   const getUserTickets = usePaymentStore(state => state.getUserTickets)
 
+  const STATUS_BADGE: Record<
+    string,
+    { label: string; variant: "default" | "secondary" | "destructive" }
+  > = {
+    VALID: { label: t("status.VALID"), variant: "default" },
+    USED: { label: t("status.USED"), variant: "secondary" },
+    CANCELLED: { label: t("status.CANCELLED"), variant: "destructive" },
+  }
+
   useEffect(() => {
     getUserTickets()
       .then(setGroups)
+      .catch(() => {})
       .finally(() => setTicketsLoaded(true))
   }, [getUserTickets])
 
-  const totalSeats  = groups.reduce((sum, g) => sum + g.totalSeats, 0)
+  const totalSeats = groups.reduce((sum, g) => sum + g.totalSeats, 0)
   const activeCount = groups.filter(g => g.groupStatus === "VALID").length
   const recentGroups = groups.slice(0, 2)
 
-  const ticketSummary = !ticketsLoaded
-    ? "Chargement…"
-    : groups.length === 0
+  const ticketSummary = ticketsLoaded
+    ? groups.length === 0
       ? undefined
-      : `${groups.length} commande${groups.length > 1 ? "s" : ""} · ${totalSeats} place${totalSeats > 1 ? "s" : ""}${activeCount > 0 ? ` · ${activeCount} actif${activeCount > 1 ? "s" : ""}` : ""}`
+      : `${t("ticketSummaryOrders", { count: groups.length })} · ${t("ticketSummarySeats", { count: totalSeats })}${activeCount > 0 ? ` · ${t(`ticketSummaryActive`, { count: activeCount })}` : ""}`
+    : t("loadingTickets")
 
   return (
     <main className="flex-1 mx-auto w-full max-w-3xl px-4 sm:px-6 py-8 sm:py-12 lg:py-16">
@@ -78,10 +84,10 @@ export const AuthenticatedView = ({
           </span>
           <div className="min-w-0">
             <h1 className="text-2xl sm:text-3xl font-bold tracking-tight font-mono truncate">
-              Bonjour, {user.firstName}
+              {t("greeting", { name: user.firstName })}
             </h1>
             <p className="text-sm sm:text-base text-muted-foreground">
-              {"Bienvenue dans votre espace personnel Paris 2024"}
+              {t("welcomeSubtitle")}
             </p>
           </div>
         </div>
@@ -90,16 +96,21 @@ export const AuthenticatedView = ({
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-4">
             <div>
               <CardTitle className="text-lg font-mono">
-                {isEditing ? "Modifier mes informations" : "Informations du compte"}
+                {isEditing ? t("editTitle") : t("title")}
               </CardTitle>
               <CardDescription className="mt-1">
-                {isEditing ? "Mettez a jour vos informations personnelles" : "Vos informations personnelles"}
+                {isEditing ? t("editDescription") : t("description")}
               </CardDescription>
             </div>
             {!isEditing && (
-              <Button variant="ghost" size="sm" onClick={() => setIsEditing(true)} className="shrink-0">
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => setIsEditing(true)}
+                className="shrink-0"
+              >
                 <Pencil className="mr-2 h-4 w-4" />
-                Modifier
+                {t("edit")}
               </Button>
             )}
           </CardHeader>
@@ -112,13 +123,23 @@ export const AuthenticatedView = ({
               />
             ) : (
               <div className="space-y-0">
-                <InfoRow icon={User} label="Nom complet" value={`${user.firstName} ${user.lastName}`} hasBorder />
-                <InfoRow icon={Mail} label="Email" value={user.email} hasBorder />
+                <InfoRow
+                  icon={User}
+                  label={t("fullName")}
+                  value={`${user.firstName} ${user.lastName}`}
+                  hasBorder
+                />
+                <InfoRow
+                  icon={Mail}
+                  label={t("email")}
+                  value={user.email}
+                  hasBorder
+                />
                 <InfoRow
                   icon={Ticket}
-                  label="Billets"
+                  label={t("tickets")}
                   value={ticketSummary}
-                  placeholder="Aucun billet pour le moment"
+                  placeholder={t("noTickets")}
                 />
               </div>
             )}
@@ -128,9 +149,14 @@ export const AuthenticatedView = ({
         {ticketsLoaded && recentGroups.length > 0 && (
           <Card className="border-border/50">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
-              <CardTitle className="text-base font-mono">Billets récents</CardTitle>
-              <Link href="/billets" className="text-xs text-muted-foreground hover:text-primary transition-colors">
-                Voir tout →
+              <CardTitle className="text-base font-mono">
+                {t("recentTickets")}
+              </CardTitle>
+              <Link
+                href="/billets"
+                className="text-xs text-muted-foreground hover:text-primary transition-colors"
+              >
+                {t("viewAll")}
               </Link>
             </CardHeader>
             <CardContent className="space-y-2 pt-0">
@@ -142,12 +168,18 @@ export const AuthenticatedView = ({
                     className="flex items-center justify-between gap-3 rounded-lg bg-muted/40 px-3 py-2.5"
                   >
                     <div className="min-w-0 flex-1">
-                      <p className="text-sm font-medium truncate">{group.event.name}</p>
+                      <p className="text-sm font-medium truncate">
+                        {group.event.name}
+                      </p>
                       <p className="text-xs text-muted-foreground mt-0.5">
-                        {group.totalSeats} place{group.totalSeats > 1 ? "s" : ""} · {formatDatePurchase(group.purchasedAt)} · {formatPrice(group.totalPrice)}
+                        {t("seatsCount", { count: group.totalSeats })} ·{" "}
+                        {formatDatePurchase(group.purchasedAt)} ·{" "}
+                        {formatPrice(group.totalPrice)}
                       </p>
                     </div>
-                    <Badge variant={cfg.variant} className="text-xs shrink-0">{cfg.label}</Badge>
+                    <Badge variant={cfg.variant} className="text-xs shrink-0">
+                      {cfg.label}
+                    </Badge>
                   </div>
                 )
               })}
@@ -163,8 +195,12 @@ export const AuthenticatedView = ({
                   <Ticket className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <h3 className="font-semibold text-sm sm:text-base">Acheter des billets</h3>
-                  <p className="text-xs sm:text-sm text-muted-foreground">{"Explorez les évènements"}</p>
+                  <h3 className="font-semibold text-sm sm:text-base">
+                    {t("buyTickets")}
+                  </h3>
+                  <p className="text-xs sm:text-sm text-muted-foreground">
+                    {t("exploreEvents")}
+                  </p>
                 </div>
                 <ArrowRight className="h-4 w-4 text-muted-foreground shrink-0" />
               </CardContent>
@@ -178,11 +214,13 @@ export const AuthenticatedView = ({
                   <Shield className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <h3 className="font-semibold text-sm sm:text-base">Mes billets</h3>
+                  <h3 className="font-semibold text-sm sm:text-base">
+                    {t("myTickets")}
+                  </h3>
                   <p className="text-xs sm:text-sm text-muted-foreground">
                     {ticketsLoaded && groups.length > 0
-                      ? `${groups.length} commande${groups.length > 1 ? "s" : ""}`
-                      : "Consultez vos réservations"}
+                      ? t("ordersCount", { count: groups.length })
+                      : t("viewReservations")}
                   </p>
                 </div>
                 <ArrowRight className="h-4 w-4 text-muted-foreground shrink-0" />
@@ -195,7 +233,7 @@ export const AuthenticatedView = ({
           <Button variant="outline" className="bg-transparent" asChild>
             <Link href="/">
               <ArrowLeft className="mr-2 h-4 w-4" />
-              {"Retour a l'accueil"}
+              {t("backHome")}
             </Link>
           </Button>
           <ResetPasswordDialog
@@ -203,7 +241,7 @@ export const AuthenticatedView = ({
             trigger={
               <Button variant="outline" className="bg-transparent">
                 <Lock className="mr-2 h-4 w-4" />
-                Changer le mot de passe
+                {t("changePassword")}
               </Button>
             }
           />
@@ -213,7 +251,7 @@ export const AuthenticatedView = ({
             className="text-destructive hover:text-destructive hover:bg-destructive/10"
           >
             <LogOut className="mr-2 h-4 w-4" />
-            Se deconnecter
+            {t("logout")}
           </Button>
         </div>
       </div>

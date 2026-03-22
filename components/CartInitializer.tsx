@@ -10,7 +10,7 @@ export const CartInitializer = () => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      fetchCart()
+      fetchCart().then()
     }
   }, [isAuthenticated, fetchCart])
 

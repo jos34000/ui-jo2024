@@ -7,6 +7,7 @@ import {
   getMonth,
   olympicDays,
 } from "@/lib/utils/date"
+import { useTranslations } from "next-intl"
 
 interface DayTimelineProps {
   selectedDate: string
@@ -19,6 +20,7 @@ export const DayTimeline = ({
   onSelectDate,
   eventCounts,
 }: DayTimelineProps) => {
+  const t = useTranslations("calendar")
   const scrollRef = useRef<HTMLDivElement>(null)
 
   const scroll = (dir: number) => {
@@ -42,7 +44,7 @@ export const DayTimeline = ({
       <button
         onClick={() => scroll(-1)}
         className="shrink-0 flex items-center justify-center h-9 w-9 rounded-full border border-border bg-card hover:bg-accent text-foreground transition-colors"
-        aria-label="Defiler a gauche"
+        aria-label={t("scrollLeft")}
       >
         <ChevronLeft className="h-4 w-4" />
       </button>
@@ -63,7 +65,7 @@ export const DayTimeline = ({
             <div key={day} className="flex flex-col items-center gap-1">
               {showMonthLabel && (
                 <span className="text-[10px] font-medium text-muted-foreground uppercase tracking-wide mb-0.5">
-                  {month === 6 ? "Juillet" : "Août"}
+                  {month === 6 ? t("july") : t("august")}
                 </span>
               )}
               <button
@@ -77,7 +79,7 @@ export const DayTimeline = ({
                       : "bg-card border-border hover:border-primary/40 hover:bg-accent text-foreground"
                   }
                 `}
-                aria-label={`Voir les évènement du ${formatDateFull(day)}`}
+                aria-label={t("viewEventsOf", { date: formatDateFull(day) })}
               >
                 <span className="text-[10px] font-medium uppercase opacity-90">
                   {formatDay(day)}
@@ -101,7 +103,7 @@ export const DayTimeline = ({
       <button
         onClick={() => scroll(1)}
         className="shrink-0 flex items-center justify-center h-9 w-9 rounded-full border border-border bg-card hover:bg-accent text-foreground transition-colors"
-        aria-label="Defiler a droite"
+        aria-label={t("scrollRight")}
       >
         <ChevronRight className="h-4 w-4" />
       </button>

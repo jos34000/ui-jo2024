@@ -22,7 +22,6 @@ export interface OfferDTO {
 }
 
 export interface OlympicOffer extends OfferDTO {
-  subtitle: string
   style: OfferStyle
 }
 
