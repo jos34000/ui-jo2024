@@ -9,6 +9,15 @@ const nextConfig: NextConfig = {
     browserToTerminal: "warn",
   },
   allowedDevOrigins: ["192.168.1.23"],
+  async rewrites() {
+    const apiBase = process.env.API_BASE_URL || "http://localhost:8000/api"
+    return [
+      {
+        source: "/api/:path*",
+        destination: `${apiBase}/:path*`,
+      },
+    ]
+  },
 }
 
 export default withNextIntl(nextConfig)
