@@ -30,6 +30,7 @@ export const ResetPasswordDialog = ({
   userEmail,
 }: ResetPasswordDialogProps) => {
   const t = useTranslations("changePassword")
+  const tErrors = useTranslations("errors")
   const [open, setOpen] = useState(false)
   const [success, setSuccess] = useState(false)
 
@@ -47,7 +48,7 @@ export const ResetPasswordDialog = ({
         })
 
         if (!response.ok) {
-          toast.error(await parseApiError(response, t("genericError")))
+          toast.error(await parseApiError(response, t("genericError"), tErrors))
           return
         }
 
@@ -80,7 +81,7 @@ export const ResetPasswordDialog = ({
         })
 
         if (!response.ok) {
-          toast.error(await parseApiError(response, t("genericError")))
+          toast.error(await parseApiError(response, t("genericError"), tErrors))
           return
         }
 

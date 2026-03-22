@@ -5,7 +5,7 @@ export const changePasswordSchema = z
     currentPassword: z.string().min(1, "Mot de passe actuel requis"),
     newPassword: z
       .string()
-      .min(8, "Le mot de passe doit contenir au moins 8 caracteres")
+      .min(8, "Le mot de passe doit contenir au moins 8 caractères")
       .regex(/[A-Z]/, "Le mot de passe doit contenir au moins une majuscule")
       .regex(/\d/, "Le mot de passe doit contenir au moins un chiffre"),
     confirmPassword: z.string(),

@@ -1,6 +1,5 @@
 "use client"
 
-import { z } from "zod"
 import { UserIcon } from "lucide-react"
 import { useAuthStore } from "@/lib/stores/auth.store"
 import { profileSchema } from "@/lib/schemas/profile.schema"
@@ -9,6 +8,7 @@ import { useAppForm } from "@/lib/hooks/useAppForm"
 import { Button } from "@/components/ui/button"
 import { apiClient, parseApiError } from "@/lib/utils/apiClient"
 import { toast } from "sonner"
+import { z } from "zod"
 import { useTranslations } from "next-intl"
 
 type ProfileFormValues = z.infer<typeof profileSchema>
@@ -26,6 +26,7 @@ export const ProfileForm = ({
 }: ProfileFormProps) => {
   const t = useTranslations("profile")
   const tCommon = useTranslations("common")
+  const tErrors = useTranslations("errors")
   const updateUser = useAuthStore(state => state.updateUser)
 
   const form = useAppForm({
@@ -41,7 +42,7 @@ export const ProfileForm = ({
         body: JSON.stringify(value),
       })
       if (!response.ok) {
-        toast.error(await parseApiError(response, t("updateError")))
+        toast.error(await parseApiError(response, t("updateError"), tErrors))
         return
       }
       const data = await response.json()

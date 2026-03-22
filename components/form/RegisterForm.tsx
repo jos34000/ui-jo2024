@@ -17,6 +17,7 @@ export const RegisterForm = () => {
   const locale = useLocale()
   const { setUser } = useAuthStore()
   const t = useTranslations("registerForm")
+  const tErrors = useTranslations("errors")
 
   const registerForm = useAppForm({
     defaultValues: {
@@ -44,7 +45,7 @@ export const RegisterForm = () => {
         })
 
         if (!response.ok) {
-          toast.error(await parseApiError(response, t("error")))
+          toast.error(await parseApiError(response, t("error"), tErrors))
           return
         }
 

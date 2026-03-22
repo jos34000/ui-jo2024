@@ -33,6 +33,7 @@ export const OTPDialog = ({
   const router = useRouter()
   const { setUser } = useAuthStore()
   const t = useTranslations("otp")
+  const tErrors = useTranslations("errors")
 
   const form = useAppForm({
     defaultValues: {
@@ -50,7 +51,7 @@ export const OTPDialog = ({
         toast.success(t("success"))
         router.push("/")
       } else {
-        toast.error(await parseApiError(res, t("invalidCode")))
+        toast.error(await parseApiError(res, t("invalidCode"), tErrors))
       }
     },
   })

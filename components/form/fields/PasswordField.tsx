@@ -12,6 +12,7 @@ import { Eye, EyeOff, Lock } from "lucide-react"
 import { ResetPasswordDialog } from "@/components/ResetPasswordDialog"
 import { Button } from "@/components/ui/button"
 import { useTranslations } from "next-intl"
+import { translateValidationError } from "@/lib/utils/validationErrors"
 
 interface PasswordFieldProps extends ComponentProps<typeof Input> {
   label: string
@@ -27,8 +28,10 @@ export const PasswordField = ({
   ...inputProps
 }: Readonly<PasswordFieldProps>) => {
   const t = useTranslations("common")
+  const tV = useTranslations("validation")
   const field = useFieldContext<string>()
-  const error = field.state.meta.errors[0]?.message
+  const rawError = field.state.meta.errors[0]?.message
+  const error = rawError ? translateValidationError(rawError, tV) : undefined
   const [showPassword, setShowPassword] = useState(false)
 
   return (

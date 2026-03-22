@@ -7,14 +7,18 @@ import {
   InputOTPSeparator,
   InputOTPSlot,
 } from "@/components/ui/input-otp"
+import { useTranslations } from "next-intl"
+import { translateValidationError } from "@/lib/utils/validationErrors"
 
 interface OTPFieldProps {
   label: string
 }
 
 export const OTPField = ({ label, ...otpProps }: Readonly<OTPFieldProps>) => {
+  const tV = useTranslations("validation")
   const field = useFieldContext<string>()
-  const error = field.state.meta.errors[0]?.message
+  const rawError = field.state.meta.errors[0]?.message
+  const error = rawError ? translateValidationError(rawError, tV) : undefined
   const slotClassName =
     "*:data-[slot=input-otp-slot]:h-12 *:data-[slot=input-otp-slot]:w-11 *:data-[slot=input-otp-slot]:text-xl"
   return (
@@ -27,7 +31,6 @@ export const OTPField = ({ label, ...otpProps }: Readonly<OTPFieldProps>) => {
         name={field.name}
         onChange={field.handleChange}
         aria-invalid={!!error}
-        /*disabled={isVerifying}*/
       >
         <InputOTPGroup className={slotClassName}>
           <InputOTPSlot index={0} />

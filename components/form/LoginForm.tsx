@@ -6,11 +6,11 @@ import { toast } from "sonner"
 import { loginSchema } from "@/lib/schemas/login.schema"
 import { useAuthStore } from "@/lib/stores/auth.store"
 import { apiClient, parseApiError } from "@/lib/utils/apiClient"
-import { z } from "zod"
 import { useState } from "react"
 import { OTPDialog } from "@/components/OTPDialog"
 import { User } from "@/lib/types/user.types"
 import { User as UserIcon } from "lucide-react"
+import { z } from "zod"
 import { useTranslations } from "next-intl"
 
 type LoginFormValues = z.infer<typeof loginSchema>
@@ -22,6 +22,7 @@ export const LoginForm = () => {
   const [pendingEmail, setPendingEmail] = useState("")
   const { setUser } = useAuthStore()
   const t = useTranslations("loginForm")
+  const tErrors = useTranslations("errors")
 
   const loginForm = useAppForm({
     defaultValues: {
@@ -40,7 +41,7 @@ export const LoginForm = () => {
         })
 
         if (!response.ok) {
-          toast.error(await parseApiError(response, t("error")))
+          toast.error(await parseApiError(response, t("error"), tErrors))
           return
         }
 

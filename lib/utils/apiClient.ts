@@ -1,4 +1,5 @@
 import { getAuthStore } from "@/lib/stores/auth.store"
+import { resolveBackendErrorKey } from "@/lib/utils/apiErrors"
 
 const API_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:8000"
 const PUBLIC_ENDPOINTS = ["/auth/", "/2fa/send", "/2fa/verify"]
@@ -62,10 +63,20 @@ export async function apiClient(endpoint: string, options?: RequestInit) {
 export async function parseApiError(
   response: Response,
   fallback = "Une erreur est survenue",
+  t?: (key: string) => string,
 ): Promise<string> {
   const error = await response.json().catch(() => ({}))
-  if (error.message) return error.message
-  const values = Object.values(error).filter(v => typeof v === "string")
-  if (values.length > 0) return values.join(", ")
+  const rawMessage: string | undefined =
+    error.message ??
+    (Object.values(error).filter(v => typeof v === "string")[0] as string | undefined)
+
+  if (rawMessage) {
+    if (t) {
+      const key = resolveBackendErrorKey(rawMessage)
+      if (key) return t(key)
+    }
+    return rawMessage
+  }
+
   return fallback
 }
