@@ -28,8 +28,10 @@ export const Footer = () => {
       { name: t("links.contact"), href: "#" },
     ],
     legal: [
-      { name: t("links.terms"), href: "#" },
-      { name: t("links.privacy"), href: "#" },
+      { name: t("links.mentions"), href: "/mentions-legales" },
+      { name: t("links.terms"), href: "/conditions-utilisation" },
+      { name: t("links.privacy"), href: "/confidentialite" },
+      { name: t("links.cookiesPolicy"), href: "/cookies" },
     ],
   }
 

@@ -50,8 +50,10 @@
       "faq": "FAQ",
       "accessibility": "Accessibilité",
       "contact": "Contact",
+      "mentions": "Mentions légales",
       "terms": "Conditions générales",
       "privacy": "Politique de confidentialité",
+      "cookiesPolicy": "Politique des cookies",
       "cookies": "Cookies"
     }
   },
@@ -575,6 +577,405 @@
       "preferences": {
         "title": "Cookies de préférences",
         "description": "Ces cookies permettent de mémoriser vos choix et préférences pour personnaliser votre expérience."
+      }
+    }
+  },
+  "legal": {
+    "badge": "Document légal",
+    "backHome": "Retour à l'accueil",
+    "lastUpdated": "Dernière mise à jour : 22 mars 2026",
+    "mentions": {
+      "title": "Mentions légales",
+      "editor": {
+        "title": "1. Éditeur du site",
+        "intro": "Le présent site internet est édité par :",
+        "companyName": "ESN InfoEvent",
+        "companyType": "Société par actions simplifiée (SAS)",
+        "address": "Siège social : 42 Avenue de la République, 75011 Paris, France",
+        "siret": "SIRET : 123 456 789 00015",
+        "tva": "N° TVA intracommunautaire : FR 12 123456789",
+        "directorLabel": "Directeur de la publication",
+        "directorName": "José, Président-Directeur Général",
+        "emailLabel": "Email",
+        "phoneLabel": "Téléphone"
+      },
+      "hosting": {
+        "title": "2. Hébergement",
+        "intro": "Le site est hébergé par :"
+      },
+      "contact": {
+        "title": "3. Contact",
+        "intro": "Pour toute question ou réclamation concernant le site :"
+      },
+      "ip": {
+        "title": "4. Propriété intellectuelle",
+        "copyright": {
+          "title": "4.1 Droits d'auteur",
+          "content": "L'ensemble des contenus (textes, images, vidéos, graphismes, logos, icônes, sons, logiciels) présents sur ce site sont protégés par le droit d'auteur et le droit des marques. Toute reproduction, représentation, modification, publication ou adaptation de tout ou partie des éléments du site, quel que soit le moyen ou le procédé utilisé, est interdite sans autorisation écrite préalable."
+        },
+        "brands": {
+          "title": "4.2 Marques",
+          "content": "Les marques et logos figurant sur le site sont des marques déposées. Leur reproduction ou utilisation sans autorisation est strictement interdite."
+        },
+        "olympic": "Les symboles olympiques, l'emblème olympique, le drapeau olympique, la devise olympique, les hymnes olympiques et les termes « Jeux Olympiques » et « Olympiade » sont la propriété exclusive du Comité International Olympique."
+      },
+      "liability": {
+        "title": "5. Limitation de responsabilité",
+        "intro": "ESN InfoEvent décline toute responsabilité pour :",
+        "items": [
+          "Toute imprécision, inexactitude ou omission portant sur des informations disponibles sur le site",
+          "Tous dommages résultant d'une intrusion frauduleuse d'un tiers",
+          "Tout dommage causé au système informatique de l'utilisateur",
+          "Toute interruption du site"
+        ]
+      },
+      "links": {
+        "title": "6. Liens hypertextes",
+        "outgoing": {
+          "title": "6.1 Liens sortants",
+          "content": "Le site peut contenir des liens vers d'autres sites internet. ESN InfoEvent n'exerce aucun contrôle sur ces sites et décline toute responsabilité quant à leur contenu."
+        },
+        "incoming": {
+          "title": "6.2 Liens entrants",
+          "content": "La création de liens hypertextes vers le site est soumise à l'accord préalable et écrit d'ESN InfoEvent. Toute demande doit être adressée à"
+        }
+      },
+      "dataLink": {
+        "title": "7. Protection des données personnelles",
+        "content": "Pour toute information concernant le traitement de vos données personnelles, veuillez consulter notre",
+        "linkLabel": "Politique de Confidentialité"
+      },
+      "cookiesLink": {
+        "title": "8. Cookies",
+        "content": "Pour toute information concernant l'utilisation des cookies sur ce site, veuillez consulter notre",
+        "linkLabel": "Politique relative aux Cookies"
+      },
+      "law": {
+        "title": "9. Droit applicable",
+        "content": "Les présentes mentions légales sont soumises au droit français. En cas de litige, et après échec de toute tentative de recherche d'une solution amiable, les tribunaux français seront seuls compétents."
+      },
+      "credits": {
+        "title": "10. Crédits",
+        "dev": {
+          "title": "10.1 Conception et développement",
+          "content": "Site conçu et développé par ESN InfoEvent dans le cadre d'un projet pédagogique."
+        },
+        "photos": {
+          "title": "10.2 Crédits photos et illustrations",
+          "content": "Les photographies et illustrations utilisées sur ce site sont la propriété d'ESN InfoEvent ou utilisées avec l'autorisation de leurs auteurs respectifs."
+        }
+      }
+    },
+    "terms": {
+      "title": "Conditions générales d'utilisation",
+      "object": {
+        "title": "1. Objet",
+        "content1": "Les présentes Conditions Générales d'Utilisation (ci-après « CGU ») ont pour objet de définir les modalités et conditions d'utilisation de la plateforme de billetterie officielle des Jeux Olympiques et Paralympiques de Paris 2024 (ci-après « la Plateforme »), ainsi que les droits et obligations des utilisateurs.",
+        "content2": "L'accès et l'utilisation de la Plateforme impliquent l'acceptation sans réserve des présentes CGU par l'utilisateur."
+      },
+      "definitions": {
+        "title": "2. Définitions",
+        "items": [
+          {
+            "term": "Utilisateur",
+            "definition": "Toute personne physique accédant à la Plateforme, qu'elle soit inscrite ou non."
+          },
+          {
+            "term": "Compte",
+            "definition": "Espace personnel de l'Utilisateur lui permettant d'accéder aux services de la Plateforme."
+          },
+          {
+            "term": "Billet",
+            "definition": "Titre d'accès à un événement des Jeux Olympiques et Paralympiques de Paris 2024."
+          },
+          {
+            "term": "Événement",
+            "definition": "Compétition, cérémonie ou manifestation faisant partie du programme officiel des Jeux."
+          }
+        ]
+      },
+      "access": {
+        "title": "3. Accès à la Plateforme",
+        "conditions": {
+          "title": "3.1 Conditions d'accès",
+          "content": "L'accès à la Plateforme est ouvert à toute personne disposant d'une connexion internet. Certaines fonctionnalités, notamment l'achat de billets, nécessitent la création d'un Compte."
+        },
+        "account": {
+          "title": "3.2 Création de compte",
+          "content1": "Pour créer un Compte, l'Utilisateur doit fournir des informations exactes et complètes. Il s'engage à mettre à jour ces informations en cas de modification.",
+          "content2": "L'Utilisateur est responsable de la confidentialité de ses identifiants de connexion et de toutes les actions effectuées depuis son Compte."
+        }
+      },
+      "purchase": {
+        "title": "4. Achat de billets",
+        "process": {
+          "title": "4.1 Processus d'achat",
+          "content": "L'achat de Billets s'effectue exclusivement en ligne via la Plateforme. L'Utilisateur sélectionne l'Événement souhaité, la catégorie de places et le nombre de billets désirés."
+        },
+        "price": {
+          "title": "4.2 Prix et paiement",
+          "content": "Les prix des Billets sont indiqués en euros TTC. Le paiement s'effectue par carte bancaire ou tout autre moyen de paiement proposé sur la Plateforme."
+        },
+        "confirmation": {
+          "title": "4.3 Confirmation de commande",
+          "content": "Toute commande validée fait l'objet d'un email de confirmation. Le Billet électronique est disponible dans l'espace personnel de l'Utilisateur."
+        }
+      },
+      "ticketUse": {
+        "title": "5. Utilisation des billets",
+        "nominal": {
+          "title": "5.1 Billets nominatifs",
+          "content": "Tous les Billets sont nominatifs et non cessibles, sauf via la plateforme officielle de revente autorisée par l'organisateur."
+        },
+        "access": {
+          "title": "5.2 Contrôle d'accès",
+          "content": "L'accès aux sites olympiques est soumis à la présentation d'un Billet valide et d'une pièce d'identité correspondant au nom indiqué sur le Billet."
+        }
+      },
+      "cancellation": {
+        "title": "6. Annulation et remboursement",
+        "withdrawal": {
+          "title": "6.1 Droit de rétractation",
+          "content": "Conformément à l'article L.221-28 du Code de la consommation, le droit de rétractation ne s'applique pas aux contrats de services de loisirs devant être fournis à une date déterminée."
+        },
+        "byOrganizer": {
+          "title": "6.2 Annulation par l'organisateur",
+          "content": "En cas d'annulation d'un Événement, l'Utilisateur sera remboursé du montant du Billet dans un délai de 30 jours."
+        }
+      },
+      "liability": {
+        "title": "7. Responsabilité",
+        "content1": "ESN InfoEvent s'efforce d'assurer la disponibilité et le bon fonctionnement de la Plateforme. Toutefois, sa responsabilité ne saurait être engagée en cas d'interruption temporaire du service pour maintenance ou mise à jour.",
+        "content2": "L'Utilisateur est seul responsable de l'utilisation qu'il fait de son Compte et des informations qu'il communique."
+      },
+      "ip": {
+        "title": "8. Propriété intellectuelle",
+        "content": "L'ensemble des éléments de la Plateforme (logos, textes, images, vidéos, etc.) sont protégés par les droits de propriété intellectuelle. Toute reproduction ou utilisation non autorisée est strictement interdite."
+      },
+      "changes": {
+        "title": "9. Modification des CGU",
+        "content": "ESN InfoEvent se réserve le droit de modifier les présentes CGU à tout moment. Les Utilisateurs seront informés de toute modification par email ou notification sur la Plateforme."
+      },
+      "law": {
+        "title": "10. Droit applicable",
+        "content": "Les présentes CGU sont soumises au droit français. En cas de litige, les tribunaux français seront seuls compétents."
+      },
+      "contact": {
+        "title": "11. Contact",
+        "content": "Pour toute question relative aux présentes CGU, vous pouvez nous contacter à l'adresse :"
+      }
+    },
+    "privacy": {
+      "title": "Politique de confidentialité",
+      "intro": {
+        "title": "1. Introduction",
+        "content1": "ESN InfoEvent s'engage à protéger la vie privée des utilisateurs de sa plateforme de billetterie.",
+        "content2": "La présente Politique de Confidentialité décrit comment nous collectons, utilisons, stockons et protégeons vos données personnelles conformément au Règlement Général sur la Protection des Données (RGPD) et à la loi Informatique et Libertés."
+      },
+      "controller": {
+        "title": "2. Responsable du traitement",
+        "intro": "Le responsable du traitement des données personnelles est :"
+      },
+      "collected": {
+        "title": "3. Données collectées",
+        "intro": "Nous collectons les catégories de données suivantes :",
+        "identity": {
+          "title": "3.1 Données d'identification",
+          "items": [
+            "Nom et prénom",
+            "Adresse email"
+          ]
+        },
+        "transaction": {
+          "title": "3.2 Données de transaction",
+          "items": [
+            "Historique des achats",
+            "Informations de paiement (traitées par notre prestataire sécurisé)",
+            "Préférences de billets"
+          ]
+        },
+        "technical": {
+          "title": "3.3 Données techniques",
+          "items": [
+            "Adresse IP",
+            "Type de navigateur et appareil",
+            "Données de navigation",
+            "Cookies et traceurs"
+          ]
+        }
+      },
+      "purpose": {
+        "title": "4. Finalités du traitement",
+        "intro": "Vos données personnelles sont collectées pour les finalités suivantes :",
+        "items": [
+          "Gestion de votre compte et de vos commandes",
+          "Émission et livraison des billets",
+          "Contrôle d'accès aux sites olympiques",
+          "Service client et assistance",
+          "Envoi de communications relatives à vos achats",
+          "Envoi de communications marketing (avec votre consentement)",
+          "Prévention de la fraude",
+          "Amélioration de nos services",
+          "Respect de nos obligations légales"
+        ]
+      },
+      "legalBasis": {
+        "title": "5. Base légale du traitement",
+        "intro": "Le traitement de vos données repose sur les bases légales suivantes :",
+        "items": [
+          {
+            "term": "Exécution du contrat",
+            "definition": "pour la gestion de vos commandes et la fourniture de nos services."
+          },
+          {
+            "term": "Consentement",
+            "definition": "pour l'envoi de communications marketing et l'utilisation de certains cookies."
+          },
+          {
+            "term": "Intérêt légitime",
+            "definition": "pour la prévention de la fraude et l'amélioration de nos services."
+          },
+          {
+            "term": "Obligation légale",
+            "definition": "pour le respect de nos obligations comptables et fiscales."
+          }
+        ]
+      },
+      "retention": {
+        "title": "6. Durée de conservation",
+        "intro": "Vos données personnelles sont conservées pendant les durées suivantes :",
+        "items": [
+          "Données de compte : 3 ans après la dernière activité",
+          "Données de transaction : 10 ans (obligations comptables)",
+          "Données marketing : 3 ans après le dernier contact",
+          "Cookies : selon leur nature (voir notre politique cookies)"
+        ]
+      },
+      "recipients": {
+        "title": "7. Destinataires des données",
+        "intro": "Vos données peuvent être transmises aux destinataires suivants :",
+        "items": [
+          "Nos services internes (billetterie, marketing, service client)",
+          "Nos prestataires techniques (hébergement Cloudflare, paiement)",
+          "Le Comité International Olympique",
+          "Les autorités compétentes en cas d'obligation légale"
+        ]
+      },
+      "transfers": {
+        "title": "8. Transferts internationaux",
+        "content": "Vos données sont principalement traitées au sein de l'Union Européenne. En cas de transfert vers un pays tiers, nous veillons à ce que des garanties appropriées soient mises en place (clauses contractuelles types, décision d'adéquation)."
+      },
+      "rights": {
+        "title": "9. Vos droits",
+        "intro": "Conformément au RGPD, vous disposez des droits suivants :",
+        "items": [
+          {
+            "term": "Droit d'accès",
+            "definition": "obtenir une copie de vos données personnelles."
+          },
+          {
+            "term": "Droit de rectification",
+            "definition": "corriger vos données inexactes ou incomplètes."
+          },
+          {
+            "term": "Droit à l'effacement",
+            "definition": "demander la suppression de vos données."
+          },
+          {
+            "term": "Droit à la limitation",
+            "definition": "limiter le traitement de vos données."
+          },
+          {
+            "term": "Droit à la portabilité",
+            "definition": "recevoir vos données dans un format structuré."
+          },
+          {
+            "term": "Droit d'opposition",
+            "definition": "vous opposer à certains traitements."
+          },
+          {
+            "term": "Droit de retrait du consentement",
+            "definition": "retirer votre consentement à tout moment."
+          }
+        ],
+        "contact": "Pour exercer vos droits, contactez notre Délégué à la Protection des Données à :"
+      },
+      "security": {
+        "title": "10. Sécurité",
+        "content": "Nous mettons en œuvre des mesures techniques et organisationnelles appropriées pour protéger vos données contre tout accès non autorisé, modification, divulgation ou destruction. Ces mesures incluent le chiffrement des données, des contrôles d'accès stricts et des audits de sécurité réguliers."
+      },
+      "cookiesLink": {
+        "title": "11. Cookies",
+        "content": "Nous utilisons des cookies et technologies similaires pour améliorer votre expérience. Pour plus d'informations, consultez notre",
+        "linkLabel": "Politique relative aux cookies"
+      },
+      "contact": {
+        "title": "12. Contact et réclamation",
+        "content": "Pour toute question concernant cette politique ou vos données personnelles, contactez-nous à :",
+        "cnil": "Vous avez également le droit d'introduire une réclamation auprès de la CNIL (Commission Nationale de l'Informatique et des Libertés) :"
+      }
+    },
+    "cookies": {
+      "title": "Politique relative aux cookies",
+      "whatIs": {
+        "title": "1. Qu'est-ce qu'un cookie ?",
+        "content1": "Un cookie est un petit fichier texte déposé sur votre terminal (ordinateur, tablette, smartphone) lors de la visite d'un site web. Il permet au site de mémoriser des informations sur votre visite, comme vos préférences de langue ou d'autres paramètres.",
+        "content2": "Les cookies peuvent être « de session » (supprimés à la fermeture du navigateur) ou « persistants » (conservés pendant une durée déterminée)."
+      },
+      "types": {
+        "title": "2. Types de cookies utilisés",
+        "necessary": {
+          "title": "2.1 Cookies strictement nécessaires",
+          "content": "Ces cookies sont indispensables au fonctionnement du site et ne peuvent pas être désactivés. Ils sont généralement définis en réponse à vos actions (connexion, remplissage de formulaires, préférences de confidentialité)."
+        },
+        "analytics": {
+          "title": "2.2 Cookies analytiques",
+          "content": "Ces cookies nous permettent de mesurer l'audience du site et d'analyser la navigation pour améliorer nos services. Les données collectées sont anonymisées."
+        },
+        "marketing": {
+          "title": "2.3 Cookies marketing",
+          "content": "Ces cookies sont utilisés pour vous proposer des publicités pertinentes en fonction de vos centres d'intérêt. Ils permettent également de limiter le nombre de fois que vous voyez une publicité."
+        },
+        "preferences": {
+          "title": "2.4 Cookies de préférences",
+          "content": "Ces cookies permettent de mémoriser vos choix (langue, région, thème) pour personnaliser votre expérience sur le site."
+        }
+      },
+      "table": {
+        "name": "Nom",
+        "purpose": "Finalité",
+        "duration": "Durée",
+        "rows": {
+          "auth": "Authentification utilisateur",
+          "authDuration": "Session",
+          "cart": "Panier d'achat",
+          "cartDuration": "7 jours",
+          "consent": "Préférences cookies",
+          "consentDuration": "1 an",
+          "cfbm": "Protection anti-bot Cloudflare",
+          "cflb": "Équilibrage de charge",
+          "cflbDuration": "Session"
+        }
+      },
+      "management": {
+        "title": "3. Gestion des cookies",
+        "intro": "Vous pouvez à tout moment modifier vos préférences en matière de cookies en cliquant sur le bouton ci-dessous :",
+        "browser": {
+          "title": "3.1 Via votre navigateur",
+          "content": "Vous pouvez également configurer votre navigateur pour accepter ou refuser les cookies :"
+        }
+      },
+      "refusal": {
+        "title": "4. Conséquences du refus",
+        "content": "Le refus de certains cookies peut entraîner une dégradation de l'expérience utilisateur. Par exemple, le site ne pourra pas mémoriser vos préférences ou votre panier d'achat. Les cookies strictement nécessaires ne peuvent pas être refusés car ils sont indispensables au fonctionnement du site."
+      },
+      "thirdParty": {
+        "title": "5. Cookies tiers",
+        "content": "Certains cookies peuvent être déposés par des partenaires tiers (Cloudflare pour la sécurité et les performances, prestataires de paiement). Ces partenaires ont leurs propres politiques de confidentialité que nous vous invitons à consulter."
+      },
+      "contact": {
+        "title": "6. Contact",
+        "content": "Pour toute question concernant notre utilisation des cookies, contactez notre Délégué à la Protection des Données :"
       }
     }
   }

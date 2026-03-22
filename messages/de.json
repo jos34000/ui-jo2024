@@ -50,8 +50,10 @@
       "faq": "FAQ",
       "accessibility": "Barrierefreiheit",
       "contact": "Kontakt",
+      "mentions": "Impressum",
       "terms": "Allgemeine Geschäftsbedingungen",
       "privacy": "Datenschutzrichtlinie",
+      "cookiesPolicy": "Cookie-Richtlinie",
       "cookies": "Cookies"
     }
   },
@@ -575,6 +577,405 @@
       "preferences": {
         "title": "Präferenz-Cookies",
         "description": "Diese Cookies ermöglichen es, Ihre Auswahl und Präferenzen zu speichern, um Ihre Erfahrung zu personalisieren."
+      }
+    }
+  },
+  "legal": {
+    "badge": "Rechtliches Dokument",
+    "backHome": "Zurück zur Startseite",
+    "lastUpdated": "Letzte Aktualisierung: 22. März 2026",
+    "mentions": {
+      "title": "Impressum",
+      "editor": {
+        "title": "1. Herausgeber der Website",
+        "intro": "Diese Website wird herausgegeben von:",
+        "companyName": "ESN InfoEvent",
+        "companyType": "Vereinfachte Aktiengesellschaft (SAS)",
+        "address": "Sitz: 42 Avenue de la République, 75011 Paris, Frankreich",
+        "siret": "SIRET: 123 456 789 00015",
+        "tva": "USt-IdNr.: FR 12 123456789",
+        "directorLabel": "Veröffentlichungsleiter",
+        "directorName": "José, Generaldirektor",
+        "emailLabel": "E-Mail",
+        "phoneLabel": "Telefon"
+      },
+      "hosting": {
+        "title": "2. Hosting",
+        "intro": "Die Website wird gehostet von:"
+      },
+      "contact": {
+        "title": "3. Kontakt",
+        "intro": "Bei Fragen oder Beschwerden zur Website:"
+      },
+      "ip": {
+        "title": "4. Geistiges Eigentum",
+        "copyright": {
+          "title": "4.1 Urheberrecht",
+          "content": "Alle Inhalte (Texte, Bilder, Videos, Grafiken, Logos, Symbole, Töne, Software) auf dieser Website sind durch das Urheber- und Markenrecht geschützt. Jede Vervielfältigung, Darstellung, Änderung, Veröffentlichung oder Anpassung aller oder eines Teils der Website-Elemente, gleich welchem Mittel oder Verfahren, ist ohne vorherige schriftliche Genehmigung untersagt."
+        },
+        "brands": {
+          "title": "4.2 Marken",
+          "content": "Die auf der Website abgebildeten Marken und Logos sind eingetragene Marken. Ihre Reproduktion oder Verwendung ohne Genehmigung ist streng verboten."
+        },
+        "olympic": "Die Olympischen Symbole, das Olympische Emblem, die Olympische Flagge, der Olympische Leitspruch, die Olympischen Hymnen und die Begriffe „Olympische Spiele und Olympiade sind ausschließliches Eigentum des Internationalen Olympischen Komitees."
+      },
+      "liability": {
+        "title": "5. Haftungsbeschränkung",
+        "intro": "ESN InfoEvent lehnt jede Haftung ab für:",
+        "items": [
+          "Jede Ungenauigkeit, Unrichtigkeit oder Auslassung bezüglich der auf der Website verfügbaren Informationen",
+          "Jeden Schaden, der durch einen betrügerischen Eingriff Dritter entsteht",
+          "Jeden Schaden am Computersystem des Nutzers",
+          "Jede Unterbrechung der Website"
+        ]
+      },
+      "links": {
+        "title": "6. Hyperlinks",
+        "outgoing": {
+          "title": "6.1 Ausgehende Links",
+          "content": "Die Website kann Links zu anderen Websites enthalten. ESN InfoEvent hat keine Kontrolle über diese Websites und übernimmt keine Verantwortung für deren Inhalt."
+        },
+        "incoming": {
+          "title": "6.2 Eingehende Links",
+          "content": "Das Setzen von Hyperlinks auf diese Website bedarf der vorherigen schriftlichen Zustimmung von ESN InfoEvent. Alle Anfragen sind zu richten an"
+        }
+      },
+      "dataLink": {
+        "title": "7. Datenschutz",
+        "content": "Für Informationen zur Verarbeitung Ihrer personenbezogenen Daten lesen Sie bitte unsere",
+        "linkLabel": "Datenschutzerklärung"
+      },
+      "cookiesLink": {
+        "title": "8. Cookies",
+        "content": "Für Informationen zur Verwendung von Cookies auf dieser Website lesen Sie bitte unsere",
+        "linkLabel": "Cookie-Richtlinie"
+      },
+      "law": {
+        "title": "9. Anwendbares Recht",
+        "content": "Dieses Impressum unterliegt französischem Recht. Im Streitfall und nach dem Scheitern jedes Versuchs einer gütlichen Einigung sind ausschließlich die französischen Gerichte zuständig."
+      },
+      "credits": {
+        "title": "10. Credits",
+        "dev": {
+          "title": "10.1 Gestaltung und Entwicklung",
+          "content": "Website entworfen und entwickelt von ESN InfoEvent im Rahmen eines Bildungsprojekts."
+        },
+        "photos": {
+          "title": "10.2 Foto- und Illustrationsnachweise",
+          "content": "Die auf dieser Website verwendeten Fotos und Illustrationen sind Eigentum von ESN InfoEvent oder werden mit Genehmigung ihrer jeweiligen Urheber verwendet."
+        }
+      }
+    },
+    "terms": {
+      "title": "Allgemeine Nutzungsbedingungen",
+      "object": {
+        "title": "1. Gegenstand",
+        "content1": "Diese Allgemeinen Nutzungsbedingungen (im Folgenden „ANB) regeln die Bedingungen für den Zugang zur und die Nutzung der offiziellen Ticketing-Plattform für die Olympischen und Paralympischen Spiele Paris 2024 (im Folgenden „die Plattform) sowie die Rechte und Pflichten der Nutzer.",
+        "content2": "Der Zugang zur und die Nutzung der Plattform implizieren die vorbehaltlose Annahme dieser ANB durch den Nutzer."
+      },
+      "definitions": {
+        "title": "2. Definitionen",
+        "items": [
+          {
+            "term": "Nutzer",
+            "definition": "Jede natürliche Person, die auf die Plattform zugreift, ob registriert oder nicht."
+          },
+          {
+            "term": "Konto",
+            "definition": "Der persönliche Bereich des Nutzers, der ihm den Zugang zu den Diensten der Plattform ermöglicht."
+          },
+          {
+            "term": "Ticket",
+            "definition": "Eine Eintrittskarte für eine Veranstaltung der Olympischen und Paralympischen Spiele Paris 2024."
+          },
+          {
+            "term": "Veranstaltung",
+            "definition": "Ein Wettkampf, eine Zeremonie oder eine Manifestation, die Teil des offiziellen Spieleprogramms ist."
+          }
+        ]
+      },
+      "access": {
+        "title": "3. Zugang zur Plattform",
+        "conditions": {
+          "title": "3.1 Zugangsbedingungen",
+          "content": "Der Zugang zur Plattform steht jeder Person mit Internetzugang offen. Einige Funktionen, insbesondere der Ticketkauf, erfordern die Erstellung eines Kontos."
+        },
+        "account": {
+          "title": "3.2 Kontoerstellung",
+          "content1": "Um ein Konto zu erstellen, muss der Nutzer genaue und vollständige Angaben machen. Er verpflichtet sich, diese Angaben bei Änderungen zu aktualisieren.",
+          "content2": "Der Nutzer ist für die Vertraulichkeit seiner Zugangsdaten und alle von seinem Konto aus vorgenommenen Aktionen verantwortlich."
+        }
+      },
+      "purchase": {
+        "title": "4. Ticketkauf",
+        "process": {
+          "title": "4.1 Kaufprozess",
+          "content": "Der Ticketkauf erfolgt ausschließlich online über die Plattform. Der Nutzer wählt die gewünschte Veranstaltung, die Platzkategorie und die Anzahl der Tickets aus."
+        },
+        "price": {
+          "title": "4.2 Preise und Zahlung",
+          "content": "Die Ticketpreise werden in Euro inkl. MwSt. angegeben. Die Zahlung erfolgt per Kreditkarte oder einem anderen auf der Plattform angebotenen Zahlungsmittel."
+        },
+        "confirmation": {
+          "title": "4.3 Bestellbestätigung",
+          "content": "Jede validierte Bestellung wird per E-Mail bestätigt. Das elektronische Ticket ist im persönlichen Bereich des Nutzers verfügbar."
+        }
+      },
+      "ticketUse": {
+        "title": "5. Nutzung der Tickets",
+        "nominal": {
+          "title": "5.1 Personenbezogene Tickets",
+          "content": "Alle Tickets sind personenbezogen und nicht übertragbar, außer über die vom Veranstalter autorisierte offizielle Wiederverkaufsplattform."
+        },
+        "access": {
+          "title": "5.2 Zugangskontrolle",
+          "content": "Der Zutritt zu olympischen Sportstätten setzt die Vorlage eines gültigen Tickets und eines Lichtbildausweises voraus, der dem auf dem Ticket angegebenen Namen entspricht."
+        }
+      },
+      "cancellation": {
+        "title": "6. Stornierung und Erstattung",
+        "withdrawal": {
+          "title": "6.1 Widerrufsrecht",
+          "content": "Gemäß Artikel L.221-28 des französischen Verbrauchergesetzbuches gilt das Widerrufsrecht nicht für Freizeitdienstleistungsverträge, die an einem bestimmten Datum zu erbringen sind."
+        },
+        "byOrganizer": {
+          "title": "6.2 Absage durch den Veranstalter",
+          "content": "Im Falle einer Veranstaltungsabsage wird der Nutzer innerhalb von 30 Tagen über den Ticketbetrag erstattet."
+        }
+      },
+      "liability": {
+        "title": "7. Haftung",
+        "content1": "ESN InfoEvent bemüht sich um die Verfügbarkeit und das ordnungsgemäße Funktionieren der Plattform. Es kann jedoch nicht für vorübergehende Serviceunterbrechungen aufgrund von Wartung oder Updates haftbar gemacht werden.",
+        "content2": "Der Nutzer ist allein verantwortlich für die Nutzung seines Kontos und die von ihm mitgeteilten Informationen."
+      },
+      "ip": {
+        "title": "8. Geistiges Eigentum",
+        "content": "Alle Elemente der Plattform (Logos, Texte, Bilder, Videos usw.) sind durch Rechte des geistigen Eigentums geschützt. Jede nicht autorisierte Vervielfältigung oder Verwendung ist streng verboten."
+      },
+      "changes": {
+        "title": "9. Änderung der ANB",
+        "content": "ESN InfoEvent behält sich das Recht vor, diese ANB jederzeit zu ändern. Die Nutzer werden über jede Änderung per E-Mail oder Benachrichtigung auf der Plattform informiert."
+      },
+      "law": {
+        "title": "10. Anwendbares Recht",
+        "content": "Diese ANB unterliegen französischem Recht. Im Streitfall sind ausschließlich die französischen Gerichte zuständig."
+      },
+      "contact": {
+        "title": "11. Kontakt",
+        "content": "Bei Fragen zu diesen ANB können Sie uns kontaktieren unter:"
+      }
+    },
+    "privacy": {
+      "title": "Datenschutzerklärung",
+      "intro": {
+        "title": "1. Einleitung",
+        "content1": "ESN InfoEvent verpflichtet sich, die Privatsphäre der Nutzer seiner Ticketing-Plattform zu schützen.",
+        "content2": "Diese Datenschutzerklärung beschreibt, wie wir Ihre personenbezogenen Daten gemäß der Datenschutz-Grundverordnung (DSGVO) und dem französischen Datenschutzgesetz erheben, verwenden, speichern und schützen."
+      },
+      "controller": {
+        "title": "2. Verantwortlicher für die Datenverarbeitung",
+        "intro": "Der Verantwortliche für die Verarbeitung personenbezogener Daten ist:"
+      },
+      "collected": {
+        "title": "3. Erhobene Daten",
+        "intro": "Wir erheben folgende Datenkategorien:",
+        "identity": {
+          "title": "3.1 Identifikationsdaten",
+          "items": [
+            "Nachname und Vorname",
+            "E-Mail-Adresse"
+          ]
+        },
+        "transaction": {
+          "title": "3.2 Transaktionsdaten",
+          "items": [
+            "Kaufhistorie",
+            "Zahlungsinformationen (von unserem sicheren Zahlungsdienstleister verarbeitet)",
+            "Ticketpräferenzen"
+          ]
+        },
+        "technical": {
+          "title": "3.3 Technische Daten",
+          "items": [
+            "IP-Adresse",
+            "Browser- und Gerätetyp",
+            "Browsing-Daten",
+            "Cookies und Tracker"
+          ]
+        }
+      },
+      "purpose": {
+        "title": "4. Verarbeitungszwecke",
+        "intro": "Ihre personenbezogenen Daten werden für folgende Zwecke erhoben:",
+        "items": [
+          "Verwaltung Ihres Kontos und Ihrer Bestellungen",
+          "Ausstellung und Lieferung von Tickets",
+          "Zugangskontrolle zu olympischen Sportstätten",
+          "Kundendienst und Support",
+          "Versand von kaufbezogenen Mitteilungen",
+          "Versand von Marketingmitteilungen (mit Ihrer Einwilligung)",
+          "Betrugsprävention",
+          "Verbesserung unserer Dienste",
+          "Einhaltung unserer gesetzlichen Pflichten"
+        ]
+      },
+      "legalBasis": {
+        "title": "5. Rechtsgrundlage der Verarbeitung",
+        "intro": "Die Verarbeitung Ihrer Daten basiert auf folgenden Rechtsgrundlagen:",
+        "items": [
+          {
+            "term": "Vertragserfüllung",
+            "definition": "für die Verwaltung Ihrer Bestellungen und die Erbringung unserer Dienste."
+          },
+          {
+            "term": "Einwilligung",
+            "definition": "für den Versand von Marketingmitteilungen und die Verwendung bestimmter Cookies."
+          },
+          {
+            "term": "Berechtigtes Interesse",
+            "definition": "für die Betrugsprävention und die Verbesserung unserer Dienste."
+          },
+          {
+            "term": "Rechtliche Verpflichtung",
+            "definition": "zur Einhaltung unserer buchhalterischen und steuerlichen Pflichten."
+          }
+        ]
+      },
+      "retention": {
+        "title": "6. Aufbewahrungsfristen",
+        "intro": "Ihre personenbezogenen Daten werden für folgende Zeiträume aufbewahrt:",
+        "items": [
+          "Kontodaten: 3 Jahre nach der letzten Aktivität",
+          "Transaktionsdaten: 10 Jahre (buchhalterische Pflichten)",
+          "Marketingdaten: 3 Jahre nach dem letzten Kontakt",
+          "Cookies: je nach Art (siehe unsere Cookie-Richtlinie)"
+        ]
+      },
+      "recipients": {
+        "title": "7. Datenempfänger",
+        "intro": "Ihre Daten können an folgende Empfänger weitergegeben werden:",
+        "items": [
+          "Unsere internen Abteilungen (Ticketing, Marketing, Kundendienst)",
+          "Unsere technischen Dienstleister (Cloudflare-Hosting, Zahlung)",
+          "Das Internationale Olympische Komitee",
+          "Zuständige Behörden, wenn gesetzlich vorgeschrieben"
+        ]
+      },
+      "transfers": {
+        "title": "8. Internationale Datenübermittlungen",
+        "content": "Ihre Daten werden hauptsächlich innerhalb der Europäischen Union verarbeitet. Im Falle einer Übermittlung in ein Drittland stellen wir sicher, dass geeignete Garantien vorhanden sind (Standardvertragsklauseln, Angemessenheitsbeschluss)."
+      },
+      "rights": {
+        "title": "9. Ihre Rechte",
+        "intro": "Gemäß der DSGVO haben Sie folgende Rechte:",
+        "items": [
+          {
+            "term": "Auskunftsrecht",
+            "definition": "Erhalt einer Kopie Ihrer personenbezogenen Daten."
+          },
+          {
+            "term": "Berichtigungsrecht",
+            "definition": "Korrektur ungenauer oder unvollständiger Daten."
+          },
+          {
+            "term": "Löschungsrecht",
+            "definition": "Beantragung der Löschung Ihrer Daten."
+          },
+          {
+            "term": "Recht auf Einschränkung",
+            "definition": "Einschränkung der Verarbeitung Ihrer Daten."
+          },
+          {
+            "term": "Recht auf Datenübertragbarkeit",
+            "definition": "Erhalt Ihrer Daten in einem strukturierten Format."
+          },
+          {
+            "term": "Widerspruchsrecht",
+            "definition": "Widerspruch gegen bestimmte Verarbeitungstätigkeiten."
+          },
+          {
+            "term": "Recht auf Widerruf der Einwilligung",
+            "definition": "Widerruf Ihrer Einwilligung jederzeit."
+          }
+        ],
+        "contact": "Um Ihre Rechte auszuüben, wenden Sie sich an unseren Datenschutzbeauftragten:"
+      },
+      "security": {
+        "title": "10. Sicherheit",
+        "content": "Wir implementieren geeignete technische und organisatorische Maßnahmen zum Schutz Ihrer Daten vor unbefugtem Zugriff, Änderung, Offenlegung oder Zerstörung. Diese Maßnahmen umfassen Datenverschlüsselung, strenge Zugangskontrollen und regelmäßige Sicherheitsaudits."
+      },
+      "cookiesLink": {
+        "title": "11. Cookies",
+        "content": "Wir verwenden Cookies und ähnliche Technologien zur Verbesserung Ihrer Erfahrung. Weitere Informationen finden Sie in unserer",
+        "linkLabel": "Cookie-Richtlinie"
+      },
+      "contact": {
+        "title": "12. Kontakt und Beschwerden",
+        "content": "Bei Fragen zu dieser Richtlinie oder Ihren personenbezogenen Daten kontaktieren Sie uns unter:",
+        "cnil": "Sie haben auch das Recht, eine Beschwerde bei der CNIL (Commission Nationale de l'Informatique et des Libertés) einzureichen:"
+      }
+    },
+    "cookies": {
+      "title": "Cookie-Richtlinie",
+      "whatIs": {
+        "title": "1. Was ist ein Cookie?",
+        "content1": "Ein Cookie ist eine kleine Textdatei, die beim Besuch einer Website auf Ihrem Gerät (Computer, Tablet, Smartphone) abgelegt wird. Sie ermöglicht es der Website, Informationen über Ihren Besuch zu speichern, z. B. Ihre Spracheinstellungen oder andere Parameter.",
+        "content2": "Cookies können „Sitzungscookies (nach dem Schließen des Browsers gelöscht) oder „persistente Cookies (für einen bestimmten Zeitraum gespeichert) sein."
+      },
+      "types": {
+        "title": "2. Arten der verwendeten Cookies",
+        "necessary": {
+          "title": "2.1 Unbedingt erforderliche Cookies",
+          "content": "Diese Cookies sind für das Funktionieren der Website unerlässlich und können nicht deaktiviert werden. Sie werden in der Regel als Reaktion auf Ihre Aktionen gesetzt (Anmeldung, Formularausfüllung, Datenschutzeinstellungen)."
+        },
+        "analytics": {
+          "title": "2.2 Analytische Cookies",
+          "content": "Diese Cookies ermöglichen es uns, den Website-Traffic zu messen und die Navigation zu analysieren, um unsere Dienste zu verbessern. Die erhobenen Daten werden anonymisiert."
+        },
+        "marketing": {
+          "title": "2.3 Marketing-Cookies",
+          "content": "Diese Cookies werden verwendet, um Ihnen relevante Werbung basierend auf Ihren Interessen zu zeigen. Sie begrenzen auch die Häufigkeit, mit der Sie eine Werbeanzeige sehen."
+        },
+        "preferences": {
+          "title": "2.4 Präferenz-Cookies",
+          "content": "Diese Cookies speichern Ihre Auswahl (Sprache, Region, Design), um Ihr Erlebnis auf der Website zu personalisieren."
+        }
+      },
+      "table": {
+        "name": "Name",
+        "purpose": "Zweck",
+        "duration": "Dauer",
+        "rows": {
+          "auth": "Benutzerauthentifizierung",
+          "authDuration": "Sitzung",
+          "cart": "Warenkorb",
+          "cartDuration": "7 Tage",
+          "consent": "Cookie-Einstellungen",
+          "consentDuration": "1 Jahr",
+          "cfbm": "Cloudflare Bot-Schutz",
+          "cflb": "Lastverteilung",
+          "cflbDuration": "Sitzung"
+        }
+      },
+      "management": {
+        "title": "3. Cookie-Verwaltung",
+        "intro": "Sie können Ihre Cookie-Einstellungen jederzeit ändern, indem Sie auf die Schaltfläche unten klicken:",
+        "browser": {
+          "title": "3.1 Über Ihren Browser",
+          "content": "Sie können Ihren Browser auch so konfigurieren, dass Cookies akzeptiert oder abgelehnt werden:"
+        }
+      },
+      "refusal": {
+        "title": "4. Folgen der Ablehnung",
+        "content": "Die Ablehnung bestimmter Cookies kann das Nutzererlebnis beeinträchtigen. Zum Beispiel kann die Website Ihre Einstellungen oder Ihren Warenkorb nicht speichern. Unbedingt erforderliche Cookies können nicht abgelehnt werden, da sie für das Funktionieren der Website unerlässlich sind."
+      },
+      "thirdParty": {
+        "title": "5. Drittanbieter-Cookies",
+        "content": "Einige Cookies können von Drittanbietern gesetzt werden (Cloudflare für Sicherheit und Leistung, Zahlungsdienstleister). Diese Partner haben ihre eigenen Datenschutzrichtlinien, die wir Ihnen empfehlen zu konsultieren."
+      },
+      "contact": {
+        "title": "6. Kontakt",
+        "content": "Bei Fragen zu unserer Verwendung von Cookies wenden Sie sich an unseren Datenschutzbeauftragten:"
       }
     }
   }

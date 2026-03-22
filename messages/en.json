@@ -50,8 +50,10 @@
       "faq": "FAQ",
       "accessibility": "Accessibility",
       "contact": "Contact",
+      "mentions": "Legal Notice",
       "terms": "Terms & Conditions",
       "privacy": "Privacy policy",
+      "cookiesPolicy": "Cookie policy",
       "cookies": "Cookies"
     }
   },
@@ -575,6 +577,405 @@
       "preferences": {
         "title": "Preference cookies",
         "description": "These cookies allow us to remember your choices and preferences to personalize your experience."
+      }
+    }
+  },
+  "legal": {
+    "badge": "Legal document",
+    "backHome": "Back to home",
+    "lastUpdated": "Last updated: March 22, 2026",
+    "mentions": {
+      "title": "Legal Notice",
+      "editor": {
+        "title": "1. Website Publisher",
+        "intro": "This website is published by:",
+        "companyName": "ESN InfoEvent",
+        "companyType": "Simplified joint-stock company (SAS)",
+        "address": "Registered office: 42 Avenue de la République, 75011 Paris, France",
+        "siret": "SIRET: 123 456 789 00015",
+        "tva": "VAT number: FR 12 123456789",
+        "directorLabel": "Publication director",
+        "directorName": "José, CEO",
+        "emailLabel": "Email",
+        "phoneLabel": "Phone"
+      },
+      "hosting": {
+        "title": "2. Hosting",
+        "intro": "This website is hosted by:"
+      },
+      "contact": {
+        "title": "3. Contact",
+        "intro": "For any questions or complaints regarding the website:"
+      },
+      "ip": {
+        "title": "4. Intellectual Property",
+        "copyright": {
+          "title": "4.1 Copyright",
+          "content": "All content (texts, images, videos, graphics, logos, icons, sounds, software) on this website is protected by copyright and trademark law. Any reproduction, representation, modification, publication or adaptation of all or part of the site's elements, by any means or process, is prohibited without prior written authorisation."
+        },
+        "brands": {
+          "title": "4.2 Trademarks",
+          "content": "Trademarks and logos appearing on the site are registered trademarks. Their reproduction or use without authorisation is strictly prohibited."
+        },
+        "olympic": "Olympic symbols, the Olympic emblem, the Olympic flag, the Olympic motto, Olympic anthems and the terms 'Olympic Games' and 'Olympiad' are the exclusive property of the International Olympic Committee."
+      },
+      "liability": {
+        "title": "5. Limitation of Liability",
+        "intro": "ESN InfoEvent disclaims all liability for:",
+        "items": [
+          "Any inaccuracy, imprecision or omission regarding information available on the website",
+          "Any damage resulting from fraudulent intrusion by a third party",
+          "Any damage caused to the user's computer system",
+          "Any interruption of the website"
+        ]
+      },
+      "links": {
+        "title": "6. Hyperlinks",
+        "outgoing": {
+          "title": "6.1 Outgoing links",
+          "content": "This website may contain links to other websites. ESN InfoEvent has no control over these sites and disclaims all liability for their content."
+        },
+        "incoming": {
+          "title": "6.2 Incoming links",
+          "content": "Creating hyperlinks to this website requires prior written agreement from ESN InfoEvent. All requests must be sent to"
+        }
+      },
+      "dataLink": {
+        "title": "7. Personal Data Protection",
+        "content": "For information regarding the processing of your personal data, please consult our",
+        "linkLabel": "Privacy Policy"
+      },
+      "cookiesLink": {
+        "title": "8. Cookies",
+        "content": "For information regarding the use of cookies on this website, please consult our",
+        "linkLabel": "Cookie Policy"
+      },
+      "law": {
+        "title": "9. Applicable Law",
+        "content": "This legal notice is governed by French law. In the event of a dispute, and after failure of any attempt to find an amicable solution, French courts shall have sole jurisdiction."
+      },
+      "credits": {
+        "title": "10. Credits",
+        "dev": {
+          "title": "10.1 Design and development",
+          "content": "Website designed and developed by ESN InfoEvent as part of an educational project."
+        },
+        "photos": {
+          "title": "10.2 Photo and illustration credits",
+          "content": "Photographs and illustrations used on this website are the property of ESN InfoEvent or used with the permission of their respective authors."
+        }
+      }
+    },
+    "terms": {
+      "title": "Terms of Use",
+      "object": {
+        "title": "1. Purpose",
+        "content1": "These Terms of Use (hereinafter 'ToU') define the terms and conditions of use of the official ticketing platform for the Paris 2024 Olympic and Paralympic Games (hereinafter 'the Platform'), as well as the rights and obligations of users.",
+        "content2": "Accessing and using the Platform implies unconditional acceptance of these ToU by the user."
+      },
+      "definitions": {
+        "title": "2. Definitions",
+        "items": [
+          {
+            "term": "User",
+            "definition": "Any natural person accessing the Platform, whether registered or not."
+          },
+          {
+            "term": "Account",
+            "definition": "The User's personal space giving access to the Platform's services."
+          },
+          {
+            "term": "Ticket",
+            "definition": "An access pass to an event of the Paris 2024 Olympic and Paralympic Games."
+          },
+          {
+            "term": "Event",
+            "definition": "A competition, ceremony or manifestation forming part of the official Games programme."
+          }
+        ]
+      },
+      "access": {
+        "title": "3. Access to the Platform",
+        "conditions": {
+          "title": "3.1 Access conditions",
+          "content": "Access to the Platform is open to any person with an internet connection. Some features, particularly ticket purchasing, require the creation of an Account."
+        },
+        "account": {
+          "title": "3.2 Account creation",
+          "content1": "To create an Account, the User must provide accurate and complete information. They agree to update this information if it changes.",
+          "content2": "The User is responsible for the confidentiality of their login credentials and all actions performed from their Account."
+        }
+      },
+      "purchase": {
+        "title": "4. Ticket Purchase",
+        "process": {
+          "title": "4.1 Purchase process",
+          "content": "Ticket purchases are made exclusively online via the Platform. The User selects the desired Event, seat category and number of tickets."
+        },
+        "price": {
+          "title": "4.2 Prices and payment",
+          "content": "Ticket prices are shown inclusive of tax in euros. Payment is made by credit card or any other payment method offered on the Platform."
+        },
+        "confirmation": {
+          "title": "4.3 Order confirmation",
+          "content": "Every validated order is confirmed by email. The electronic ticket is available in the User's personal space."
+        }
+      },
+      "ticketUse": {
+        "title": "5. Ticket Use",
+        "nominal": {
+          "title": "5.1 Personal tickets",
+          "content": "All tickets are personal and non-transferable, except via the official resale platform authorised by the organiser."
+        },
+        "access": {
+          "title": "5.2 Access control",
+          "content": "Entry to Olympic venues requires presentation of a valid Ticket and an identity document matching the name on the Ticket."
+        }
+      },
+      "cancellation": {
+        "title": "6. Cancellation and Refunds",
+        "withdrawal": {
+          "title": "6.1 Right of withdrawal",
+          "content": "In accordance with Article L.221-28 of the French Consumer Code, the right of withdrawal does not apply to leisure service contracts to be provided on a specific date."
+        },
+        "byOrganizer": {
+          "title": "6.2 Cancellation by the organiser",
+          "content": "In the event of an Event cancellation, the User will be refunded the ticket amount within 30 days."
+        }
+      },
+      "liability": {
+        "title": "7. Liability",
+        "content1": "ESN InfoEvent strives to ensure the availability and proper functioning of the Platform. However, it cannot be held liable for temporary service interruptions due to maintenance or updates.",
+        "content2": "The User is solely responsible for the use of their Account and the information they provide."
+      },
+      "ip": {
+        "title": "8. Intellectual Property",
+        "content": "All elements of the Platform (logos, texts, images, videos, etc.) are protected by intellectual property rights. Any unauthorised reproduction or use is strictly prohibited."
+      },
+      "changes": {
+        "title": "9. Changes to the ToU",
+        "content": "ESN InfoEvent reserves the right to modify these ToU at any time. Users will be notified of any changes by email or notification on the Platform."
+      },
+      "law": {
+        "title": "10. Applicable Law",
+        "content": "These ToU are governed by French law. In the event of a dispute, French courts shall have sole jurisdiction."
+      },
+      "contact": {
+        "title": "11. Contact",
+        "content": "For any questions regarding these ToU, you can contact us at:"
+      }
+    },
+    "privacy": {
+      "title": "Privacy Policy",
+      "intro": {
+        "title": "1. Introduction",
+        "content1": "ESN InfoEvent is committed to protecting the privacy of users of its ticketing platform.",
+        "content2": "This Privacy Policy describes how we collect, use, store and protect your personal data in accordance with the General Data Protection Regulation (GDPR) and the French Data Protection Act."
+      },
+      "controller": {
+        "title": "2. Data Controller",
+        "intro": "The data controller for personal data is:"
+      },
+      "collected": {
+        "title": "3. Data Collected",
+        "intro": "We collect the following categories of data:",
+        "identity": {
+          "title": "3.1 Identification data",
+          "items": [
+            "Last name and first name",
+            "Email address"
+          ]
+        },
+        "transaction": {
+          "title": "3.2 Transaction data",
+          "items": [
+            "Purchase history",
+            "Payment information (processed by our secure payment provider)",
+            "Ticket preferences"
+          ]
+        },
+        "technical": {
+          "title": "3.3 Technical data",
+          "items": [
+            "IP address",
+            "Browser and device type",
+            "Browsing data",
+            "Cookies and trackers"
+          ]
+        }
+      },
+      "purpose": {
+        "title": "4. Processing Purposes",
+        "intro": "Your personal data is collected for the following purposes:",
+        "items": [
+          "Managing your account and orders",
+          "Issuing and delivering tickets",
+          "Access control at Olympic venues",
+          "Customer service and support",
+          "Sending communications related to your purchases",
+          "Sending marketing communications (with your consent)",
+          "Fraud prevention",
+          "Improving our services",
+          "Compliance with our legal obligations"
+        ]
+      },
+      "legalBasis": {
+        "title": "5. Legal Basis for Processing",
+        "intro": "Processing of your data is based on the following legal grounds:",
+        "items": [
+          {
+            "term": "Contract performance",
+            "definition": "for managing your orders and providing our services."
+          },
+          {
+            "term": "Consent",
+            "definition": "for sending marketing communications and using certain cookies."
+          },
+          {
+            "term": "Legitimate interest",
+            "definition": "for fraud prevention and improving our services."
+          },
+          {
+            "term": "Legal obligation",
+            "definition": "for compliance with our accounting and tax obligations."
+          }
+        ]
+      },
+      "retention": {
+        "title": "6. Retention Period",
+        "intro": "Your personal data is retained for the following periods:",
+        "items": [
+          "Account data: 3 years after last activity",
+          "Transaction data: 10 years (accounting obligations)",
+          "Marketing data: 3 years after last contact",
+          "Cookies: depending on their nature (see our cookie policy)"
+        ]
+      },
+      "recipients": {
+        "title": "7. Data Recipients",
+        "intro": "Your data may be shared with the following recipients:",
+        "items": [
+          "Our internal departments (ticketing, marketing, customer service)",
+          "Our technical providers (Cloudflare hosting, payment)",
+          "The International Olympic Committee",
+          "Competent authorities when legally required"
+        ]
+      },
+      "transfers": {
+        "title": "8. International Transfers",
+        "content": "Your data is primarily processed within the European Union. In the event of transfer to a third country, we ensure that appropriate safeguards are in place (standard contractual clauses, adequacy decision)."
+      },
+      "rights": {
+        "title": "9. Your Rights",
+        "intro": "In accordance with the GDPR, you have the following rights:",
+        "items": [
+          {
+            "term": "Right of access",
+            "definition": "obtain a copy of your personal data."
+          },
+          {
+            "term": "Right of rectification",
+            "definition": "correct inaccurate or incomplete data."
+          },
+          {
+            "term": "Right to erasure",
+            "definition": "request deletion of your data."
+          },
+          {
+            "term": "Right to restriction",
+            "definition": "restrict the processing of your data."
+          },
+          {
+            "term": "Right to portability",
+            "definition": "receive your data in a structured format."
+          },
+          {
+            "term": "Right to object",
+            "definition": "object to certain processing activities."
+          },
+          {
+            "term": "Right to withdraw consent",
+            "definition": "withdraw your consent at any time."
+          }
+        ],
+        "contact": "To exercise your rights, contact our Data Protection Officer at:"
+      },
+      "security": {
+        "title": "10. Security",
+        "content": "We implement appropriate technical and organisational measures to protect your data against unauthorised access, modification, disclosure or destruction. These measures include data encryption, strict access controls and regular security audits."
+      },
+      "cookiesLink": {
+        "title": "11. Cookies",
+        "content": "We use cookies and similar technologies to improve your experience. For more information, please consult our",
+        "linkLabel": "Cookie Policy"
+      },
+      "contact": {
+        "title": "12. Contact and Complaints",
+        "content": "For any questions regarding this policy or your personal data, contact us at:",
+        "cnil": "You also have the right to lodge a complaint with the CNIL (Commission Nationale de l'Informatique et des Libertés):"
+      }
+    },
+    "cookies": {
+      "title": "Cookie Policy",
+      "whatIs": {
+        "title": "1. What is a Cookie?",
+        "content1": "A cookie is a small text file placed on your device (computer, tablet, smartphone) when you visit a website. It allows the site to remember information about your visit, such as your language preferences or other settings.",
+        "content2": "Cookies can be 'session cookies' (deleted when you close your browser) or 'persistent cookies' (stored for a set period)."
+      },
+      "types": {
+        "title": "2. Types of Cookies Used",
+        "necessary": {
+          "title": "2.1 Strictly necessary cookies",
+          "content": "These cookies are essential for the website to function and cannot be disabled. They are generally set in response to your actions (login, form filling, privacy preferences)."
+        },
+        "analytics": {
+          "title": "2.2 Analytics cookies",
+          "content": "These cookies allow us to measure website traffic and analyse navigation to improve our services. The data collected is anonymised."
+        },
+        "marketing": {
+          "title": "2.3 Marketing cookies",
+          "content": "These cookies are used to show you relevant advertisements based on your interests. They also limit the number of times you see an advertisement."
+        },
+        "preferences": {
+          "title": "2.4 Preference cookies",
+          "content": "These cookies remember your choices (language, region, theme) to personalise your experience on the website."
+        }
+      },
+      "table": {
+        "name": "Name",
+        "purpose": "Purpose",
+        "duration": "Duration",
+        "rows": {
+          "auth": "User authentication",
+          "authDuration": "Session",
+          "cart": "Shopping cart",
+          "cartDuration": "7 days",
+          "consent": "Cookie preferences",
+          "consentDuration": "1 year",
+          "cfbm": "Cloudflare bot protection",
+          "cflb": "Load balancing",
+          "cflbDuration": "Session"
+        }
+      },
+      "management": {
+        "title": "3. Cookie Management",
+        "intro": "You can change your cookie preferences at any time by clicking the button below:",
+        "browser": {
+          "title": "3.1 Via your browser",
+          "content": "You can also configure your browser to accept or refuse cookies:"
+        }
+      },
+      "refusal": {
+        "title": "4. Consequences of Refusal",
+        "content": "Refusing certain cookies may degrade your user experience. For example, the site will not be able to remember your preferences or shopping cart. Strictly necessary cookies cannot be refused as they are essential to the website's operation."
+      },
+      "thirdParty": {
+        "title": "5. Third-party Cookies",
+        "content": "Some cookies may be placed by third-party partners (Cloudflare for security and performance, payment providers). These partners have their own privacy policies which we invite you to consult."
+      },
+      "contact": {
+        "title": "6. Contact",
+        "content": "For any questions regarding our use of cookies, contact our Data Protection Officer:"
       }
     }
   }
