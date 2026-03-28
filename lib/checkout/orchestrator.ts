@@ -1,6 +1,6 @@
 import { useAuthStore } from "@/lib/stores/auth.store"
 import { useCartStore } from "@/lib/stores/cart.store"
-import { apiClient } from "@/lib/utils/apiClient"
+import { api } from "@/lib/utils/api"
 import { CheckoutRequest, TransactionResponse } from "@/lib/types/payment.type"
 
 export interface CheckoutResult {
@@ -15,18 +15,10 @@ async function submitCheckout(data: CheckoutRequest): Promise<CheckoutResult> {
   const { isAuthenticated } = useAuthStore.getState()
   if (!isAuthenticated) throw new Error("Not authenticated")
 
-  const response = await apiClient("/checkout", {
+  const transaction = await api<TransactionResponse>("/checkout", {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(data),
+    body: data,
   })
-
-  if (!response.ok) {
-    const error = await response.json().catch(() => ({}))
-    throw new Error(error.message || "Erreur lors du paiement")
-  }
-
-  const transaction: TransactionResponse = await response.json()
 
   // Await the cart refresh — fixes the fire-and-forget bug
   await useCartStore.getState().fetchCart().catch(() => {
@@ -37,14 +29,7 @@ async function submitCheckout(data: CheckoutRequest): Promise<CheckoutResult> {
 }
 
 async function confirmCheckout(transactionId: number): Promise<ConfirmationResult> {
-  const response = await apiClient(`/checkout/${transactionId}`)
-
-  if (!response.ok) {
-    const error = await response.json().catch(() => ({}))
-    throw new Error(error.message || "Transaction introuvable")
-  }
-
-  const transaction: TransactionResponse = await response.json()
+  const transaction = await api<TransactionResponse>(`/checkout/${transactionId}`)
 
   // Clear cart locally — no network call needed, no setState surgery
   useCartStore.getState().clearCartLocally()

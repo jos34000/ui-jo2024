@@ -1,28 +1,18 @@
 import { create } from "zustand"
 import { PaymentState, TicketGroup, TransactionResponse } from "@/lib/types/payment.type"
-import { apiClient } from "@/lib/utils/apiClient"
+import { api } from "@/lib/utils/api"
 
 export const usePaymentStore = create<PaymentState>()(() => ({
   getTransaction: async (transactionId: number): Promise<TransactionResponse> => {
-    const response = await apiClient(`/checkout/${transactionId}`)
-    if (!response.ok) {
-      const error = await response.json().catch(() => ({}))
-      throw new Error(error.message || "Transaction introuvable")
-    }
-    return response.json()
+    return api<TransactionResponse>(`/checkout/${transactionId}`)
   },
 
   getUserTickets: async (): Promise<TicketGroup[]> => {
-    const response = await apiClient("/checkout/tickets")
-    if (!response.ok) {
-      const error = await response.json().catch(() => ({}))
-      throw new Error(error.message || "Impossible de récupérer vos billets")
-    }
-    return response.json()
+    return api<TicketGroup[]>("/checkout/tickets")
   },
 
   downloadTicketPdf: async (transactionId: number): Promise<void> => {
-    const response = await apiClient(`/checkout/${transactionId}/pdf`)
+    const response = await api(`/checkout/${transactionId}/pdf`, { raw: true })
     if (!response.ok) {
       const error = await response.json().catch(() => ({}))
       throw new Error(error.message || "Impossible de télécharger le PDF")

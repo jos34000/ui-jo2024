@@ -14,7 +14,7 @@ import { Button } from "@/components/ui/button"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { OlympicRings } from "@/lib/svg/OlympicRings"
 import { useAuthStore } from "@/lib/stores/auth.store"
-import { apiClient } from "@/lib/utils/apiClient"
+import { api } from "@/lib/utils/api"
 import { toast } from "sonner"
 import { useRouter } from "next/navigation"
 import {
@@ -54,7 +54,7 @@ export const Header = () => {
 
   const handleLogout = async () => {
     try {
-      await apiClient("/auth/logout", { method: "POST" })
+      await api("/auth/logout", { method: "POST", raw: true })
       logout()
       router.push("/")
       toast.success(t("logoutSuccess"))

@@ -1,6 +1,6 @@
 import { create } from "zustand"
 import { Cart, CartState } from "@/lib/types/cart.type"
-import { apiClient } from "@/lib/utils/apiClient"
+import { api } from "@/lib/utils/api"
 import * as cartMutations from "@/lib/cart/mutations"
 
 export const useCartStore = create<CartState>()(set => ({
@@ -12,13 +12,8 @@ export const useCartStore = create<CartState>()(set => ({
   fetchCart: async () => {
     set({ isLoading: true })
     try {
-      const response = await apiClient("/cart")
-      if (response.ok) {
-        const data: Cart = await response.json()
-        set({ cart: data })
-      } else {
-        set({ cart: null })
-      }
+      const data = await api<Cart>("/cart")
+      set({ cart: data })
     } catch {
       set({ cart: null })
     } finally {

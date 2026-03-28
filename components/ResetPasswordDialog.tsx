@@ -14,7 +14,7 @@ import {
 import { emailForReset } from "@/lib/schemas/resetPassword.schema"
 import { changePasswordSchema } from "@/lib/schemas/changePassword.schema"
 import { useAppForm } from "@/lib/hooks/useAppForm"
-import { apiClient, parseApiError } from "@/lib/utils/apiClient"
+import { api, ApiError, resolveApiErrorMessage } from "@/lib/utils/api"
 import { toast } from "sonner"
 import { useTranslations } from "next-intl"
 
@@ -40,23 +40,18 @@ export const ResetPasswordDialog = ({
     },
     onSubmit: async ({ value }) => {
       try {
-        const response = await apiClient("/user/forget-password", {
+        await api("/user/forget-password", {
           method: "POST",
-          body: JSON.stringify({
-            email: value.email,
-          }),
+          body: { email: value.email },
         })
-
-        if (!response.ok) {
-          toast.error(await parseApiError(response, t("genericError"), tErrors))
-          return
-        }
-
         toast.success(t("requestSent"))
         setSuccess(true)
-      } catch (error) {
-        console.error("Reset error:", error)
-        toast.error(t("genericError"))
+      } catch (err) {
+        if (err instanceof ApiError) {
+          toast.error(resolveApiErrorMessage(err, tErrors, t("genericError")))
+        } else {
+          toast.error(t("genericError"))
+        }
       }
     },
     validators: {
@@ -72,24 +67,18 @@ export const ResetPasswordDialog = ({
     },
     onSubmit: async ({ value }) => {
       try {
-        const response = await apiClient("/user/password", {
+        await api("/user/password", {
           method: "PUT",
-          body: JSON.stringify({
-            oldPassword: value.currentPassword,
-            newPassword: value.newPassword,
-          }),
+          body: { oldPassword: value.currentPassword, newPassword: value.newPassword },
         })
-
-        if (!response.ok) {
-          toast.error(await parseApiError(response, t("genericError"), tErrors))
-          return
-        }
-
         toast.success(t("changeSuccess"))
         setSuccess(true)
-      } catch (error) {
-        console.error("Update error:", error)
-        toast.error(t("genericError"))
+      } catch (err) {
+        if (err instanceof ApiError) {
+          toast.error(resolveApiErrorMessage(err, tErrors, t("genericError")))
+        } else {
+          toast.error(t("genericError"))
+        }
       }
     },
     validators: {

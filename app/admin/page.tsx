@@ -12,7 +12,7 @@ import {
   Ticket,
   TrendingUp,
 } from "lucide-react"
-import { apiClient } from "@/lib/utils/apiClient"
+import { api } from "@/lib/utils/api"
 import { OfferDTO } from "@/lib/types/offer.type"
 import { EventDTO } from "@/lib/types/event.type"
 
@@ -21,14 +21,8 @@ const AdminDashboard = () => {
   const [events, setEvents] = useState<EventDTO[]>([])
 
   useEffect(() => {
-    apiClient("/offer/all")
-      .then(r => (r.ok ? r.json() : []))
-      .then(setOffers)
-      .catch(() => {})
-    apiClient("/events/all")
-      .then(r => (r.ok ? r.json() : []))
-      .then(setEvents)
-      .catch(() => {})
+    api<OfferDTO[]>("/offer/all").then(setOffers).catch(() => {})
+    api<EventDTO[]>("/events/all").then(setEvents).catch(() => {})
   }, [])
 
   const activeOffers = offers.filter(o => o.isActive)

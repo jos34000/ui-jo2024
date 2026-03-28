@@ -37,7 +37,7 @@ import {
   ToggleRight,
   Trash2,
 } from "lucide-react"
-import { apiClient } from "@/lib/utils/apiClient"
+import { api, ApiError } from "@/lib/utils/api"
 import { OfferDTO } from "@/lib/types/offer.type"
 
 interface OfferFormValues {
@@ -108,28 +108,16 @@ const OfferForm = ({ offer, onSuccess, onCancel }: OfferFormProps) => {
     const body = parseForm(values)
 
     try {
-      const response = offer
-        ? await apiClient(`/offer/${offer.id}`, {
-            method: "PUT",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(body),
-          })
-        : await apiClient("/offer", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(body),
-          })
-
-      if (!response.ok) {
-        const data = await response.json().catch(() => ({}))
-        setError(data.message || "Une erreur est survenue")
-        return
-      }
-
-      const saved: OfferDTO = await response.json()
+      const saved = offer
+        ? await api<OfferDTO>(`/offer/${offer.id}`, { method: "PUT", body })
+        : await api<OfferDTO>("/offer", { method: "POST", body })
       onSuccess(saved)
-    } catch {
-      setError("Erreur réseau, veuillez réessayer")
+    } catch (err) {
+      if (err instanceof ApiError) {
+        setError(err.rawMessage || "Une erreur est survenue")
+      } else {
+        setError("Erreur réseau, veuillez réessayer")
+      }
     } finally {
       setIsSubmitting(false)
     }
@@ -263,10 +251,9 @@ const OfferCard = ({ offer, onUpdated, onDeleted }: OfferCardProps) => {
   const handleToggle = async () => {
     setIsToggling(true)
     try {
-      const response = await apiClient(`/offer/${offer.id}`, {
+      const updated = await api<OfferDTO>(`/offer/${offer.id}`, {
         method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
+        body: {
           name: offer.name,
           description: offer.description,
           price: offer.price,
@@ -274,12 +261,9 @@ const OfferCard = ({ offer, onUpdated, onDeleted }: OfferCardProps) => {
           displayOrder: offer.displayOrder,
           isActive: !offer.isActive,
           features: offer.features,
-        }),
+        },
       })
-      if (response.ok) {
-        const updated: OfferDTO = await response.json()
-        onUpdated(updated)
-      }
+      onUpdated(updated)
     } catch {
       // silent — UI stays unchanged
     } finally {
@@ -289,12 +273,8 @@ const OfferCard = ({ offer, onUpdated, onDeleted }: OfferCardProps) => {
 
   const handleDelete = async () => {
     try {
-      const response = await apiClient(`/offer/${offer.id}`, {
-        method: "DELETE",
-      })
-      if (response.ok) {
-        onDeleted(offer.id)
-      }
+      await api(`/offer/${offer.id}`, { method: "DELETE" })
+      onDeleted(offer.id)
     } catch {
       // silent
     }
@@ -451,9 +431,8 @@ const AdminOffersPage = () => {
   const [createDialogOpen, setCreateDialogOpen] = useState(false)
 
   useEffect(() => {
-    apiClient("/offer/all")
-      .then(r => (r.ok ? r.json() : []))
-      .then((data: OfferDTO[]) => {
+    api<OfferDTO[]>("/offer/all")
+      .then(data => {
         setOffers([...data].sort((a, b) => a.displayOrder - b.displayOrder))
       })
       .catch(() => {})

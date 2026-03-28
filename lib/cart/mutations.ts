@@ -1,5 +1,4 @@
-import { apiClient } from "@/lib/utils/apiClient"
-import { resolveBackendErrorKey } from "@/lib/utils/apiErrors"
+import { api, ApiError } from "@/lib/utils/api"
 import { Cart } from "@/lib/types/cart.type"
 
 export type CartErrorCode =
@@ -46,43 +45,29 @@ const CART_ERROR_CODES = new Set<string>([
   "offerNotFound",
 ])
 
-async function parseCartFailure(response: Response): Promise<CartError> {
-  let rawMessage = "Une erreur est survenue"
-  try {
-    const body = await response.json()
-    rawMessage =
-      body.message ??
-      (Object.values(body).find(v => typeof v === "string") as string | undefined) ??
-      rawMessage
-  } catch {
-    // non-JSON body — keep default message
-  }
-  const i18nKey = resolveBackendErrorKey(rawMessage)
+function toCartError(err: ApiError): CartError {
   const code: CartErrorCode =
-    i18nKey && CART_ERROR_CODES.has(i18nKey)
-      ? (i18nKey as CartErrorCode)
+    err.i18nKey && CART_ERROR_CODES.has(err.i18nKey)
+      ? (err.i18nKey as CartErrorCode)
       : "unknown"
-  return new CartError(code, rawMessage)
+  return new CartError(code, err.rawMessage)
 }
 
 export async function addItem(input: AddItemInput): Promise<CartResult> {
   try {
-    const response = await apiClient("/cart/items", {
+    const cart = await api<Cart>("/cart/items", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
+      body: {
         eventId: input.eventId,
         offerId: input.offerId,
         quantity: input.quantity ?? 1,
-      }),
+      },
     })
-    if (!response.ok) {
-      const error = await parseCartFailure(response)
-      return { ok: false, error }
-    }
-    const cart: Cart = await response.json()
     return { ok: true, cart }
-  } catch {
+  } catch (err) {
+    if (err instanceof ApiError) {
+      return { ok: false, error: toCartError(err) }
+    }
     return {
       ok: false,
       error: new CartError("networkError", "Erreur réseau"),
@@ -92,25 +77,25 @@ export async function addItem(input: AddItemInput): Promise<CartResult> {
 
 export async function updateItem(input: UpdateItemInput): Promise<Cart> {
   const { itemId, quantity } = input
-  const response =
-    quantity === 0
-      ? await apiClient(`/cart/items/${itemId}`, { method: "DELETE" })
-      : await apiClient(`/cart/items/${itemId}`, {
-          method: "PATCH",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ quantity }),
-        })
-
-  if (!response.ok) {
-    throw await parseCartFailure(response)
+  try {
+    if (quantity === 0) {
+      return await api<Cart>(`/cart/items/${itemId}`, { method: "DELETE" })
+    }
+    return await api<Cart>(`/cart/items/${itemId}`, {
+      method: "PATCH",
+      body: { quantity },
+    })
+  } catch (err) {
+    if (err instanceof ApiError) throw toCartError(err)
+    throw err
   }
-  return response.json()
 }
 
 export async function clearCart(): Promise<Cart> {
-  const response = await apiClient("/cart/items", { method: "DELETE" })
-  if (!response.ok) {
-    throw await parseCartFailure(response)
+  try {
+    return await api<Cart>("/cart/items", { method: "DELETE" })
+  } catch (err) {
+    if (err instanceof ApiError) throw toCartError(err)
+    throw err
   }
-  return response.json()
 }
