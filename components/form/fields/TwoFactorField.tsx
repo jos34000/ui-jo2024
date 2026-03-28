@@ -1,11 +1,11 @@
-import { useFieldContext } from "@/lib/hooks/formContexts"
 import { ComponentProps } from "react"
 import { Shield } from "lucide-react"
 import { Label } from "@/components/ui/label"
 import { Switch } from "@/components/ui/switch"
+import { useFieldValidation } from "@/lib/hooks/useFieldValidation"
 
 export const TwoFactorField = (props: ComponentProps<typeof Switch>) => {
-  const field = useFieldContext<boolean>()
+  const { field } = useFieldValidation<boolean>()
   return (
     <div className="flex items-center justify-between rounded-lg border border-border p-4">
       <div className="flex items-start gap-3">

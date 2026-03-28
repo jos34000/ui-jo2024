@@ -1,5 +1,4 @@
 "use client"
-import { useFieldContext } from "@/lib/hooks/formContexts"
 import { Field, FieldError, FieldLabel } from "@/components/ui/field"
 import {
   InputOTP,
@@ -7,18 +6,14 @@ import {
   InputOTPSeparator,
   InputOTPSlot,
 } from "@/components/ui/input-otp"
-import { useTranslations } from "next-intl"
-import { translateValidationError } from "@/lib/utils/validationErrors"
+import { useFieldValidation } from "@/lib/hooks/useFieldValidation"
 
 interface OTPFieldProps {
   label: string
 }
 
 export const OTPField = ({ label, ...otpProps }: Readonly<OTPFieldProps>) => {
-  const tV = useTranslations("validation")
-  const field = useFieldContext<string>()
-  const rawError = field.state.meta.errors[0]?.message
-  const error = rawError ? translateValidationError(rawError, tV) : undefined
+  const { field, validation } = useFieldValidation()
   const slotClassName =
     "*:data-[slot=input-otp-slot]:h-12 *:data-[slot=input-otp-slot]:w-11 *:data-[slot=input-otp-slot]:text-xl"
   return (
@@ -30,7 +25,7 @@ export const OTPField = ({ label, ...otpProps }: Readonly<OTPFieldProps>) => {
         value={field.state.value}
         name={field.name}
         onChange={field.handleChange}
-        aria-invalid={!!error}
+        aria-invalid={validation.invalid}
       >
         <InputOTPGroup className={slotClassName}>
           <InputOTPSlot index={0} />
@@ -44,7 +39,7 @@ export const OTPField = ({ label, ...otpProps }: Readonly<OTPFieldProps>) => {
           <InputOTPSlot index={5} />
         </InputOTPGroup>
       </InputOTP>
-      <FieldError>{error}</FieldError>
+      <FieldError>{validation.error}</FieldError>
     </Field>
   )
 }
