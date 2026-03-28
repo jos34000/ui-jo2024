@@ -6,8 +6,12 @@ export function proxy(request: NextRequest) {
   const accessToken = request.cookies.get("access_token")?.value
   const { pathname } = request.nextUrl
 
-  const publicPaths = ["/", "/auth", "/login", "/register", "/events"]
-  const isPublicPath = publicPaths.some(path => pathname.startsWith(path))
+  const isPublicPath =
+    pathname === "/" ||
+    pathname === "/403" ||
+    ["/auth", "/login", "/register", "/events"].some(path =>
+      pathname.startsWith(path),
+    )
 
   // Redirect authenticated users away from auth pages
   if (pathname.startsWith("/auth") && accessToken) {
