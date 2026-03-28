@@ -6,6 +6,8 @@ export function proxy(request: NextRequest) {
   const accessToken = request.cookies.get("access_token")?.value
   const { pathname } = request.nextUrl
 
+  // /403 is listed here (not excluded from the matcher) so unauthenticated users
+  // redirected from /admin can see the page without being sent to /auth
   const isPublicPath =
     pathname === "/" ||
     pathname === "/403" ||
