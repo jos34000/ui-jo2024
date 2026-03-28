@@ -7,6 +7,7 @@ import { Separator } from "@/components/ui/separator"
 import { Button } from "@/components/ui/button"
 import { CartItemResponse } from "@/lib/types/cart.type"
 import { useCartStore } from "@/lib/stores/cart.store"
+import { CartError } from "@/lib/cart/mutations"
 import { toast } from "sonner"
 import { useTranslations } from "next-intl"
 
@@ -33,13 +34,18 @@ export const CartItemCard = ({ item }: CartItemCardProps) => {
   const updateQuantity = useCartStore(state => state.updateQuantity)
   const [isUpdating, setIsUpdating] = useState(false)
   const t = useTranslations("cart")
+  const tErrors = useTranslations("errors")
 
   const handleQuantityChange = async (newQuantity: number) => {
     setIsUpdating(true)
     try {
       await updateQuantity(item.id, newQuantity)
-    } catch {
-      toast.error(t("updateError"))
+    } catch (err) {
+      const msg =
+        err instanceof CartError && err.code !== "unknown"
+          ? tErrors(err.code)
+          : tErrors("genericError")
+      toast.error(msg)
     } finally {
       setIsUpdating(false)
     }
