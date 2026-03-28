@@ -405,6 +405,11 @@
     "faq": "FAQ",
     "viewCart": "Warenkorb anzeigen"
   },
+  "forbidden": {
+    "title": "Zugriff verweigert",
+    "description": "Sie haben nicht die erforderlichen Berechtigungen, um auf diese Seite zuzugreifen.",
+    "backHome": "Zurück zur Startseite"
+  },
   "resetPassword": {
     "title": "Passwort zurücksetzen",
     "subtitle": "Geben Sie Ihr neues Passwort ein",

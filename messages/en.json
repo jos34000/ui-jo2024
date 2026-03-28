@@ -405,6 +405,11 @@
     "faq": "FAQ",
     "viewCart": "View my cart"
   },
+  "forbidden": {
+    "title": "Access denied",
+    "description": "You don't have the required permissions to access this page.",
+    "backHome": "Back to home"
+  },
   "resetPassword": {
     "title": "Reset password",
     "subtitle": "Enter your new password",

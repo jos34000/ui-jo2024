@@ -405,6 +405,11 @@
     "faq": "FAQ",
     "viewCart": "Ver mi carrito"
   },
+  "forbidden": {
+    "title": "Acceso denegado",
+    "description": "No tiene los permisos necesarios para acceder a esta página.",
+    "backHome": "Volver al inicio"
+  },
   "resetPassword": {
     "title": "Restablecer contraseña",
     "subtitle": "Introduzca su nueva contraseña",

@@ -405,6 +405,11 @@
     "faq": "FAQ",
     "viewCart": "Voir mon panier"
   },
+  "forbidden": {
+    "title": "Accès refusé",
+    "description": "Vous n'avez pas les droits nécessaires pour accéder à cette page.",
+    "backHome": "Retour à l'accueil"
+  },
   "resetPassword": {
     "title": "Réinitialisation du mot de passe",
     "subtitle": "Entrez votre nouveau mot de passe",
