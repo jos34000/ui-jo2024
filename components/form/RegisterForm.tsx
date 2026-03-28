@@ -43,7 +43,15 @@ export const RegisterForm = () => {
             locale: locale,
           },
         })
-        setUser(data)
+        setUser({
+          id: data.id,
+          email: data.email,
+          firstName: value.firstName,
+          lastName: value.lastName,
+          mfaEnabled: value.enableTwoFactor,
+          locale: locale,
+          createdDate: new Date().toISOString(),
+        })
         toast.success(t("success"))
         router.push("/")
       } catch (err) {

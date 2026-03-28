@@ -6,7 +6,7 @@ export interface User {
   mfaEnabled: boolean
   locale: string
   createdDate: string
-  roles: string[]
+  roles?: string[]
 }
 
 export interface AuthState {
