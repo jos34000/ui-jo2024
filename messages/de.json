@@ -1026,6 +1026,8 @@
     "noValidTickets":      "Keine gültigen Tickets für diese Transaktion verfügbar",
     "otpExpired":          "Bestätigungscode ist abgelaufen",
     "otpMaxAttempts":      "Maximale Versuche für diesen Code erreicht",
-    "genericError":        "Ein Fehler ist aufgetreten"
+    "genericError":        "Ein Fehler ist aufgetreten",
+    "networkError":        "Netzwerkfehler, bitte erneut versuchen",
+    "sessionExpired":      "Ihre Sitzung ist abgelaufen, bitte erneut anmelden"
   }
 }

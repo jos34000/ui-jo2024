@@ -1026,6 +1026,8 @@
     "noValidTickets":      "No valid tickets available for this transaction",
     "otpExpired":          "Verification code has expired",
     "otpMaxAttempts":      "Maximum attempts reached for this code",
-    "genericError":        "An error occurred"
+    "genericError":        "An error occurred",
+    "networkError":        "Network error, please try again",
+    "sessionExpired":      "Your session has expired, please log in again"
   }
 }

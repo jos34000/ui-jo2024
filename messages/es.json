@@ -1026,6 +1026,8 @@
     "noValidTickets":      "No hay entradas válidas disponibles para esta transacción",
     "otpExpired":          "El código de verificación ha expirado",
     "otpMaxAttempts":      "Número máximo de intentos alcanzado para este código",
-    "genericError":        "Se ha producido un error"
+    "genericError":        "Se ha producido un error",
+    "networkError":        "Error de red, por favor inténtalo de nuevo",
+    "sessionExpired":      "Tu sesión ha expirado, por favor vuelve a iniciar sesión"
   }
 }
