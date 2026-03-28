@@ -42,4 +42,5 @@ export interface CartState {
   removeItem: (itemId: number) => Promise<void>
   updateQuantity: (itemId: number, quantity: number) => Promise<void>
   clearCart: () => Promise<void>
+  clearCartLocally: () => void
 }

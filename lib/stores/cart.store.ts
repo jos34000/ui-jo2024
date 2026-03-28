@@ -49,4 +49,6 @@ export const useCartStore = create<CartState>()(set => ({
     const cart = await cartMutations.clearCart()
     set({ cart })
   },
+
+  clearCartLocally: () => set({ cart: null }),
 }))

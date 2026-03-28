@@ -2,8 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { useParams, useRouter } from "next/navigation"
-import { useCartStore } from "@/lib/stores/cart.store"
-import { usePaymentStore } from "@/lib/stores/payment.store"
+import { useCheckoutOrchestrator } from "@/lib/checkout/useCheckoutOrchestrator"
 import { TransactionResponse } from "@/lib/types/payment.type"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
@@ -32,7 +31,7 @@ export default function ConfirmationPage() {
   const params = useParams()
   const router = useRouter()
   const t = useTranslations("confirmation")
-  const { getTransaction } = usePaymentStore()
+  const { confirmCheckout } = useCheckoutOrchestrator()
 
   const [transaction, setTransaction] = useState<TransactionResponse | null>(
     null,
@@ -47,16 +46,15 @@ export default function ConfirmationPage() {
       return
     }
 
-    getTransaction(transactionId)
-      .then(data => {
-        setTransaction(data)
-        useCartStore.setState({ cart: null })
+    confirmCheckout(transactionId)
+      .then(({ transaction }) => {
+        setTransaction(transaction)
       })
       .catch(err => {
         setError(err instanceof Error ? err.message : t("error"))
       })
       .finally(() => setIsLoading(false))
-  }, [params.transactionId, router, getTransaction, t])
+  }, [params.transactionId, router, confirmCheckout, t])
 
   if (isLoading) {
     return (
