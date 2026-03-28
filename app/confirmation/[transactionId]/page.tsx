@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react"
 import { useParams, useRouter } from "next/navigation"
-import { useAuthStore } from "@/lib/stores/auth.store"
 import { useCartStore } from "@/lib/stores/cart.store"
 import { usePaymentStore } from "@/lib/stores/payment.store"
 import { TransactionResponse } from "@/lib/types/payment.type"
@@ -33,8 +32,6 @@ export default function ConfirmationPage() {
   const params = useParams()
   const router = useRouter()
   const t = useTranslations("confirmation")
-  const isAuthenticated = useAuthStore(state => state.isAuthenticated)
-  const setCart = useCartStore(state => state.fetchCart)
   const { getTransaction } = usePaymentStore()
 
   const [transaction, setTransaction] = useState<TransactionResponse | null>(
@@ -44,11 +41,6 @@ export default function ConfirmationPage() {
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
-    if (!isAuthenticated) {
-      router.push("/auth")
-      return
-    }
-
     const transactionId = Number(params.transactionId)
     if (Number.isNaN(transactionId)) {
       router.push("/")
@@ -64,16 +56,7 @@ export default function ConfirmationPage() {
         setError(err instanceof Error ? err.message : t("error"))
       })
       .finally(() => setIsLoading(false))
-  }, [
-    isAuthenticated,
-    params.transactionId,
-    router,
-    getTransaction,
-    setCart,
-    t,
-  ])
-
-  if (!isAuthenticated) return null
+  }, [params.transactionId, router, getTransaction, t])
 
   if (isLoading) {
     return (

@@ -1,9 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { useRouter } from "next/navigation"
 import Link from "next/link"
-import { useAuthStore } from "@/lib/stores/auth.store"
 import { usePaymentStore } from "@/lib/stores/payment.store"
 import { TicketGroup, TicketStatus } from "@/lib/types/payment.type"
 import { Badge } from "@/components/ui/badge"
@@ -107,9 +105,7 @@ function TicketGroupCard({ group, onDownload }: Readonly<{ group: TicketGroup; o
 }
 
 export default function BilletsPage() {
-  const router = useRouter()
   const t = useTranslations("tickets")
-  const isAuthenticated = useAuthStore(state => state.isAuthenticated)
   const getUserTickets = usePaymentStore(state => state.getUserTickets)
   const downloadTicketPdf = usePaymentStore(state => state.downloadTicketPdf)
 
@@ -118,10 +114,6 @@ export default function BilletsPage() {
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
-    if (!isAuthenticated) {
-      router.push("/auth")
-      return
-    }
     ;(async () => {
       try {
         const data = await getUserTickets()
@@ -132,7 +124,7 @@ export default function BilletsPage() {
         setIsLoading(false)
       }
     })()
-  }, [isAuthenticated, getUserTickets, router, t])
+  }, [getUserTickets, t])
 
   const totalSeats  = groups.reduce((sum, g) => sum + g.totalSeats, 0)
   const activeCount = groups.filter(g => g.groupStatus === "VALID").length

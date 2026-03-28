@@ -2,7 +2,6 @@
 
 import { useEffect } from "react"
 import { useRouter } from "next/navigation"
-import { useAuthStore } from "@/lib/stores/auth.store"
 import { useCartStore } from "@/lib/stores/cart.store"
 import { usePaymentStore } from "@/lib/stores/payment.store"
 import { useAppForm } from "@/lib/hooks/useAppForm"
@@ -18,7 +17,6 @@ import { useTranslations } from "next-intl"
 export default function CheckoutPage() {
   const router = useRouter()
   const t = useTranslations("checkout")
-  const isAuthenticated = useAuthStore(state => state.isAuthenticated)
   const cart = useCartStore(state => state.cart)
   const { isProcessing, checkout } = usePaymentStore()
 
@@ -82,15 +80,10 @@ export default function CheckoutPage() {
   })
 
   useEffect(() => {
-    if (!isAuthenticated) router.push("/auth")
-  }, [isAuthenticated, router])
+    if (cart !== null && cart.items.length === 0) router.push("/")
+  }, [cart, router])
 
-  useEffect(() => {
-    if (isAuthenticated && cart !== null && cart.items.length === 0)
-      router.push("/")
-  }, [cart, isAuthenticated, router])
-
-  if (!isAuthenticated || !cart || cart.items.length === 0) return null
+  if (!cart || cart.items.length === 0) return null
 
   return (
     <main className="min-h-screen bg-background">
