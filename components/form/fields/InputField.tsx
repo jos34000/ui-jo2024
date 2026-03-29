@@ -1,4 +1,3 @@
-import { useFieldContext } from "@/lib/hooks/formContexts"
 import { ComponentProps, ReactNode } from "react"
 import { Input } from "@/components/ui/input"
 import { Field, FieldError, FieldLabel } from "@/components/ui/field"
@@ -7,8 +6,7 @@ import {
   InputGroupAddon,
   InputGroupInput,
 } from "@/components/ui/input-group"
-import { useTranslations } from "next-intl"
-import { translateValidationError } from "@/lib/utils/validationErrors"
+import { useFieldValidation } from "@/lib/hooks/useFieldValidation"
 
 interface InputFieldProps extends ComponentProps<typeof Input> {
   label: string
@@ -20,10 +18,7 @@ export const InputField = ({
   icon,
   ...inputProps
 }: Readonly<InputFieldProps>) => {
-  const tV = useTranslations("validation")
-  const field = useFieldContext<string>()
-  const rawError = field.state.meta.errors[0]?.message
-  const error = rawError ? translateValidationError(rawError, tV) : undefined
+  const { field, validation } = useFieldValidation()
   return (
     <Field>
       <FieldLabel htmlFor={field.name}>{label}</FieldLabel>
@@ -33,11 +28,11 @@ export const InputField = ({
           name={field.name}
           value={field.state.value}
           onChange={e => field.handleChange(e.target.value)}
-          aria-invalid={!!error}
+          aria-invalid={validation.invalid}
         />
         <InputGroupAddon>{icon}</InputGroupAddon>
       </InputGroup>
-      <FieldError>{error}</FieldError>
+      <FieldError>{validation.error}</FieldError>
     </Field>
   )
 }

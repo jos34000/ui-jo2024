@@ -2,9 +2,7 @@
 
 import { useEffect } from "react"
 import { useRouter } from "next/navigation"
-import { useAuthStore } from "@/lib/stores/auth.store"
-import { useCartStore } from "@/lib/stores/cart.store"
-import { usePaymentStore } from "@/lib/stores/payment.store"
+import { useCheckoutOrchestrator } from "@/lib/checkout/useCheckoutOrchestrator"
 import { useAppForm } from "@/lib/hooks/useAppForm"
 import { checkoutSchema } from "@/lib/schemas/checkout.schema"
 import { Separator } from "@/components/ui/separator"
@@ -18,9 +16,7 @@ import { useTranslations } from "next-intl"
 export default function CheckoutPage() {
   const router = useRouter()
   const t = useTranslations("checkout")
-  const isAuthenticated = useAuthStore(state => state.isAuthenticated)
-  const cart = useCartStore(state => state.cart)
-  const { isProcessing, checkout } = usePaymentStore()
+  const { canCheckout, isProcessing, cart, submitCheckout } = useCheckoutOrchestrator()
 
   const TEST_CARDS = [
     {
@@ -67,14 +63,14 @@ export default function CheckoutPage() {
       const rawCard = value.cardNumber.replaceAll(/\D/g, "")
       const [month, year] = value.expiry.split("/")
       try {
-        const transaction = await checkout({
+        const result = await submitCheckout({
           cardNumber: rawCard,
           expiryMonth: Number.parseInt(month, 10),
           expiryYear: 2000 + Number.parseInt(year, 10),
           cvv: value.cvv,
           paymentMethod: "CREDIT_CARD",
         })
-        router.push(`/confirmation/${transaction.id}`)
+        router.push(`/confirmation/${result.transactionId}`)
       } catch (err) {
         toast.error(err instanceof Error ? err.message : t("paymentError"))
       }
@@ -82,15 +78,10 @@ export default function CheckoutPage() {
   })
 
   useEffect(() => {
-    if (!isAuthenticated) router.push("/auth")
-  }, [isAuthenticated, router])
+    if (cart !== null && cart.items.length === 0) router.push("/")
+  }, [cart, router])
 
-  useEffect(() => {
-    if (isAuthenticated && cart !== null && cart.items.length === 0)
-      router.push("/")
-  }, [cart, isAuthenticated, router])
-
-  if (!isAuthenticated || !cart || cart.items.length === 0) return null
+  if (!canCheckout || !cart) return null
 
   return (
     <main className="min-h-screen bg-background">

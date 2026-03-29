@@ -10,6 +10,7 @@ import { getLocale, getMessages } from "next-intl/server"
 import "./globals.css"
 import { Toaster } from "@/components/ui/sonner"
 import { CookieBanner } from "@/components/CookieBanner"
+import { ApiProvider } from "@/components/providers/ApiProvider"
 
 const _jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
@@ -43,9 +44,11 @@ export default async function RootLayout({ children }: Readonly<LayoutProps>) {
             enableSystem
             disableTransitionOnChange
           >
+            <ApiProvider>
             <CartInitializer />
             <CartSidebar hideTrigger />
             {children}
+            </ApiProvider>
             <Toaster
               position="bottom-right"
               richColors={true}

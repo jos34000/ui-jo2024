@@ -405,6 +405,11 @@
     "faq": "FAQ",
     "viewCart": "View my cart"
   },
+  "forbidden": {
+    "title": "Access denied",
+    "description": "You don't have the required permissions to access this page.",
+    "backHome": "Back to home"
+  },
   "resetPassword": {
     "title": "Reset password",
     "subtitle": "Enter your new password",
@@ -1026,6 +1031,8 @@
     "noValidTickets":      "No valid tickets available for this transaction",
     "otpExpired":          "Verification code has expired",
     "otpMaxAttempts":      "Maximum attempts reached for this code",
-    "genericError":        "An error occurred"
+    "genericError":        "An error occurred",
+    "networkError":        "Network error, please try again",
+    "sessionExpired":      "Your session has expired, please log in again"
   }
 }

@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/dialog"
 import { useAppForm } from "@/lib/hooks/useAppForm"
 import { User } from "@/lib/types/user.types"
-import { apiClient, parseApiError } from "@/lib/utils/apiClient"
+import { api, ApiError, resolveApiErrorMessage } from "@/lib/utils/api"
 import { toast } from "sonner"
 import { useAuthStore } from "@/lib/stores/auth.store"
 import { useTranslations } from "next-intl"
@@ -40,18 +40,21 @@ export const OTPDialog = ({
       otp: "",
     },
     onSubmit: async ({ value }) => {
-      const res = await apiClient("/2fa/verify", {
-        method: "POST",
-        body: JSON.stringify({ code: value.otp, email: pendingEmail }),
-      })
-
-      if (res.ok) {
+      try {
+        await api("/2fa/verify", {
+          method: "POST",
+          body: { code: value.otp, email: pendingEmail },
+        })
         setUser(pendingUser)
         onOpenChange(false)
         toast.success(t("success"))
-        router.push("/")
-      } else {
-        toast.error(await parseApiError(res, t("invalidCode"), tErrors))
+        router.push(pendingUser?.roles?.includes("ROLE_ADMIN") ? "/admin" : "/")
+      } catch (err) {
+        if (err instanceof ApiError) {
+          toast.error(resolveApiErrorMessage(err, tErrors, t("invalidCode")))
+        } else {
+          toast.error(t("invalidCode"))
+        }
       }
     },
   })

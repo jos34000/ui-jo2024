@@ -1,7 +1,6 @@
-import { useFieldContext } from "@/lib/hooks/formContexts"
 import { cn } from "@/lib/utils"
 import { ComponentProps } from "react"
-import { Label } from "@/components/ui/label"
+import { Field, FieldError, FieldLabel } from "@/components/ui/field"
 import {
   Select,
   SelectContent,
@@ -9,8 +8,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import { useTranslations } from "next-intl"
-import { translateValidationError } from "@/lib/utils/validationErrors"
+import { useFieldValidation } from "@/lib/hooks/useFieldValidation"
 
 interface SelectOption {
   label: string
@@ -28,14 +26,11 @@ export const SelectField = ({
   placeholder,
   ...selectProps
 }: Readonly<SelectFieldProps>) => {
-  const tV = useTranslations("validation")
-  const field = useFieldContext<string>()
-  const rawError = field.state.meta.errors[0]?.message
-  const error = rawError ? translateValidationError(rawError, tV) : undefined
+  const { field, validation } = useFieldValidation<string>()
 
   return (
-    <div className="space-y-2">
-      <Label htmlFor={field.name}>{label}</Label>
+    <Field>
+      <FieldLabel htmlFor={field.name}>{label}</FieldLabel>
       <Select
         {...selectProps}
         name={field.name}
@@ -44,7 +39,7 @@ export const SelectField = ({
         <SelectTrigger
           className={cn(
             "bg-background text-foreground rounded-lg transition-all duration-300",
-            error ? "border-red-500" : "border-secondary",
+            validation.invalid ? "border-red-500" : "border-secondary",
           )}
         >
           <SelectValue placeholder={placeholder} />
@@ -57,7 +52,7 @@ export const SelectField = ({
           ))}
         </SelectContent>
       </Select>
-      {error && <p className="text-sm text-red-500">{error}</p>}
-    </div>
+      <FieldError>{validation.error}</FieldError>
+    </Field>
   )
 }

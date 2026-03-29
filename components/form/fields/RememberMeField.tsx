@@ -1,10 +1,10 @@
 import { Checkbox } from "@/components/ui/checkbox"
-import { useFieldContext } from "@/lib/hooks/formContexts"
 import { ComponentProps } from "react"
 import { Field, FieldLabel } from "@/components/ui/field"
+import { useFieldValidation } from "@/lib/hooks/useFieldValidation"
 
 export const RememberMeField = (props: ComponentProps<typeof Checkbox>) => {
-  const field = useFieldContext<boolean>()
+  const { field } = useFieldValidation<boolean>()
   return (
     <Field orientation={"horizontal"}>
       <Checkbox

@@ -2,9 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { useParams, useRouter } from "next/navigation"
-import { useAuthStore } from "@/lib/stores/auth.store"
-import { useCartStore } from "@/lib/stores/cart.store"
-import { usePaymentStore } from "@/lib/stores/payment.store"
+import { useCheckoutOrchestrator } from "@/lib/checkout/useCheckoutOrchestrator"
 import { TransactionResponse } from "@/lib/types/payment.type"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
@@ -33,9 +31,7 @@ export default function ConfirmationPage() {
   const params = useParams()
   const router = useRouter()
   const t = useTranslations("confirmation")
-  const isAuthenticated = useAuthStore(state => state.isAuthenticated)
-  const setCart = useCartStore(state => state.fetchCart)
-  const { getTransaction } = usePaymentStore()
+  const { confirmCheckout } = useCheckoutOrchestrator()
 
   const [transaction, setTransaction] = useState<TransactionResponse | null>(
     null,
@@ -44,36 +40,21 @@ export default function ConfirmationPage() {
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
-    if (!isAuthenticated) {
-      router.push("/auth")
-      return
-    }
-
     const transactionId = Number(params.transactionId)
     if (Number.isNaN(transactionId)) {
       router.push("/")
       return
     }
 
-    getTransaction(transactionId)
-      .then(data => {
-        setTransaction(data)
-        useCartStore.setState({ cart: null })
+    confirmCheckout(transactionId)
+      .then(({ transaction }) => {
+        setTransaction(transaction)
       })
       .catch(err => {
         setError(err instanceof Error ? err.message : t("error"))
       })
       .finally(() => setIsLoading(false))
-  }, [
-    isAuthenticated,
-    params.transactionId,
-    router,
-    getTransaction,
-    setCart,
-    t,
-  ])
-
-  if (!isAuthenticated) return null
+  }, [params.transactionId, router, confirmCheckout, t])
 
   if (isLoading) {
     return (

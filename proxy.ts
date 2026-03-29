@@ -4,11 +4,32 @@ import { decodeJwt } from "jose"
 
 export function proxy(request: NextRequest) {
   const accessToken = request.cookies.get("access_token")?.value
+  const { pathname } = request.nextUrl
 
-  const publicPaths = ["/", "/auth", "/login", "/register", "/events"]
-  const isPublicPath = publicPaths.some(path =>
-    request.nextUrl.pathname.startsWith(path),
-  )
+  // /403 is listed here (not excluded from the matcher) so unauthenticated users
+  // redirected from /admin can see the page without being sent to /auth
+  const isPublicPath =
+    pathname === "/" ||
+    pathname === "/403" ||
+    ["/auth", "/login", "/register", "/events"].some(path =>
+      pathname.startsWith(path),
+    )
+
+  // Redirect authenticated users away from auth pages
+  if (pathname.startsWith("/auth") && accessToken) {
+    try {
+      const payload = decodeJwt(accessToken)
+      const expirationTime = (payload.exp ?? 0) * 1000
+      if (Date.now() < expirationTime) {
+        const roles = (payload.roles as string[]) ?? []
+        return NextResponse.redirect(
+          new URL(roles.includes("ROLE_ADMIN") ? "/admin" : "/", request.url),
+        )
+      }
+    } catch {
+      // invalid token — let them through to auth
+    }
+  }
 
   if (isPublicPath) {
     return NextResponse.next()
@@ -16,7 +37,7 @@ export function proxy(request: NextRequest) {
 
   if (!accessToken) {
     const authUrl = new URL("/auth", request.url)
-    authUrl.searchParams.set("callbackUrl", request.nextUrl.pathname)
+    authUrl.searchParams.set("callbackUrl", pathname)
     return NextResponse.redirect(authUrl)
   }
 
@@ -26,8 +47,16 @@ export function proxy(request: NextRequest) {
 
     if (Date.now() >= expirationTime) {
       const authUrl = new URL("/auth", request.url)
-      authUrl.searchParams.set("callbackUrl", request.nextUrl.pathname)
+      authUrl.searchParams.set("callbackUrl", pathname)
       return NextResponse.redirect(authUrl)
+    }
+
+    // Protect /admin — requires ROLE_ADMIN
+    if (pathname.startsWith("/admin")) {
+      const roles = (payload.roles as string[]) ?? []
+      if (!roles.includes("ROLE_ADMIN")) {
+        return NextResponse.redirect(new URL("/403", request.url))
+      }
     }
   } catch {
     const authUrl = new URL("/auth", request.url)
@@ -39,14 +68,6 @@ export function proxy(request: NextRequest) {
 
 export const config = {
   matcher: [
-    /*
-     * Protéger toutes les routes sauf :
-     * - /auth (page de connexion/inscription)
-     * - /api (routes API)
-     * - /_next/static (fichiers statiques)
-     * - /_next/image (images optimisées)
-     * - /favicon.ico, /images/*, etc.
-     */
     "/((?!auth|api|_next/static|_next/image|favicon.ico|.*\\.png|.*\\.jpg|.*\\.svg).*)",
   ],
 }

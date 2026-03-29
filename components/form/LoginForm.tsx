@@ -5,7 +5,7 @@ import { useAppForm } from "@/lib/hooks/useAppForm"
 import { toast } from "sonner"
 import { loginSchema } from "@/lib/schemas/login.schema"
 import { useAuthStore } from "@/lib/stores/auth.store"
-import { apiClient, parseApiError } from "@/lib/utils/apiClient"
+import { api, ApiError } from "@/lib/utils/api"
 import { useState } from "react"
 import { OTPDialog } from "@/components/OTPDialog"
 import { User } from "@/lib/types/user.types"
@@ -22,7 +22,6 @@ export const LoginForm = () => {
   const [pendingEmail, setPendingEmail] = useState("")
   const { setUser } = useAuthStore()
   const t = useTranslations("loginForm")
-  const tErrors = useTranslations("errors")
 
   const loginForm = useAppForm({
     defaultValues: {
@@ -32,16 +31,15 @@ export const LoginForm = () => {
     } as LoginFormValues,
     onSubmit: async ({ value }) => {
       try {
-        const response = await apiClient("/auth/login", {
+        const response = await api("/auth/login", {
           method: "POST",
-          body: JSON.stringify({
-            email: value.email,
-            password: value.password,
-          }),
+          body: { email: value.email, password: value.password },
+          raw: true,
         })
 
         if (!response.ok) {
-          toast.error(await parseApiError(response, t("error"), tErrors))
+          const body = await response.json().catch(() => ({}))
+          toast.error(body.message || t("error"))
           return
         }
 
@@ -54,11 +52,14 @@ export const LoginForm = () => {
         } else {
           setUser(data)
           toast.success(t("success"))
-          router.push("/")
+          router.push(data.roles?.includes("ROLE_ADMIN") ? "/admin" : "/")
         }
-      } catch (error) {
-        console.error("Login error:", error)
-        toast.error(t("genericError"))
+      } catch (err) {
+        if (err instanceof ApiError) {
+          toast.error(err.rawMessage || t("genericError"))
+        } else {
+          toast.error(t("genericError"))
+        }
       }
     },
     validators: {

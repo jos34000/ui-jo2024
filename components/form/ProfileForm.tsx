@@ -6,7 +6,7 @@ import { profileSchema } from "@/lib/schemas/profile.schema"
 import { StoredUser } from "@/lib/types/user.types"
 import { useAppForm } from "@/lib/hooks/useAppForm"
 import { Button } from "@/components/ui/button"
-import { apiClient, parseApiError } from "@/lib/utils/apiClient"
+import { api, ApiError, resolveApiErrorMessage } from "@/lib/utils/api"
 import { toast } from "sonner"
 import { z } from "zod"
 import { useTranslations } from "next-intl"
@@ -37,17 +37,17 @@ export const ProfileForm = ({
       twoFactor: user.mfaEnabled,
     } as ProfileFormValues,
     onSubmit: async ({ value }) => {
-      const response = await apiClient("/user", {
-        method: "PUT",
-        body: JSON.stringify(value),
-      })
-      if (!response.ok) {
-        toast.error(await parseApiError(response, t("updateError"), tErrors))
-        return
+      try {
+        const data = await api<StoredUser>("/user", { method: "PUT", body: value })
+        updateUser(data)
+        onSuccess()
+      } catch (err) {
+        if (err instanceof ApiError) {
+          toast.error(resolveApiErrorMessage(err, tErrors, t("updateError")))
+        } else {
+          throw err
+        }
       }
-      const data = await response.json()
-      updateUser(data)
-      onSuccess()
     },
     validators: {
       onSubmit: profileSchema,

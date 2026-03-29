@@ -29,6 +29,10 @@ export const toOlympicOffer = (dto: OfferDTO): OlympicOffer => {
     isActive: dto.isActive,
     displayOrder: dto.displayOrder,
     features: dto.features,
-    style: offerStyles[dto.name],
+    style: offerStyles[dto.name] ?? {
+      icon: User,
+      color: "text-muted-foreground",
+      isPopular: false,
+    },
   }
 }

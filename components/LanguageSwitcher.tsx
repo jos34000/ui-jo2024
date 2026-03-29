@@ -11,7 +11,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { useAuthStore } from "@/lib/stores/auth.store"
-import { apiClient } from "@/lib/utils/apiClient"
+import { api } from "@/lib/utils/api"
 
 const LOCALES = [
   { code: "fr", flag: "🇫🇷", label: "Français" },
@@ -32,10 +32,7 @@ export const LanguageSwitcher = () => {
 
     if (isAuthenticated) {
       try {
-        await apiClient("/api/user/locale", {
-          method: "PATCH",
-          body: JSON.stringify({ locale: code }),
-        })
+        await api("/user/locale", { method: "PATCH", body: { locale: code } })
       } catch {}
     }
 

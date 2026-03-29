@@ -405,6 +405,11 @@
     "faq": "FAQ",
     "viewCart": "Voir mon panier"
   },
+  "forbidden": {
+    "title": "Accès refusé",
+    "description": "Vous n'avez pas les droits nécessaires pour accéder à cette page.",
+    "backHome": "Retour à l'accueil"
+  },
   "resetPassword": {
     "title": "Réinitialisation du mot de passe",
     "subtitle": "Entrez votre nouveau mot de passe",
@@ -1026,6 +1031,8 @@
     "noValidTickets":      "Aucun billet valide disponible pour cette transaction",
     "otpExpired":          "Code de vérification expiré",
     "otpMaxAttempts":      "Nombre maximum de tentatives atteint pour ce code",
-    "genericError":        "Une erreur est survenue"
+    "genericError":        "Une erreur est survenue",
+    "networkError":        "Erreur réseau, veuillez réessayer",
+    "sessionExpired":      "Votre session a expiré, veuillez vous reconnecter"
   }
 }

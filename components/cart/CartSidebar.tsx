@@ -16,6 +16,7 @@ import {
 import { useCartStore } from "@/lib/stores/cart.store"
 import { useAuthStore } from "@/lib/stores/auth.store"
 import { CartItemCard } from "@/components/cart/CartItemCard"
+import { CartError } from "@/lib/cart/mutations"
 import { toast } from "sonner"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
@@ -31,6 +32,7 @@ function formatPrice(amount: number): string {
 export const CartSidebar = ({ hideTrigger = false }: { hideTrigger?: boolean }) => {
   const router = useRouter()
   const t = useTranslations("cart")
+  const tErrors = useTranslations("errors")
   const isAuthenticated = useAuthStore(state => state.isAuthenticated)
   const { cart, isLoading, fetchCart, clearCart, sidebarOpen, setSidebarOpen } =
     useCartStore()
@@ -51,8 +53,12 @@ export const CartSidebar = ({ hideTrigger = false }: { hideTrigger?: boolean }) 
     try {
       await clearCart()
       toast.success(t("cleared"))
-    } catch {
-      toast.error(t("clearError"))
+    } catch (err) {
+      const msg =
+        err instanceof CartError && err.code !== "unknown"
+          ? tErrors(err.code)
+          : tErrors("genericError")
+      toast.error(msg)
     } finally {
       setIsClearing(false)
     }

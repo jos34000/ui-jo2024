@@ -1,115 +1,17 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { useRouter } from "next/navigation"
 import Link from "next/link"
-import { useAuthStore } from "@/lib/stores/auth.store"
 import { usePaymentStore } from "@/lib/stores/payment.store"
-import { TicketGroup, TicketStatus } from "@/lib/types/payment.type"
-import { Badge } from "@/components/ui/badge"
-import { Separator } from "@/components/ui/separator"
-import { CalendarDays, Download, MapPin, Tag, Ticket, Users } from "lucide-react"
-import { formatDateWithTime, formatDatePurchase } from "@/lib/utils/date"
-import { formatPrice } from "@/lib/utils/format"
-import { useTranslatePhase, useTranslateOffer } from "@/lib/utils/i18nHelpers"
+import { TicketGroup } from "@/lib/types/payment.type"
+import { Ticket } from "lucide-react"
 import { Header } from "@/components/Header"
 import { Footer } from "@/components/Footer"
 import { useTranslations } from "next-intl"
-
-function TicketGroupCard({ group, onDownload }: Readonly<{ group: TicketGroup; onDownload: () => void }>) {
-  const t = useTranslations("tickets")
-  const translatePhase = useTranslatePhase()
-  const translateOffer = useTranslateOffer()
-
-  const STATUS_CONFIG: Record<
-    TicketStatus,
-    { label: string; variant: "default" | "secondary" | "destructive" | "outline" }
-  > = {
-    VALID:     { label: t("status.VALID"),     variant: "default" },
-    USED:      { label: t("status.USED"),      variant: "secondary" },
-    CANCELLED: { label: t("status.CANCELLED"), variant: "destructive" },
-  }
-
-  const cfg = STATUS_CONFIG[group.groupStatus]
-  const [isDownloading, setIsDownloading] = useState(false)
-
-  const handleDownload = async () => {
-    setIsDownloading(true)
-    try {
-      await onDownload()
-    } finally {
-      setIsDownloading(false)
-    }
-  }
-
-  return (
-    <div className="rounded-xl border border-border bg-card overflow-hidden transition-shadow hover:shadow-md">
-      <div className="h-1 bg-primary" />
-      <div className="p-5">
-        <div className="flex items-start justify-between gap-3 mb-3">
-          <div className="min-w-0">
-            <p className="font-semibold text-base leading-tight truncate">{group.event.name}</p>
-            <p className="text-xs text-muted-foreground font-mono mt-0.5">{t("ref", { ref: group.paymentReference })}</p>
-          </div>
-          <Badge variant={cfg.variant} className="shrink-0 text-xs">{cfg.label}</Badge>
-        </div>
-
-        <Separator className="mb-3" />
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm">
-          <div className="flex items-center gap-2 text-muted-foreground">
-            <CalendarDays className="h-3.5 w-3.5 shrink-0" />
-            <span className="truncate">{formatDateWithTime(group.event.eventDate)}</span>
-          </div>
-          <div className="flex items-center gap-2 text-muted-foreground">
-            <MapPin className="h-3.5 w-3.5 shrink-0" />
-            <span className="truncate">{group.event.location} · {group.event.city}</span>
-          </div>
-          <div className="flex items-center gap-2 text-muted-foreground">
-            <Tag className="h-3.5 w-3.5 shrink-0" />
-            <span className="truncate">{translateOffer(group.offer.name)} · {translatePhase(group.event.phase)}</span>
-          </div>
-          <div className="flex items-center gap-2 text-muted-foreground">
-            <Users className="h-3.5 w-3.5 shrink-0" />
-            <span>{group.totalSeats} place{group.totalSeats > 1 ? "s" : ""}</span>
-          </div>
-        </div>
-
-        {group.barcodes.length > 1 && (
-          <div className="mt-3 flex flex-wrap gap-1.5">
-            {group.barcodes.map(bc => (
-              <span key={bc} className="font-mono text-xs bg-muted px-2 py-0.5 rounded text-muted-foreground">
-                {bc}
-              </span>
-            ))}
-          </div>
-        )}
-
-        <div className="flex items-center justify-between mt-4 pt-3 border-t border-border">
-          <span className="text-xs text-muted-foreground">{t("purchasedOn", { date: formatDatePurchase(group.purchasedAt) })}</span>
-          <div className="flex items-center gap-3">
-            {group.groupStatus === "VALID" && (
-              <button
-                onClick={handleDownload}
-                disabled={isDownloading}
-                className="flex items-center gap-1.5 text-xs font-medium text-primary hover:text-primary/80 disabled:opacity-50 transition-colors"
-              >
-                <Download className="h-3.5 w-3.5" />
-                {isDownloading ? t("downloading") : t("downloadPdf")}
-              </button>
-            )}
-            <span className="font-mono font-bold text-sm">{formatPrice(group.totalPrice)}</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  )
-}
+import { TicketGroupCard } from "@/app/billets/TicketGroupCard"
 
 export default function BilletsPage() {
-  const router = useRouter()
   const t = useTranslations("tickets")
-  const isAuthenticated = useAuthStore(state => state.isAuthenticated)
   const getUserTickets = usePaymentStore(state => state.getUserTickets)
   const downloadTicketPdf = usePaymentStore(state => state.downloadTicketPdf)
 
@@ -118,25 +20,21 @@ export default function BilletsPage() {
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
-    if (!isAuthenticated) {
-      router.push("/auth")
-      return
-    }
     ;(async () => {
       try {
         const data = await getUserTickets()
         setGroups(data)
-      } catch (err) {
-        setError(err instanceof Error ? err.message : t("loadingError"))
+      } catch (err: any) {
+        setError(err.message ?? t("loadingError"))
       } finally {
         setIsLoading(false)
       }
     })()
-  }, [isAuthenticated, getUserTickets, router, t])
+  }, [getUserTickets, t])
 
-  const totalSeats  = groups.reduce((sum, g) => sum + g.totalSeats, 0)
+  const totalSeats = groups.reduce((sum, g) => sum + g.totalSeats, 0)
   const activeCount = groups.filter(g => g.groupStatus === "VALID").length
-  const usedCount   = groups.filter(g => g.groupStatus === "USED").length
+  const usedCount = groups.filter(g => g.groupStatus === "USED").length
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
@@ -152,15 +50,27 @@ export default function BilletsPage() {
           </div>
           {!isLoading && !error && (
             <p className="text-sm text-muted-foreground ml-13">
-              {groups.length === 0
-                ? t("noOrders")
-                : <>
-                    {t("ordersCount", { count: groups.length })}
-                    {" · "}{t("seatsCount", { count: totalSeats })}
-                    {activeCount > 0 && <> · <span className="text-green-600 dark:text-green-400 font-medium">{t("activeCount", { count: activeCount })}</span></>}
-                    {usedCount   > 0 && <> · {t("usedCount", { count: usedCount })}</>}
-                  </>
-              }
+              {groups.length === 0 ? (
+                t("noOrders")
+              ) : (
+                <>
+                  {t("ordersCount", { count: groups.length })}
+                  {" · "}
+                  {t("seatsCount", { count: totalSeats })}
+                  {activeCount > 0 && (
+                    <>
+                      {" "}
+                      ·{" "}
+                      <span className="text-green-600 dark:text-green-400 font-medium">
+                        {t("activeCount", { count: activeCount })}
+                      </span>
+                    </>
+                  )}
+                  {usedCount > 0 && (
+                    <> · {t("usedCount", { count: usedCount })}</>
+                  )}
+                </>
+              )}
             </p>
           )}
         </div>
@@ -171,7 +81,10 @@ export default function BilletsPage() {
           {isLoading && (
             <div className="flex flex-col gap-3">
               {[1, 2, 3].map(i => (
-                <div key={i} className="h-44 rounded-xl border border-border bg-muted/30 animate-pulse" />
+                <div
+                  key={i}
+                  className="h-44 rounded-xl border border-border bg-muted/30 animate-pulse"
+                />
               ))}
             </div>
           )}

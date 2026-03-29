@@ -29,6 +29,7 @@ import {
 import { OlympicEvent } from "@/lib/types/event.type"
 import { OfferDTO } from "@/lib/types/offer.type"
 import { useCartStore } from "@/lib/stores/cart.store"
+import { addItem as addCartItem } from "@/lib/cart/mutations"
 import { Label } from "@/components/ui/label"
 import { useTranslations } from "next-intl"
 
@@ -51,6 +52,7 @@ export const ReservationDialog = ({
   disabled,
 }: ReservationDialogProps) => {
   const t = useTranslations("reservation")
+  const tErrors = useTranslations("errors")
   const [selectedOfferId, setSelectedOfferId] = useState<string | undefined>(
     undefined,
   )
@@ -58,25 +60,31 @@ export const ReservationDialog = ({
   const [isComplete, setIsComplete] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
-  const addItem = useCartStore(state => state.addItem)
   const setSidebarOpen = useCartStore(state => state.setSidebarOpen)
 
   const handleReserve = async () => {
     if (!selectedOfferId) return
     setIsConfirming(true)
     setError(null)
-    try {
-      await addItem(event.id, Number(selectedOfferId), 1)
+
+    const result = await addCartItem({
+      eventId: event.id,
+      offerId: Number(selectedOfferId),
+      quantity: 1,
+    })
+
+    if (result.ok) {
+      useCartStore.setState({ cart: result.cart })
       setIsComplete(true)
-    } catch (e) {
-      setError(
-        e instanceof Error
-          ? e.message
-          : t("error"),
-      )
-    } finally {
-      setIsConfirming(false)
+    } else {
+      const msg =
+        result.error.code !== "unknown"
+          ? tErrors(result.error.code)
+          : result.error.rawMessage
+      setError(msg)
     }
+
+    setIsConfirming(false)
   }
 
   const resetDialog = () => {

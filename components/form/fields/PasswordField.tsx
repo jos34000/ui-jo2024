@@ -1,4 +1,3 @@
-import { useFieldContext } from "@/lib/hooks/formContexts"
 import { ComponentProps, useState } from "react"
 import { Input } from "@/components/ui/input"
 import { Field, FieldError, FieldLabel } from "@/components/ui/field"
@@ -12,7 +11,7 @@ import { Eye, EyeOff, Lock } from "lucide-react"
 import { ResetPasswordDialog } from "@/components/ResetPasswordDialog"
 import { Button } from "@/components/ui/button"
 import { useTranslations } from "next-intl"
-import { translateValidationError } from "@/lib/utils/validationErrors"
+import { useFieldValidation } from "@/lib/hooks/useFieldValidation"
 
 interface PasswordFieldProps extends ComponentProps<typeof Input> {
   label: string
@@ -28,10 +27,7 @@ export const PasswordField = ({
   ...inputProps
 }: Readonly<PasswordFieldProps>) => {
   const t = useTranslations("common")
-  const tV = useTranslations("validation")
-  const field = useFieldContext<string>()
-  const rawError = field.state.meta.errors[0]?.message
-  const error = rawError ? translateValidationError(rawError, tV) : undefined
+  const { field, validation } = useFieldValidation()
   const [showPassword, setShowPassword] = useState(false)
 
   return (
@@ -61,7 +57,7 @@ export const PasswordField = ({
           name={field.name}
           value={field.state.value}
           onChange={e => field.handleChange(e.target.value)}
-          aria-invalid={!!error}
+          aria-invalid={validation.invalid}
         />
         <InputGroupAddon>
           <Lock />
@@ -76,7 +72,7 @@ export const PasswordField = ({
           </InputGroupButton>
         </InputGroupAddon>
       </InputGroup>
-      <FieldError>{error}</FieldError>
+      <FieldError>{validation.error}</FieldError>
     </Field>
   )
 }

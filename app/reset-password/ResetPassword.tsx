@@ -16,7 +16,7 @@ import { ThemeToggle } from "@/components/theme-toggle"
 import { useAppForm } from "@/lib/hooks/useAppForm"
 import { OlympicRings } from "@/lib/svg/OlympicRings"
 import { resetPasswordSchema } from "@/lib/schemas/resetPassword.schema"
-import { apiClient } from "@/lib/utils/apiClient"
+import { api } from "@/lib/utils/api"
 import { useTranslations } from "next-intl"
 
 type PageState = "loading" | "valid" | "invalid" | "expired" | "success"
@@ -34,9 +34,7 @@ export default function ResetPassword() {
         return
       }
       try {
-        const result = await apiClient(
-          `/users/validate-reset-token?token=${token}`,
-        )
+        const result = await api(`/users/validate-reset-token?token=${token}`, { raw: true })
         if (result.status === 200) setPageState("valid")
         else if (result.status === 410) setPageState("expired")
         else if (result.status === 400) setPageState("invalid")

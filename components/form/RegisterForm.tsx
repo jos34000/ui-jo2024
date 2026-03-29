@@ -6,7 +6,7 @@ import { registerSchema } from "@/lib/schemas/register.schema"
 import { useRouter } from "next/navigation"
 import { useAuthStore } from "@/lib/stores/auth.store"
 import { z } from "zod"
-import { apiClient, parseApiError } from "@/lib/utils/apiClient"
+import { api, ApiError, resolveApiErrorMessage } from "@/lib/utils/api"
 import { toast } from "sonner"
 import { useLocale, useTranslations } from "next-intl"
 
@@ -32,31 +32,34 @@ export const RegisterForm = () => {
     } as RegisterFormValues,
     onSubmit: async ({ value }) => {
       try {
-        const response = await apiClient("/auth/register", {
+        const data = await api<{ id: number; email: string }>("/auth/register", {
           method: "POST",
-          body: JSON.stringify({
+          body: {
             email: value.email,
             password: value.password,
             firstName: value.firstName,
             lastName: value.lastName,
             enableTwoFactor: value.enableTwoFactor,
             locale: locale,
-          }),
+          },
         })
-
-        if (!response.ok) {
-          toast.error(await parseApiError(response, t("error"), tErrors))
-          return
-        }
-
-        const data = await response.json()
-        setUser(data)
-
+        setUser({
+          id: data.id,
+          email: data.email,
+          firstName: value.firstName,
+          lastName: value.lastName,
+          mfaEnabled: value.enableTwoFactor,
+          locale: locale,
+          createdDate: new Date().toISOString(),
+        })
         toast.success(t("success"))
         router.push("/")
-      } catch (error) {
-        console.error("Register error:", error)
-        toast.error(t("genericError"))
+      } catch (err) {
+        if (err instanceof ApiError) {
+          toast.error(resolveApiErrorMessage(err, tErrors, t("error")))
+        } else {
+          toast.error(t("genericError"))
+        }
       }
     },
     validators: {

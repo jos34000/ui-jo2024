@@ -1,6 +1,7 @@
 import { create } from "zustand"
 import { Cart, CartState } from "@/lib/types/cart.type"
-import { apiClient } from "@/lib/utils/apiClient"
+import { api } from "@/lib/utils/api"
+import * as cartMutations from "@/lib/cart/mutations"
 
 export const useCartStore = create<CartState>()(set => ({
   cart: null,
@@ -11,13 +12,8 @@ export const useCartStore = create<CartState>()(set => ({
   fetchCart: async () => {
     set({ isLoading: true })
     try {
-      const response = await apiClient("/cart")
-      if (response.ok) {
-        const data: Cart = await response.json()
-        set({ cart: data })
-      } else {
-        set({ cart: null })
-      }
+      const data = await api<Cart>("/cart")
+      set({ cart: data })
     } catch {
       set({ cart: null })
     } finally {
@@ -25,51 +21,29 @@ export const useCartStore = create<CartState>()(set => ({
     }
   },
 
-  addItem: async (eventId: any, offerId: any, quantity = 1) => {
-    const response = await apiClient("/cart/items", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ eventId, offerId, quantity }),
-    })
-    if (!response.ok) {
-      const error = await response.json().catch(() => ({}))
-      throw new Error(error.message || "Impossible d'ajouter au panier")
+  addItem: async (eventId: number, offerId: number, quantity = 1) => {
+    const result = await cartMutations.addItem({ eventId, offerId, quantity })
+    if (result.ok) {
+      set({ cart: result.cart })
+    } else {
+      throw result.error
     }
-    const data: Cart = await response.json()
-    set({ cart: data })
   },
 
   removeItem: async (itemId: number) => {
-    const response = await apiClient(`/cart/items/${itemId}`, { method: "DELETE" })
-    if (!response.ok) {
-      const error = await response.json().catch(() => ({}))
-      throw new Error(error.message || "Impossible de supprimer l'article")
-    }
-    const data: Cart = await response.json()
-    set({ cart: data })
-  },
-
-  clearCart: async () => {
-    const response = await apiClient("/cart/items", { method: "DELETE" })
-    if (!response.ok) {
-      const error = await response.json().catch(() => ({}))
-      throw new Error(error.message || "Impossible de vider le panier")
-    }
-    const data: Cart = await response.json()
-    set({ cart: data })
+    const cart = await cartMutations.updateItem({ itemId, quantity: 0 })
+    set({ cart })
   },
 
   updateQuantity: async (itemId: number, quantity: number) => {
-    const response = await apiClient(`/cart/items/${itemId}`, {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ quantity }),
-    })
-    if (!response.ok) {
-      const error = await response.json().catch(() => ({}))
-      throw new Error(error.message || "Impossible de modifier la quantité")
-    }
-    const data: Cart = await response.json()
-    set({ cart: data })
+    const cart = await cartMutations.updateItem({ itemId, quantity })
+    set({ cart })
   },
+
+  clearCart: async () => {
+    const cart = await cartMutations.clearCart()
+    set({ cart })
+  },
+
+  clearCartLocally: () => set({ cart: null }),
 }))
