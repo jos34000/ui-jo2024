@@ -1,11 +1,13 @@
 "use client"
 
-import { useEffect } from "react"
+import React, { useEffect } from "react"
 import { useRouter } from "next/navigation"
 import { configureApi } from "@/lib/utils/api"
 import { getAuthStore } from "@/lib/stores/auth.store"
 
-export function ApiProvider({ children }: { children: React.ReactNode }) {
+export function ApiProvider({
+  children,
+}: Readonly<{ children: React.ReactNode }>) {
   const router = useRouter()
 
   useEffect(() => {
