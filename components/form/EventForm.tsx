@@ -5,10 +5,11 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Switch } from "@/components/ui/switch"
 import { DialogClose, DialogFooter } from "@/components/ui/dialog"
-import { AdminEvent, useAdminEventsStore } from "@/lib/stores/admin-events.store"
+import { useAdminEventsStore } from "@/lib/stores/admin-events.store"
 import { useAppForm } from "@/lib/hooks/useAppForm"
 import { z } from "zod"
 import { eventSchema } from "@/lib/schemas/event.schema"
+import { OlympicEvent } from "@/lib/types/event.type"
 
 type EventFormValues = z.infer<typeof eventSchema>
 
@@ -33,7 +34,7 @@ const PHASE_OPTIONS = [
 ]
 
 interface EventFormProps {
-  event?: AdminEvent
+  event?: OlympicEvent
   onSuccess: () => void
 }
 
@@ -56,6 +57,7 @@ export const EventForm = ({ event, onSuccess }: EventFormProps) => {
       availableSlots: event?.availableSlots ?? 100,
       icon: event?.icon ?? "",
       isActive: event?.isActive ?? true,
+      status: event?.status,
     } as EventFormValues,
     validators: {
       onSubmit: eventSchema,
@@ -110,9 +112,7 @@ export const EventForm = ({ event, onSuccess }: EventFormProps) => {
         </form.AppField>
 
         <form.AppField name="city">
-          {field => (
-            <field.TextField label="Ville" placeholder="Ex: Paris" />
-          )}
+          {field => <field.TextField label="Ville" placeholder="Ex: Paris" />}
         </form.AppField>
       </div>
 

@@ -1,4 +1,5 @@
 import { EventPhase } from "@/lib/types/phases.type"
+import { z } from "zod"
 
 export interface SportResponseDTO {
   id: number
@@ -17,19 +18,22 @@ export interface SportSeed {
   phases: EventPhase[]
 }
 
-export type SportCategory =
-  | "Athlétisme"
-  | "Sport collectif"
-  | "Sport aquatique"
-  | "Gymnastique"
-  | "Sport de combat"
-  | "Sport de raquette"
-  | "Sport équestre"
-  | "Sport urbain"
-  | "Sport nautique"
-  | "Cérémonie"
-  | "Sport de force"
-  | "Sport combiné"
-  | "Golf"
-  | "Cyclisme"
-  | "Sport de précision"
+export const sportCategorySchema = z.enum([
+  "Athlétisme",
+  "Sport collectif",
+  "Sport aquatique",
+  "Gymnastique",
+  "Sport de combat",
+  "Sport de raquette",
+  "Sport équestre",
+  "Sport urbain",
+  "Sport nautique",
+  "Cérémonie",
+  "Sport de force",
+  "Sport combiné",
+  "Golf",
+  "Cyclisme",
+  "Sport de précision",
+])
+
+export type SportCategory = z.infer<typeof sportCategorySchema>

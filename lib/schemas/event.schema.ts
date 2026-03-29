@@ -1,12 +1,13 @@
 import { z } from "zod"
+import { sportCategorySchema } from "@/lib/types/sport.type"
+import { eventPhaseSchema } from "@/lib/types/phases.type"
+import { eventStatusSchema } from "@/lib/types/event.type"
 
 export const eventSchema = z.object({
   name: z.string().min(3, "Le nom doit contenir au moins 3 caracteres"),
   sport: z.string().min(3, "Le sport doit contenir au moins 3 caracteres"),
-  category: z
-    .string()
-    .min(2, "La categorie doit contenir au moins 2 caracteres"),
-  phase: z.string().min(1, "La phase est requise"),
+  category: sportCategorySchema,
+  phase: eventPhaseSchema,
   date: z.string().min(1, "La date est requise"),
   time: z.string().min(1, "L'heure est requise"),
   location: z.string().min(3, "Le lieu doit contenir au moins 3 caracteres"),
@@ -18,4 +19,5 @@ export const eventSchema = z.object({
   availableSlots: z.number().min(0, "Le nombre de places doit etre positif"),
   icon: z.string().min(1, "L'emoji est requis"),
   isActive: z.boolean(),
+  status: eventStatusSchema,
 })

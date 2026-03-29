@@ -1,7 +1,10 @@
 import { SportCategory } from "@/lib/types/sport.type"
 import { EventPhase } from "@/lib/types/phases.type"
+import { z } from "zod"
 
-export type EventStatus = "available" | "limited" | "soldout"
+export const eventStatusSchema = z.enum(["available", "limited", "soldout"])
+
+export type EventStatus = z.infer<typeof eventStatusSchema>
 
 export interface EventDTO {
   id: number
