@@ -21,8 +21,12 @@ const AdminDashboard = () => {
   const [events, setEvents] = useState<EventDTO[]>([])
 
   useEffect(() => {
-    api<OfferDTO[]>("/offer/all").then(setOffers).catch(() => {})
-    api<EventDTO[]>("/events/all").then(setEvents).catch(() => {})
+    api<OfferDTO[]>("/offer/all")
+      .then(setOffers)
+      .catch(() => {})
+    api<EventDTO[]>("/events/all")
+      .then(setEvents)
+      .catch(() => {})
   }, [])
 
   const activeOffers = offers.filter(o => o.isActive)
@@ -44,9 +48,9 @@ const AdminDashboard = () => {
       bgColor: "bg-[#0081C8]/10",
     },
     {
-      title: "Evenements",
+      title: "Évènements",
       value: events.length,
-      description: "evenements programmes",
+      description: "évènements programmés",
       icon: CalendarDays,
       href: "/admin/evenements",
       color: "text-[#00A651]",

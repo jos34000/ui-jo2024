@@ -57,9 +57,17 @@ export const formatDateWithTime = (dateStr: string) =>
     minute: "2-digit",
   }).format(new Date(dateStr))
 
-export const formatDatePurchase = (dateStr: string) =>
+export const formatStringDateClassic = (dateStr: string) =>
   new Intl.DateTimeFormat("fr-FR", {
     day: "numeric",
     month: "short",
     year: "numeric",
   }).format(new Date(dateStr))
+
+export const formatDateClassic = (date: Date) => {
+  return new Date(date).toLocaleDateString("fr-FR", {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+  })
+}

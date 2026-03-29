@@ -24,9 +24,9 @@ interface AdminLayoutProps {
 const navItems = [
   { name: "Dashboard", href: "/admin", icon: LayoutDashboard },
   { name: "Offres", href: "/admin/offres", icon: Ticket },
-  { name: "Evenements", href: "/admin/evenements", icon: CalendarDays },
+  { name: "Évènements", href: "/admin/evenements", icon: CalendarDays },
   { name: "Utilisateurs", href: "/admin/utilisateurs", icon: Users },
-  { name: "Parametres", href: "/admin/parametres", icon: Settings },
+  { name: "Paramètres", href: "/admin/parametres", icon: Settings },
 ]
 
 const AdminLayout = ({ children }: AdminLayoutProps) => {
@@ -91,7 +91,7 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
               className="flex-1 bg-transparent"
               asChild
             >
-              <Link href="/public">
+              <Link href="/">
                 <ChevronLeft className="mr-1 h-4 w-4" />
                 Site
               </Link>
@@ -115,7 +115,7 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
         <div className="flex items-center gap-2">
           <ThemeToggle />
           <Button variant="ghost" size="sm" asChild>
-            <Link href="/public">
+            <Link href="/">
               <ChevronLeft className="h-4 w-4" />
             </Link>
           </Button>

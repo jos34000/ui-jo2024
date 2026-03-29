@@ -28,7 +28,7 @@ import { InfoRow } from "@/app/auth/InfoRow"
 import { ResetPasswordDialog } from "@/components/ResetPasswordDialog"
 import { usePaymentStore } from "@/lib/stores/payment.store"
 import { TicketGroup } from "@/lib/types/payment.type"
-import { formatDatePurchase } from "@/lib/utils/date"
+import { formatStringDateClassic } from "@/lib/utils/date"
 import { formatPrice } from "@/lib/utils/format"
 import { useTranslations } from "next-intl"
 
@@ -173,7 +173,7 @@ export const AuthenticatedView = ({
                       </p>
                       <p className="text-xs text-muted-foreground mt-0.5">
                         {t("seatsCount", { count: group.totalSeats })} ·{" "}
-                        {formatDatePurchase(group.purchasedAt)} ·{" "}
+                        {formatStringDateClassic(group.purchasedAt)} ·{" "}
                         {formatPrice(group.totalPrice)}
                       </p>
                     </div>

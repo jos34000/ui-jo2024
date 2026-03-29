@@ -1,20 +1,13 @@
-import { AdminUser } from "@/lib/stores/admin-users.store"
 import { TableCell, TableRow } from "@/components/ui/table"
 import { Badge } from "@/components/ui/badge"
+import { AdminUser } from "@/lib/types/user.types"
+import { formatDateClassic } from "@/lib/utils/date"
 
 interface UserRowProps {
   user: AdminUser
 }
 
 export const UserRow = ({ user }: UserRowProps) => {
-  const formatDate = (date: Date) => {
-    return new Date(date).toLocaleDateString("fr-FR", {
-      day: "numeric",
-      month: "short",
-      year: "numeric",
-    })
-  }
-
   return (
     <TableRow>
       <TableCell>
@@ -34,10 +27,10 @@ export const UserRow = ({ user }: UserRowProps) => {
       </TableCell>
       <TableCell>
         <Badge
-          variant={user.role === "admin" ? "default" : "secondary"}
-          className={user.role === "admin" ? "bg-primary" : ""}
+          variant={user.role === "ROLE_ADMIN" ? "default" : "secondary"}
+          className={user.role === "ROLE_ADMIN" ? "bg-primary" : ""}
         >
-          {user.role === "admin" ? "Admin" : "Utilisateur"}
+          {user.role === "ROLE_ADMIN" ? "Admin" : "Utilisateur"}
         </Badge>
       </TableCell>
       <TableCell>
@@ -53,7 +46,7 @@ export const UserRow = ({ user }: UserRowProps) => {
         </Badge>
       </TableCell>
       <TableCell className="text-muted-foreground">
-        {formatDate(user.createdAt)}
+        {formatDateClassic(user.createdAt)}
       </TableCell>
     </TableRow>
   )

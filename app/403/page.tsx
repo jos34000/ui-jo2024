@@ -11,7 +11,6 @@ export default function ForbiddenPage() {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-background">
-      {/* Animated background */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-1/4 left-[15%] w-96 h-96 rounded-full bg-[#EE334E]/10 blur-3xl animate-[float_8s_ease-in-out_infinite]" />
         <div
@@ -35,7 +34,6 @@ export default function ForbiddenPage() {
         />
       </div>
 
-      {/* Glassy card */}
       <div
         className={cn(
           "relative z-10 mx-4 w-full max-w-md",
@@ -49,12 +47,10 @@ export default function ForbiddenPage() {
         <div className="absolute top-0 left-4 right-4 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
 
         <div className="relative flex flex-col items-center text-center">
-          {/* Shield icon */}
           <div className="mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-[#EE334E]/10 ring-1 ring-[#EE334E]/20">
             <ShieldX className="h-10 w-10 text-[#EE334E]" />
           </div>
 
-          {/* 403 with 3D effect */}
           <div className="relative mb-6">
             <span
               className="absolute inset-0 flex justify-center font-mono text-7xl sm:text-8xl font-black text-foreground/5 select-none"

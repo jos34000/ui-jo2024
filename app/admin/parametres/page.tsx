@@ -12,25 +12,21 @@ import { SettingsSection } from "@/app/admin/parametres/SettingsSection"
 const AdminSettingsPage = () => {
   const [isSaving, setIsSaving] = useState(false)
 
-  // General settings state
   const [siteName, setSiteName] = useState("Paris 2024 - Billetterie")
   const [siteDescription, setSiteDescription] = useState(
     "Billetterie officielle des Jeux Olympiques de Paris 2024",
   )
   const [contactEmail, setContactEmail] = useState("")
 
-  // Notification settings state
   const [emailNotifications, setEmailNotifications] = useState(true)
   const [newUserNotifications, setNewUserNotifications] = useState(true)
   const [orderNotifications, setOrderNotifications] = useState(true)
 
-  // Security settings state
   const [twoFactorEnabled, setTwoFactorEnabled] = useState(false)
   const [sessionTimeout, setSessionTimeout] = useState("30")
 
   const handleSave = async () => {
     setIsSaving(true)
-    // Simule une sauvegarde - a remplacer par l'appel API
     await new Promise(resolve => setTimeout(resolve, 1000))
     setIsSaving(false)
   }

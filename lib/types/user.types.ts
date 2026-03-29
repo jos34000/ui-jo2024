@@ -25,9 +25,24 @@ export interface StoredUser {
   locale: string
 }
 
-export interface UpdateUser {
+export interface AdminUser {
+  id: number
   firstName: string
   lastName: string
   email: string
-  password: string
+  role: "ROLE_ADMIN" | "ROLE_USER"
+  mfaEnabled: boolean
+  locale: string
+  createdAt: Date
+}
+
+export interface AdminUserResponse {
+  id: number
+  firstName: string
+  lastName: string
+  email: string
+  role: "ROLE_ADMIN" | "ROLE_USER"
+  mfaEnabled: boolean
+  locale: string
+  createdDate: string
 }

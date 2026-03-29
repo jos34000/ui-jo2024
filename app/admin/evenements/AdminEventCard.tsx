@@ -33,11 +33,13 @@ import {
   Trash2,
   Users,
 } from "lucide-react"
-import { AdminEvent, useAdminEventsStore } from "@/lib/stores/admin-events.store"
+import { useAdminEventsStore } from "@/lib/stores/admin-events.store"
 import { EventForm } from "@/components/form/EventForm"
+import { OlympicEvent } from "@/lib/types/event.type"
+import { formatStringDateClassic } from "@/lib/utils/date"
 
 interface AdminEventCardProps {
-  event: AdminEvent
+  event: OlympicEvent
 }
 
 export const AdminEventCard = ({ event }: AdminEventCardProps) => {
@@ -46,15 +48,6 @@ export const AdminEventCard = ({ event }: AdminEventCardProps) => {
   )
   const deleteEvent = useAdminEventsStore(state => state.deleteEvent)
   const [editDialogOpen, setEditDialogOpen] = useState(false)
-
-  const formatDate = (dateStr: string) => {
-    const date = new Date(dateStr)
-    return date.toLocaleDateString("fr-FR", {
-      day: "numeric",
-      month: "short",
-      year: "numeric",
-    })
-  }
 
   return (
     <Card className={`transition-all ${event.isActive ? "" : "opacity-60"}`}>
@@ -91,7 +84,7 @@ export const AdminEventCard = ({ event }: AdminEventCardProps) => {
               <div className="flex items-center gap-4 text-xs text-muted-foreground flex-wrap">
                 <span className="flex items-center gap-1">
                   <CalendarDays className="h-3 w-3" />
-                  {formatDate(event.date)}
+                  {formatStringDateClassic(event.date)}
                 </span>
                 <span className="flex items-center gap-1">
                   <Clock className="h-3 w-3" />
@@ -131,9 +124,7 @@ export const AdminEventCard = ({ event }: AdminEventCardProps) => {
               </DialogTrigger>
               <DialogContent className="max-w-2xl">
                 <DialogHeader>
-                  <DialogTitle className="font-mono">
-                    {event.name}
-                  </DialogTitle>
+                  <DialogTitle className="font-mono">{event.name}</DialogTitle>
                   <DialogDescription>
                     Modifiez les details de cet evenement
                   </DialogDescription>

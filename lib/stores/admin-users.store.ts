@@ -1,27 +1,6 @@
 import { create } from "zustand"
 import { api } from "@/lib/utils/api"
-
-export interface AdminUser {
-  id: number
-  firstName: string
-  lastName: string
-  email: string
-  role: "admin" | "user"
-  mfaEnabled: boolean
-  locale: string
-  createdAt: Date
-}
-
-interface AdminUserResponse {
-  id: number
-  firstName: string
-  lastName: string
-  email: string
-  role: "admin" | "user"
-  mfaEnabled: boolean
-  locale: string
-  createdDate: string
-}
+import { AdminUser, AdminUserResponse } from "@/lib/types/user.types"
 
 interface AdminUsersState {
   users: AdminUser[]

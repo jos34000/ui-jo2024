@@ -55,7 +55,6 @@ export const OfferCard = ({ offer, onUpdated, onDeleted }: OfferCardProps) => {
       })
       onUpdated(updated)
     } catch {
-      // silent — UI stays unchanged
     } finally {
       setIsToggling(false)
     }
@@ -65,9 +64,7 @@ export const OfferCard = ({ offer, onUpdated, onDeleted }: OfferCardProps) => {
     try {
       await api(`/offer/${offer.id}`, { method: "DELETE" })
       onDeleted(offer.id)
-    } catch {
-      // silent
-    }
+    } catch {}
   }
 
   const formatPrice = (price: number) =>
@@ -77,7 +74,7 @@ export const OfferCard = ({ offer, onUpdated, onDeleted }: OfferCardProps) => {
     }).format(price)
 
   return (
-    <Card className={`transition-all ${!offer.isActive ? "opacity-60" : ""}`}>
+    <Card className={`transition-all ${offer.isActive ? "" : "opacity-60"}`}>
       <CardContent className="p-5">
         <div className="flex items-start justify-between gap-4">
           <div className="flex items-start gap-4">

@@ -37,7 +37,7 @@ const AdminUsersPage = () => {
   }, [users, searchQuery])
 
   const totalCount = users.length
-  const adminCount = users.filter(u => u.role === "admin").length
+  const adminCount = users.filter(u => u.role === "ROLE_ADMIN").length
   const mfaCount = users.filter(u => u.mfaEnabled).length
 
   return (

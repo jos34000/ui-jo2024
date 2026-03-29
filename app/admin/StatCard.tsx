@@ -1,4 +1,5 @@
 import { Card, CardContent } from "@/components/ui/card"
+import React from "react"
 
 interface StatCardProps {
   label: string

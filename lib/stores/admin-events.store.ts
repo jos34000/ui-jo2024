@@ -1,71 +1,20 @@
 import { create } from "zustand"
 import { api } from "@/lib/utils/api"
-
-interface EventResponseDTO {
-  id: number
-  name: string
-  description: string
-  icon: string
-  category: string
-  phase: string
-  location: string
-  city: string
-  eventDate: string
-  capacity: number
-  availableSlots: number
-  isActive: boolean
-  sport: string
-}
-
-export interface AdminEvent {
-  id: number
-  name: string
-  description: string
-  icon: string
-  category: string
-  phase: string
-  location: string
-  city: string
-  date: string
-  time: string
-  capacity: number
-  availableSlots: number
-  isActive: boolean
-  sport: string
-}
-
-function mapEvent(dto: EventResponseDTO): AdminEvent {
-  const [date = "", timePart = ""] = dto.eventDate.split("T")
-  return {
-    id: dto.id,
-    name: dto.name,
-    description: dto.description,
-    icon: dto.icon,
-    category: dto.category,
-    phase: dto.phase,
-    location: dto.location,
-    city: dto.city,
-    date,
-    time: timePart.slice(0, 5),
-    capacity: dto.capacity,
-    availableSlots: dto.availableSlots,
-    isActive: dto.isActive,
-    sport: dto.sport,
-  }
-}
+import { EventDTO, OlympicEvent } from "@/lib/types/event.type"
+import { toOlympicEvent } from "@/lib/utils/eventMapper"
 
 function toEventDate(date: string, time: string): string {
   return `${date}T${time}:00`
 }
 
 interface AdminEventsState {
-  events: AdminEvent[]
+  events: OlympicEvent[]
   isLoading: boolean
   fetchEvents: () => Promise<void>
-  addEvent: (event: Omit<AdminEvent, "id">) => Promise<void>
+  addEvent: (event: Omit<OlympicEvent, "id">) => Promise<void>
   updateEvent: (
     id: number,
-    updates: Partial<Omit<AdminEvent, "id">>,
+    updates: Partial<Omit<OlympicEvent, "id">>,
   ) => Promise<void>
   deleteEvent: (id: number) => Promise<void>
   toggleEventStatus: (id: number) => Promise<void>
@@ -78,8 +27,8 @@ export const useAdminEventsStore = create<AdminEventsState>()((set, get) => ({
   fetchEvents: async () => {
     set({ isLoading: true })
     try {
-      const data = await api<EventResponseDTO[]>("/events/all")
-      set({ events: data.map(mapEvent) })
+      const data = await api<EventDTO[]>("/events/all")
+      set({ events: data.map(toOlympicEvent) })
     } catch {
       set({ events: [] })
     } finally {
@@ -88,7 +37,7 @@ export const useAdminEventsStore = create<AdminEventsState>()((set, get) => ({
   },
 
   addEvent: async event => {
-    const created = await api<EventResponseDTO>("/events", {
+    const created = await api<EventDTO>("/events", {
       method: "POST",
       body: {
         name: event.name,
@@ -105,7 +54,7 @@ export const useAdminEventsStore = create<AdminEventsState>()((set, get) => ({
         isActive: event.isActive,
       },
     })
-    set(state => ({ events: [...state.events, mapEvent(created)] }))
+    set(state => ({ events: [...state.events, toOlympicEvent(created)] }))
   },
 
   updateEvent: async (id, updates) => {
@@ -118,12 +67,14 @@ export const useAdminEventsStore = create<AdminEventsState>()((set, get) => ({
       delete body.date
       delete body.time
     }
-    const updated = await api<EventResponseDTO>(`/events/${id}`, {
+    const updated = await api<EventDTO>(`/events/${id}`, {
       method: "PUT",
       body,
     })
     set(state => ({
-      events: state.events.map(e => (e.id === id ? mapEvent(updated) : e)),
+      events: state.events.map(e =>
+        e.id === id ? toOlympicEvent(updated) : e,
+      ),
     }))
   },
 
