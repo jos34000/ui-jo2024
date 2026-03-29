@@ -7,9 +7,9 @@ export interface AdminUser {
   lastName: string
   email: string
   role: "admin" | "user"
-  isVerified: boolean
+  mfaEnabled: boolean
+  locale: string
   createdAt: Date
-  lastLoginAt: Date | null
 }
 
 interface AdminUserResponse {
@@ -18,9 +18,9 @@ interface AdminUserResponse {
   lastName: string
   email: string
   role: "admin" | "user"
-  isVerified: boolean
-  createdAt: string
-  lastLoginAt: string | null
+  mfaEnabled: boolean
+  locale: string
+  createdDate: string
 }
 
 interface AdminUsersState {
@@ -38,9 +38,14 @@ export const useAdminUsersStore = create<AdminUsersState>()(set => ({
     try {
       const data = await api<AdminUserResponse[]>("/user/all")
       const users: AdminUser[] = data.map(u => ({
-        ...u,
-        createdAt: new Date(u.createdAt),
-        lastLoginAt: u.lastLoginAt ? new Date(u.lastLoginAt) : null,
+        id: u.id,
+        firstName: u.firstName,
+        lastName: u.lastName,
+        email: u.email,
+        role: u.role,
+        mfaEnabled: u.mfaEnabled,
+        locale: u.locale,
+        createdAt: new Date(u.createdDate),
       }))
       set({ users })
     } catch {

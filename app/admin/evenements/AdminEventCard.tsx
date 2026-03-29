@@ -33,10 +33,7 @@ import {
   Trash2,
   Users,
 } from "lucide-react"
-import {
-  AdminEvent,
-  useAdminEventsStore,
-} from "@/lib/stores/admin-events.store"
+import { AdminEvent, useAdminEventsStore } from "@/lib/stores/admin-events.store"
 import { EventForm } from "@/components/form/EventForm"
 
 interface AdminEventCardProps {
@@ -65,11 +62,15 @@ export const AdminEventCard = ({ event }: AdminEventCardProps) => {
         <div className="flex items-start justify-between gap-4">
           <div className="flex items-start gap-4 flex-1 min-w-0">
             <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 shrink-0">
-              <CalendarDays className="h-6 w-6 text-primary" />
+              {event.icon ? (
+                <span className="text-2xl">{event.icon}</span>
+              ) : (
+                <CalendarDays className="h-6 w-6 text-primary" />
+              )}
             </div>
             <div className="flex-1 min-w-0">
               <div className="flex items-center gap-2 mb-1 flex-wrap">
-                <h3 className="font-semibold truncate">{event.title}</h3>
+                <h3 className="font-semibold truncate">{event.name}</h3>
                 <Badge variant="secondary" className="shrink-0">
                   {event.sport}
                 </Badge>
@@ -102,7 +103,7 @@ export const AdminEventCard = ({ event }: AdminEventCardProps) => {
                 </span>
                 <span className="flex items-center gap-1">
                   <Users className="h-3 w-3" />
-                  {event.availableTickets}/{event.capacity}
+                  {event.availableSlots}/{event.capacity}
                 </span>
               </div>
             </div>
@@ -131,10 +132,10 @@ export const AdminEventCard = ({ event }: AdminEventCardProps) => {
               <DialogContent className="max-w-2xl">
                 <DialogHeader>
                   <DialogTitle className="font-mono">
-                    Modifier l&apos;evenement
+                    {event.name}
                   </DialogTitle>
                   <DialogDescription>
-                    Modifiez les details de l&apos;evenement {event.title}
+                    Modifiez les details de cet evenement
                   </DialogDescription>
                 </DialogHeader>
                 <EventForm
@@ -159,7 +160,7 @@ export const AdminEventCard = ({ event }: AdminEventCardProps) => {
                   <AlertDialogTitle>Supprimer cet evenement ?</AlertDialogTitle>
                   <AlertDialogDescription>
                     Cette action est irreversible. L&apos;evenement &quot;
-                    {event.title}&quot; sera definitivement supprime.
+                    {event.name}&quot; sera definitivement supprime.
                   </AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>

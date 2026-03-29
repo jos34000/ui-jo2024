@@ -38,7 +38,7 @@ const AdminUsersPage = () => {
 
   const totalCount = users.length
   const adminCount = users.filter(u => u.role === "admin").length
-  const verifiedCount = users.filter(u => u.isVerified).length
+  const mfaCount = users.filter(u => u.mfaEnabled).length
 
   return (
     <div className="p-6 lg:p-8">
@@ -66,8 +66,8 @@ const AdminUsersPage = () => {
           iconWrapperClassName="bg-primary/10"
         />
         <StatCard
-          label="Comptes verifies"
-          value={verifiedCount}
+          label="2FA actif"
+          value={mfaCount}
           icon={<UserCheck className="h-5 w-5 text-[#00A651]" />}
           iconWrapperClassName="bg-[#00A651]/10"
           valueClassName="text-[#00A651]"
@@ -112,9 +112,8 @@ const AdminUsersPage = () => {
                   <TableRow>
                     <TableHead>Utilisateur</TableHead>
                     <TableHead>Role</TableHead>
-                    <TableHead>Statut</TableHead>
+                    <TableHead>2FA</TableHead>
                     <TableHead>Inscription</TableHead>
-                    <TableHead>Derniere connexion</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>

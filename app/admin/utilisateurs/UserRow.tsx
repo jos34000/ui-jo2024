@@ -44,19 +44,16 @@ export const UserRow = ({ user }: UserRowProps) => {
         <Badge
           variant="outline"
           className={
-            user.isVerified
+            user.mfaEnabled
               ? "border-[#00A651]/30 text-[#00A651]"
-              : "border-amber-500/30 text-amber-500"
+              : "border-muted-foreground/30 text-muted-foreground"
           }
         >
-          {user.isVerified ? "Verifie" : "Non verifie"}
+          {user.mfaEnabled ? "2FA actif" : "2FA inactif"}
         </Badge>
       </TableCell>
       <TableCell className="text-muted-foreground">
         {formatDate(user.createdAt)}
-      </TableCell>
-      <TableCell className="text-muted-foreground">
-        {user.lastLoginAt ? formatDate(user.lastLoginAt) : "-"}
       </TableCell>
     </TableRow>
   )

@@ -27,7 +27,7 @@ const AdminEventsPage = () => {
   }, [fetchEvents])
 
   const activeCount = events.filter(e => e.isActive).length
-  const totalTickets = events.reduce((acc, e) => acc + e.availableTickets, 0)
+  const totalTickets = events.reduce((acc, e) => acc + (e.availableSlots ?? 0), 0)
 
   return (
     <div className="p-6 lg:p-8">

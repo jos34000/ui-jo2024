@@ -1,29 +1,61 @@
 import { create } from "zustand"
 import { api } from "@/lib/utils/api"
 
-export interface AdminEvent {
+interface EventResponseDTO {
   id: number
-  title: string
-  sport: string
-  date: string
-  time: string
-  location: string
+  name: string
   description: string
-  price: number
+  icon: string
+  category: string
+  phase: string
+  location: string
+  city: string
+  eventDate: string
   capacity: number
-  availableTickets: number
-  imageUrl: string
+  availableSlots: number
   isActive: boolean
-  slug: string
+  sport: string
 }
 
-export function generateSlug(title: string): string {
-  return title
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-|-$/g, "")
+export interface AdminEvent {
+  id: number
+  name: string
+  description: string
+  icon: string
+  category: string
+  phase: string
+  location: string
+  city: string
+  date: string
+  time: string
+  capacity: number
+  availableSlots: number
+  isActive: boolean
+  sport: string
+}
+
+function mapEvent(dto: EventResponseDTO): AdminEvent {
+  const [date = "", timePart = ""] = dto.eventDate.split("T")
+  return {
+    id: dto.id,
+    name: dto.name,
+    description: dto.description,
+    icon: dto.icon,
+    category: dto.category,
+    phase: dto.phase,
+    location: dto.location,
+    city: dto.city,
+    date,
+    time: timePart.slice(0, 5),
+    capacity: dto.capacity,
+    availableSlots: dto.availableSlots,
+    isActive: dto.isActive,
+    sport: dto.sport,
+  }
+}
+
+function toEventDate(date: string, time: string): string {
+  return `${date}T${time}:00`
 }
 
 interface AdminEventsState {
@@ -46,8 +78,8 @@ export const useAdminEventsStore = create<AdminEventsState>()((set, get) => ({
   fetchEvents: async () => {
     set({ isLoading: true })
     try {
-      const data = await api<AdminEvent[]>("/events/all")
-      set({ events: data })
+      const data = await api<EventResponseDTO[]>("/events/all")
+      set({ events: data.map(mapEvent) })
     } catch {
       set({ events: [] })
     } finally {
@@ -56,20 +88,42 @@ export const useAdminEventsStore = create<AdminEventsState>()((set, get) => ({
   },
 
   addEvent: async event => {
-    const created = await api<AdminEvent>("/events", {
+    const created = await api<EventResponseDTO>("/events", {
       method: "POST",
-      body: event,
+      body: {
+        name: event.name,
+        description: event.description,
+        icon: event.icon,
+        category: event.category,
+        phase: event.phase,
+        location: event.location,
+        city: event.city,
+        sport: event.sport,
+        eventDate: toEventDate(event.date, event.time),
+        capacity: event.capacity,
+        availableSlots: event.availableSlots,
+        isActive: event.isActive,
+      },
     })
-    set(state => ({ events: [...state.events, created] }))
+    set(state => ({ events: [...state.events, mapEvent(created)] }))
   },
 
   updateEvent: async (id, updates) => {
-    const updated = await api<AdminEvent>(`/events/${id}`, {
+    const body: Record<string, unknown> = { ...updates }
+    if (updates.date !== undefined || updates.time !== undefined) {
+      const event = get().events.find(e => e.id === id)
+      const date = updates.date ?? event?.date ?? ""
+      const time = updates.time ?? event?.time ?? ""
+      body.eventDate = toEventDate(date, time)
+      delete body.date
+      delete body.time
+    }
+    const updated = await api<EventResponseDTO>(`/events/${id}`, {
       method: "PUT",
-      body: updates,
+      body,
     })
     set(state => ({
-      events: state.events.map(e => (e.id === id ? updated : e)),
+      events: state.events.map(e => (e.id === id ? mapEvent(updated) : e)),
     }))
   },
 
