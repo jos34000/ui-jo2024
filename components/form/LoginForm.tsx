@@ -52,7 +52,13 @@ export const LoginForm = () => {
         } else {
           setUser(data)
           toast.success(t("success"))
-          router.push(data.roles?.includes("ROLE_ADMIN") ? "/admin" : "/")
+          router.push(
+            data.roles?.includes("ROLE_ADMIN")
+              ? "/admin"
+              : data.roles?.includes("ROLE_STAFF")
+                ? "/staff"
+                : "/",
+          )
         }
       } catch (err) {
         if (err instanceof ApiError) {

@@ -48,7 +48,13 @@ export const OTPDialog = ({
         setUser(pendingUser)
         onOpenChange(false)
         toast.success(t("success"))
-        router.push(pendingUser?.roles?.includes("ROLE_ADMIN") ? "/admin" : "/")
+        router.push(
+          pendingUser?.roles?.includes("ROLE_ADMIN")
+            ? "/admin"
+            : pendingUser?.roles?.includes("ROLE_STAFF")
+              ? "/staff"
+              : "/",
+        )
       } catch (err) {
         if (err instanceof ApiError) {
           toast.error(resolveApiErrorMessage(err, tErrors, t("invalidCode")))
