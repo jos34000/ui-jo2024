@@ -1034,5 +1034,28 @@
     "genericError":        "Se ha producido un error",
     "networkError":        "Error de red, por favor inténtalo de nuevo",
     "sessionExpired":      "Tu sesión ha expirado, por favor vuelve a iniciar sesión"
+  },
+  "staff": {
+    "scanner": {
+      "title": "Escáner",
+      "subtitle": "Escanea el código QR de una entrada para validar el acceso",
+      "startScan": "Iniciar escaneo",
+      "scanAgain": "Escanear otra entrada",
+      "scanning": "Escaneando…",
+      "cameraError": "No se puede acceder a la cámara",
+      "scanError": "Error al escanear",
+      "outcome": {
+        "SUCCESS": "Entrada válida",
+        "ALREADY_USED": "Entrada ya utilizada",
+        "INVALID": "Entrada inválida",
+        "CANCELLED": "Entrada cancelada"
+      },
+      "holder": "Titular",
+      "event": "Evento",
+      "offer": "Oferta",
+      "scannedAt": "Escaneado el",
+      "scannedBy": "Escaneado por",
+      "seats": "{count, plural, one {# plaza} other {# plazas}}"
+    }
   }
 }

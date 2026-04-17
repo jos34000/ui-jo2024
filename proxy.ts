@@ -22,9 +22,12 @@ export function proxy(request: NextRequest) {
       const expirationTime = (payload.exp ?? 0) * 1000
       if (Date.now() < expirationTime) {
         const roles = (payload.roles as string[]) ?? []
-        return NextResponse.redirect(
-          new URL(roles.includes("ROLE_ADMIN") ? "/admin" : "/", request.url),
-        )
+        const redirectPath = roles.includes("ROLE_ADMIN")
+          ? "/admin"
+          : roles.includes("ROLE_STAFF")
+            ? "/staff"
+            : "/"
+        return NextResponse.redirect(new URL(redirectPath, request.url))
       }
     } catch {
       // invalid token — let them through to auth
@@ -55,6 +58,14 @@ export function proxy(request: NextRequest) {
     if (pathname.startsWith("/admin")) {
       const roles = (payload.roles as string[]) ?? []
       if (!roles.includes("ROLE_ADMIN")) {
+        return NextResponse.redirect(new URL("/403", request.url))
+      }
+    }
+
+    // Protect /staff — requires ROLE_STAFF
+    if (pathname.startsWith("/staff")) {
+      const roles = (payload.roles as string[]) ?? []
+      if (!roles.includes("ROLE_STAFF")) {
         return NextResponse.redirect(new URL("/403", request.url))
       }
     }

@@ -29,7 +29,7 @@ const defaultPreferences: CookiePreferences = {
 
 export const useCookieStore = create<CookieState>()(
   persist(
-    (set, get) => ({
+    set => ({
       hasConsented: false,
       preferences: defaultPreferences,
       showBanner: true,

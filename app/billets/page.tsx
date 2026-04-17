@@ -24,8 +24,8 @@ export default function BilletsPage() {
       try {
         const data = await getUserTickets()
         setGroups(data)
-      } catch (err: any) {
-        setError(err.message ?? t("loadingError"))
+      } catch (err) {
+        setError(err instanceof Error ? err.message : t("loadingError"))
       } finally {
         setIsLoading(false)
       }

@@ -1034,5 +1034,28 @@
     "genericError":        "An error occurred",
     "networkError":        "Network error, please try again",
     "sessionExpired":      "Your session has expired, please log in again"
+  },
+  "staff": {
+    "scanner": {
+      "title": "Scanner",
+      "subtitle": "Scan the QR code on a ticket to validate entry",
+      "startScan": "Start scanning",
+      "scanAgain": "Scan another ticket",
+      "scanning": "Scanning…",
+      "cameraError": "Unable to access camera",
+      "scanError": "Scan error",
+      "outcome": {
+        "SUCCESS": "Valid ticket",
+        "ALREADY_USED": "Ticket already used",
+        "INVALID": "Invalid ticket",
+        "CANCELLED": "Cancelled ticket"
+      },
+      "holder": "Holder",
+      "event": "Event",
+      "offer": "Offer",
+      "scannedAt": "Scanned at",
+      "scannedBy": "Scanned by",
+      "seats": "{count, plural, one {# seat} other {# seats}}"
+    }
   }
 }
