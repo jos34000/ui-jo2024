@@ -12,6 +12,7 @@ import {
   LogOut,
   Settings,
   Ticket,
+  TrendingUp,
   Users,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
@@ -23,6 +24,7 @@ interface AdminLayoutProps {
 
 const navItems = [
   { name: "Dashboard", href: "/admin", icon: LayoutDashboard },
+  { name: "Ventes", href: "/admin/ventes", icon: TrendingUp },
   { name: "Offres", href: "/admin/offres", icon: Ticket },
   { name: "Évènements", href: "/admin/evenements", icon: CalendarDays },
   { name: "Utilisateurs", href: "/admin/utilisateurs", icon: Users },
