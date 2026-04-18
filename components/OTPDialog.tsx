@@ -15,6 +15,7 @@ import { api, ApiError, resolveApiErrorMessage } from "@/lib/utils/api"
 import { toast } from "sonner"
 import { useAuthStore } from "@/lib/stores/auth.store"
 import { useTranslations } from "next-intl"
+import { fetchRolesAndRedirect } from "@/lib/utils/auth"
 
 interface OTPDialogProps {
   open: boolean
@@ -46,7 +47,7 @@ export const OTPDialog = ({
         setUser(pendingUser)
         onOpenChange(false)
         toast.success(t("success"))
-        window.location.href = "/auth"
+        await fetchRolesAndRedirect()
       } catch (err) {
         if (err instanceof ApiError) {
           toast.error(resolveApiErrorMessage(err, tErrors, t("invalidCode")))
