@@ -1,8 +1,6 @@
 "use client"
 
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { ArrowRight, Calendar, MapPin, Star, Ticket } from "lucide-react"
+import { Calendar, MapPin, Star, Ticket } from "lucide-react"
 import { useAuthStore } from "@/lib/stores/auth.store"
 import { useTranslations } from "next-intl"
 
@@ -37,23 +35,6 @@ export const HeroSection = () => {
                   {t("authenticated.subtitle")}
                 </p>
 
-                <div className="flex flex-col sm:flex-row gap-4">
-                  <Button size="lg" className="text-base">
-                    <Ticket className="mr-2 h-4 w-4" />
-                    {t("authenticated.myTickets")}
-                  </Button>
-                  <Button
-                    size="lg"
-                    variant="outline"
-                    className="text-base bg-transparent"
-                    asChild
-                  >
-                    <Link href="/events">
-                      {t("authenticated.explore")}
-                      <ArrowRight className="ml-2 h-4 w-4" />
-                    </Link>
-                  </Button>
-                </div>
               </>
             ) : (
               <>
@@ -77,19 +58,6 @@ export const HeroSection = () => {
                   {t("unauthenticated.subtitle")}
                 </p>
 
-                <div className="flex flex-col sm:flex-row gap-4">
-                  <Button size="lg" className="text-base">
-                    {t("unauthenticated.seeEvents")}
-                    <ArrowRight className="ml-2 h-4 w-4" />
-                  </Button>
-                  <Button
-                    size="lg"
-                    variant="outline"
-                    className="text-base bg-transparent"
-                  >
-                    {t("unauthenticated.buyingGuide")}
-                  </Button>
-                </div>
               </>
             )}
 
