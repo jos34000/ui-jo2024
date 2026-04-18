@@ -3,8 +3,6 @@ import Link from "next/link"
 import { Header } from "@/components/Header"
 import { Footer } from "@/components/Footer"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
 import {
   ArrowLeft,
   ArrowRight,
@@ -85,10 +83,11 @@ const SportPage = async ({ params }: { params: Promise<{ id: number }> }) => {
           </div>
         </div>
 
+        {/* Hero */}
         <section className="bg-background">
           <div className="mx-auto max-w-5xl px-4 sm:px-6 py-10 sm:py-14">
             <div className="flex flex-col sm:flex-row sm:items-start gap-6">
-              <div className="flex h-20 w-20 sm:h-24 sm:w-24 items-center justify-center rounded-2xl bg-primary/5 border border-primary/20 shrink-0">
+              <div className="flex h-20 w-20 sm:h-24 sm:w-24 items-center justify-center rounded-2xl border border-border/40 bg-card shrink-0 shadow-sm">
                 <span className="text-5xl sm:text-6xl">{sport.icon}</span>
               </div>
               <div className="flex-1 min-w-0">
@@ -99,15 +98,13 @@ const SportPage = async ({ params }: { params: Promise<{ id: number }> }) => {
                   {sport.description}
                 </p>
                 <div className="mt-6 flex flex-wrap gap-3">
-                  <Button asChild>
-                    <Link
-                      href={`/calendrier?sport=${encodeURIComponent(sport.name)}`}
-                    >
+                  <Button className="rounded-full" asChild>
+                    <Link href={`/calendrier?sport=${encodeURIComponent(sport.name)}`}>
                       <CalendarDays className="mr-2 h-4 w-4" />
                       {t("viewCalendar")}
                     </Link>
                   </Button>
-                  <Button variant="outline" className="bg-transparent" asChild>
+                  <Button variant="outline" className="bg-transparent rounded-full" asChild>
                     <Link href="/#sports">
                       <ArrowLeft className="mr-2 h-4 w-4" />
                       {t("allSports")}
@@ -119,117 +116,97 @@ const SportPage = async ({ params }: { params: Promise<{ id: number }> }) => {
           </div>
         </section>
 
+        {/* Stats */}
         <section className="bg-muted/30 border-t border-border">
           <div className="mx-auto max-w-5xl px-4 sm:px-6 py-10 sm:py-12">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-              <Card>
-                <CardContent className="p-5">
-                  <div className="flex items-center gap-3 mb-3">
-                    <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10">
-                      <Trophy className="h-4 w-4 text-primary" />
-                    </div>
-                    <span className="text-sm font-medium text-muted-foreground">
-                      {t("events")}
-                    </span>
-                  </div>
-                  <p className="text-2xl font-bold font-mono">
-                    {sport.eventCount}
-                  </p>
-                </CardContent>
-              </Card>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
 
-              {/*<Card>
-                <CardContent className="p-5">
-                  <div className="flex items-center gap-3 mb-3">
-                    <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10">
-                      <CalendarDays className="h-4 w-4 text-primary" />
-                    </div>
-                    <span className="text-sm font-medium text-muted-foreground">
-                      Dates
-                    </span>
+              <article className="relative overflow-hidden rounded-2xl border border-border/40 bg-card p-5 shadow-sm">
+                <div className="absolute top-0 left-0 right-0 h-[3px] rounded-t-2xl bg-[#FCB131]" />
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-muted">
+                    <Trophy className="h-4 w-4 text-[#FCB131]" />
                   </div>
-                  <p className="text-sm font-semibold leading-snug">
-                    {sport.dates}
-                  </p>
-                </CardContent>
-              </Card>*/}
+                  <span className="text-[10px] font-bold uppercase tracking-[0.12em] text-muted-foreground">
+                    {t("events")}
+                  </span>
+                </div>
+                <p className="text-2xl font-black font-mono leading-none">{sport.eventCount}</p>
+                <div className="flex items-center gap-1.5 mt-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full block bg-[#FCB131]" />
+                  <p className="text-[11px] text-muted-foreground">{t("eventsCount")}</p>
+                </div>
+              </article>
 
-              <Card>
-                <CardContent className="p-5">
-                  <div className="flex items-center gap-3 mb-3">
-                    <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10">
-                      <MapPin className="h-4 w-4 text-primary" />
-                    </div>
-                    <span className="text-sm font-medium text-muted-foreground">
-                      {sport.places.length > 1 ? t("sites") : t("site")}
-                    </span>
+              <article className="relative overflow-hidden rounded-2xl border border-border/40 bg-card p-5 shadow-sm">
+                <div className="absolute top-0 left-0 right-0 h-[3px] rounded-t-2xl bg-[#00A651]" />
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-muted">
+                    <MapPin className="h-4 w-4 text-[#00A651]" />
                   </div>
-                  <ul className="space-y-1">
-                    {sport.places.map(place => (
-                      <li
-                        key={place}
-                        className="text-sm font-semibold leading-snug"
-                      >
-                        {place}
-                      </li>
-                    ))}
-                  </ul>
-                </CardContent>
-              </Card>
+                  <span className="text-[10px] font-bold uppercase tracking-[0.12em] text-muted-foreground">
+                    {sport.places.length > 1 ? t("sites") : t("site")}
+                  </span>
+                </div>
+                <ul className="space-y-1">
+                  {sport.places.map(place => (
+                    <li key={place} className="text-sm font-semibold leading-snug">{place}</li>
+                  ))}
+                </ul>
+              </article>
 
-              <Card>
-                <CardContent className="p-5">
-                  <div className="flex items-center gap-3 mb-3">
-                    <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10">
-                      <Layers className="h-4 w-4 text-primary" />
-                    </div>
-                    <span className="text-sm font-medium text-muted-foreground">
-                      {t("phases")}
+              <article className="relative overflow-hidden rounded-2xl border border-border/40 bg-card p-5 shadow-sm">
+                <div className="absolute top-0 left-0 right-0 h-[3px] rounded-t-2xl bg-[#0081C8]" />
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-muted">
+                    <Layers className="h-4 w-4 text-[#0081C8]" />
+                  </div>
+                  <span className="text-[10px] font-bold uppercase tracking-[0.12em] text-muted-foreground">
+                    {t("phases")}
+                  </span>
+                </div>
+                <div className="flex flex-wrap gap-1.5">
+                  {sport.phases.map(phase => (
+                    <span
+                      key={phase}
+                      className="inline-flex items-center rounded-full px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider border border-border/40 bg-muted text-muted-foreground"
+                    >
+                      {translatePhase(phase)}
                     </span>
-                  </div>
-                  <div className="flex flex-wrap gap-1.5">
-                    {sport.phases.map(phase => (
-                      <Badge
-                        key={phase}
-                        variant="secondary"
-                        className="text-xs"
-                      >
-                        {translatePhase(phase)}
-                      </Badge>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
+                  ))}
+                </div>
+              </article>
+
             </div>
           </div>
         </section>
 
+        {/* Other sports */}
         <section className="border-t border-border bg-background">
           <div className="mx-auto max-w-5xl px-4 sm:px-6 py-10 sm:py-12">
-            <h2 className="text-xl font-bold font-mono mb-6">
-              {t("discoverOthers")}
-            </h2>
+            <h2 className="text-xl font-bold font-mono mb-6">{t("discoverOthers")}</h2>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-              {otherSports?.map(s => (
+              {otherSports?.map(sp => (
                 <Link
-                  key={s.id}
-                  href={`/sports/${s.id}`}
-                  className="group flex flex-col items-center justify-center p-5 rounded-xl border border-border bg-card hover:border-primary/50 hover:bg-primary/5 transition-all"
+                  key={sp.id}
+                  href={`/sports/${sp.id}`}
+                  className="group relative flex flex-col items-center justify-center p-5 rounded-2xl border border-border/40 bg-card overflow-hidden hover:-translate-y-0.5 hover:shadow-md hover:border-border/70 transition-all duration-200 shadow-sm"
                 >
-                  <span className="text-3xl mb-2 group-hover:scale-110 transition-transform">
-                    {s.icon}
+                  <div className="absolute top-0 left-0 right-0 h-[3px] rounded-t-2xl bg-primary/20 group-hover:bg-primary transition-colors duration-300" />
+                  <span className="text-3xl mb-2.5 mt-1 group-hover:scale-110 transition-transform duration-200 leading-none">
+                    {sp.icon}
                   </span>
-                  <span className="font-medium text-foreground text-sm">
-                    {translateSport(s.name)}
+                  <span className="font-semibold text-sm text-center leading-tight">
+                    {translateSport(sp.name)}
                   </span>
-                  <span className="text-xs text-muted-foreground mt-0.5">
-                    {s.eventCount} {t("eventsCount")}
+                  <span className="text-[10px] font-bold uppercase tracking-[0.12em] text-muted-foreground mt-1.5">
+                    {sp.eventCount} {t("eventsCount")}
                   </span>
                 </Link>
               ))}
             </div>
             <div className="text-center mt-6">
-              <Button variant="ghost" asChild>
+              <Button variant="ghost" className="rounded-full" asChild>
                 <Link href="/#sports">
                   {t("allSports")}
                   <ArrowRight className="ml-2 h-4 w-4" />

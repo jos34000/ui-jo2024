@@ -64,7 +64,7 @@ export const DayTimeline = ({
           return (
             <div key={day} className="flex flex-col items-center gap-1">
               {showMonthLabel && (
-                <span className="text-[10px] font-medium text-muted-foreground uppercase tracking-wide mb-0.5">
+                <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-[0.12em] mb-0.5">
                   {month === 6 ? t("july") : t("august")}
                 </span>
               )}
@@ -72,28 +72,31 @@ export const DayTimeline = ({
                 data-date={day}
                 onClick={() => onSelectDate(day)}
                 className={`
-                  flex flex-col items-center gap-0.5 rounded-xl px-3 py-2 transition-all border
+                  relative overflow-hidden flex flex-col items-center gap-0.5 rounded-xl px-3 py-2 transition-all duration-150 border
                   ${
                     isSelected
                       ? "bg-primary text-primary-foreground border-primary shadow-sm"
-                      : "bg-card border-border hover:border-primary/40 hover:bg-accent text-foreground"
+                      : "bg-card border-border/40 hover:border-border/80 hover:bg-accent text-foreground"
                   }
                 `}
                 aria-label={t("viewEventsOf", { date: formatDateFull(day) })}
               >
-                <span className="text-[10px] font-medium uppercase opacity-90">
+                {isSelected && (
+                  <span className="absolute top-0 left-0 right-0 h-[3px] rounded-t-xl bg-primary-foreground/40" />
+                )}
+                <span className="text-[10px] font-bold uppercase tracking-[0.08em] opacity-90">
                   {formatDay(day)}
                 </span>
-                <span className="text-base font-bold font-mono leading-none">
+                <span className="text-base font-black font-mono leading-none">
                   {formatDayNum(day)}
                 </span>
-                <div
-                  className={`text-[9px] font-medium font-mono ${
-                    isSelected ? "opacity-90" : "text-muted-foreground"
+                <span
+                  className={`text-[9px] font-bold font-mono ${
+                    isSelected ? "opacity-80" : "text-muted-foreground"
                   }`}
                 >
                   {count > 0 ? count : "—"}
-                </div>
+                </span>
               </button>
             </div>
           )

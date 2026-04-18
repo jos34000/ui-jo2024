@@ -1,6 +1,5 @@
 "use client"
 
-import React from "react"
 import Link from "next/link"
 import { useTranslations } from "next-intl"
 
@@ -12,14 +11,14 @@ export const AuthFooter = () => {
         <div className="flex items-center justify-between gap-3 text-xs sm:text-sm text-muted-foreground">
           <p className="shrink-0">Paris 2024</p>
           <nav className="flex items-center gap-3 sm:gap-6">
-            <Link href="#" className="hover:text-primary transition-colors">
-              {t("footer.help")}
-            </Link>
-            <Link href="#" className="hover:text-primary transition-colors">
+            <Link
+              href="/confidentialite"
+              className="hover:text-primary transition-colors"
+            >
               {t("footer.privacy")}
             </Link>
             <Link
-              href="#"
+              href="/conditions-utilisation"
               className="hidden sm:inline hover:text-primary transition-colors"
             >
               {t("footer.terms")}

@@ -9,9 +9,19 @@ export function proxy(request: NextRequest) {
   const isPublicPath =
     pathname === "/" ||
     pathname === "/403" ||
-    ["/auth", "/login", "/register", "/events"].some(path =>
-      pathname.startsWith(path),
-    )
+    [
+      "/auth",
+      "/login",
+      "/register",
+      "/events",
+      "/calendrier",
+      "/sports",
+      "/reset-password",
+      "/conditions-utilisation",
+      "/confidentialite",
+      "/cookies",
+      "/mentions-legales",
+    ].some(path => pathname.startsWith(path))
 
   if (pathname.startsWith("/auth") && accessToken) {
     try {

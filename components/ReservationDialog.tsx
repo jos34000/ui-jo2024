@@ -121,15 +121,12 @@ export const ReservationDialog = ({
             </DialogHeader>
             <DialogFooter className="mt-4 flex flex-col gap-2 sm:flex-row">
               <DialogClose asChild>
-                <Button
-                  variant="outline"
-                  className="bg-transparent w-full sm:w-auto"
-                >
+                <Button variant="outline" className="bg-transparent rounded-full w-full sm:w-auto">
                   {t("continue")}
                 </Button>
               </DialogClose>
               <DialogClose asChild>
-                <Button className="w-full sm:w-auto gap-2" onClick={() => setSidebarOpen(true)}>
+                <Button className="rounded-full w-full sm:w-auto gap-2" onClick={() => setSidebarOpen(true)}>
                   <ShoppingCart className="h-4 w-4" />
                   {t("viewCart")}
                 </Button>
@@ -139,41 +136,33 @@ export const ReservationDialog = ({
         ) : (
           <>
             <DialogHeader>
-              <DialogTitle className="font-mono">
-                {t("title")}
-              </DialogTitle>
+              <DialogTitle className="font-mono">{t("title")}</DialogTitle>
               <DialogDescription>{event.name}</DialogDescription>
             </DialogHeader>
 
             <div className="space-y-4 py-4">
-              <div className="flex items-center gap-3 p-3 rounded-lg bg-muted/50">
-                <CalendarDays className="h-5 w-5 text-muted-foreground shrink-0" />
+              <div className="flex items-center gap-3 p-3 rounded-xl border border-border/40 bg-card">
+                <CalendarDays className="h-4 w-4 text-primary shrink-0" />
                 <div>
-                  <p className="text-sm font-medium">
-                    {formatDateLong(event.date)}
-                  </p>
-                  <p className="text-xs text-muted-foreground">
-                    {event.time} - {event.location}
+                  <p className="text-sm font-semibold">{formatDateLong(event.date)}</p>
+                  <p className="text-[11px] text-muted-foreground mt-0.5">
+                    {event.time} · {event.location}
                   </p>
                 </div>
               </div>
 
               <div className="space-y-2">
-                <Label className="text-sm font-medium">{t("ticketType")}</Label>
-                <Select
-                  value={selectedOfferId}
-                  onValueChange={setSelectedOfferId}
-                >
-                  <SelectTrigger>
+                <Label className="text-[10px] font-bold uppercase tracking-[0.1em] text-muted-foreground">
+                  {t("ticketType")}
+                </Label>
+                <Select value={selectedOfferId} onValueChange={setSelectedOfferId}>
+                  <SelectTrigger className="rounded-xl">
                     <SelectValue placeholder={t("selectOffer")} />
                   </SelectTrigger>
                   <SelectContent>
                     {activeOffers.map(offer => (
                       <SelectItem key={offer.id} value={String(offer.id)}>
-                        <span>
-                          {offer.name} — {t("tickets", { count: offer.numberOfTickets })} ·{" "}
-                          {formatPrice(offer.price)}
-                        </span>
+                        {offer.name} — {t("tickets", { count: offer.numberOfTickets })} · {formatPrice(offer.price)}
                       </SelectItem>
                     ))}
                   </SelectContent>
@@ -182,23 +171,20 @@ export const ReservationDialog = ({
 
               {error && <p className="text-sm text-destructive">{error}</p>}
 
-              <div className="p-3 rounded-lg border border-border bg-card">
-                <div className="flex items-start gap-2">
-                  <Info className="h-4 w-4 text-primary mt-0.5 shrink-0" />
-                  <p className="text-xs text-muted-foreground">
-                    {t("info")}
-                  </p>
-                </div>
+              <div className="flex items-start gap-2 p-3 rounded-xl border border-border/40 bg-muted/40">
+                <Info className="h-3.5 w-3.5 text-primary mt-0.5 shrink-0" />
+                <p className="text-[11px] text-muted-foreground">{t("info")}</p>
               </div>
             </div>
 
             <DialogFooter className="gap-2">
               <DialogClose asChild>
-                <Button variant="outline" className="bg-transparent">
+                <Button variant="outline" className="bg-transparent rounded-full">
                   {t("cancel")}
                 </Button>
               </DialogClose>
               <Button
+                className="rounded-full"
                 onClick={handleReserve}
                 disabled={!selectedOfferId || isConfirming}
               >

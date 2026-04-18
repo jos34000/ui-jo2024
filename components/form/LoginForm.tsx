@@ -11,6 +11,7 @@ import { User } from "@/lib/types/user.types"
 import { User as UserIcon } from "lucide-react"
 import { z } from "zod"
 import { useTranslations } from "next-intl"
+import { fetchRolesAndRedirect } from "@/lib/utils/auth"
 
 type LoginFormValues = z.infer<typeof loginSchema>
 
@@ -50,7 +51,7 @@ export const LoginForm = () => {
         } else {
           setUser(data)
           toast.success(t("success"))
-          window.location.href = "/auth"
+          await fetchRolesAndRedirect()
         }
       } catch (err) {
         if (err instanceof ApiError) {

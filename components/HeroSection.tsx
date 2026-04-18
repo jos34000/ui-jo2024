@@ -1,15 +1,21 @@
 "use client"
 
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { ArrowRight, Calendar, MapPin, Star, Ticket } from "lucide-react"
+import { Calendar, MapPin, Star, Ticket } from "lucide-react"
 import { useAuthStore } from "@/lib/stores/auth.store"
 import { useTranslations } from "next-intl"
+
+const STATS = [
+  { icon: Calendar, value: "16", accent: "#0081C8" },
+  { icon: Ticket, value: "32", accent: "#FCB131" },
+  { icon: MapPin, value: "35", accent: "#00A651" },
+] as const
 
 export const HeroSection = () => {
   const user = useAuthStore(state => state.user)
   const isAuthenticated = useAuthStore(state => state.isAuthenticated)
   const t = useTranslations("hero")
+
+  const statLabels = [t("stats.days"), t("stats.sports"), t("stats.venues")]
 
   return (
     <section className="relative overflow-hidden bg-background">
@@ -36,31 +42,13 @@ export const HeroSection = () => {
                 <p className="text-lg text-muted-foreground max-w-lg leading-relaxed">
                   {t("authenticated.subtitle")}
                 </p>
-
-                <div className="flex flex-col sm:flex-row gap-4">
-                  <Button size="lg" className="text-base">
-                    <Ticket className="mr-2 h-4 w-4" />
-                    {t("authenticated.myTickets")}
-                  </Button>
-                  <Button
-                    size="lg"
-                    variant="outline"
-                    className="text-base bg-transparent"
-                    asChild
-                  >
-                    <Link href="/events">
-                      {t("authenticated.explore")}
-                      <ArrowRight className="ml-2 h-4 w-4" />
-                    </Link>
-                  </Button>
-                </div>
               </>
             ) : (
               <>
                 <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-1.5 text-sm font-medium text-primary">
                   <span className="relative flex h-2 w-2">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75" />
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-primary" />
                   </span>
                   {t("unauthenticated.badge")}
                 </div>
@@ -76,58 +64,38 @@ export const HeroSection = () => {
                 <p className="text-lg text-muted-foreground max-w-lg leading-relaxed">
                   {t("unauthenticated.subtitle")}
                 </p>
-
-                <div className="flex flex-col sm:flex-row gap-4">
-                  <Button size="lg" className="text-base">
-                    {t("unauthenticated.seeEvents")}
-                    <ArrowRight className="ml-2 h-4 w-4" />
-                  </Button>
-                  <Button
-                    size="lg"
-                    variant="outline"
-                    className="text-base bg-transparent"
-                  >
-                    {t("unauthenticated.buyingGuide")}
-                  </Button>
-                </div>
               </>
             )}
 
-            <div className="grid grid-cols-3 gap-6 pt-8 border-t border-border">
-              <div className="space-y-1">
-                <div className="flex items-center gap-2 text-primary">
-                  <Calendar className="h-4 w-4" />
-                  <span className="text-2xl font-bold">16</span>
+            <div className="grid grid-cols-3 gap-3 pt-8 border-t border-border">
+              {STATS.map(({ icon: Icon, value, accent }, i) => (
+                <div
+                  key={value}
+                  className="relative overflow-hidden rounded-xl border border-border/40 bg-card px-4 py-3 shadow-sm"
+                >
+                  <div
+                    className="absolute top-0 left-0 right-0 h-[3px] rounded-t-xl"
+                    style={{ backgroundColor: accent }}
+                  />
+                  <div className="flex items-center gap-2 mt-1" style={{ color: accent }}>
+                    <Icon className="h-3.5 w-3.5 shrink-0" />
+                    <span className="text-2xl font-black font-mono leading-none">{value}</span>
+                  </div>
+                  <p className="text-[11px] text-muted-foreground mt-1.5 leading-tight">
+                    {statLabels[i]}
+                  </p>
                 </div>
-                <p className="text-sm text-muted-foreground">
-                  {t("stats.days")}
-                </p>
-              </div>
-              <div className="space-y-1">
-                <div className="flex items-center gap-2 text-primary">
-                  <Ticket className="h-4 w-4" />
-                  <span className="text-2xl font-bold">32</span>
-                </div>
-                <p className="text-sm text-muted-foreground">
-                  {t("stats.sports")}
-                </p>
-              </div>
-              <div className="space-y-1">
-                <div className="flex items-center gap-2 text-primary">
-                  <MapPin className="h-4 w-4" />
-                  <span className="text-2xl font-bold">35</span>
-                </div>
-                <p className="text-sm text-muted-foreground">
-                  {t("stats.venues")}
-                </p>
-              </div>
+              ))}
             </div>
           </div>
 
           <div className="relative lg:pl-8">
             <div className="relative max-w-lg mx-auto">
               <div className="grid grid-cols-3 gap-3">
-                <div className="col-span-2 row-span-2 bg-card border border-border rounded-2xl p-6 flex flex-col justify-between min-h-[280px]">
+
+                {/* Main PARIS 2024 card */}
+                <div className="col-span-2 row-span-2 relative overflow-hidden bg-card border border-border/40 rounded-2xl p-6 flex flex-col justify-between min-h-[280px] shadow-sm">
+                  <div className="absolute top-0 left-0 right-0 h-[3px] rounded-t-2xl bg-[#0081C8]" />
                   <div>
                     <span className="text-xs font-mono uppercase tracking-wider text-muted-foreground">
                       {t("labels.olympicGames")}
@@ -140,6 +108,7 @@ export const HeroSection = () => {
                       <span className="text-[#00A651]">S</span>
                     </h3>
                   </div>
+                  <div className="border-t-2 border-dashed border-border/30" />
                   <div>
                     <div className="text-7xl sm:text-8xl font-mono font-bold text-foreground tracking-tighter">
                       2024
@@ -154,40 +123,36 @@ export const HeroSection = () => {
                   </div>
                 </div>
 
-                <div className="bg-[#0081C8] rounded-2xl p-4 flex flex-col justify-center items-center text-white">
+                <div className="relative overflow-hidden bg-[#0081C8] rounded-2xl p-4 flex flex-col justify-center items-center text-white shadow-sm">
+                  <div className="absolute top-0 left-0 right-0 h-[3px] rounded-t-2xl bg-white/30" />
                   <span className="text-3xl font-mono font-bold">206</span>
-                  <span className="text-xs opacity-80 text-center">
-                    {t("labels.nations")}
-                  </span>
+                  <span className="text-xs opacity-80 text-center mt-0.5">{t("labels.nations")}</span>
                 </div>
 
-                <div className="bg-[#FCB131] rounded-2xl p-4 flex flex-col justify-center items-center text-black">
+                <div className="relative overflow-hidden bg-[#FCB131] rounded-2xl p-4 flex flex-col justify-center items-center text-black shadow-sm">
+                  <div className="absolute top-0 left-0 right-0 h-[3px] rounded-t-2xl bg-black/20" />
                   <span className="text-3xl font-mono font-bold">329</span>
-                  <span className="text-xs opacity-80 text-center">
-                    {t("labels.events")}
-                  </span>
+                  <span className="text-xs opacity-80 text-center mt-0.5">{t("labels.events")}</span>
                 </div>
 
-                <div className="bg-[#00A651] rounded-2xl p-4 flex flex-col justify-center items-center text-white">
+                <div className="relative overflow-hidden bg-[#00A651] rounded-2xl p-4 flex flex-col justify-center items-center text-white shadow-sm">
+                  <div className="absolute top-0 left-0 right-0 h-[3px] rounded-t-2xl bg-white/30" />
                   <span className="text-2xl font-mono font-bold">26/07</span>
-                  <span className="text-xs opacity-80">
-                    {t("labels.start")}
-                  </span>
+                  <span className="text-xs opacity-80 mt-0.5">{t("labels.start")}</span>
                 </div>
 
-                <div className="bg-card border border-border rounded-2xl p-4 flex flex-col justify-center items-center">
-                  <span className="text-2xl font-mono font-bold text-foreground">
-                    10K+
-                  </span>
-                  <span className="text-xs text-muted-foreground">
-                    {t("labels.athletes")}
-                  </span>
+                <div className="relative overflow-hidden bg-card border border-border/40 rounded-2xl p-4 flex flex-col justify-center items-center shadow-sm">
+                  <div className="absolute top-0 left-0 right-0 h-[3px] rounded-t-2xl bg-border" />
+                  <span className="text-2xl font-mono font-bold text-foreground">10K+</span>
+                  <span className="text-xs text-muted-foreground mt-0.5">{t("labels.athletes")}</span>
                 </div>
 
-                <div className="bg-[#EE334E] rounded-2xl p-4 flex flex-col justify-center items-center text-white">
+                <div className="relative overflow-hidden bg-[#EE334E] rounded-2xl p-4 flex flex-col justify-center items-center text-white shadow-sm">
+                  <div className="absolute top-0 left-0 right-0 h-[3px] rounded-t-2xl bg-white/30" />
                   <span className="text-2xl font-mono font-bold">11/08</span>
-                  <span className="text-xs opacity-80">{t("labels.end")}</span>
+                  <span className="text-xs opacity-80 mt-0.5">{t("labels.end")}</span>
                 </div>
+
               </div>
             </div>
           </div>

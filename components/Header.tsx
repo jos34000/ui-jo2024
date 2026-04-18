@@ -35,6 +35,7 @@ import {
 } from "@/components/ui/sheet"
 import { useCartStore } from "@/lib/stores/cart.store"
 import { useTranslations } from "next-intl"
+import { usePathname } from "next/navigation"
 import { LanguageSwitcher } from "@/components/LanguageSwitcher"
 
 export const Header = () => {
@@ -45,10 +46,13 @@ export const Header = () => {
   const isAuthenticated = useAuthStore(state => state.isAuthenticated)
   const logout = useAuthStore(state => state.logout)
   const setSidebarOpen = useCartStore(state => state.setSidebarOpen)
+  const pathname = usePathname()
+  const isHome = pathname === "/" || /^\/(fr|en|de|es)$/.test(pathname)
 
   const navigation = [
-    { name: t("nav.events"), href: "#events" },
-    { name: t("nav.sports"), href: "#sports" },
+    { name: t("nav.events"), href: isHome ? "#events" : "/#events" },
+    { name: t("nav.sports"), href: isHome ? "#sports" : "/#sports" },
+    { name: t("nav.offers"), href: isHome ? "#offers" : "/#offers" },
     { name: t("nav.calendar"), href: "/calendrier" },
   ]
 

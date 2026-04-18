@@ -4,7 +4,6 @@ import { useEffect, useState } from "react"
 import { ShoppingCart, Trash2, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { Separator } from "@/components/ui/separator"
 import {
   Sheet,
   SheetClose,
@@ -92,9 +91,9 @@ export const CartSidebar = ({ hideTrigger = false }: { hideTrigger?: boolean }) 
             <ShoppingCart className="h-5 w-5 shrink-0" />
             <span className="flex-1 truncate">{t("title")}</span>
             {itemCount > 0 && (
-              <Badge variant="secondary" className="shrink-0 font-mono">
+              <span className="shrink-0 inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider border border-border/40 bg-muted text-muted-foreground font-mono">
                 {t("articles", { count: itemCount })}
-              </Badge>
+              </span>
             )}
             <SheetClose asChild>
               <Button variant="ghost" size="icon" className="shrink-0 h-7 w-7">
@@ -112,7 +111,7 @@ export const CartSidebar = ({ hideTrigger = false }: { hideTrigger?: boolean }) 
                 {Array.from({ length: 3 }).map((_, i) => (
                   <div
                     key={i}
-                    className="h-24 rounded-lg bg-muted animate-pulse"
+                    className="h-24 rounded-2xl bg-muted animate-pulse"
                   />
                 ))}
               </div>
@@ -149,17 +148,17 @@ export const CartSidebar = ({ hideTrigger = false }: { hideTrigger?: boolean }) 
 
         {isAuthenticated && cart && cart.items.length > 0 && (
           <div className="border-t border-border px-5 py-4">
-            <div className="flex items-center justify-between mb-4">
-              <span className="text-sm text-muted-foreground">
+            <div className="flex items-center justify-between mb-3">
+              <span className="text-[10px] font-bold uppercase tracking-[0.12em] text-muted-foreground">
                 {t("total")}
               </span>
-              <span className="font-bold font-mono text-lg">
+              <span className="font-black font-mono text-lg">
                 {formatPrice(cart.totalPrice)}
               </span>
             </div>
-            <Separator className="mb-4" />
+            <div className="border-t-2 border-dashed border-border/30 mb-3" />
             <Button
-              className="w-full"
+              className="w-full rounded-full"
               size="lg"
               onClick={() => {
                 setSidebarOpen(false)
@@ -171,7 +170,7 @@ export const CartSidebar = ({ hideTrigger = false }: { hideTrigger?: boolean }) 
             <Button
               variant="ghost"
               size="sm"
-              className="w-full mt-2 text-muted-foreground hover:text-destructive hover:bg-destructive/10"
+              className="w-full mt-2 rounded-full text-muted-foreground hover:text-destructive hover:bg-destructive/10"
               onClick={handleClearCart}
               disabled={isClearing}
             >
