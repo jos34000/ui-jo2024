@@ -20,15 +20,17 @@ export const InfoRow = ({
     <div
       className={cn(
         "flex items-center gap-3 py-3",
-        hasBorder && "border-b border-border",
+        hasBorder && "border-b border-dashed border-border/40",
       )}
     >
-      <Icon className="h-5 w-5 text-muted-foreground shrink-0" />
+      <Icon className="h-4 w-4 text-primary/60 shrink-0" />
       <div className="min-w-0">
-        <p className="text-sm text-muted-foreground">{label}</p>
+        <p className="text-[10px] font-bold uppercase tracking-[0.1em] text-muted-foreground">
+          {label}
+        </p>
         <p
           className={cn(
-            "font-medium truncate",
+            "text-sm font-medium truncate mt-0.5",
             !value && "text-muted-foreground italic",
           )}
         >

@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState } from "react"
+import { useState } from "react"
 import { CheckCircle2, Mail } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import {
@@ -98,14 +98,14 @@ export const ResetPasswordDialog = ({
     if (success) {
       return (
         <div className="flex flex-col items-center py-6 text-center">
-          <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 mb-4">
-            <CheckCircle2 className="h-8 w-8 text-primary" />
+          <div className="flex h-16 w-16 items-center justify-center rounded-full bg-[#00A651]/10 mb-4">
+            <CheckCircle2 className="h-8 w-8 text-[#00A651]" />
           </div>
           <h3 className="text-lg font-semibold mb-2">{t("emailSentTitle")}</h3>
           <p className="text-sm text-muted-foreground mb-6">
             {t("emailSentDescription")}
           </p>
-          <Button onClick={() => handleOpenChange(false)} className="w-full">
+          <Button onClick={() => handleOpenChange(false)} className="w-full rounded-full">
             {t("close")}
           </Button>
         </div>
@@ -132,7 +132,7 @@ export const ResetPasswordDialog = ({
         </requestForm.AppField>
 
         <requestForm.AppForm>
-          <requestForm.SubmitButton className="w-full">
+          <requestForm.SubmitButton className="w-full rounded-full">
             {t("sendLink")}
           </requestForm.SubmitButton>
         </requestForm.AppForm>
@@ -144,14 +144,14 @@ export const ResetPasswordDialog = ({
     if (success) {
       return (
         <div className="flex flex-col items-center py-6 text-center">
-          <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 mb-4">
-            <CheckCircle2 className="h-8 w-8 text-primary" />
+          <div className="flex h-16 w-16 items-center justify-center rounded-full bg-[#00A651]/10 mb-4">
+            <CheckCircle2 className="h-8 w-8 text-[#00A651]" />
           </div>
           <h3 className="text-lg font-semibold mb-2">{t("successTitle")}</h3>
           <p className="text-sm text-muted-foreground mb-6">
             {t("successDescription")}
           </p>
-          <Button onClick={() => handleOpenChange(false)} className="w-full">
+          <Button onClick={() => handleOpenChange(false)} className="w-full rounded-full">
             {t("close")}
           </Button>
         </div>
@@ -196,7 +196,7 @@ export const ResetPasswordDialog = ({
         </changeForm.AppField>
 
         <changeForm.AppForm>
-          <changeForm.SubmitButton className="w-full">
+          <changeForm.SubmitButton className="w-full rounded-full">
             {t("submit")}
           </changeForm.SubmitButton>
         </changeForm.AppForm>

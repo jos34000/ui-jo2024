@@ -35,15 +35,16 @@ export const SportCategories = async () => {
             <Link
               key={sport.id}
               href={`/sports/${sport.id}`}
-              className="group flex flex-col items-center justify-center p-6 rounded-xl border border-border bg-card hover:border-primary/50 hover:bg-primary/5 transition-all duration-200"
+              className="group relative flex flex-col items-center justify-center p-5 rounded-2xl border border-border/40 bg-card overflow-hidden hover:-translate-y-0.5 hover:shadow-md hover:border-border/70 transition-all duration-200 shadow-sm"
             >
-              <span className="text-4xl mb-3 group-hover:scale-110 transition-transform">
+              <div className="absolute top-0 left-0 right-0 h-[3px] rounded-t-2xl bg-primary/20 group-hover:bg-primary transition-colors duration-300" />
+              <span className="text-4xl mb-3 mt-1 group-hover:scale-110 transition-transform duration-200 leading-none">
                 {sport.icon}
               </span>
-              <span className="font-medium text-foreground text-sm">
+              <span className="font-semibold text-sm text-center leading-tight">
                 {translateSport(sport.name)}
               </span>
-              <span className="text-xs text-muted-foreground mt-1">
+              <span className="text-[10px] font-bold uppercase tracking-[0.12em] text-muted-foreground mt-1.5">
                 {sport.eventCount} {t("events")}
               </span>
             </Link>

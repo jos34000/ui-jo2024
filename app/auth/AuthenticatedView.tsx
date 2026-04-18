@@ -11,14 +11,6 @@ import {
   Ticket,
   User,
 } from "lucide-react"
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { StoredUser } from "@/lib/types/user.types"
@@ -38,6 +30,17 @@ interface AuthenticatedViewProps {
   initials: string
 }
 
+const TICKET_STATUS = {
+  VALID: { hex: "#00A651", bg: "#00A65114", border: "#00A65130" },
+  USED: { hex: "#6B7280", bg: "#6B728014", border: "#6B728030" },
+  CANCELLED: { hex: "#EE334E", bg: "#EE334E14", border: "#EE334E30" },
+} as const
+
+const QUICK_ACTIONS = (buyTickets: string, exploreEvents: string, myTickets: string) => [
+  { href: "/calendrier", icon: Ticket, title: buyTickets, subtitle: exploreEvents },
+  { href: "/billets", icon: Shield, title: myTickets, subtitle: null },
+]
+
 export const AuthenticatedView = ({
   user,
   onLogout,
@@ -48,15 +51,6 @@ export const AuthenticatedView = ({
   const [groups, setGroups] = useState<TicketGroup[]>([])
   const [ticketsLoaded, setTicketsLoaded] = useState(false)
   const getUserTickets = usePaymentStore(state => state.getUserTickets)
-
-  const STATUS_BADGE: Record<
-    string,
-    { label: string; variant: "default" | "secondary" | "destructive" }
-  > = {
-    VALID: { label: t("status.VALID"), variant: "default" },
-    USED: { label: t("status.USED"), variant: "secondary" },
-    CANCELLED: { label: t("status.CANCELLED"), variant: "destructive" },
-  }
 
   useEffect(() => {
     getUserTickets()
@@ -72,12 +66,14 @@ export const AuthenticatedView = ({
   const ticketSummary = ticketsLoaded
     ? groups.length === 0
       ? undefined
-      : `${t("ticketSummaryOrders", { count: groups.length })} · ${t("ticketSummarySeats", { count: totalSeats })}${activeCount > 0 ? ` · ${t(`ticketSummaryActive`, { count: activeCount })}` : ""}`
+      : `${t("ticketSummaryOrders", { count: groups.length })} · ${t("ticketSummarySeats", { count: totalSeats })}${activeCount > 0 ? ` · ${t("ticketSummaryActive", { count: activeCount })}` : ""}`
     : t("loadingTickets")
 
   return (
     <main className="flex-1 mx-auto w-full max-w-3xl px-4 sm:px-6 py-8 sm:py-12 lg:py-16">
-      <div className="space-y-8">
+      <div className="space-y-6">
+
+        {/* Avatar + greeting */}
         <div className="flex items-center gap-4 sm:gap-5">
           <span className="flex h-14 w-14 sm:h-16 sm:w-16 items-center justify-center rounded-full bg-primary text-primary-foreground text-lg sm:text-xl font-mono font-bold shrink-0">
             {initials}
@@ -92,35 +88,40 @@ export const AuthenticatedView = ({
           </div>
         </div>
 
-        <Card className="border-border/50">
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-4">
+        {/* Profile card */}
+        <article className="relative overflow-hidden rounded-2xl border border-border/40 bg-card shadow-sm">
+          <div className="absolute top-0 left-0 right-0 h-[3px] rounded-t-2xl bg-primary" />
+          <div className="px-5 pt-6 pb-4 flex items-start justify-between gap-3">
             <div>
-              <CardTitle className="text-lg font-mono">
+              <h2 className="text-base font-bold font-mono">
                 {isEditing ? t("editTitle") : t("title")}
-              </CardTitle>
-              <CardDescription className="mt-1">
+              </h2>
+              <p className="text-sm text-muted-foreground mt-0.5">
                 {isEditing ? t("editDescription") : t("description")}
-              </CardDescription>
+              </p>
             </div>
             {!isEditing && (
               <Button
                 variant="ghost"
                 size="sm"
                 onClick={() => setIsEditing(true)}
-                className="shrink-0"
+                className="shrink-0 h-8 text-xs rounded-full"
               >
-                <Pencil className="mr-2 h-4 w-4" />
+                <Pencil className="mr-1.5 h-3.5 w-3.5" />
                 {t("edit")}
               </Button>
             )}
-          </CardHeader>
-          <CardContent>
+          </div>
+          <div className="border-t-2 border-dashed border-border/30 mx-5" />
+          <div className="px-5 pb-4">
             {isEditing ? (
-              <ProfileForm
-                user={user}
-                onCancel={() => setIsEditing(false)}
-                onSuccess={() => setIsEditing(false)}
-              />
+              <div className="pt-4">
+                <ProfileForm
+                  user={user}
+                  onCancel={() => setIsEditing(false)}
+                  onSuccess={() => setIsEditing(false)}
+                />
+              </div>
             ) : (
               <div className="space-y-0">
                 <InfoRow
@@ -129,12 +130,7 @@ export const AuthenticatedView = ({
                   value={`${user.firstName} ${user.lastName}`}
                   hasBorder
                 />
-                <InfoRow
-                  icon={Mail}
-                  label={t("email")}
-                  value={user.email}
-                  hasBorder
-                />
+                <InfoRow icon={Mail} label={t("email")} value={user.email} hasBorder />
                 <InfoRow
                   icon={Ticket}
                   label={t("tickets")}
@@ -143,94 +139,92 @@ export const AuthenticatedView = ({
                 />
               </div>
             )}
-          </CardContent>
-        </Card>
+          </div>
+        </article>
 
+        {/* Recent tickets */}
         {ticketsLoaded && recentGroups.length > 0 && (
-          <Card className="border-border/50">
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
-              <CardTitle className="text-base font-mono">
-                {t("recentTickets")}
-              </CardTitle>
+          <article className="relative overflow-hidden rounded-2xl border border-border/40 bg-card shadow-sm">
+            <div className="absolute top-0 left-0 right-0 h-[3px] rounded-t-2xl bg-primary" />
+            <div className="px-5 pt-6 pb-3 flex items-center justify-between gap-3">
+              <h2 className="text-base font-bold font-mono">{t("recentTickets")}</h2>
               <Link
                 href="/billets"
-                className="text-xs text-muted-foreground hover:text-primary transition-colors"
+                className="text-[11px] font-bold uppercase tracking-[0.1em] text-muted-foreground hover:text-primary transition-colors"
               >
                 {t("viewAll")}
               </Link>
-            </CardHeader>
-            <CardContent className="space-y-2 pt-0">
+            </div>
+            <div className="border-t-2 border-dashed border-border/30 mx-5" />
+            <div className="px-5 py-4 space-y-2">
               {recentGroups.map(group => {
-                const cfg = STATUS_BADGE[group.groupStatus]
+                const s = TICKET_STATUS[group.groupStatus as keyof typeof TICKET_STATUS] ?? TICKET_STATUS.USED
                 return (
                   <div
                     key={`${group.transactionId}-${group.event.id}`}
-                    className="flex items-center justify-between gap-3 rounded-lg bg-muted/40 px-3 py-2.5"
+                    className="relative overflow-hidden flex items-center justify-between gap-3 rounded-xl border border-border/30 bg-background/50 px-4 py-3"
                   >
-                    <div className="min-w-0 flex-1">
-                      <p className="text-sm font-medium truncate">
-                        {group.event.name}
-                      </p>
-                      <p className="text-xs text-muted-foreground mt-0.5">
+                    <div
+                      className="absolute left-0 top-0 bottom-0 w-[3px] rounded-l-xl"
+                      style={{ backgroundColor: s.hex }}
+                    />
+                    <div className="min-w-0 flex-1 pl-1">
+                      <p className="text-sm font-semibold truncate">{group.event.name}</p>
+                      <p className="text-[11px] text-muted-foreground mt-0.5">
                         {t("seatsCount", { count: group.totalSeats })} ·{" "}
                         {formatStringDateClassic(group.purchasedAt)} ·{" "}
                         {formatPrice(group.totalPrice)}
                       </p>
                     </div>
-                    <Badge variant={cfg.variant} className="text-xs shrink-0">
-                      {cfg.label}
-                    </Badge>
+                    <span
+                      className="shrink-0 inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider"
+                      style={{ color: s.hex, backgroundColor: s.bg, border: `1px solid ${s.border}` }}
+                    >
+                      <span
+                        className="w-1.5 h-1.5 rounded-full block"
+                        style={{ backgroundColor: s.hex }}
+                      />
+                      {t(`status.${group.groupStatus}`)}
+                    </span>
                   </div>
                 )
               })}
-            </CardContent>
-          </Card>
+            </div>
+          </article>
         )}
 
+        {/* Quick actions */}
         <div className="grid sm:grid-cols-2 gap-4">
-          <Link href="/calendrier">
-            <Card className="border-border/50 hover:border-primary/30 transition-colors cursor-pointer h-full">
-              <CardContent className="flex items-center gap-4 py-5 sm:py-6">
-                <div className="flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-lg bg-primary/10 shrink-0">
-                  <Ticket className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
+          {([
+            { href: "/calendrier", icon: Ticket, title: t("buyTickets"), subtitle: t("exploreEvents") },
+            {
+              href: "/billets",
+              icon: Shield,
+              title: t("myTickets"),
+              subtitle: ticketsLoaded && groups.length > 0
+                ? t("ordersCount", { count: groups.length })
+                : t("viewReservations"),
+            },
+          ] as const).map(({ href, icon: Icon, title, subtitle }) => (
+            <Link key={href} href={href}>
+              <article className="group relative overflow-hidden flex items-center gap-4 rounded-2xl border border-border/40 bg-card px-5 py-4 hover:-translate-y-0.5 hover:shadow-md hover:border-border/70 transition-all duration-200 shadow-sm h-full">
+                <div className="absolute top-0 left-0 right-0 h-[3px] rounded-t-2xl bg-primary/25 group-hover:bg-primary transition-colors duration-300" />
+                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 shrink-0">
+                  <Icon className="h-5 w-5 text-primary" />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <h3 className="font-semibold text-sm sm:text-base">
-                    {t("buyTickets")}
-                  </h3>
-                  <p className="text-xs sm:text-sm text-muted-foreground">
-                    {t("exploreEvents")}
-                  </p>
+                  <h3 className="font-semibold text-sm">{title}</h3>
+                  <p className="text-xs text-muted-foreground mt-0.5">{subtitle}</p>
                 </div>
-                <ArrowRight className="h-4 w-4 text-muted-foreground shrink-0" />
-              </CardContent>
-            </Card>
-          </Link>
-
-          <Link href="/billets">
-            <Card className="border-border/50 hover:border-primary/30 transition-colors cursor-pointer h-full">
-              <CardContent className="flex items-center gap-4 py-5 sm:py-6">
-                <div className="flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-lg bg-primary/10 shrink-0">
-                  <Shield className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
-                </div>
-                <div className="flex-1 min-w-0">
-                  <h3 className="font-semibold text-sm sm:text-base">
-                    {t("myTickets")}
-                  </h3>
-                  <p className="text-xs sm:text-sm text-muted-foreground">
-                    {ticketsLoaded && groups.length > 0
-                      ? t("ordersCount", { count: groups.length })
-                      : t("viewReservations")}
-                  </p>
-                </div>
-                <ArrowRight className="h-4 w-4 text-muted-foreground shrink-0" />
-              </CardContent>
-            </Card>
-          </Link>
+                <ArrowRight className="h-4 w-4 text-muted-foreground shrink-0 group-hover:text-primary transition-colors" />
+              </article>
+            </Link>
+          ))}
         </div>
 
+        {/* Action buttons */}
         <div className="flex flex-col sm:flex-row gap-3 pt-2">
-          <Button variant="outline" className="bg-transparent" asChild>
+          <Button variant="outline" className="bg-transparent rounded-full" asChild>
             <Link href="/">
               <ArrowLeft className="mr-2 h-4 w-4" />
               {t("backHome")}
@@ -239,7 +233,7 @@ export const AuthenticatedView = ({
           <ResetPasswordDialog
             mode="change"
             trigger={
-              <Button variant="outline" className="bg-transparent">
+              <Button variant="outline" className="bg-transparent rounded-full">
                 <Lock className="mr-2 h-4 w-4" />
                 {t("changePassword")}
               </Button>
@@ -248,12 +242,13 @@ export const AuthenticatedView = ({
           <Button
             variant="ghost"
             onClick={onLogout}
-            className="text-destructive hover:text-destructive hover:bg-destructive/10"
+            className="rounded-full text-destructive hover:text-destructive hover:bg-destructive/10"
           >
             <LogOut className="mr-2 h-4 w-4" />
             {t("logout")}
           </Button>
         </div>
+
       </div>
     </main>
   )

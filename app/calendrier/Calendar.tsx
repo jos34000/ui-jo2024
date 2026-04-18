@@ -1,7 +1,6 @@
 "use client"
 
 import { useMemo, useState } from "react"
-import { Badge } from "@/components/ui/badge"
 import { Header } from "@/components/Header"
 import { Footer } from "@/components/Footer"
 import { Search, Trophy, X } from "lucide-react"
@@ -100,9 +99,10 @@ export const Calendar = ({ initialEvents }: CalendarProps) => {
                   <h2 className="text-lg font-bold font-mono capitalize">
                     {formatDateFull(selectedDate)}
                   </h2>
-                  <Badge variant="secondary" className="text-xs font-mono">
+                  <span className="inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-muted-foreground border border-border/40 bg-card">
+                    <span className="w-1.5 h-1.5 rounded-full block bg-primary" />
                     {totalForDay} {totalForDay > 1 ? t("events") : t("event")}
-                  </Badge>
+                  </span>
                 </div>
 
                 <div className="relative w-full sm:w-64">
@@ -111,7 +111,7 @@ export const Calendar = ({ initialEvents }: CalendarProps) => {
                     value={searchQuery}
                     onChange={e => setSearchQuery(e.target.value)}
                     placeholder={t("search")}
-                    className="pl-9 pr-8 h-9 text-sm"
+                    className="pl-9 pr-8 h-9 text-sm rounded-full"
                   />
                   {searchQuery && (
                     <button

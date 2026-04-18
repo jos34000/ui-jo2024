@@ -42,36 +42,32 @@ export default function BilletsPage() {
 
       <div className="bg-card border-b border-border">
         <div className="max-w-4xl mx-auto px-4 py-8 sm:py-10">
-          <div className="flex items-center gap-3 mb-1">
-            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 shrink-0">
+          <div className="flex items-center gap-3 mb-2">
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 shrink-0">
               <Ticket className="h-5 w-5 text-primary" />
             </div>
-            <h1 className="text-2xl font-bold tracking-tight">{t("title")}</h1>
+            <h1 className="text-2xl font-bold tracking-tight font-mono">{t("title")}</h1>
           </div>
-          {!isLoading && !error && (
-            <p className="text-sm text-muted-foreground ml-13">
-              {groups.length === 0 ? (
-                t("noOrders")
-              ) : (
-                <>
-                  {t("ordersCount", { count: groups.length })}
-                  {" · "}
-                  {t("seatsCount", { count: totalSeats })}
-                  {activeCount > 0 && (
-                    <>
-                      {" "}
-                      ·{" "}
-                      <span className="text-green-600 dark:text-green-400 font-medium">
-                        {t("activeCount", { count: activeCount })}
-                      </span>
-                    </>
-                  )}
-                  {usedCount > 0 && (
-                    <> · {t("usedCount", { count: usedCount })}</>
-                  )}
-                </>
+          {!isLoading && !error && groups.length > 0 && (
+            <div className="flex flex-wrap items-center gap-2 ml-13">
+              <span className="inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider border border-border/40 bg-muted text-muted-foreground">
+                {t("ordersCount", { count: groups.length })}
+              </span>
+              <span className="inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider border border-border/40 bg-muted text-muted-foreground">
+                {t("seatsCount", { count: totalSeats })}
+              </span>
+              {activeCount > 0 && (
+                <span className="inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider" style={{ color: "#00A651", backgroundColor: "#00A65114", border: "1px solid #00A65130" }}>
+                  <span className="w-1.5 h-1.5 rounded-full block bg-[#00A651]" />
+                  {t("activeCount", { count: activeCount })}
+                </span>
               )}
-            </p>
+              {usedCount > 0 && (
+                <span className="inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider border border-border/40 bg-muted text-muted-foreground">
+                  {t("usedCount", { count: usedCount })}
+                </span>
+              )}
+            </div>
           )}
         </div>
       </div>
@@ -79,32 +75,31 @@ export default function BilletsPage() {
       <main className="flex-1">
         <div className="max-w-4xl mx-auto px-4 py-8">
           {isLoading && (
-            <div className="flex flex-col gap-3">
+            <div className="flex flex-col gap-4">
               {[1, 2, 3].map(i => (
                 <div
                   key={i}
-                  className="h-44 rounded-xl border border-border bg-muted/30 animate-pulse"
+                  className="h-44 rounded-2xl border border-border/40 bg-muted/30 animate-pulse"
                 />
               ))}
             </div>
           )}
 
           {error && !isLoading && (
-            <div className="rounded-xl border border-destructive/30 bg-destructive/5 p-6 text-center">
+            <div className="rounded-2xl border border-destructive/30 bg-destructive/5 p-6 text-center">
               <p className="text-sm text-destructive">{error}</p>
             </div>
           )}
 
           {!isLoading && !error && groups.length === 0 && (
-            <div className="rounded-xl border border-border bg-card p-12 text-center">
-              <Ticket className="h-10 w-10 text-muted-foreground mx-auto mb-3" />
-              <p className="font-medium">{t("noTickets")}</p>
-              <p className="text-sm text-muted-foreground mt-1 mb-5">
-                {t("noTicketsSubtitle")}
-              </p>
+            <div className="relative overflow-hidden rounded-2xl border border-border/40 bg-card p-12 text-center shadow-sm">
+              <div className="absolute top-0 left-0 right-0 h-[3px] rounded-t-2xl bg-border" />
+              <Ticket className="h-10 w-10 text-muted-foreground/40 mx-auto mb-3" />
+              <p className="font-semibold">{t("noTickets")}</p>
+              <p className="text-sm text-muted-foreground mt-1 mb-6">{t("noTicketsSubtitle")}</p>
               <Link
                 href="/"
-                className="inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90 transition-colors"
+                className="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2 text-sm font-semibold text-primary-foreground hover:bg-primary/90 transition-colors"
               >
                 {t("discover")}
               </Link>

@@ -1,6 +1,5 @@
 "use client"
 
-import React from "react"
 import Link from "next/link"
 import { OlympicRings } from "@/lib/svg/OlympicRings"
 import { ThemeToggle } from "@/components/theme-toggle"

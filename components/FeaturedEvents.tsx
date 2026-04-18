@@ -1,37 +1,27 @@
 "use client"
 
 import Link from "next/link"
-import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
 import { ArrowRight, Calendar, Clock, MapPin } from "lucide-react"
 import { OlympicEvent } from "@/lib/types/event.type"
 import { formatDateLong } from "@/lib/utils/date"
 import { useTranslations } from "next-intl"
 import { useTranslateSport } from "@/lib/utils/i18nHelpers"
+import { cn } from "@/lib/utils"
 
 interface FeaturedEventsProps {
   events: OlympicEvent[]
 }
 
+const STATUS = {
+  available: { hex: "#00A651", bg: "#00A65114", border: "#00A65130" },
+  limited: { hex: "#FCB131", bg: "#FCB13114", border: "#FCB13130" },
+  soldout: { hex: "#EE334E", bg: "#EE334E14", border: "#EE334E30" },
+} as const
+
 export function FeaturedEvents({ events }: Readonly<FeaturedEventsProps>) {
   const t = useTranslations("featuredEvents")
   const translateSport = useTranslateSport()
-
-  const statusConfig = {
-    available: {
-      label: t("status.available"),
-      className: "bg-[#00A651] text-white",
-    },
-    limited: {
-      label: t("status.limited"),
-      className: "bg-[#FCB131] text-black",
-    },
-    soldout: {
-      label: t("status.soldout"),
-      className: "bg-[#EE334E] text-white",
-    },
-  }
 
   return (
     <section id="events" className="py-20 bg-muted/30">
@@ -52,51 +42,99 @@ export function FeaturedEvents({ events }: Readonly<FeaturedEventsProps>) {
         </div>
 
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {events.map(event => (
-            <Link key={event.id} href={`/events/${event.id}`}>
-              <Card className="group overflow-hidden hover:shadow-lg hover:border-primary/30 transition-all border-border/50 h-full">
-                <CardHeader className="pb-3">
-                  <div className="flex items-start justify-between">
-                    <div className="text-4xl">{event.icon}</div>
-                    <Badge className={statusConfig[event.status].className}>
-                      {statusConfig[event.status].label}
-                    </Badge>
-                  </div>
-                  <div className="space-y-1 pt-2">
-                    <p className="text-sm font-medium text-primary">
-                      {translateSport(event.sport)}
-                    </p>
-                    <h3 className="text-lg font-semibold leading-tight group-hover:text-primary transition-colors">
-                      {event.name}
-                    </h3>
-                  </div>
-                </CardHeader>
-                <CardContent className="space-y-3 text-sm text-muted-foreground">
-                  <div className="flex items-center gap-2">
-                    <Calendar className="h-4 w-4" />
-                    <span>{formatDateLong(event.date)}</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Clock className="h-4 w-4" />
-                    <span>{event.time}</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <MapPin className="h-4 w-4" />
-                    <span>{event.location}</span>
-                  </div>
-                </CardContent>
-                <CardFooter className="flex justify-end border-t border-border/50 pt-4">
-                  <Button
-                    size="sm"
-                    disabled={event.status === "soldout"}
-                    variant={event.status === "soldout" ? "outline" : "default"}
+          {events.map(event => {
+            const s = STATUS[event.status]
+            const isSoldOut = event.status === "soldout"
+
+            return (
+              <Link key={event.id} href={`/events/${event.id}`}>
+                <article
+                  className={cn(
+                    "group relative flex flex-col overflow-hidden rounded-2xl h-full",
+                    "border border-border/40 bg-card",
+                    "hover:-translate-y-0.5 hover:shadow-lg hover:border-border/70",
+                    "transition-all duration-200 ease-out shadow-sm",
+                  )}
+                >
+                  {/* Top accent bar */}
+                  <div
+                    className="absolute top-0 left-0 right-0 h-[3px] rounded-t-2xl"
+                    style={{ backgroundColor: s.hex }}
+                  />
+
+                  {/* Header — icon + status */}
+                  <div
+                    className="px-5 pt-6 pb-4"
+                    style={{ background: `linear-gradient(180deg, ${s.bg} 0%, transparent 100%)` }}
                   >
-                    {event.status === "soldout" ? t("soldout") : t("reserve")}
-                  </Button>
-                </CardFooter>
-              </Card>
-            </Link>
-          ))}
+                    <div className="flex items-start justify-between gap-3">
+                      <span className="text-4xl leading-none">{event.icon}</span>
+                      <span
+                        className="inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider"
+                        style={{
+                          color: s.hex,
+                          backgroundColor: s.bg,
+                          border: `1px solid ${s.border}`,
+                        }}
+                      >
+                        <span
+                          className="w-1.5 h-1.5 rounded-full block"
+                          style={{ backgroundColor: s.hex }}
+                        />
+                        {t(`status.${event.status}`)}
+                      </span>
+                    </div>
+
+                    <div className="mt-3 space-y-0.5">
+                      <p
+                        className="text-[10px] font-bold uppercase tracking-[0.15em]"
+                        style={{ color: s.hex }}
+                      >
+                        {translateSport(event.sport)}
+                      </p>
+                      <h3 className="text-base font-semibold leading-snug group-hover:text-primary transition-colors line-clamp-2">
+                        {event.name}
+                      </h3>
+                    </div>
+                  </div>
+
+                  {/* Perforated separator */}
+                  <div className="border-t-2 border-dashed border-border/30 mx-5" />
+
+                  {/* Details */}
+                  <div className="flex-1 px-5 py-4 space-y-2 text-[11px] text-muted-foreground">
+                    <div className="flex items-center gap-2">
+                      <Calendar className="h-3.5 w-3.5 shrink-0" />
+                      <span>{formatDateLong(event.date)}</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Clock className="h-3.5 w-3.5 shrink-0" />
+                      <span className="font-mono font-semibold">{event.time}</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <MapPin className="h-3.5 w-3.5 shrink-0" />
+                      <span className="truncate">{event.location}</span>
+                    </div>
+                  </div>
+
+                  {/* Footer */}
+                  <div className="px-5 pb-5 flex justify-end border-t border-border/30 pt-4">
+                    <Button
+                      size="sm"
+                      disabled={isSoldOut}
+                      className={cn(
+                        "h-7 rounded-full text-[11px] font-semibold px-3.5",
+                        isSoldOut && "opacity-40",
+                      )}
+                      variant={isSoldOut ? "outline" : "default"}
+                    >
+                      {isSoldOut ? t("soldout") : t("reserve")}
+                    </Button>
+                  </div>
+                </article>
+              </Link>
+            )
+          })}
         </div>
       </div>
     </section>

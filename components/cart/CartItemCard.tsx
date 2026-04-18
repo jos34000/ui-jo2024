@@ -2,8 +2,6 @@
 
 import { useState } from "react"
 import { Calendar, MapPin, Minus, Plus, Ticket } from "lucide-react"
-import { Card, CardContent } from "@/components/ui/card"
-import { Separator } from "@/components/ui/separator"
 import { Button } from "@/components/ui/button"
 import { CartItemResponse } from "@/lib/types/cart.type"
 import { useCartStore } from "@/lib/stores/cart.store"
@@ -52,64 +50,60 @@ export const CartItemCard = ({ item }: CartItemCardProps) => {
   }
 
   return (
-    <Card className="gap-0 py-0 overflow-hidden">
-      <CardContent className="p-4">
-        <div className="flex items-start justify-between gap-3">
-          <div className="min-w-0 flex-1">
-            <p className="font-semibold text-sm leading-tight truncate">
-              {item.event.name}
-            </p>
-            <div className="mt-2 flex flex-col gap-1">
-              <span className="flex items-center gap-1.5 text-xs text-muted-foreground">
-                <Calendar className="h-3.5 w-3.5 shrink-0" />
-                {formatDate(item.event.eventDate)}
-              </span>
-              <span className="flex items-center gap-1.5 text-xs text-muted-foreground">
-                <MapPin className="h-3.5 w-3.5 shrink-0" />
-                {item.event.location}
-              </span>
-              <span className="flex items-center gap-1.5 text-xs text-muted-foreground">
-                <Ticket className="h-3.5 w-3.5 shrink-0" />
-                {item.offer.name} — {t("tickets", { count: item.offer.numberOfTickets * item.quantity })}
-              </span>
-            </div>
-          </div>
-          <div className="flex flex-col items-end gap-2 shrink-0">
-            <div className="text-right">
-              <p className="font-bold text-sm">{formatPrice(item.subtotal)}</p>
-              <p className="text-xs text-muted-foreground mt-0.5">
-                {formatPrice(item.unitPrice)} {t("formule")}
-              </p>
-            </div>
-            <div className="flex items-center gap-1">
-              <Button
-                variant="outline"
-                size="icon"
-                className="h-6 w-6"
-                onClick={() => handleQuantityChange(item.quantity - 1)}
-                disabled={isUpdating}
-                aria-label={t("decreaseQty")}
-              >
-                <Minus className="h-3 w-3" />
-              </Button>
-              <span className="w-6 text-center text-sm font-mono font-medium">
-                {item.quantity}
-              </span>
-              <Button
-                variant="outline"
-                size="icon"
-                className="h-6 w-6"
-                onClick={() => handleQuantityChange(item.quantity + 1)}
-                disabled={isUpdating}
-                aria-label={t("increaseQty")}
-              >
-                <Plus className="h-3 w-3" />
-              </Button>
-            </div>
+    <article className="relative overflow-hidden rounded-2xl border border-border/40 bg-card shadow-sm">
+      <div className="absolute left-0 top-0 bottom-0 w-[3px] rounded-l-2xl bg-primary/40" />
+      <div className="pl-4 pr-4 py-3.5 flex items-start justify-between gap-3">
+        <div className="min-w-0 flex-1 pl-1">
+          <p className="font-semibold text-sm leading-tight truncate">{item.event.name}</p>
+          <div className="mt-2 flex flex-col gap-1">
+            <span className="flex items-center gap-1.5 text-[11px] text-muted-foreground">
+              <Calendar className="h-3 w-3 shrink-0" />
+              {formatDate(item.event.eventDate)}
+            </span>
+            <span className="flex items-center gap-1.5 text-[11px] text-muted-foreground">
+              <MapPin className="h-3 w-3 shrink-0" />
+              {item.event.location}
+            </span>
+            <span className="flex items-center gap-1.5 text-[11px] text-muted-foreground">
+              <Ticket className="h-3 w-3 shrink-0" />
+              {item.offer.name} — {t("tickets", { count: item.offer.numberOfTickets * item.quantity })}
+            </span>
           </div>
         </div>
-        <Separator className="mt-3" />
-      </CardContent>
-    </Card>
+        <div className="flex flex-col items-end gap-2.5 shrink-0">
+          <div className="text-right">
+            <p className="font-black text-sm font-mono">{formatPrice(item.subtotal)}</p>
+            <p className="text-[10px] text-muted-foreground mt-0.5">
+              {formatPrice(item.unitPrice)} {t("formule")}
+            </p>
+          </div>
+          <div className="flex items-center gap-1">
+            <Button
+              variant="outline"
+              size="icon"
+              className="h-6 w-6 rounded-full"
+              onClick={() => handleQuantityChange(item.quantity - 1)}
+              disabled={isUpdating}
+              aria-label={t("decreaseQty")}
+            >
+              <Minus className="h-3 w-3" />
+            </Button>
+            <span className="w-6 text-center text-sm font-mono font-bold">
+              {item.quantity}
+            </span>
+            <Button
+              variant="outline"
+              size="icon"
+              className="h-6 w-6 rounded-full"
+              onClick={() => handleQuantityChange(item.quantity + 1)}
+              disabled={isUpdating}
+              aria-label={t("increaseQty")}
+            >
+              <Plus className="h-3 w-3" />
+            </Button>
+          </div>
+        </div>
+      </div>
+    </article>
   )
 }
