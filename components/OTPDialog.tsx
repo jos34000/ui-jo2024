@@ -1,7 +1,6 @@
 "use client"
 
 import React from "react"
-import { useRouter } from "next/navigation"
 import { Mail, Shield } from "lucide-react"
 import {
   Dialog,
@@ -30,7 +29,6 @@ export const OTPDialog = ({
   pendingEmail,
   pendingUser,
 }: OTPDialogProps) => {
-  const router = useRouter()
   const { setUser } = useAuthStore()
   const t = useTranslations("otp")
   const tErrors = useTranslations("errors")
@@ -48,13 +46,7 @@ export const OTPDialog = ({
         setUser(pendingUser)
         onOpenChange(false)
         toast.success(t("success"))
-        router.push(
-          pendingUser?.roles?.includes("ROLE_ADMIN")
-            ? "/admin"
-            : pendingUser?.roles?.includes("ROLE_STAFF")
-              ? "/staff"
-              : "/",
-        )
+        window.location.href = "/auth"
       } catch (err) {
         if (err instanceof ApiError) {
           toast.error(resolveApiErrorMessage(err, tErrors, t("invalidCode")))

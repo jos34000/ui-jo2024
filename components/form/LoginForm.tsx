@@ -1,6 +1,5 @@
 "use client"
 
-import { useRouter } from "next/navigation"
 import { useAppForm } from "@/lib/hooks/useAppForm"
 import { toast } from "sonner"
 import { loginSchema } from "@/lib/schemas/login.schema"
@@ -16,7 +15,6 @@ import { useTranslations } from "next-intl"
 type LoginFormValues = z.infer<typeof loginSchema>
 
 export const LoginForm = () => {
-  const router = useRouter()
   const [showOtpDialog, setShowOtpDialog] = useState(false)
   const [pendingUser, setPendingUser] = useState<User | null>(null)
   const [pendingEmail, setPendingEmail] = useState("")
@@ -52,13 +50,7 @@ export const LoginForm = () => {
         } else {
           setUser(data)
           toast.success(t("success"))
-          router.push(
-            data.roles?.includes("ROLE_ADMIN")
-              ? "/admin"
-              : data.roles?.includes("ROLE_STAFF")
-                ? "/staff"
-                : "/",
-          )
+          window.location.href = "/auth"
         }
       } catch (err) {
         if (err instanceof ApiError) {
