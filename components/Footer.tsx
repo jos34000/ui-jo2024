@@ -10,22 +10,8 @@ export const Footer = () => {
 
   const footerNavigation = {
     billetterie: [
-      { name: t("links.allEvents"), href: "#" },
-      { name: t("links.calendar"), href: "#" },
-      { name: t("links.resale"), href: "#" },
-      { name: t("links.familyPack"), href: "#" },
-    ],
-    sports: [
-      { name: t("links.athletics"), href: "#" },
-      { name: t("links.swimming"), href: "#" },
-      { name: t("links.basketball"), href: "#" },
-      { name: t("links.football"), href: "#" },
-    ],
-    infos: [
-      { name: t("links.about"), href: "#" },
-      { name: t("links.faq"), href: "#" },
-      { name: t("links.accessibility"), href: "#" },
-      { name: t("links.contact"), href: "#" },
+      { name: t("links.allEvents"), href: "/billets" },
+      { name: t("links.calendar"), href: "/calendrier" },
     ],
     legal: [
       { name: t("links.mentions"), href: "/mentions-legales" },
@@ -56,72 +42,38 @@ export const Footer = () => {
             </div>
           </div>
           <div className="mt-16 grid grid-cols-2 gap-8 xl:col-span-2 xl:mt-0">
-            <div className="md:grid md:grid-cols-2 md:gap-8">
-              <div>
-                <h3 className="text-sm font-semibold">{t("sections.ticketing")}</h3>
-                <ul className="mt-4 space-y-3">
-                  {footerNavigation.billetterie.map(item => (
-                    <li key={item.name}>
-                      <Link
-                        href={item.href}
-                        className="text-sm text-muted-foreground hover:text-primary transition-colors"
-                      >
-                        {item.name}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className="mt-10 md:mt-0">
-                <h3 className="text-sm font-semibold">{t("sections.popularSports")}</h3>
-                <ul className="mt-4 space-y-3">
-                  {footerNavigation.sports.map(item => (
-                    <li key={item.name}>
-                      <Link
-                        href={item.href}
-                        className="text-sm text-muted-foreground hover:text-primary transition-colors"
-                      >
-                        {item.name}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-            <div className="md:grid md:grid-cols-2 md:gap-8">
-              <div>
-                <h3 className="text-sm font-semibold">{t("sections.information")}</h3>
-                <ul className="mt-4 space-y-3">
-                  {footerNavigation.infos.map(item => (
-                    <li key={item.name}>
-                      <Link
-                        href={item.href}
-                        className="text-sm text-muted-foreground hover:text-primary transition-colors"
-                      >
-                        {item.name}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className="mt-10 md:mt-0">
-                <h3 className="text-sm font-semibold">{t("sections.legal")}</h3>
-                <ul className="mt-4 space-y-3">
-                  {footerNavigation.legal.map(item => (
-                    <li key={item.name}>
-                      <Link
-                        href={item.href}
-                        className="text-sm text-muted-foreground hover:text-primary transition-colors"
-                      >
-                        {item.name}
-                      </Link>
-                    </li>
-                  ))}
-                  <li>
-                    <CookieSettingsButton />
+            <div>
+              <h3 className="text-sm font-semibold">{t("sections.ticketing")}</h3>
+              <ul className="mt-4 space-y-3">
+                {footerNavigation.billetterie.map(item => (
+                  <li key={item.name}>
+                    <Link
+                      href={item.href}
+                      className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                    >
+                      {item.name}
+                    </Link>
                   </li>
-                </ul>
-              </div>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <h3 className="text-sm font-semibold">{t("sections.legal")}</h3>
+              <ul className="mt-4 space-y-3">
+                {footerNavigation.legal.map(item => (
+                  <li key={item.name}>
+                    <Link
+                      href={item.href}
+                      className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                    >
+                      {item.name}
+                    </Link>
+                  </li>
+                ))}
+                <li>
+                  <CookieSettingsButton />
+                </li>
+              </ul>
             </div>
           </div>
         </div>
