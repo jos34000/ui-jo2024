@@ -295,9 +295,9 @@ export const CookieSettingsButton = () => {
   return (
     <button
       onClick={openBanner}
-      className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+      className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors whitespace-nowrap"
     >
-      <Cookie className="h-4 w-4" />
+      <Cookie className="h-3.5 w-3.5" />
       {t("manage")}
     </button>
   )
